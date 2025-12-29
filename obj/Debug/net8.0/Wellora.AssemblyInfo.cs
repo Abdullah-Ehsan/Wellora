@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wellora")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a65c12496d36628cec066e618d764300945098b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wellora")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Wellora")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
