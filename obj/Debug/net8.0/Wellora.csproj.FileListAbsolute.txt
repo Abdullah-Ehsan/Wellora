@@ -27,3 +27,4 @@ F:\Final year project\Wellora\obj\Debug\net8.0\refint\Wellora.dll
 F:\Final year project\Wellora\obj\Debug\net8.0\Wellora.pdb
 F:\Final year project\Wellora\obj\Debug\net8.0\Wellora.genruntimeconfig.cache
 F:\Final year project\Wellora\obj\Debug\net8.0\ref\Wellora.dll
+F:\Final year project\Wellora\obj\Debug\net8.0\Wellora.sourcelink.json
