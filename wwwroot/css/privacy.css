@@ -1,0 +1,30 @@
+﻿:root {
+    --teal-light: #A7D8D8;
+    --teal-medium: #20B2AA;
+    --teal-dark: #006666;
+}
+
+.text-teal-light {
+    color: var(--teal-light);
+}
+
+.text-teal-medium {
+    color: var(--teal-medium);
+}
+
+.text-teal-dark {
+    color: var(--teal-dark);
+}
+
+.card {
+    border: 1px solid var(--teal-light);
+}
+
+.card-body h1 {
+    font-weight: 600;
+}
+
+section h4 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
