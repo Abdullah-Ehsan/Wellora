@@ -1,0 +1,171 @@
+﻿/* ===============================
+   GLOBAL STYLES
+================================ */
+.about-page {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #ffffff;
+}
+
+.page-title {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* ===============================
+   PROJECT BANNER
+================================ */
+.project-banner {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    border-radius: 20px;
+    padding: 35px;
+    text-align: center;
+}
+
+.banner-img {
+    max-height: 120px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.banner-text {
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* ===============================
+   SECTION TITLES
+================================ */
+.section-title {
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 25px;
+}
+
+/* ===============================
+   SUPERVISOR CARD (FIXED)
+================================ */
+.supervisor-card {
+    background: #ffffff;
+    width: 260px;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+    .supervisor-card img {
+        width: 150px; /* increased width */
+        height: 180px; /* increased height */
+        border-radius: 12px; /* removed circular crop */
+        object-fit: contain; /* prevents cutting */
+        object-position: top; /* shows full upper body */
+        margin-bottom: 15px;
+    }
+
+    .supervisor-card h5 {
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .supervisor-card span {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+/* ===============================
+   TEAM SECTION
+================================ */
+.team-section {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    padding: 70px 0;
+}
+
+.team-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+    .team-card img {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        object-fit: cover;
+    }
+
+    .team-card h6 {
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .team-card p {
+        font-size: 14px;
+        color: #4b5563;
+        line-height: 1.6; /* better readability */
+        word-break: break-word; /* prevents overflow */
+    }
+
+/* ===============================
+   TEAM RESPONSIBILITIES
+================================ */
+.responsibility-box {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+    .responsibility-box h5 {
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #0f172a;
+    }
+
+    .responsibility-box p {
+        font-size: 15px;
+        color: #4b5563;
+        line-height: 1.6;
+    }
+
+/* ===============================
+   MISSION SECTION (FOOTER SAFE)
+================================ */
+.mission-box {
+    max-width: 850px;
+    background: #f0fdfa;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    text-align: center;
+    margin-bottom: 60px; /* prevents footer overlap */
+}
+
+    .mission-box p {
+        font-size: 16px;
+        color: #334155;
+        line-height: 1.7;
+    }
+
+/* ===============================
+   RESPONSIVE FIXES
+================================ */
+@media (max-width: 768px) {
+    .project-banner {
+        padding: 25px;
+    }
+
+    .team-section {
+        padding: 50px 0;
+    }
+
+    .mission-box {
+        padding: 25px;
+    }
+}
