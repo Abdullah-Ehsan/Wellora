@@ -1,5 +1,10 @@
-wwwroot\css\site.css
+wwwroot\css\privacy.css
 wwwroot\favicon.ico
+wwwroot\images\About\college.png
+wwwroot\images\About\sirkhizar.jpg
+wwwroot\images\About\universityofpunjab.png
+wwwroot\images\About\user_placeholder.png
+wwwroot\images\logo.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
@@ -58,3 +63,5 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\css\about.css
+wwwroot\css\site.css
