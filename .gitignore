@@ -362,7 +362,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-#visual studio
-*.vs
-bin
-obj
+# Visual Studio cache folder
+.vs/
+
+# Build output folders
+bin/
+obj/
