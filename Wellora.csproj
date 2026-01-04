@@ -7,22 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\**" />
     <Compile Remove="Views\Admin\**" />
     <Compile Remove="Views\Doctor\**" />
     <Compile Remove="Views\Patient\**" />
+    <Content Remove="Areas\**" />
     <Content Remove="Views\Admin\**" />
     <Content Remove="Views\Doctor\**" />
     <Content Remove="Views\Patient\**" />
+    <EmbeddedResource Remove="Areas\**" />
     <EmbeddedResource Remove="Views\Admin\**" />
     <EmbeddedResource Remove="Views\Doctor\**" />
     <EmbeddedResource Remove="Views\Patient\**" />
+    <None Remove="Areas\**" />
     <None Remove="Views\Admin\**" />
     <None Remove="Views\Doctor\**" />
     <None Remove="Views\Patient\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
     <Folder Include="wwwroot\images\About\" />
   </ItemGroup>
 
