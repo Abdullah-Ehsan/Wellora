@@ -1,22 +1,97 @@
+/* === Base font sizing === */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* === Focus styles for buttons, inputs === */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+/* === Page height and body spacing === */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+/* === Reset default link styles === */
+a {
+    color: inherit; /* inherit parent text color */
+    text-decoration: none; /* remove underline */
+}
+
+    a:hover {
+        color: teal; /* teal on hover */
+        text-decoration: none; /* keep underline off */
+    }
+
+/* === Navbar links === */
+.nav-link {
+    color: #212529; /* dark gray text */
+    text-decoration: none;
+}
+
+    .nav-link:hover {
+        color: teal; /* teal hover */
+    }
+
+    /* === Active nav link (current page) === */
+    .nav-link.active {
+        color: teal !important; /* teal text */
+        position: relative;
+    }
+
+        .nav-link.active::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 3px; /* thickness of bar */
+            background-color: green; /* green underline bar */
+            position: absolute;
+            bottom: -2px; /* spacing below text */
+            left: 0;
+        }
+
+/* === Footer links === */
+footer a {
+    color: #212529; /* match footer text */
+    text-decoration: none;
+}
+
+    footer a:hover {
+        color: teal;
+    }
+
+
+/* Active nav item styling */ .nav-item .nav-link.active {
+    color: teal !important; /* teal text */
+    background-color: rgba(0, 128, 128, 0.1); /* light teal background highlight */
+    border-radius: 4px; /* rounded corners for nicer look */
+    position: relative;
+}
+    /* Green underline bar under active nav link */
+
+    .nav-item .nav-link.active::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: green;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+    }
