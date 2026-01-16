@@ -2,13 +2,18 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
 :root {
-    --brand-teal: #00796B;
+    --teal-dark: #004d40;
+    --teal-medium: #00796B;
+    --teal-light: #26a69a;
+    --white: #ffffff;
     --text-dark: #212529;
     --text-muted: #6c757d;
 }
 
+/* Body */
 body {
-    background-color: #fff;
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal-medium));
+    color: var(--white);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
@@ -17,13 +22,15 @@ body {
 /* Navbar (Minimal version for error page) */
 .navbar-minimal {
     padding: 15px 30px;
-    background: transparent;
+    background: var(--teal-dark);
+    color: var(--white);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .brand-logo {
     font-weight: 700;
     font-size: 1.4rem;
-    color: #000;
+    color: var(--white);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -31,12 +38,12 @@ body {
 }
 
     .brand-logo i {
-        color: var(--brand-teal);
+        color: var(--teal-light);
     }
 
 /* Main Error Container */
 .error-container {
-    min-height: 80vh; /* Centers content vertically in the view */
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,52 +52,87 @@ body {
     padding: 20px;
 }
 
-/* The Confused Wolf Image */
 .error-image-wrapper {
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #004d40; /* dark teal border */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    margin: 0 auto;
+    /* Transition for smooth effects */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.error-image-wrapper:hover {
+    transform: scale(1.05); /* circle grows slightly */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35); /* deeper shadow */
+    border-color: #26a69a; /* border shifts to light teal */
 }
 
 .error-char-img {
-    height: 250px; /* Adjust height as needed */
-    width: auto;
-    object-fit: contain;
+    width: 180%;
+    height: 180%;
+    object-fit: cover;
+    object-position: 75% 180%; /* adjust vertical centering */
+    transition: transform 0.3s ease; /* smooth zoom on hover */
+}
+
+.error-image-wrapper:hover .error-char-img {
+    transform: scale(1.05); /* image zooms slightly with circle */
+}
+
+
+
+
+
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* Typography */
 .error-heading {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 700;
-    color: var(--text-dark);
+    color: var(--white);
     margin-bottom: 15px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
 
 .error-subtext {
-    font-size: 1.1rem;
-    color: var(--text-muted);
+    font-size: 1.2rem;
+    color: var(--white);
+    opacity: 0.9;
     margin-bottom: 40px;
-    max-width: 500px;
+    max-width: 600px;
     line-height: 1.6;
 }
 
-/* Go Back Home Button */
+/* Button */
 .btn-home {
-    background-color: var(--brand-teal);
-    color: white;
+    background: var(--teal-light);
+    color: var(--white);
     text-decoration: none;
-    padding: 12px 40px;
-    border-radius: 50px; /* Pill shape */
+    padding: 14px 45px;
+    border-radius: 50px;
     font-weight: 600;
-    font-size: 1rem;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 4px 6px rgba(0, 121, 107, 0.2);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
 }
 
     .btn-home:hover {
-        background-color: #004d40;
-        transform: translateY(-2px);
-        color: white;
+        background: var(--teal-dark);
+        transform: translateY(-3px) scale(1.05);
+        color: var(--white);
     }
 
 /* Responsive */
