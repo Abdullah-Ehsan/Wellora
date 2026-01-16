@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Chat with Lora";
+    // Assuming you are using a standard Layout, otherwise set Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/patient/AIChat.css" />
+
+<div class="chat-page-body">
+
+    <nav class="navbar wellora-navbar px-4">
+        <div class="d-flex align-items-center">
+            <a class="text-decoration-none brand-logo" href="#">
+                <i class="fa-solid fa-feather"></i> Wellora
+            </a>
+        </div>
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <a href="#" class="text-secondary text-decoration-none small">Sign in</a>
+            <a href="#" class="text-secondary"><i class="far fa-bell"></i></a>
+            <a href="#" class="text-secondary">
+                <img src="https://via.placeholder.com/32" class="rounded-circle" alt="User">
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="main-chat-card">
+
+            <div class="border-bottom p-3 px-4">
+                <h5 class="m-0 fw-bold">AI Health Assistant</h5>
+            </div>
+
+            <div class="chat-area-wrapper">
+
+                <div class="character-panel">
+                    <img src="~/images/lora_character.png" alt="Lora Character" class="character-img">
+                </div>
+
+                <div class="chat-panel">
+
+                    <div class="messages-box" id="messagesList">
+
+                        <div class="message-ai">
+                            <img src="~/images/lora_icon_small.png" class="ai-avatar-small" alt="AI">
+                            <div class="bubble-ai">
+                                Hello! I'm Lora, your personal health assistant. How can I help you today?
+                            </div>
+                        </div>
+                        <div class="sender-name">Lora</div>
+
+                        <div class="message-user">
+                            <div class="bubble-user">
+                                I need to find a cardiologist.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="input-area">
+                        <div class="custom-input-group">
+                            <input type="text" class="chat-input" placeholder="Type your message..." id="userMessage">
+                            <button class="send-btn" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

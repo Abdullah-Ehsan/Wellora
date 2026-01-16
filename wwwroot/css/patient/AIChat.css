@@ -1,0 +1,203 @@
+﻿/* chat-custom.css */
+
+/* Import Font Awesome and Fonts if not already in your _Layout.cshtml */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+:root {
+    --brand-teal: #00796B; /* Adjust specific teal color here */
+    --chat-bg: #F8F9FA;
+}
+
+/* Page Background override if needed */
+.chat-page-body {
+    background-color: #F4F6F8;
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, let chat scroll */
+}
+
+/* Navbar Styling adjustments */
+.wellora-navbar {
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    height: 60px;
+}
+
+.brand-logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #000;
+}
+
+    .brand-logo i {
+        color: var(--brand-teal);
+    }
+
+/* Main Card Container */
+.main-chat-card {
+    height: calc(100vh - 100px); /* Adjust based on navbar height */
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-area-wrapper {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- Left Side: Character Panel --- */
+.character-panel {
+    width: 35%;
+    position: relative;
+    display: flex;
+    align-items: flex-end; /* Align image to bottom */
+    justify-content: center;
+    padding-left: 20px;
+    background-color: #fff; /* Optional: Ensure white bg behind char */
+}
+
+.character-img {
+    max-width: 100%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* --- Right Side: Chat Interface --- */
+.chat-panel {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+}
+
+/* Messages Area */
+.messages-box {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+    /* Scrollbar styling for Webkit (Chrome/Safari) */
+    .messages-box::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .messages-box::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 4px;
+    }
+
+/* AI Message Bubble */
+.message-ai {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    max-width: 85%;
+}
+
+.ai-avatar-small {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.bubble-ai {
+    background-color: #F0F2F5;
+    color: #333;
+    padding: 15px;
+    border-radius: 18px;
+    border-top-left-radius: 4px; /* The sharp corner effect */
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.sender-name {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: -15px; /* Pull closer to bubble */
+    margin-bottom: 20px;
+    margin-left: 45px;
+}
+
+/* User Message Bubble */
+.message-user {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.bubble-user {
+    background-color: var(--brand-teal);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    border-bottom-right-radius: 4px; /* The sharp corner effect */
+    max-width: 70%;
+}
+
+/* Input Area */
+.input-area {
+    padding-top: 20px;
+    background: #fff;
+}
+
+.custom-input-group {
+    border: 1px solid #ced4da;
+    border-radius: 30px;
+    padding: 5px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+    .custom-input-group:focus-within {
+        border-color: var(--brand-teal);
+        box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.1);
+    }
+
+.chat-input {
+    border: none;
+    flex: 1;
+    padding: 10px 20px;
+    outline: none;
+    background: transparent;
+}
+
+.send-btn {
+    background-color: var(--brand-teal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+    .send-btn:hover {
+        background-color: #004d40;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .character-panel {
+        display: none;
+    }
+
+    .chat-panel {
+        width: 100%;
+        padding: 15px;
+    }
+}
