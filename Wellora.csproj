@@ -29,6 +29,7 @@
     <Folder Include="Areas\Patient\ViewModels\" />
     <Folder Include="wwwroot\images\About\" />
     <Folder Include="wwwroot\images\Error\" />
+    <Folder Include="wwwroot\images\Patient\AIChat\" />
   </ItemGroup>
 
 </Project>

@@ -1,53 +1,69 @@
 ﻿@{
     ViewData["Title"] = "Chat with Lora";
-    // Assuming you are using a standard Layout, otherwise set Layout = null;
 }
 
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="~/css/patient/AIChat.css" />
 
 <div class="chat-page-body">
 
+    <!-- Navbar -->
     <nav class="navbar wellora-navbar px-4">
         <div class="d-flex align-items-center">
             <a class="text-decoration-none brand-logo" href="#">
-                <i class="fa-solid fa-feather"></i> Wellora
+                <i class="fa-solid fa-feather me-2"></i> Wellora
             </a>
         </div>
         <div class="ms-auto d-flex align-items-center gap-3">
             <a href="#" class="text-secondary text-decoration-none small">Sign in</a>
             <a href="#" class="text-secondary"><i class="far fa-bell"></i></a>
             <a href="#" class="text-secondary">
-                <img src="https://via.placeholder.com/32" class="rounded-circle" alt="User">
+                <img src="" class="rounded-circle user-avatar" alt="User">
             </a>
         </div>
     </nav>
 
+    <!-- Main Chat Card -->
     <div class="container-fluid">
         <div class="main-chat-card">
 
-            <div class="border-bottom p-3 px-4">
-                <h5 class="m-0 fw-bold">AI Health Assistant</h5>
+            <!-- Header -->
+            <div class="chat-header border-bottom p-3 px-4">
+                <h5 class="m-0 fw-bold text-dark">AI Health Assistant</h5>
             </div>
 
-            <div class="chat-area-wrapper">
+            <!-- Chat Area -->
+            <div class="d-flex flex-row h-100">
 
-                <div class="character-panel">
-                    <img src="~/images/lora_character.png" alt="Lora Character" class="character-img">
+                <!-- Character Panel -->
+                <div class="character-panel flex-shrink-0">
+                    <img src="~/images/Patient/AIChat/lora_withoutglasses_greeting.png"
+                         alt="Lora Character"
+                         class="character-img">
                 </div>
 
-                <div class="chat-panel">
+                <!-- Chat Panel -->
+                <div class="chat-panel flex-grow-1">
 
+                    <!-- Messages -->
                     <div class="messages-box" id="messagesList">
 
-                        <div class="message-ai">
-                            <img src="~/images/lora_icon_small.png" class="ai-avatar-small" alt="AI">
-                            <div class="bubble-ai">
-                                Hello! I'm Lora, your personal health assistant. How can I help you today?
+                        <!-- AI Message -->
+                        <div class="d-flex align-items-start mb-2">
+                            <img src="~/images/Patient/AIChat/lora_icon_gradientbackground.png"
+                                 alt="AI"
+                                 class="rounded-circle me-2"
+                                 style="width:36px; height:36px; object-fit:cover;">
+                            <div>
+                                <div class="bubble-ai">
+                                    Hello! I'm Lora, your personal health assistant. How can I help you today?
+                                </div>
+                                
                             </div>
                         </div>
-                        <div class="sender-name">Lora</div>
 
-                        <div class="message-user">
+                        <!-- User Message -->
+                        <div class="d-flex justify-content-end mb-2">
                             <div class="bubble-user">
                                 I need to find a cardiologist.
                             </div>
@@ -55,7 +71,8 @@
 
                     </div>
 
-                    <div class="input-area">
+                    <!-- Input -->
+                    <div class="input-area mt-3">
                         <div class="custom-input-group">
                             <input type="text" class="chat-input" placeholder="Type your message..." id="userMessage">
                             <button class="send-btn" type="button">

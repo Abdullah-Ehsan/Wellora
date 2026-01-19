@@ -31,6 +31,14 @@ app.UseStatusCodePages(async context =>
     }
 });
 
+//this is the testing for specific page 
+app.MapControllerRoute(
+    name: "patient_ai_chat",
+    pattern: "Patient/AIChat",
+    defaults: new { area = "Patient", controller = "Patient", action = "AIChat" }
+);
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
