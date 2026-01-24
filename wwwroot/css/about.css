@@ -12,7 +12,6 @@
     background-color: #f8f9fa; /* or your custom color */
 }
 
-
 .page-title {
     font-weight: 700;
     color: #0f172a;
@@ -87,6 +86,7 @@
 .team-section {
     background: linear-gradient(135deg, #0f766e, #0d9488);
     padding: 70px 0;
+    border-radius: 40px;
 }
 
 .team-card {
@@ -105,6 +105,10 @@
         margin-bottom: 15px;
         object-fit: cover;
     }
+    .team-card:nth-child(3) img {
+        top: 5%; /* pushes Wakeel’s image down */
+    }
+
 
     .team-card h6 {
         font-weight: 700;
@@ -117,6 +121,104 @@
         line-height: 1.6; /* better readability */
         word-break: break-word; /* prevents overflow */
     }
+
+/* ===============================
+   TEAM MEMBER SOCIAL ICONS
+================================ */
+.social-links {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* ===============================
+   TEAM MEMBER SOCIAL ICONS
+================================ */
+.social-links {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column; /* stack vertically */
+    align-items: center; /* center align */
+    gap: 8px; /* spacing between links */
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: black; /* text + icon black */
+    text-decoration: underline; /* underline by default */
+    transition: all 0.3s ease;
+}
+
+    .social-icon i {
+        margin-right: 8px; /* space between icon and text */
+        color: black; /* icon black by default */
+    }
+
+    /* Hover effects with brand colors + remove underline */
+    .social-icon:hover {
+        text-decoration: none; /* underline disappears */
+    }
+
+    .social-icon.linkedin:hover i,
+    .social-icon.linkedin:hover span {
+        color: #0A66C2; /* LinkedIn blue */
+    }
+
+    .social-icon.github:hover i,
+    .social-icon.github:hover span {
+        color: #333; /* GitHub black */
+    }
+
+    .social-icon.kaggle:hover i,
+    .social-icon.kaggle:hover span {
+        color: #20BEFF; /* Kaggle blue */
+    }
+
+    .social-icon.docker:hover i,
+    .social-icon.docker:hover span {
+        color: #0db7ed; /* Docker blue */
+    }
+
+/* ===============================
+   MEMBER IMAGE POSITION FIXES
+================================ */
+.team-card img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Lower Abdullah’s picture slightly */
+.team-card:nth-child(1) img {
+    top: 50px; /* adjust as needed */
+}
+
+/* Lower Wakeel’s picture by ~41% */
+.team-card:nth-child(3) img {
+    top: 41%; /* pushes image down */
+}
+
 
 /* ===============================
    TEAM RESPONSIBILITIES
@@ -159,6 +261,107 @@
         color: #334155;
         line-height: 1.7;
     }
+
+/ /* ===============================
+   PROJECT RESOURCES SECTION
+================================ */
+.project-resources {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    padding: 70px 0;
+}
+
+.project-resources h3,
+.project-resources h4 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* PROJECT RESOURCES SECTION */
+.project-resources {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    padding: 70px 0;
+}
+
+.team-card i {
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.team-card:hover i {
+    transform: scale(1.2);
+    text-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.team-card a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b5563;
+    transition: color 0.3s ease;
+}
+
+.team-card:hover a {
+    color: #0A66C2;
+}
+
+/* Brand Colors */
+.github-icon {
+    color: #000000;
+}
+
+.docker-icon {
+    color: #0db7ed;
+}
+
+.kaggle-icon {
+    color: #20BEFF;
+}
+
+.anaconda-icon {
+    color: #3fbf3f;
+}
+
+.vs-icon {
+    color: #5c2d91;
+}
+
+.vscode-icon {
+    color: #007acc;
+}
+
+.postman-icon {
+    color: #ff6c37;
+}
+
+.aspnet-icon {
+    color: #512bd4;
+}
+
+.numpy-icon {
+    color: #013243;
+}
+
+.pandas-icon {
+    color: #150458;
+}
+
+.matplotlib-icon {
+    color: #11557c;
+}
+
+.keras-icon {
+    color: #d00000;
+}
+
+.tensorflow-icon {
+    color: #ff6f00;
+}
+
+
+
+
+
 
 /* ===============================
    RESPONSIVE FIXES
