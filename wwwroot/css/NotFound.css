@@ -1,0 +1,147 @@
+﻿/* error-custom.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+:root {
+    --teal-dark: #004d40;
+    --teal-medium: #00796B;
+    --teal-light: #26a69a;
+    --white: #ffffff;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+}
+
+/* Body */
+body {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal-medium));
+    color: var(--white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar (Minimal version for error page) */
+.navbar-minimal {
+    padding: 15px 30px;
+    background: var(--teal-dark);
+    color: var(--white);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.brand-logo {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--white);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .brand-logo i {
+        color: var(--teal-light);
+    }
+
+/* Main Error Container */
+.error-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.error-image-wrapper {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #004d40; /* dark teal border */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    margin: 0 auto;
+    /* Transition for smooth effects */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.error-image-wrapper:hover {
+    transform: scale(1.05); /* circle grows slightly */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35); /* deeper shadow */
+    border-color: #26a69a; /* border shifts to light teal */
+}
+
+.error-char-img {
+    width: 180%;
+    height: 180%;
+    object-fit: cover;
+    object-position: 75% 180%; /* adjust vertical centering */
+    transition: transform 0.3s ease; /* smooth zoom on hover */
+}
+
+.error-image-wrapper:hover .error-char-img {
+    transform: scale(1.05); /* image zooms slightly with circle */
+}
+
+
+
+
+
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Typography */
+.error-heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.error-subtext {
+    font-size: 1.2rem;
+    color: var(--white);
+    opacity: 0.9;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* Button */
+.btn-home {
+    background: var(--teal-light);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 45px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+    .btn-home:hover {
+        background: var(--teal-dark);
+        transform: translateY(-3px) scale(1.05);
+        color: var(--white);
+    }
+
+/* Responsive */
+@media (max-width: 576px) {
+    .error-heading {
+        font-size: 2rem;
+    }
+
+    .error-char-img {
+        height: 200px;
+    }
+}
