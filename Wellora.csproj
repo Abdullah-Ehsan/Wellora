@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -28,6 +28,8 @@
     <Folder Include="Areas\Patient\Models\" />
     <Folder Include="Areas\Patient\ViewModels\" />
     <Folder Include="wwwroot\images\About\" />
+    <Folder Include="wwwroot\images\Error\" />
+    <Folder Include="wwwroot\images\Patient\AIChat\" />
   </ItemGroup>
 
 </Project>
