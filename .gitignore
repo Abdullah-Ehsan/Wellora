@@ -368,3 +368,6 @@ FodyWeavers.xsd
 # Build output folders
 bin/
 obj/
+/wwwroot/images/About/Abdullah.jpg
+/wwwroot/images/About/Fahid.jpeg
+/wwwroot/images/About/Wakeel.jpeg
