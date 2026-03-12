@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Chat with Lora";
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="~/css/patient/AIChat.css" />
+
+<div class="chat-page-body">
+
+    <!-- Navbar -->
+    <nav class="navbar wellora-navbar px-4">
+        <div class="d-flex align-items-center">
+            <a class="text-decoration-none brand-logo" href="#">
+                <i class="fa-solid fa-feather me-2"></i> Wellora
+            </a>
+        </div>
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <a href="#" class="text-secondary text-decoration-none small">Sign in</a>
+            <a href="#" class="text-secondary"><i class="far fa-bell"></i></a>
+            <a href="#" class="text-secondary">
+                <img src="" class="rounded-circle user-avatar" alt="User">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Chat Card -->
+    <div class="container-fluid">
+        <div class="main-chat-card">
+
+            <!-- Header -->
+            <div class="chat-header border-bottom p-3 px-4">
+                <h5 class="m-0 fw-bold text-dark">AI Health Assistant</h5>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="d-flex flex-row h-100">
+
+                <!-- Character Panel -->
+                <div class="character-panel flex-shrink-0">
+                    <img src="~/images/Patient/AIChat/lora_withoutglasses_greeting.png"
+                         alt="Lora Character"
+                         class="character-img">
+                </div>
+
+                <!-- Chat Panel -->
+                <div class="chat-panel flex-grow-1">
+
+                    <!-- Messages -->
+                    <div class="messages-box" id="messagesList">
+
+                        <!-- AI Message -->
+                        <div class="d-flex align-items-start mb-2">
+                            <img src="~/images/Patient/AIChat/lora_icon_gradientbackground.png"
+                                 alt="AI"
+                                 class="rounded-circle me-2"
+                                 style="width:36px; height:36px; object-fit:cover;">
+                            <div>
+                                <div class="bubble-ai">
+                                    Hello! I'm Lora, your personal health assistant. How can I help you today?
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- User Message -->
+                        <div class="d-flex justify-content-end mb-2">
+                            <div class="bubble-user">
+                                I need to find a cardiologist.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Input -->
+                    <div class="input-area mt-3">
+                        <div class="custom-input-group">
+                            <input type="text" class="chat-input" placeholder="Type your message..." id="userMessage">
+                            <button class="send-btn" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
