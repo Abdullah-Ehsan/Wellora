@@ -14,5 +14,15 @@ namespace Wellora.Areas.Patient.Controllers
         {
             return View();
         }
+
+        public IActionResult PatientRegistration()
+        {
+            return View();
+        }
+
+        public IActionResult Patientlogin()
+        {
+            return View();
+        }
     }
 }

@@ -95,3 +95,27 @@ footer a {
         bottom: -2px;
         left: 0;
     }
+
+
+
+.btn-teal-dark {
+    background-color: #006d6d; /* dark teal */
+    color: #fff;
+    border: none;
+}
+
+    .btn-teal-dark:hover {
+        background-color: #005555;
+        color: #fff;
+    }
+
+.btn-teal-light {
+    background-color: #20c997; /* medium/light teal */
+    color: #fff;
+    border: none;
+}
+
+    .btn-teal-light:hover {
+        background-color: #17a589;
+        color: #fff;
+    }
