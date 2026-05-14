@@ -20,7 +20,7 @@ namespace Wellora.Areas.Patient.Controllers
             return View();
         }
 
-        public IActionResult Patientlogin()
+        public IActionResult PatientLogin()
         {
             return View();
         }
