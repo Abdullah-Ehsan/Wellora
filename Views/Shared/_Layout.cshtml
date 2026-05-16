@@ -43,11 +43,11 @@
                     <!-- Right side buttons -->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="btn btn-teal-dark me-2"
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "PatientLogin" ? "active" : "")"
                                asp-area="Patient" asp-controller="Patient" asp-action="PatientLogin">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-teal-light"
+                            <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "PatientRegistration" ? "active" : "")"
                                asp-area="Patient" asp-controller="Patient" asp-action="PatientRegistration">Register</a>
                         </li>
                     </ul>
@@ -66,11 +66,13 @@
     <!-- Footer stays attached at bottom -->
     <footer class="border-top bg-light text-muted py-3">
         <div class="container text-center">
-            <p>&copy; 2025 - Wellora | This is Wellora, the medical website for healthcare solutions.</p>
+            <p>&copy; 2025 - 2026 Wellora | This is Wellora, the medical website for healthcare solutions.</p>
             <p>
                 <a asp-controller="Home" asp-action="About">About</a> |
                 <a asp-controller="Home" asp-action="Contact">Contact</a> |
-                <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <a asp-controller="Home" asp-action="Privacy">Privacy</a> |
+                <a asp-area="Doctor" asp-controller="Doctor" asp-action="DoctorRegistration">Register as Doctor</a> |
+                <a asp-area="Doctor" asp-controller="Doctor" asp-action="DoctorLogin">Login as Doctor</a>
             </p>
         </div>
     </footer>

@@ -31,6 +31,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Route for areas (must come before default)
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 // Custom 404 handling
 app.UseStatusCodePages(async context =>
 {
@@ -53,5 +58,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
 
 app.Run();

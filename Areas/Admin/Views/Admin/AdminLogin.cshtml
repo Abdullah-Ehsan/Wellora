@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Admin Login";
+}
+
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<!-- Font Awesome (icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Your custom error page CSS -->
+<link href="~/css/patient/user_login.css" rel="stylesheet" />
+
+
+
+<!DOCTYPE html>
+
+
+<div class="main-screen">
+    <div class="login-box shadow">
+
+        <div class="text-center">
+            <h2 class="title-text">Admin Login</h2>
+            <div class="teal-line"></div>
+        </div>
+
+        <form class="mt-4">
+            <div class="mb-3">
+                <label class="label-style">Email Address</label>
+                <input type="email" class="form-control input-field" placeholder="Email Address">
+            </div>
+
+            <div class="mb-3">
+                <label class="label-style">Password</label>
+                <input type="password" class="form-control input-field" placeholder="Password">
+            </div>
+
+            <div class="d-flex justify-content-between mb-4">
+
+               <p>Forget  password contact another Admin or Head Admin</p>
+
+            </div>
+
+            <button type="submit" class="btn login-btn w-100">Login</button>
+        </form>
+
+    </div>
+</div>

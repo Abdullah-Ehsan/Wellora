@@ -8,5 +8,15 @@ namespace Wellora.Areas.Doctor.Controllers
         {
             return View();
         }
+
+        public IActionResult DoctorRegistration()
+        {
+            return View();
+        }
+
+        public IActionResult DoctorLogin()
+        {
+            return View();
+        }
     }
 }
