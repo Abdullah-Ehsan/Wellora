@@ -1,49 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Admin Login";
-}
+﻿@model Wellora.Areas.Patient.ViewModels.LoginViewModel
 
+@{
+    ViewData["Title"] = "Patient Login";
+}
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
-<!-- Font Awesome (icons) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Your custom error page CSS -->
 <link href="~/css/patient/user_login.css" rel="stylesheet" />
-
-
-
-<!DOCTYPE html>
-
 
 <div class="main-screen">
     <div class="login-box shadow">
 
         <div class="text-center">
-            <h2 class="title-text">Admin Login</h2>
+            <h2 class="title-text">Patient Login</h2>
             <div class="teal-line"></div>
         </div>
 
-        <form class="mt-4">
+        <form asp-action="PatientLogin" asp-controller="Patient" asp-area="Patient" method="post" class="mt-4">
             <div class="mb-3">
-                <label class="label-style">Email Address</label>
-                <input type="email" class="form-control input-field" placeholder="Email Address">
+                <label asp-for="LoginIdentifier" class="label-style">Username or Email</label>
+                <input asp-for="LoginIdentifier" class="form-control input-field" placeholder="Username or Email" />
+                <span asp-validation-for="LoginIdentifier" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label class="label-style">Password</label>
-                <input type="password" class="form-control input-field" placeholder="Password">
+            <div class="mb-3 position-relative">
+                <label asp-for="Password" class="label-style"></label>
+                <input asp-for="Password"
+                       class="form-control input-field"
+                       id="LoginPassword"
+                       type="password"
+                       placeholder="Password" />
+
+                <!-- Eye icon toggle -->
+                <span class="password-toggle"
+                      onclick="togglePassword('LoginPassword','toggleLoginPasswordIcon')">
+                    <!-- Start with closed eye (fa-eye-slash) since password is hidden initially -->
+                    <i id="toggleLoginPasswordIcon" class="fa fa-eye-slash text-success"></i>
+                </span>
+
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
+
 
             <div class="d-flex justify-content-between mb-4">
-
-               <p>Forget  password contact another Admin or Head Admin</p>
-
+                <a asp-area="Patient" asp-controller="Patient" asp-action="PatientRegistration" class="forgot-text">Register</a>
+                <a href="#" class="forgot-text">Forgot Password?</a>
             </div>
 
             <button type="submit" class="btn login-btn w-100">Login</button>
         </form>
-
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script src="~/js/input_validation.js"></script>

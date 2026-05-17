@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Doctor Registration";
+﻿@model Wellora.Areas.Patient.ViewModels.PatientRegistrationViewModel
+
+
+@{
+    ViewData["Title"] = "Patient Registration";
 }
 
 
@@ -16,57 +19,79 @@
 
 <!DOCTYPE html>
 
+
+
 <div class="main-screen">
     <div class="login-box shadow">
-
         <div class="text-center">
-            <h2 class="title-text">Doctor Registration</h2>
+            <h2 class="title-text">Patient Registration</h2>
             <div class="teal-line"></div>
         </div>
 
-        <form class="mt-4">
-
+        <form asp-action="PatientRegistration" asp-controller="Patient" asp-area="Patient" method="post" class="mt-4">
             <div class="row">
                 <div class="col-6 mb-3">
-                    <label class="label-style">First Name</label>
-                    <input type="text" class="form-control input-field" placeholder="First Name" required>
+                    <label asp-for="FirstName" class="label-style"></label>
+                    <input asp-for="FirstName" class="form-control input-field" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="col-6 mb-3">
-                    <label class="label-style">Last Name</label>
-                    <input type="text" class="form-control input-field" placeholder="Last Name" required>
+                    <label asp-for="LastName" class="label-style"></label>
+                    <input asp-for="LastName" class="form-control input-field" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label class="label-style">Email Address</label>
-                <input type="email" class="form-control input-field" placeholder="Email Address" required>
+                <label asp-for="Username" class="label-style"></label>
+                <input asp-for="Username" class="form-control input-field" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label class="label-style">Password</label>
-                <input type="password" class="form-control input-field" placeholder="Create Password" required>
+                <label asp-for="Email" class="label-style"></label>
+                <input asp-for="Email" class="form-control input-field" id="Email"
+                       onkeyup="validateEmail('Email','EmailError')" />
+                <span id="EmailError" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label class="label-style">Password</label>
-                <input type="password" class="form-control input-field" placeholder="Confirm Password" required>
+            <div class="mb-3 position-relative">
+                <label asp-for="Password" class="label-style"></label>
+                <input asp-for="Password" class="form-control input-field" id="Password"
+                       onkeyup="validatePassword('Password','PasswordError')" type="password" />
+                <span class="position-absolute end-0 top-50 translate-middle-y me-3"
+                      onclick="togglePassword('Password','togglePasswordIcon')">
+                    <i id="togglePasswordIcon" class="fa fa-eye-slash text-success"></i>
+                </span>
+                <span id="PasswordError" class="text-danger"></span>
             </div>
+
+            <div class="mb-3 position-relative">
+                <label asp-for="ConfirmPassword" class="label-style"></label>
+                <input asp-for="ConfirmPassword" class="form-control input-field" id="ConfirmPassword" type="password" />
+                <span class="position-absolute end-0 top-50 translate-middle-y me-3"
+                      onclick="togglePassword('ConfirmPassword','toggleConfirmPasswordIcon')">
+                    <i id="toggleConfirmPasswordIcon" class="fa fa-eye-slash text-success"></i>
+                </span>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+
 
             <button type="submit" class="btn login-btn w-100 mt-2">Register</button>
 
             <div class="text-center mt-3">
                 <small class="text-muted">
                     Already have an account?
-                    <a  class="forgot-text" asp-area="Doctor"
-                       asp-controller="Doctor"
-                       asp-action="DoctorLogin">
-                        Login
-                    </a>
+                    <a asp-area="Patient" asp-controller="Patient" asp-action="PatientLogin" class="forgot-text">Login</a>
                 </small>
             </div>
-
         </form>
-
     </div>
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script src="~/js/input_validation.js"></script>
