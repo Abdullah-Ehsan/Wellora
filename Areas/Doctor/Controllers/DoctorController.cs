@@ -2,6 +2,7 @@
 
 namespace Wellora.Areas.Doctor.Controllers
 {
+    [Area("Doctor")]
     public class DoctorController : Controller
     {
         public IActionResult Index()
@@ -9,14 +10,6 @@ namespace Wellora.Areas.Doctor.Controllers
             return View();
         }
 
-        public IActionResult DoctorRegistration()
-        {
-            return View();
-        }
-
-        public IActionResult DoctorLogin()
-        {
-            return View();
-        }
+        
     }
 }

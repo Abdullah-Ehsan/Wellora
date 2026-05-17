@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Wellora.Areas.Patient.Models;
 using Wellora.Areas.Patient.ViewModels;
 using Wellora.Data;
+using Wellora.Models;
 using PatientEntity = Wellora.Areas.Patient.Models.Patient;
 
 
@@ -15,12 +16,12 @@ using PatientEntity = Wellora.Areas.Patient.Models.Patient;
 namespace Wellora.Areas.Patient.Controllers
 {
     [Area("Patient")]
-    public class PatientController : Controller
+    public class PatientAccountController : Controller
     {
         
         private readonly ApplicationDbContext _context;
 
-        public PatientController(ApplicationDbContext context)
+        public PatientAccountController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -81,7 +82,7 @@ namespace Wellora.Areas.Patient.Controllers
                 _context.Patients.Add(patient);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("PatientLogin", "Patient", new { area = "Patient" });
+                return RedirectToAction("PatientLogin", "PatientAccount", new { area = "Patient" });
             }
 
             return View(model);
@@ -97,7 +98,7 @@ namespace Wellora.Areas.Patient.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PatientLogin(LoginViewModel model)
+        public async Task<IActionResult> PatientLogin(PatientLoginViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);

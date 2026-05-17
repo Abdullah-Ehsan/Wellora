@@ -44,11 +44,11 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "PatientLogin" ? "active" : "")"
-                               asp-area="Patient" asp-controller="Patient" asp-action="PatientLogin">Login</a>
+                               asp-area="Patient" asp-controller="PatientAccount" asp-action="PatientLogin">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "PatientRegistration" ? "active" : "")"
-                               asp-area="Patient" asp-controller="Patient" asp-action="PatientRegistration">Register</a>
+                               asp-area="Patient" asp-controller="PatientAccount" asp-action="PatientRegistration">Register</a>
                         </li>
                     </ul>
                 </div>
@@ -71,8 +71,8 @@
                 <a asp-controller="Home" asp-action="About">About</a> |
                 <a asp-controller="Home" asp-action="Contact">Contact</a> |
                 <a asp-controller="Home" asp-action="Privacy">Privacy</a> |
-                <a asp-area="Doctor" asp-controller="Doctor" asp-action="DoctorRegistration">Register as Doctor</a> |
-                <a asp-area="Doctor" asp-controller="Doctor" asp-action="DoctorLogin">Login as Doctor</a>
+                <a asp-area="Doctor" asp-controller="DoctorAccount" asp-action="DoctorRegistration">Register as Doctor</a> |
+                <a asp-area="Doctor" asp-controller="DoctorAccount" asp-action="DoctorLogin">Login as Doctor</a>
             </p>
         </div>
     </footer>

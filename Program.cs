@@ -18,9 +18,50 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Patient/Patient/PatientLogin";
-        options.AccessDeniedPath = "/Patient/Patient/AccessDenied";
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                var path = context.Request.Path;
+
+                if (path.StartsWithSegments("/Doctor"))
+                {
+                    context.Response.Redirect("/Doctor/DoctorAccount/DoctorLogin");
+                }
+                else if (path.StartsWithSegments("/Admin"))
+                {
+                    context.Response.Redirect("/Admin/AdminAccount/AdminLogin");
+                }
+                else
+                {
+                    context.Response.Redirect("/Patient/PatientAccount/PatientLogin");
+                }
+
+                return Task.CompletedTask;
+            },
+
+            OnRedirectToAccessDenied = context =>
+            {
+                var path = context.Request.Path;
+
+                if (path.StartsWithSegments("/Doctor"))
+                {
+                    context.Response.Redirect("/Doctor/DoctorAccount/AccessDenied");
+                }
+                else if (path.StartsWithSegments("/Admin"))
+                {
+                    context.Response.Redirect("/Admin/AdminAccount/AccessDenied");
+                }
+                else
+                {
+                    context.Response.Redirect("/Patient/PatientAccount/AccessDenied");
+                }
+
+                return Task.CompletedTask;
+            }
+        };
     });
+
 
 var app = builder.Build();
 
@@ -58,12 +99,7 @@ app.UseStatusCodePages(async context =>
     }
 });
 
-//this is the testing for specific page 
-app.MapControllerRoute(
-    name: "patient_ai_chat",
-    pattern: "Patient/AIChat",
-    defaults: new { area = "Patient", controller = "Patient", action = "AIChat" }
-);
+
 
 
 app.MapControllerRoute(

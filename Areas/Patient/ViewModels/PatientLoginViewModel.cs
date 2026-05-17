@@ -2,7 +2,7 @@
 
 namespace Wellora.Areas.Patient.ViewModels
 {
-    public class LoginViewModel
+    public class PatientLoginViewModel
     {
         [Required]
         public string LoginIdentifier { get; set; } // can be email or username

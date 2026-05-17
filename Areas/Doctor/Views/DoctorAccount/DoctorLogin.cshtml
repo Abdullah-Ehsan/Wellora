@@ -1,23 +1,23 @@
-﻿@model Wellora.Areas.Patient.ViewModels.LoginViewModel
+﻿@model Wellora.Areas.Doctor.ViewModels.DoctorLoginViewModel
 
 @{
-    ViewData["Title"] = "Patient Login";
+    ViewData["Title"] = "Doctor Login";
 }
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="~/css/patient/user_login.css" rel="stylesheet" />
+<link href="~/css/account/user_login.css" rel="stylesheet" />
 
 <div class="main-screen">
     <div class="login-box shadow">
 
         <div class="text-center">
-            <h2 class="title-text">Patient Login</h2>
+            <h2 class="title-text">Doctor Login</h2>
             <div class="teal-line"></div>
         </div>
 
-        <form asp-action="PatientLogin" asp-controller="Patient" asp-area="Patient" method="post" class="mt-4">
+        <form asp-action="DoctorLogin" asp-controller="DoctorAccount" asp-area="Doctor" method="post" class="mt-4">
             <div class="mb-3">
                 <label asp-for="LoginIdentifier" class="label-style">Username or Email</label>
                 <input asp-for="LoginIdentifier" class="form-control input-field" placeholder="Username or Email" />
@@ -45,7 +45,7 @@
 
 
             <div class="d-flex justify-content-between mb-4">
-                <a asp-area="Patient" asp-controller="Patient" asp-action="PatientRegistration" class="forgot-text">Register</a>
+                <a asp-area="Doctor" asp-controller="DoctorAccount" asp-action="DoctorRegistration" class="forgot-text">Register</a>
                 <a href="#" class="forgot-text">Forgot Password?</a>
             </div>
 

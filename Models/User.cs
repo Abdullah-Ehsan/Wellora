@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Wellora.Areas.Patient.Models
+namespace Wellora.Models
 {
     [Table("users")] // map to table name
     public class User
@@ -17,16 +17,16 @@ namespace Wellora.Areas.Patient.Models
         [Column("user_name")]
         public string? Username { get; set; }
 
-        [Column("email")] 
+        [Column("email")]
         public string Email { get; set; }
 
         [Column("password_hash")]
         public string PasswordHash { get; set; }
 
-        [Column("role")] 
+        [Column("role")]
         public string Role { get; set; }
 
-        [Column("status")] 
+        [Column("status")]
         public string Status { get; set; }
 
         [Column("created_at")]

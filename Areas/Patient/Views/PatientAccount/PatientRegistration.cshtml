@@ -14,7 +14,7 @@
 
 <!-- Your custom error page CSS -->
 
-<link rel="stylesheet" href="~/css/patient/user_registration.css" />
+<link rel="stylesheet" href="~/css/account/user_registration.css" />
 
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
             <div class="teal-line"></div>
         </div>
 
-        <form asp-action="PatientRegistration" asp-controller="Patient" asp-area="Patient" method="post" class="mt-4">
+        <form asp-action="PatientRegistration" asp-controller="PatientAccount" asp-area="Patient" method="post" class="mt-4">
             <div class="row">
                 <div class="col-6 mb-3">
                     <label asp-for="FirstName" class="label-style"></label>
@@ -83,7 +83,7 @@
             <div class="text-center mt-3">
                 <small class="text-muted">
                     Already have an account?
-                    <a asp-area="Patient" asp-controller="Patient" asp-action="PatientLogin" class="forgot-text">Login</a>
+                    <a asp-area="Patient" asp-controller="PatientAccount" asp-action="PatientLogin" class="forgot-text">Login</a>
                 </small>
             </div>
         </form>
