@@ -27,8 +27,6 @@
     <Folder Include="Areas\Doctor\Models\" />
     <Folder Include="Areas\Doctor\ViewModels\" />
     <Folder Include="Areas\Doctor\Views\Shared\" />
-    <Folder Include="Areas\Patient\Models\" />
-    <Folder Include="Areas\Patient\ViewModels\" />
     <Folder Include="Areas\Patient\Views\Shared\" />
     <Folder Include="wwwroot\images\About\" />
     <Folder Include="wwwroot\images\Error\" />
@@ -36,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+  <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
 
   <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">

@@ -1,14 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-
-@model IEnumerable<Wellora.Areas.Patient.Models.User>
+﻿@model IEnumerable<Wellora.Areas.Patient.Models.User>
 
 <h2>Users in Database</h2>
 
@@ -16,11 +6,8 @@
     <thead>
         <tr>
             <th>UserId</th>
-            <th>First</th>
-            <th>last</th>
             <th>Email</th>
             <th>Role</th>
-            <th>Status</th>
             <th>CreatedAt</th>
         </tr>
     </thead>
@@ -29,11 +16,8 @@
         {
             <tr>
                 <td>@user.UserId</td>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
                 <td>@user.Email</td>
                 <td>@user.Role</td>
-                <td>@user.Status</td>
                 <td>@user.CreatedAt</td>
             </tr>
         }

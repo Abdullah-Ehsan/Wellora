@@ -70,3 +70,31 @@
 .forgot-text:hover { 
     text-decoration: underline; 
 }
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10; /* ensures it’s clickable above the input */
+}
+
+
+/* Base link style */
+a {
+    text-decoration: none; /* removes underline */
+    color: #1a8b7b; /* default link color */
+    transition: color 0.3s ease; /* smooth hover transition */
+}
+
+    /* Hover effect */
+    a:hover {
+        color: #14695f; /* darker teal on hover */
+        text-decoration: none; /* keep underline removed */
+    }
+
+    /* Optional: visited links */
+    a:visited {
+        color: #1a8b7b; /* keep same color for visited links */
+    }
