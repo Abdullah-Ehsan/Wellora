@@ -1,5 +1,74 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Doctor Listing";
 }
+
+<link rel="stylesheet" href="~/css/patient/DoctorListing.css" />
+
+
+
+<div class="container-fluid doctor-listing">
+    <div class="row">
+        <!-- Filter Panel -->
+        <div class="col-md-3 filter-panel">
+            <h4>Filters</h4>
+            <div class="form-group">
+                <label>Specialty</label>
+                <select id="specialtyFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Psychologist">Psychologist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Language</label>
+                <select id="languageFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="English">English</option>
+                    <option value="German">German</option>
+                    <option value="French">French</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="genderFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Doctor Cards -->
+        <div class="col-md-9">
+            <div class="row" id="doctorCards">
+                @for (int i = 0; i < 16; i++) // Example loop for 16 doctors
+                {
+                    <div class="col-md-3">
+                        <div class="card doctor-card">
+                            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+                                 alt="Doctor Avatar" class="card-img-top" />
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Default Name</h5>
+                                <p class="card-text">Specialty: Default Specialty</p>
+                                <a href="#" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination justify-content-center" id="pagination">
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/doctorlisting.js"></script>

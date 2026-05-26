@@ -1,0 +1,37 @@
+﻿.doctor-listing {
+    background-color: #f8f9fa;
+}
+
+.filter-panel {
+    background-color: #004d4d; /* dark teal */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+    .filter-panel h4 {
+        margin-bottom: 15px;
+    }
+
+.doctor-card {
+    background-color: #e0f2f1; /* light teal */
+    margin: 15px 0;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+    .doctor-card:hover {
+        transform: scale(1.05);
+    }
+
+    .doctor-card .card-title {
+        color: #006666; /* medium teal */
+        font-weight: bold;
+    }
+
+    .doctor-card .btn {
+        background-color: #004d4d; /* dark teal */
+        border: none;
+    }

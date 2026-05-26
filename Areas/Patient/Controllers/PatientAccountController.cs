@@ -74,6 +74,7 @@ namespace Wellora.Areas.Patient.Controllers
                     UserId = user.UserId, // foreign key
                     FullName = $"{model.FirstName} {model.LastName}",
                     DateOfBirth = new DateOnly(1900, 1, 1), // temporary placeholder
+                    Gender = "other",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                     // other fields left null for now
@@ -118,7 +119,7 @@ namespace Wellora.Areas.Patient.Controllers
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Name, user.Username ?? user.Email),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role, user.Role.ToLower())
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -145,7 +146,6 @@ namespace Wellora.Areas.Patient.Controllers
         }
 
 
-        public IActionResult AIChat()
-        { return View(); }
+       
     }
 }

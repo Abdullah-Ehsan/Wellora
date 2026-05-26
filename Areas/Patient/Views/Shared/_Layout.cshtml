@@ -1,0 +1,72 @@
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Wellora</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container-fluid p-0">
+
+        <!-- Header: Only visible when a Patient is logged in -->
+        @if (User.Identity.IsAuthenticated && User.IsInRole("patient"))
+                {
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+
+                    <!-- Left: Logo + Website Name -->
+                    <a class="navbar-brand d-flex align-items-center" asp-area="Patient" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/logo.png" alt="Logo" style="height:40px;" />
+                        <span class="ms-2">Wellora</span>
+                    </a>
+
+                    <!-- Center: Navigation Links -->
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Profile" asp-action="Index">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Chat" asp-action="Index">AI Chat</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Doctors" asp-action="Index">Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Appointments" asp-action="Index">Appointments</a></li>
+                    </ul>
+
+                    <!-- Right: Profile Picture -->
+                        <!-- Right: Profile Picture -->
+                        <div class="d-flex align-items-center">
+                            @{
+                                var profilePic = User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value
+                                ?? "~/images/default-profile.png";
+                            }
+                            <img src="@Url.Content(profilePic)" alt="Profile" class="rounded-circle" style="height:40px;width:40px;" />
+                        </div>
+                </div>
+            </nav>
+        </header>
+                }
+
+        <!-- Main Content -->
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+        <!-- Footer: Always visible -->
+        <footer class="border-top bg-light text-muted py-3">
+            <div class="container text-center">
+                <p>&copy; 2025 - 2026 project | This is Wellora, the medical website for healthcare solutions.</p>
+                <p>
+                    <a asp-area="" asp-controller="Home" asp-action="About">About</a> |
+                    <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> |
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> |
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
