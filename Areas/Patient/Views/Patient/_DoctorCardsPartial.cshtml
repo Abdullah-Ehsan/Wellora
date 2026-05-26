@@ -1,0 +1,34 @@
+﻿@model Wellora.Areas.Patient.ViewModels.DoctorListingViewModel
+
+<div class="row" id="doctorCards">
+    @foreach (var doctor in Model.Doctors)
+    {
+        <div class="col-md-3">
+            <div class="card doctor-card">
+                <img src="@(string.IsNullOrEmpty(doctor.ProfilePhoto)
+                         ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                         : Url.Content("~/" + doctor.ProfilePhoto))"
+                 alt="Doctor Avatar" class="doctor-img" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@doctor.FullName</h5>
+                    <p class="card-text">Specialty: @doctor.Specialization</p>
+                    <a href="#" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+     }
+</div>
+
+<nav>
+    <ul class="pagination justify-content-center" id="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" href="javascript:void(0);" onclick="applyFilters(@i)">
+                    @i
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

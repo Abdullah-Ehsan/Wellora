@@ -7,11 +7,13 @@
     color: white;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 70px;
 }
 
-    .filter-panel h4 {
-        margin-bottom: 15px;
-    }
+.filter-panel h4 {
+       margin-bottom: 15px;
+}
 
 .doctor-card {
     background-color: #e0f2f1; /* light teal */
@@ -22,16 +24,30 @@
     transition: transform 0.2s;
 }
 
-    .doctor-card:hover {
+.doctor-card:hover {
         transform: scale(1.05);
-    }
+}
 
-    .doctor-card .card-title {
+.doctor-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #ffffff; /* white border around circle */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow */
+}
+
+.doctor-card .card-title {
         color: #006666; /* medium teal */
         font-weight: bold;
-    }
+}
 
-    .doctor-card .btn {
+.doctor-card .btn {
         background-color: #004d4d; /* dark teal */
         border: none;
-    }
+}
+
+
+

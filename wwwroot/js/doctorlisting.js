@@ -8,11 +8,19 @@
     });
 });
 
-function applyFilters() {
+function applyFilters(pageNumber = 1) {
     const specialty = document.getElementById("specialtyFilter").value;
     const language = document.getElementById("languageFilter").value;
     const gender = document.getElementById("genderFilter").value;
 
-    // TODO: AJAX call to controller with filters
-    console.log("Filters applied:", specialty, language, gender);
+    const query = `?pageNumber=${pageNumber}&specialty=${specialty}&language=${language}&gender=${gender}`;
+
+    // Correct route: Patient area, DoctorListing action
+    fetch("/Patient/DoctorListing" + query)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("doctorCardsContainer").innerHTML = html;
+        })
+        .catch(err => console.error("Error loading doctors:", err));
 }
+
