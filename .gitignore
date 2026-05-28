@@ -376,3 +376,21 @@ obj/
 appsettings.jsonwwwroot/User/Doctor/Profile_Picture/*
 wwwroot/User/Patient/Profile_Picture/*
 wwwroot/User/Admin/Profile_Picture/*
+
+# Ignore all Doctor profile pictures except default
+wwwroot/User/Doctor/Profile_Picture/*
+!wwwroot/User/Doctor/Profile_Picture/default.*
+
+# Ignore all Patient profile pictures except default
+wwwroot/User/Patient/Profile_Picture/*
+!wwwroot/User/Patient/Profile_Picture/Default.*
+
+# Ignore all Admin profile pictures except default
+wwwroot/User/Admin/Profile_Picture/*
+!wwwroot/User/Admin/Profile_Picture/Default.*
+
+# Keep all banners
+!wwwroot/User/Doctor/Banner/
+!wwwroot/User/Patient/Banner/
+!wwwroot/User/Admin/Banner/
+
