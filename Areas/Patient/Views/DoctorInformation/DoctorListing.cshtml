@@ -1,0 +1,120 @@
+﻿@model Wellora.Areas.Patient.ViewModels.DoctorListingViewModel
+
+
+@{
+    ViewData["Title"] = "Doctor Listing";
+}
+
+
+<link rel="stylesheet" href="~/css/patient/DoctorListing.css" />
+
+
+
+<div class="container-fluid doctor-listing">
+    <div class="row">
+        <!-- Filter Panel -->
+        <div class="col-md-3 filter-panel">
+            <h4>Filters</h4>
+            <div class="form-group">
+                <label>Specialty</label>
+                <select id="specialtyFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="cardiologist">Cardiologist</option>
+                    <option value="dermatologist">Dermatologist</option>
+                    <option value="neurologist">Neurologist</option>
+                    <option value="gastroenterologist">Gastroenterologist</option>
+                    <option value="pulmonologist">Pulmonologist</option>
+                    <option value="endocrinologist">Endocrinologist</option>
+                    <option value="psychiatrist">Psychiatrist</option>
+                    <option value="orthopedic_specialist">Orthopedic Specialist</option>
+                    <option value="ophthalmologist">Ophthalmologist</option>
+                    <option value="ent_specialist">ENT Specialist</option>
+                    <option value="general_physician">General Physician</option>
+                    <option value="urologist">Urologist</option>
+                    <option value="gynecologist">Gynecologist</option>
+                    <option value="oncologist">Oncologist</option>
+                    <option value="pediatrician">Pediatrician</option>
+                    <option value="nephrologist">Nephrologist</option>
+                    <option value="hematologist">Hematologist</option>
+                    <option value="allergist_immunologist">Allergist / Immunologist</option>
+                    <option value="rheumatologist">Rheumatologist</option>
+                    <option value="infectious_disease_specialist">Infectious Disease Specialist</option>
+                    <option value="geriatrician">Geriatrician</option>
+                    <option value="sports_medicine_specialist">Sports Medicine Specialist</option>
+                    <option value="emergency_medicine_specialist">Emergency Medicine Specialist</option>
+                    <option value="nutritionist">Nutritionist</option>
+                    <option value="pain_management_specialist">Pain Management Specialist</option>
+                    <option value="sleep_medicine_specialist">Sleep Medicine Specialist</option>
+                    <option value="occupational_medicine_specialist">Occupational Medicine Specialist</option>
+                    <option value="plastic_surgeon">Plastic Surgeon</option>
+                    <option value="radiologist">Radiologist</option>
+                    <option value="anesthesiologist">Anesthesiologist</option>
+                    <option value="psychologist">Psychologist</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Language</label>
+                <select id="languageFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="english">English</option>
+                    <option value="urdu">اردو</option>
+                    <option value="punjabi">ਪੰਜਾਬੀ</option>
+                    <option value="sindhi">سنڌي</option>
+                    <option value="pashto">پښتو</option>
+                    <option value="balochi">بلوچی</option>
+                    <option value="saraiki">سرائیکی</option>
+                    <option value="hindko">ہندکو</option>
+                    <option value="brahui">براہوی</option>
+                    <option value="kashmiri">کٲشُر</option>
+                    <option value="shina">شینا</option>
+                    <option value="balti">بلتی</option>
+                    <option value="wakhi">وخى</option>
+                    <option value="burushaski">بروشسکی</option>
+                    <option value="khowar">کھوار</option>
+                    <option value="dari">دری</option>
+                    <option value="persian">فارسی</option>
+                    <option value="memoni">میمنی</option>
+                    <option value="marwari">मारवाड़ी</option>
+                    <option value="gujarati">ગુજરાતી</option>
+                    <option value="hazargi">هزارگی</option>
+                    <option value="torwali">توروالی</option>
+                    <option value="gawri">گاؤری</option>
+                    <option value="dameli">دامیلی</option>
+                    <option value="kalasha">کلاشہ</option>
+                    <option value="palula">پالولا</option>
+                    <option value="ushojo">اوشوجو</option>
+                    <option value="domaaki">دوماکی</option>
+                    <option value="pahari">پہاڑی</option>
+                    <option value="potohari">پوٹوہاری</option>
+                    <option value="kohistani">کوہستانی</option>
+                    <option value="gilgiti">گلگتی</option>
+                    <option value="chitrali">چترالی</option>
+                    <option value="arabic">العربية</option>
+                    <option value="farsi">فارسی</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="genderFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div id="doctorCardsContainer">
+                @await Html.PartialAsync("_DoctorCardsPartial", Model)
+            </div>
+        </div>
+
+
+
+        
+    </div>
+</div>
+
+<script src="~/js/doctorlisting.js"></script>
