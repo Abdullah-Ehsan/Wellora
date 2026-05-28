@@ -2,9 +2,12 @@
     const filters = ["specialtyFilter", "languageFilter", "genderFilter"];
 
     filters.forEach(f => {
-        document.getElementById(f).addEventListener("change", function () {
-            applyFilters();
-        });
+        const el = document.getElementById(f);
+        if (el) {
+            el.addEventListener("change", function () {
+                applyFilters(); // reset to page 1 when filter changes
+            });
+        }
     });
 });
 
@@ -15,12 +18,20 @@ function applyFilters(pageNumber = 1) {
 
     const query = `?pageNumber=${pageNumber}&specialty=${specialty}&language=${language}&gender=${gender}`;
 
-    // Correct route: Patient area, DoctorListing action
-    fetch("/Patient/DoctorListing" + query)
-        .then(response => response.text())
+    fetch("/Patient/DoctorInformation/DoctorListing" + query, {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();
+        })
         .then(html => {
-            document.getElementById("doctorCardsContainer").innerHTML = html;
+            const container = document.getElementById("doctorCardsContainer");
+            if (container) {
+                container.innerHTML = html;
+            }
         })
         .catch(err => console.error("Error loading doctors:", err));
 }
-
