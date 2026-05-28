@@ -64,5 +64,57 @@ namespace Wellora.Areas.Patient.Controllers
             return View(viewModel);
 
         }
+
+
+
+
+
+
+        public IActionResult DoctorDetail(int id)
+        {
+            var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == id);
+
+            if (doctor == null)
+                return NotFound();
+
+            var viewModel = new DoctorViewModel
+            {
+                DoctorId = doctor.DoctorId,
+                FullName = doctor.FullName,
+                DateOfBirth = doctor.DateOfBirth,
+                Gender = doctor.Gender,
+                ProfilePhoto = doctor.ProfilePhoto,
+                ContactNumber = doctor.ContactNumber,
+                HospitalAddress = doctor.HospitalAddress,
+                Country = doctor.Country,
+                LicenseNumber = doctor.LicenseNumber,
+                PmdcNumber = doctor.PmdcNumber,
+                MedicalSchool = doctor.MedicalSchool,
+                Certifications = doctor.Certifications,
+                Qualifications = doctor.Qualifications,
+                YearsExperience = doctor.YearsExperience,
+                ClinicHours = doctor.ClinicHours,
+                DaysAvailable = doctor.DaysAvailable,
+                TelemedicineAvailable = doctor.TelemedicineAvailable,
+                AppointmentDurationMin = doctor.AppointmentDurationMin,
+                BreakTimes = doctor.BreakTimes,
+                MaxPatientsPerDay = doctor.MaxPatientsPerDay,
+                ConsultationFee = doctor.ConsultationFee,
+                Specialization = doctor.Specialization,
+                SubSpecialties = doctor.SubSpecialties,
+                ServicesOffered = doctor.ServicesOffered,
+                LanguagesSpoken = doctor.LanguagesSpoken,
+                Biography = doctor.Biography,
+                Achievements = doctor.Achievements,
+                Publications = doctor.Publications,
+                SocialLinks = doctor.SocialLinks,
+                CreatedAt = doctor.CreatedAt,
+                UpdatedAt = doctor.UpdatedAt
+            };
+
+            return View(viewModel);
+
+        }
     }
+
 }

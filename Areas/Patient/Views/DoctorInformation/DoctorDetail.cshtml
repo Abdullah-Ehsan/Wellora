@@ -1,0 +1,92 @@
+﻿@model Wellora.Areas.Patient.ViewModels.DoctorViewModel
+
+@{
+    ViewData["Title"] = "Doctor Profile";
+}
+
+<link rel="stylesheet" href="~/css/Patient/DoctorDetail.css" />
+
+<div class="container doctor-detail">
+    <!-- Top Section -->
+    <div class="row mb-4">
+        <div class="col-md-4 text-center">
+           <!--- <img src="@Model.ProfilePhoto" alt="@Model.FullName" class="img-fluid rounded-circle profile-photo" /> -->
+            <img src="@(string.IsNullOrEmpty(@Model.ProfilePhoto)
+                                          ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                                                           : Url.Content("~/" + @Model.ProfilePhoto))"
+                 alt="@Model.FullName" class="img-fluid rounded-circle profile-photo" />
+        </div>
+        <div class="col-md-8 d-flex flex-column justify-content-center position-relative light-teal-box">
+            <h2 class="doctor-name">DR. @Model.FullName</h2>
+            <h5 class="doctor-specialization">@Model.Specialization</h5>
+            <p class="doctor-sub">@Model.SubSpecialties</p>
+
+            <a asp-controller="Appointment" asp-action="Book" asp-route-id="@Model.DoctorId"
+               class="btn appointment-btn">
+                Make an Appointment
+            </a>
+        </div>
+    </div>
+
+    <!-- Base Information -->
+    <section class="info-section">
+        <h3>Base Information</h3>
+        <p><strong>Gender:</strong> @Model.Gender</p>
+        <p><strong>Date of Birth:</strong> @Model.DateOfBirth</p>
+        <p><strong>Contact:</strong> @Model.ContactNumber</p>
+        <p><strong>Hospital Address:</strong> @Model.HospitalAddress</p>
+        <p><strong>Country:</strong> @Model.Country</p>
+    </section>
+
+    <!-- Professional Credentials -->
+    <section class="info-section">
+        <h3>Professional Credentials</h3>
+        <p><strong>License Number:</strong> @Model.LicenseNumber</p>
+        <p><strong>PMDC Number:</strong> @Model.PmdcNumber</p>
+        <p><strong>Medical School:</strong> @Model.MedicalSchool</p>
+        <p><strong>Certifications:</strong> @Model.Certifications</p>
+        <p><strong>Qualifications:</strong> @Model.Qualifications</p>
+    </section>
+
+    <!-- Clinical Practice -->
+    <section class="info-section">
+        <h3>Clinical Practice</h3>
+        <p><strong>Years of Experience:</strong> @Model.YearsExperience</p>
+        <p><strong>Clinic Hours:</strong> @Model.ClinicHours</p>
+        <p><strong>Days Available:</strong> @Model.DaysAvailable</p>
+        <p><strong>Telemedicine:</strong> @(Model.TelemedicineAvailable == true ? "Available" : "Not Available")</p>
+        <p><strong>Appointment Duration:</strong> @Model.AppointmentDurationMin minutes</p>
+        <p><strong>Break Times:</strong> @Model.BreakTimes</p>
+        <p><strong>Max Patients/Day:</strong> @Model.MaxPatientsPerDay</p>
+        <p><strong>Consultation Fee:</strong> @Model.ConsultationFee</p>
+    </section>
+
+    <!-- Specialties & Services -->
+    <section class="info-section">
+        <h3>Specialties & Services</h3>
+        <p><strong>Specialization:</strong> @Model.Specialization</p>
+        <p><strong>Sub-specialties:</strong> @Model.SubSpecialties</p>
+        <p><strong>Services Offered:</strong> @Model.ServicesOffered</p>
+        <p><strong>Languages Spoken:</strong> @Model.LanguagesSpoken</p>
+    </section>
+
+    <!-- Biography & Achievements -->
+    <section class="info-section">
+        <h3>Biography</h3>
+        <div class="scroll-box">@Model.Biography</div>
+
+        <h3>Achievements</h3>
+        <div class="scroll-box">@Model.Achievements</div>
+
+        <h3>Publications</h3>
+        <div class="scroll-box">@Model.Publications</div>
+    </section>
+
+    <!-- Additional Information -->
+    <section class="info-section">
+        <h3>Additional Information</h3>
+        <p><strong>Social Links:</strong> @Model.SocialLinks</p>
+        <p><strong>Created At:</strong> @Model.CreatedAt</p>
+        <p><strong>Updated At:</strong> @Model.UpdatedAt</p>
+    </section>
+</div>

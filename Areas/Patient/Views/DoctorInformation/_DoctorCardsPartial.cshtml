@@ -13,7 +13,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Dr. @doctor.FullName</h5>
                     <p class="card-text">Specialty: @doctor.Specialization</p>
-                    <a href="#" class="btn btn-primary">View</a>
+                    <a asp-area="Patient" asp-controller="DoctorInformation" asp-action="DoctorDetail" asp-route-id="@doctor.DoctorId"
+                       class="btn btn-primary">
+                        View
+                    </a>
                 </div>
             </div>
         </div>
@@ -25,10 +28,7 @@
         @for (int i = 1; i <= Model.TotalPages; i++)
         {
             <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <!--<a class="page-link" href="javascript:void(0);" onclick="applyFilters(@i)">
-                    @i
-                </a>-->
-                <a class="page-link" href="javascript:~/js/doctorlisting.js;" onclick="applyFilters(@i)">
+                <a class="page-link" href="javascript:void(0);" onclick="applyFilters(@i)">
                     @i
                 </a>
             </li>
