@@ -16,11 +16,11 @@ namespace Wellora.Areas.Patient.Models
         public int PatientId { get; set; }
 
         [Column("symptoms")]
-        public string Symptoms { get; set; }
+        public string? Symptoms { get; set; }
 
         [StringLength(255)]
         [Column("suggested_specialization")]
-        public string SuggestedSpecialization { get; set; }
+        public string? SuggestedSpecialization { get; set; }
 
         [Column("confidence_score")]
         public decimal? ConfidenceScore { get; set; }
@@ -31,6 +31,6 @@ namespace Wellora.Areas.Patient.Models
         // Navigation Property
 
         [ForeignKey("PatientId")]
-        public virtual Patient Patient { get; set; }
+        public virtual Patient? Patient { get; set; }
     }
 }

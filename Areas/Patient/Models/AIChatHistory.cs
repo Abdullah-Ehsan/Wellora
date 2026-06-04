@@ -16,10 +16,10 @@ namespace Wellora.Areas.Patient.Models
         public int PatientId { get; set; }
 
         [Column("user_message")]
-        public string UserMessage { get; set; }
+        public string? UserMessage { get; set; }
 
         [Column("ai_response")]
-        public string AIResponse { get; set; }
+        public string? AIResponse { get; set; }
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
@@ -27,6 +27,6 @@ namespace Wellora.Areas.Patient.Models
         // Navigation Property
 
         [ForeignKey("PatientId")]
-        public virtual Patient Patient { get; set; }
+        public virtual Patient? Patient { get; set; }
     }
 }

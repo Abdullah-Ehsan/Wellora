@@ -5,7 +5,7 @@ using Wellora.Areas.Doctor.Models;
 
 namespace Wellora.Areas.Doctor.Models
 {
-    [Table("doctor_schedule")]
+    [Table("doctors_schedule")]
     public class DoctorSchedule
     {
         [Key]
@@ -15,9 +15,8 @@ namespace Wellora.Areas.Doctor.Models
         [Column("doctor_id")]
         public int DoctorId { get; set; }
 
-        [StringLength(3)]
         [Column("day_of_week")]
-        public string DayOfWeek { get; set; }
+        public int DayOfWeek { get; set; } // 1=Mon ... 7=Sun
 
         [Column("start_time")]
         public TimeSpan StartTime { get; set; }
@@ -25,8 +24,19 @@ namespace Wellora.Areas.Doctor.Models
         [Column("end_time")]
         public TimeSpan EndTime { get; set; }
 
-        // Navigation Property (assuming Doctor model exists)
+        [Column("appointment_duration_min")]
+        public int AppointmentDurationMin { get; set; }
+
+        [Column("max_patients_per_day")]
+        public int MaxPatientsPerDay { get; set; }
+
+        [Column("buffer_time_min")] 
+        public int BufferTimeMin { get; set; }
+
+        [Column("is_active")]
+        public bool IsActive { get; set; }
+
         [ForeignKey("DoctorId")]
-        public virtual Doctor Doctor { get; set; }
+        public virtual Doctor? Doctor { get; set; }
     }
 }

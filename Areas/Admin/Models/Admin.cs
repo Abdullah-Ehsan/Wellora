@@ -17,12 +17,12 @@ namespace Wellora.Areas.Admin.Models
         [Required]
         [StringLength(150)]
         [Column("full_name")]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         // Navigation Property
 
         // Assuming you have User model
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
     }
 }

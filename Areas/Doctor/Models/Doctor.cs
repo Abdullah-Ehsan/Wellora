@@ -13,13 +13,13 @@ namespace Wellora.Areas.Doctor.Models
         public int UserId { get; set; }
 
         [Column("full_name")]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         [Column("date_of_birth")]
         public DateOnly DateOfBirth { get; set; }
 
         [Column("gender")]
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
 
         [Column("profile_photo")]
         public string? ProfilePhoto { get; set; }
@@ -31,10 +31,10 @@ namespace Wellora.Areas.Doctor.Models
         public string? HospitalAddress { get; set; }
 
         [Column("license_number")]
-        public string LicenseNumber { get; set; }
+        public string? LicenseNumber { get; set; }
 
         [Column("specialization")]
-        public string Specialization { get; set; }
+        public string? Specialization { get; set; }
 
         [Column("sub_specialties")]
         public string? SubSpecialties { get; set; }
@@ -45,23 +45,10 @@ namespace Wellora.Areas.Doctor.Models
         [Column("qualifications")]
         public string? Qualifications { get; set; }
 
-        [Column("clinic_hours")]
-        public string? ClinicHours { get; set; }
-
-        [Column("days_available")]
-        public string? DaysAvailable { get; set; }
 
         [Column("telemedicine_available")]
         public bool? TelemedicineAvailable { get; set; }
 
-        [Column("appointment_duration_min")]
-        public int? AppointmentDurationMin { get; set; }
-
-        [Column("break_times")]
-        public string? BreakTimes { get; set; }
-
-        [Column("max_patients_per_day")]
-        public int? MaxPatientsPerDay { get; set; }
 
         [Column("consultation_fee")]
         public decimal ConsultationFee { get; set; }
