@@ -1,0 +1,375 @@
+﻿:root {
+    --dark-teal: #004d4d;
+    --light-teal-bg: #f4fafb;
+    --btn-teal: #008b8b;
+    --white: #ffffff;
+    --border-teal: #cfecec;
+    --text-dark: #2c3e50;
+}
+
+.appointments-page-wrapper {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background-color: var(--white);
+}
+
+.split-layout-grid {
+    display: flex;
+    min-height: 100vh;
+    align-items: stretch;
+}
+
+/* Sidebar Styling Controls */
+.filter-sidebar-panel {
+    width: 400px;
+    min-width: 400px;
+    min-height: 2000px;
+    background-color: var(--dark-teal);
+    padding: 40px 30px;
+    box-sizing: border-box;
+    color: var(--white);
+}
+
+.sidebar-main-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 35px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 15px;
+}
+
+.filter-group-block {
+    margin-bottom: 30px;
+}
+
+.filter-group-title {
+    display: block;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.custom-select-box {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #113333;
+    font-weight: 600;
+    background-color: var(--white);
+    outline: none;
+    cursor: pointer;
+}
+
+/* Right View Workspace Main Panel */
+.appointments-feed-list {
+    flex-grow: 1;
+    padding: 50px;
+    background-color: var(--white);
+    box-sizing: border-box;
+}
+
+/* Data Table Styling Architecture */
+.table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-teal);
+}
+
+.appointments-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background-color: var(--white);
+}
+
+    .appointments-data-table thead tr {
+        background-color: var(--dark-teal);
+        color: var(--white);
+        font-weight: 700;
+    }
+
+    .appointments-data-table th {
+        padding: 18px 24px;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+    }
+
+    .appointments-data-table td {
+        padding: 16px 24px;
+        vertical-align: middle;
+        color: var(--text-dark);
+        font-size: 0.95rem;
+        border-bottom: 1px solid var(--border-teal);
+    }
+
+    /* Alternating Teal Rows Implementation */
+    .appointments-data-table tbody tr:nth-of-type(odd) {
+        background-color: var(--white);
+    }
+
+    .appointments-data-table tbody tr:nth-of-type(even) {
+        background-color: var(--light-teal-bg);
+    }
+
+/* Image Column Alignment Rules */
+.image-col-width {
+    width: 90px;
+    padding-right: 0 !important;
+}
+
+.doctor-table-profile-cell {
+    display: flex;
+    align-items: center;
+}
+
+/* Rigid 70px Circle Mask Constraints */
+.doctor-thumbnail-pic {
+    width: 70px !important;
+    height: 70px !important;
+    min-width: 70px !important;
+    min-height: 70px !important;
+    max-width: 70px !important;
+    max-height: 70px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid var(--border-teal);
+    display: block;
+}
+
+.doctor-name-text {
+    font-weight: 700;
+    color: var(--dark-teal);
+    font-size: 1.05rem;
+}
+
+.specialization-badge {
+    background-color: rgba(0, 139, 139, 0.1);
+    color: var(--btn-teal);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.date-cell-highlight, .time-cell-highlight {
+    font-weight: 600;
+}
+
+.fee-cell-text {
+    font-weight: 800;
+    color: var(--dark-teal);
+    font-size: 1.05rem;
+}
+
+/* Action Operations CSS Matrix */
+.table-action-buttons-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-table-action {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    transition: all 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .btn-table-action.btn-view {
+        background-color: var(--border-teal);
+        color: var(--dark-teal);
+    }
+
+        .btn-table-action.btn-view:hover {
+            background-color: #b2dede;
+        }
+
+    .btn-table-action.btn-print {
+        background-color: var(--btn-teal);
+        color: var(--white);
+        padding: 8px 12px;
+    }
+
+        .btn-table-action.btn-print:hover {
+            background-color: var(--dark-teal);
+        }
+
+/* Empty State Container Design Layer */
+.empty-state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.empty-state-layout-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.character-graphic-frame {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.character-vector-artwork {
+    max-width: 380px;
+    height: auto;
+    object-fit: contain;
+}
+
+.empty-message-details-block {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.empty-state-main-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 20px 0;
+    line-height: 1.15;
+}
+
+.empty-state-subtitle {
+    font-size: 1.3rem;
+    color: #444444;
+    margin: 0 0 30px 0;
+    font-weight: 500;
+}
+
+.btn-book-appointment-trigger {
+    background-color: var(--dark-teal);
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 14px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+}
+
+    .btn-book-appointment-trigger:hover {
+        background-color: #003333;
+        color: var(--white);
+    }
+
+/* Custom Print Button Image Wrapper */
+.btn-table-action.btn-print {
+    background-color: var(--btn-teal);
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .btn-table-action.btn-print:hover {
+        background-color: var(--dark-teal);
+    }
+
+/* Explicitly scale the 512x512 asset down to a sharp, responsive web standard */
+.btn-print-icon {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    object-fit: contain !important;
+    filter: brightness(0) invert(1); /* Keeps the icon crisp white to contrast against the teal background */
+}
+
+
+
+/* Ticket Component Profile Images Parameters */
+.ticket-avatar-circle {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 100px !important;
+    min-height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 3px solid var(--border-teal);
+}
+
+.appointment-invoice-card {
+    max-width: 850px;
+    background-color: var(--white);
+}
+
+.toolbar-print-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   PRINT ENGINE MEDIA OVERLAY STYLES
+   Ensures clean single-page formatting during PDF exports or printing cycles
+   ========================================================================== */
+@media print {
+    /* Hide all browser-centric navigation elements, sidebars, and control toolbars */
+    .no-print,
+    .filter-sidebar-panel,
+    .ticket-actions-toolbar,
+    nav,
+    footer,
+    .btn {
+        display: none !important;
+    }
+
+    /* Expand workspace boundaries to occupy full printable area */
+    body,
+    .appointments-page-wrapper,
+    .appointments-feed-list,
+    .ticket-page-container {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .appointment-invoice-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 10px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Force background colors to show up in print/PDF formats across edge browsers */
+    .info-section-block, .bg-light {
+        background-color: #f4fafb !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}

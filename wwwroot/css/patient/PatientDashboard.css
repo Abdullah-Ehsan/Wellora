@@ -1,0 +1,80 @@
+﻿:root {
+    --dark-teal: #004d4d;
+    --light-teal-bg: #f4fafb;
+    --btn-teal: #008b8b;
+    --white: #ffffff;
+    --border-teal: #cfecec;
+}
+
+.dashboard-page-container {
+    background-color: #f8fbfb;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* Rigid 300x300 Box Scaling Rule */
+.dashboard-avatar-fixed {
+    width: 300px !important;
+    height: 300px !important;
+    min-width: 300px !important;
+    min-height: 300px !important;
+    max-width: 300px !important;
+    max-height: 300px !important;
+    border-radius: 12px !important;
+    object-fit: cover !important;
+    border: 3px solid var(--border-teal);
+    box-shadow: 0 4px 15px rgba(0, 63, 63, 0.08);
+}
+
+.text-teal {
+    color: var(--dark-teal) !important;
+}
+
+.badge-teal {
+    background-color: var(--dark-teal);
+    color: var(--white);
+    padding: 6px 12px;
+    font-weight: 700;
+}
+
+.badge-light-teal {
+    background-color: rgba(0, 139, 139, 0.1);
+    color: var(--btn-teal);
+}
+
+/* Upcoming Table Mini Dashboard Rules */
+.appointment-dashboard-table {
+    width: 100%;
+    vertical-align: middle;
+}
+
+    .appointment-dashboard-table th {
+        background-color: var(--light-teal-bg);
+        color: var(--dark-teal);
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+
+    .appointment-dashboard-table td {
+        vertical-align: middle !important;
+    }
+
+.dashboard-table-thumb {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 1px solid var(--border-teal);
+}
+
+.grid-info-fields strong {
+    color: #111111;
+    font-size: 1.05rem;
+}
+
+.dashboard-timeline-footer {
+    letter-spacing: 0.3px;
+    font-weight: 500;
+}
