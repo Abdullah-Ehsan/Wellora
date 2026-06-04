@@ -1,4 +1,5 @@
-﻿@model Wellora.Areas.Patient.ViewModels.DoctorViewModel
+﻿@using Wellora.Areas.Patient.ViewModels.DoctorInformation
+@model DoctorViewModel
 
 @{
     ViewData["Title"] = "Doctor Profile";
@@ -20,8 +21,9 @@
             <h2 class="doctor-name">DR. @Model.FullName</h2>
             <h5 class="doctor-specialization">@Model.Specialization</h5>
             <p class="doctor-sub">@Model.SubSpecialties</p>
+            
 
-            <a asp-controller="Appointment" asp-action="Book" asp-route-id="@Model.DoctorId"
+            <a asp-area="Patient" asp-controller="MakeAppointment" asp-action="AppointmentBooking" asp-route-doctorId="@Model.DoctorId"
                class="btn appointment-btn">
                 Make an Appointment
             </a>
@@ -49,17 +51,40 @@
     </section>
 
     <!-- Clinical Practice -->
+    <!-- Clinical Practice -->
     <section class="info-section">
         <h3>Clinical Practice</h3>
         <p><strong>Years of Experience:</strong> @Model.YearsExperience</p>
-        <p><strong>Clinic Hours:</strong> @Model.ClinicHours</p>
-        <p><strong>Days Available:</strong> @Model.DaysAvailable</p>
         <p><strong>Telemedicine:</strong> @(Model.TelemedicineAvailable == true ? "Available" : "Not Available")</p>
-        <p><strong>Appointment Duration:</strong> @Model.AppointmentDurationMin minutes</p>
-        <p><strong>Break Times:</strong> @Model.BreakTimes</p>
-        <p><strong>Max Patients/Day:</strong> @Model.MaxPatientsPerDay</p>
         <p><strong>Consultation Fee:</strong> @Model.ConsultationFee</p>
+
+        <h4>Weekly Schedule</h4>
+        <table class="table doctor-schedule-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Working Hours</th>
+                    <th>Break</th>
+                    <th>Duration</th>
+                    <th>Max Patients</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model.Schedules)
+                {
+                    <tr class="@(s.StartTime == "OFF" ? "off-day" : "work-day")">
+                        <td>@s.DayOfWeek</td>
+                        <td>@(s.StartTime == "OFF" ? "OFF" : s.StartTime + " - " + s.EndTime)</td>
+                        <td>@(s.StartTime == "OFF" ? "-" : s.BreakStart + " - " + s.BreakEnd)</td>
+                        <td>@(s.AppointmentDurationMin > 0 ? s.AppointmentDurationMin + " min" : "-")</td>
+                        <td>@(s.MaxPatientsPerDay > 0 ? s.MaxPatientsPerDay.ToString() : "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
     </section>
+
 
     <!-- Specialties & Services -->
     <section class="info-section">

@@ -19,25 +19,29 @@
                 <div class="container-fluid">
 
                     <!-- Left: Logo + Website Name -->
-                    <a class="navbar-brand d-flex align-items-center" asp-area="Patient" asp-controller="Home" asp-action="Index">
+                    <a class="navbar-brand d-flex align-items-center" asp-area="Patient" asp-controller="Patient" asp-action="PatientDashboard">
                         <img src="~/images/logo.png" alt="Logo" style="height:40px;" />
                         <span class="ms-2">Wellora</span>
                     </a>
 
                     <!-- Center: Navigation Links -->
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Profile" asp-action="Index">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Chat" asp-action="Index">AI Chat</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Doctors" asp-action="Index">Doctors</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Appointments" asp-action="Index">Appointments</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Patient" asp-action="PatientDashboard">DashBoard</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Patient" asp-action="PatientProfile">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="Patient" asp-action="AIChat">AI Chat</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="DoctorInformation" asp-action="DoctorListing">Doctors</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="Patient" asp-controller="MakeAppointment" asp-action="PatientAppointment">Appointments</a></li>
                     </ul>
 
                     <!-- Right: Profile Picture -->
                         <!-- Right: Profile Picture -->
                         <div class="d-flex align-items-center">
                             @{
-                                var profilePic = User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value
-                                ?? "~/images/default-profile.png";
+                                var profilePicPath = User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value;
+
+                                var profilePic = string.IsNullOrWhiteSpace(profilePicPath)
+                                ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                                : Url.Content("~/" + profilePicPath.TrimStart('/'));
                             }
                             <img src="@Url.Content(profilePic)" alt="Profile" class="rounded-circle" style="height:40px;width:40px;" />
                         </div>

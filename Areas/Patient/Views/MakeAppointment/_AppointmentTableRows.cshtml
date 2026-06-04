@@ -1,0 +1,59 @@
+﻿@using Wellora.Areas.Patient.ViewModels.MakeAppointment
+@model IEnumerable<PatientAppointmentItem>
+
+@if (Model == null || !Model.Any())
+{
+    <tr>
+        <td colspan="6" class="text-center py-5 border-0">
+            <div id="emptyStateFlag"></div>
+        </td>
+    </tr>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td class="image-col-width">
+                <div class="doctor-table-profile-cell">
+                    <img src="@(string.IsNullOrEmpty(item.ProfilePhoto)
+                                                          ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                                                          : Url.Content("~/" + item.ProfilePhoto))"
+                 alt="Doctor Avatar" class="doctor-thumbnail-pic" />
+        </div>
+    </td>
+
+            <td>
+                <span class="doctor-name-text">Dr. @item.DoctorName</span>
+            </td>
+
+            <td>
+                <span class="specialization-badge">@item.Specialization</span>
+            </td>
+
+            <td class="date-cell-highlight">
+                @item.AppointmentDate.ToString("dd/MM/yyyy")
+            </td>
+
+            <td class="time-cell-highlight">
+                @item.AppointmentDate.ToString("hh:mm tt")
+            </td>
+
+            <td class="fee-cell-text">
+                Rs. @item.ConsultationFee.ToString("F2")
+            </td>
+
+            <td>
+                <div class="table-action-buttons-cell">
+                    <a href="@Url.Action("ViewTicket", "MakeAppointment", new { area = "Patient", id = item.AppointmentId })"
+                       class="btn-table-action btn-view text-decoration-none">View</a>
+
+                    <a href="@Url.Action("ViewTicket", "MakeAppointment", new { area = "Patient", id = item.AppointmentId, autoPrint = true })"
+                       class="btn-table-action btn-print" title="Print Ticket">
+                        <img src="@Url.Content("~/images/Patient/Appointment/print.png")" alt="Print" class="btn-print-icon" />
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+}

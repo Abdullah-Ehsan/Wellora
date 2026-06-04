@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Wellora.Areas.Doctor.Models;
 using Wellora.Areas.Patient.ViewModels;
+using Wellora.Areas.Patient.ViewModels.DoctorInformation;
 using Wellora.Data;
+
 
 namespace Wellora.Areas.Patient.Controllers
 {
@@ -73,10 +76,58 @@ namespace Wellora.Areas.Patient.Controllers
         public IActionResult DoctorDetail(int id)
         {
             var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == id);
-
             if (doctor == null)
                 return NotFound();
 
+            // Fetch all schedules and breaks for this doctor
+            var schedules = _context.DoctorSchedules
+                .Where(s => s.DoctorId == id && s.IsActive)
+                .ToList();
+
+            var breaks = _context.DoctorBreaks
+                .Where(b => b.DoctorId == id)
+                .ToList();
+
+            // Map day numbers (1–7) to names
+            string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+            // Build schedule view models for all 7 days
+            var scheduleViewModels = new List<DoctorScheduleViewModel>();
+            for (int day = 1; day <= 7; day++)
+            {
+                var schedule = schedules.FirstOrDefault(s => s.DayOfWeek == day);
+                var dayBreak = breaks.FirstOrDefault(b => b.DayOfWeek == day);
+
+                if (schedule != null)
+                {
+                    scheduleViewModels.Add(new DoctorScheduleViewModel
+                    {
+                        DayOfWeek = dayNames[day - 1],
+                        StartTime = DateTime.Today.Add(schedule.StartTime).ToString("hh:mm tt"),
+                        EndTime = DateTime.Today.Add(schedule.EndTime).ToString("hh:mm tt"),
+                        AppointmentDurationMin = schedule.AppointmentDurationMin,
+                        MaxPatientsPerDay = schedule.MaxPatientsPerDay,
+                        BreakStart = dayBreak != null ? DateTime.Today.Add(dayBreak.BreakStart).ToString("hh:mm tt") : "—",
+                        BreakEnd = dayBreak != null ? DateTime.Today.Add(dayBreak.BreakEnd).ToString("hh:mm tt") : "—"
+                    });
+                }
+                else
+                {
+                    // No schedule for this day → mark as OFF
+                    scheduleViewModels.Add(new DoctorScheduleViewModel
+                    {
+                        DayOfWeek = dayNames[day - 1],
+                        StartTime = "OFF",
+                        EndTime = "OFF",
+                        AppointmentDurationMin = 0,
+                        MaxPatientsPerDay = 0,
+                        BreakStart = "—",
+                        BreakEnd = "—"
+                    });
+                }
+            }
+
+            // Build main view model
             var viewModel = new DoctorViewModel
             {
                 DoctorId = doctor.DoctorId,
@@ -93,12 +144,7 @@ namespace Wellora.Areas.Patient.Controllers
                 Certifications = doctor.Certifications,
                 Qualifications = doctor.Qualifications,
                 YearsExperience = doctor.YearsExperience,
-                ClinicHours = doctor.ClinicHours,
-                DaysAvailable = doctor.DaysAvailable,
                 TelemedicineAvailable = doctor.TelemedicineAvailable,
-                AppointmentDurationMin = doctor.AppointmentDurationMin,
-                BreakTimes = doctor.BreakTimes,
-                MaxPatientsPerDay = doctor.MaxPatientsPerDay,
                 ConsultationFee = doctor.ConsultationFee,
                 Specialization = doctor.Specialization,
                 SubSpecialties = doctor.SubSpecialties,
@@ -109,12 +155,13 @@ namespace Wellora.Areas.Patient.Controllers
                 Publications = doctor.Publications,
                 SocialLinks = doctor.SocialLinks,
                 CreatedAt = doctor.CreatedAt,
-                UpdatedAt = doctor.UpdatedAt
+                UpdatedAt = doctor.UpdatedAt,
+                Schedules = scheduleViewModels
             };
 
             return View(viewModel);
-
         }
+
     }
 
 }

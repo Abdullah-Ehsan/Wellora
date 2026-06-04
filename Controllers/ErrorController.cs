@@ -12,11 +12,11 @@ namespace Wellora.Controllers
             // Role-based message
             if (User.Identity.IsAuthenticated)
             {
-                if (User.IsInRole("Doctor"))
+                if (User.IsInRole("doctor"))
                     message = "Sorry Doctor, the page you’re looking for doesn’t exist.";
-                else if (User.IsInRole("Patient"))
+                else if (User.IsInRole("patient"))
                     message = "Sorry Patient, we couldn’t find that page.";
-                else if (User.IsInRole("Admin"))
+                else if (User.IsInRole("admin"))
                     message = "Sorry Admin, this page is missing or unavailable.";
                 else
                     message = "Sorry User, page not found.";

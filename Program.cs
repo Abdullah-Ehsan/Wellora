@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Wellora.Areas.Patient.Services.Scheduling;
+using Wellora.Services.Dashboard;
 using Wellora.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +64,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         };
     });
 
+//Patient Services
+builder.Services.AddScoped<AppointmentSlotService>();
+builder.Services.AddScoped<PatientAppointmentService>();
+builder.Services.AddScoped<DashboardService>();
+
+
+
 
 var app = builder.Build();
 
@@ -82,12 +91,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-// Route for areas (must come before default)
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
 // Custom 404 handling
 app.UseStatusCodePages(async context =>
 {
@@ -99,6 +102,10 @@ app.UseStatusCodePages(async context =>
     }
 });
 
+// Route for areas (must come before default)
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 
 

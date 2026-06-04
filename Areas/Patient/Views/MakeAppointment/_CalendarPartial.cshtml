@@ -1,0 +1,34 @@
+﻿@using Wellora.Areas.Patient.ViewModels.MakeAppointment
+@model List<CalendarCell>
+
+@{
+    int cellIndex = 0;
+}
+
+@for (var row = 0; row < 6; row++)
+{
+    <tr>
+        @for (var col = 0; col < 7; col++)
+        {
+            var cell = Model[cellIndex++];
+
+            if (cell.Date == null)
+            {
+                <td><div class="date-card placeholder"></div></td>
+            }
+            else
+            {
+                var css = "date-card";
+                if (cell.IsAvailable) css += " available";
+                else css += " unavailable";
+
+                <td>
+                    <div class="@css"
+                         data-date="@cell.Date.Value.ToString("yyyy-MM-dd")">
+                        @cell.Date.Value.Day
+                    </div>
+                </td>
+            }
+        }
+    </tr>
+}

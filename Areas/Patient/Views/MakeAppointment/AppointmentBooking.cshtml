@@ -1,0 +1,200 @@
+﻿@using Wellora.Areas.Patient.ViewModels.MakeAppointment
+@model AppointmentBookingViewModel
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<link rel="stylesheet" href="~/css/patient/AppointmentBooking.css" />
+
+<div class="container appointment-page">
+
+    <!-- Doctor Info -->
+    <div class="row doctor-header align-items-center mb-4">
+        <div class="col-md-4 text-center">
+            <img src="@(string.IsNullOrEmpty(Model.ProfilePhoto)
+                                          ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                                          : Url.Content("~/" + Model.ProfilePhoto))"
+                 alt="@Model.DoctorName"
+                 class="doctor-photo rounded-circle" />
+        </div>
+
+        <div class="col-md-7 doctor-info">
+            <h2 class="doctor-name">Dr. @Model.DoctorName</h2>
+            <h5>@Model.Specialization</h5>
+            <p>@Model.SubSpecialization</p>
+            <p class="doctor-fee">
+                Consultation Fee: <strong>@Model.ConsultationFee PKR</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- FORM START -->
+    <form asp-action="Confirm" asp-controller="MakeAppointment" method="post">
+
+        <input type="hidden" name="DoctorId" value="@Model.DoctorId" />
+        <input type="hidden" id="SelectedDate" name="SelectedDate" />
+        <input type="hidden" id="SelectedSlot" name="SelectedSlot" />
+        <input type="hidden" asp-for="ConsultationFee" />
+
+        <!-- CALENDAR -->
+        <section class="calendar-section mb-4">
+            <h3>Select Date</h3>
+            <div class="calendar-nav d-flex justify-content-between align-items-center mb-3">
+
+                <button id="prevMonth" class="btn btn-outline-teal">Previous Month</button>
+
+                @{
+                    var displayDate = new DateTime(ViewBag.Year, ViewBag.Month, 1);
+                }
+
+                <span id="monthLabel" class="month-label">
+                    @displayDate.ToString("MMMM yyyy")
+                </span>
+
+                <button id="nextMonth" class="btn btn-outline-teal">Next Month</button>
+            </div>
+
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @Html.Partial("_CalendarPartial", Model.CalendarCells)
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SLOTS -->
+        <section class="slots-section">
+
+            <h3>Select Time Slot</h3>
+
+            <div class="row">
+
+                <!-- MORNING -->
+                <div class="col-md-4">
+                    <h5>Morning</h5>
+
+                    <div class="slots-grid morning-slots">
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            var slot = Model.MorningSlots.ElementAtOrDefault(i);
+
+                            if (slot == null)
+                            {
+                                <button type="button" class="slot-btn placeholder-slot" disabled>—</button>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="slot-btn available @(slot.IsAvailable ? "" : "unavailable")"
+                                        data-slot="@slot.Time"
+                                        @(slot.IsAvailable ? "" : "disabled")>
+                                    @slot.Time
+                                </button>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <!-- AFTERNOON -->
+                <div class="col-md-4">
+                    <h5>Afternoon</h5>
+
+                    <div class="slots-grid afternoon-slots">
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            var slot = Model.AfternoonSlots.ElementAtOrDefault(i);
+
+                            if (slot == null)
+                            {
+                                <button type="button" class="slot-btn placeholder-slot" disabled>—</button>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="slot-btn available @(slot.IsAvailable ? "" : "unavailable")"
+                                        data-slot="@slot.Time"
+                                        @(slot.IsAvailable ? "" : "disabled")>
+                                    @slot.Time
+                                </button>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <!-- EVENING -->
+                <div class="col-md-4">
+                    <h5>Evening</h5>
+
+                    <div class="slots-grid evening-slots">
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            var slot = Model.EveningSlots.ElementAtOrDefault(i);
+
+                            if (slot == null)
+                            {
+                                <button type="button" class="slot-btn placeholder-slot" disabled>—</button>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="slot-btn available @(slot.IsAvailable ? "" : "unavailable")"
+                                        data-slot="@slot.Time"
+                                        @(slot.IsAvailable ? "" : "disabled")>
+                                    @slot.Time
+                                </button>
+                            }
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PAYMENT -->
+        <section class="payment-section">
+            <h3>Payment Method</h3>
+
+            <div class="form-check">
+                <input type="radio" name="PaymentMethod" value="Onsite" checked />
+                Onsite
+            </div>
+
+            <div class="form-check">
+                <input type="radio" name="PaymentMethod" value="Online" />
+                Online
+            </div>
+        </section>
+
+        <!-- CONFIRM -->
+        <div class="confirm-section text-center">
+            <button type="submit" class="btn btn-teal">
+                Confirm Appointment
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    window.availableDates = @Html.Raw(
+                Json.Serialize(Model.AvailableDates.Select(x => x.ToString("yyyy-MM-dd")))
+        );
+
+    window.doctorId = @Model.DoctorId;
+    window.currentYear = @ViewBag.Year;
+    window.currentMonth = @ViewBag.Month - 1;
+</script>
+
+<script src="~/js/appointmentbooking.js"></script>

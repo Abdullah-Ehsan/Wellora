@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Generators;
 using System.Security.Claims;
 using Wellora.Areas.Patient.Models;
-using Wellora.Areas.Patient.ViewModels;
+using Wellora.Areas.Patient.ViewModels.PatientAccount;
 using Wellora.Data;
 using Wellora.Models;
 using PatientEntity = Wellora.Areas.Patient.Models.Patient;
@@ -135,7 +135,7 @@ namespace Wellora.Areas.Patient.Controllers
                 });
 
             // Redirect to dashboard
-            return RedirectToAction("AIChat", "Patient", new { area = "Patient" });
+            return RedirectToAction("PatientDashboard", "Patient", new { area = "Patient" });
         }
 
         [HttpGet]

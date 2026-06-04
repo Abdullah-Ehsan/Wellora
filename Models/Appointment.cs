@@ -23,27 +23,29 @@ namespace Wellora.Models
         [Column("appointment_date")]
         public DateTime AppointmentDate { get; set; }
 
-        [StringLength(20)]
-        [Column("status")]
-        public string Status { get; set; }
+        [Column("scheduled_status")]
+        public string? Status { get; set; }
 
         [StringLength(20)]
         [Column("payment_status")]
-        public string PaymentStatus { get; set; }
+        public string? PaymentStatus { get; set; }
 
         [Column("notes")]
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
+
+        [Column("consultation_fee")]
+        public decimal ConsultationFee { get; set; }
+
+        [Column("payment_method")]
+        public string? PaymentMethod { get; set; }
 
         [Column("created_at")]
-        public DateTime? CreatedAt { get; set; }
-
-        // Navigation Properties
+        public DateTime CreatedAt { get; set; }
 
         [ForeignKey("PatientId")]
-        public virtual Patient Patient { get; set; }
+        public virtual Patient? Patient { get; set; }
 
-        // Assuming you have Doctor model
         [ForeignKey("DoctorId")]
-        public virtual Doctor Doctor { get; set; }
+        public virtual Doctor? Doctor { get; set; }
     }
 }

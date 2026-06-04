@@ -1,29 +1,51 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Wellora.Areas.Patient.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Wellora.Areas.Patient.Services.Scheduling;
+using Wellora.Areas.Patient.ViewModels.MakeAppointment;
 using Wellora.Data;
 using Wellora.Models;
-using Wellora.Areas.Doctor.Models;
-using DoctorEntity = Wellora.Areas.Doctor.Models.Doctor;
 
 namespace Wellora.Areas.Patient.Controllers
 {
     [Area("Patient")]
     [Authorize(Roles = "patient")]
+    
+
     public class MakeAppointmentController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly AppointmentSlotService _slotService;
+        private readonly PatientAppointmentService _appointmentService;
 
-        public MakeAppointmentController(ApplicationDbContext context)
+        public MakeAppointmentController(
+            ApplicationDbContext context,
+            AppointmentSlotService slotService,
+            PatientAppointmentService appointmentService)
         {
             _context = context;
+            _slotService = slotService;
+            _appointmentService = appointmentService;
         }
 
-        // GET: Appointment/Book/{doctorId}
-        public IActionResult AppointmentBooking(int doctorId)
+        // =========================
+        // BOOKING PAGE
+        // =========================
+        public IActionResult AppointmentBooking(int doctorId, int? year, int? month)
         {
-            var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
+            var doctor = _context.Doctors
+                .FirstOrDefault(d => d.DoctorId == doctorId);
+
             if (doctor == null) return NotFound();
+
+            var targetYear = year ?? DateTime.Today.Year;
+            var targetMonth = month ?? DateTime.Today.Month;
+
+            ViewBag.Year = targetYear;
+            ViewBag.Month = targetMonth;
+
+            var availableDates = GenerateAvailableDates(doctorId);
 
             var vm = new AppointmentBookingViewModel
             {
@@ -33,60 +55,50 @@ namespace Wellora.Areas.Patient.Controllers
                 SubSpecialization = doctor.SubSpecialties,
                 ProfilePhoto = doctor.ProfilePhoto,
                 ConsultationFee = doctor.ConsultationFee,
-                AvailableDates = GenerateAvailableDates(doctor)
+
+                AvailableDates = availableDates,
+                CalendarCells = BuildCalendarCells(availableDates, targetYear, targetMonth)
             };
 
             return View("AppointmentBooking", vm);
         }
 
-        [HttpGet]
-        public IActionResult GetAvailableDates(int doctorId, int year, int month)
+        // =========================
+        // GET SLOTS (AJAX or reload)
+        // =========================
+        [HttpGet("/Patient/MakeAppointment/GetAvailableSlots")]
+        public IActionResult GetSlots(int doctorId, DateTime date)
         {
-            var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
-            if (doctor == null) return NotFound();
+            var result = _slotService.GenerateSlots(doctorId, date);
 
-            var dates = GenerateAvailableDates(doctor)
-                .Where(d => d.Year == year && d.Month == month)
-                .Select(d => d.ToString("yyyy-MM-dd"))
-                .ToList();
-
-            return Json(dates);
+            return Json(new
+            {
+                morningSlots = result.Morning,
+                afternoonSlots = result.Afternoon,
+                eveningSlots = result.Evening,
+                noSlots = result.NoSlots
+            });
         }
 
-
-        // GET: Appointment/GetSlots
-        [HttpGet]
-        public IActionResult GetAvailableSlots(int doctorId, DateTime date)
-        {
-            var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
-            if (doctor == null) return NotFound();
-
-            var slots = GenerateSlots(doctor, date);
-
-            // Remove already booked slots
-            var booked = _context.Appointments
-                .Where(a => a.DoctorId == doctorId && a.AppointmentDate.Date == date.Date && a.Status != "cancelled")
-                .Select(a => a.AppointmentDate.ToString("hh:mm tt")) // AM/PM format
-                .ToList();
-
-            slots.MorningSlots = slots.MorningSlots.Except(booked).ToList();
-            slots.AfternoonSlots = slots.AfternoonSlots.Except(booked).ToList();
-            slots.EveningSlots = slots.EveningSlots.Except(booked).ToList();
-
-            return Json(slots);
-        }
-
-        // POST: Appointment/Confirm
+        // =========================
+        // CONFIRM BOOKING
+        // =========================
         [HttpPost]
         public IActionResult Confirm(AppointmentBookingViewModel vm)
         {
-            if (!ModelState.IsValid || vm.SelectedDate == null || string.IsNullOrEmpty(vm.SelectedSlot))
+            if (vm.SelectedDate == null || string.IsNullOrEmpty(vm.SelectedSlot))
             {
-                return View("AppointmentBooking", vm);
+                ModelState.AddModelError("", "Please select date and slot.");
+                return RedirectToAction("AppointmentBooking", new
+                {
+                    doctorId = vm.DoctorId
+                });
             }
 
-            // Check if slot is free
-            var slotDateTime = DateTime.Parse($"{vm.SelectedDate.Value.ToShortDateString()} {vm.SelectedSlot}");
+            // rebuild full datetime
+            var slotDateTime = DateTime.Parse($"{vm.SelectedDate:yyyy-MM-dd} {vm.SelectedSlot}");
+
+            // DOUBLE BOOKING PROTECTION
             var exists = _context.Appointments.Any(a =>
                 a.DoctorId == vm.DoctorId &&
                 a.AppointmentDate == slotDateTime &&
@@ -94,14 +106,29 @@ namespace Wellora.Areas.Patient.Controllers
 
             if (exists)
             {
-                ModelState.AddModelError("", "This slot is already booked.");
-                return View("AppointmentBooking", vm);
+                TempData["Error"] = "This slot is already booked.";
+                return RedirectToAction("AppointmentBooking", new
+                {
+                    doctorId = vm.DoctorId
+                });
             }
+
+            // get patient
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            //var patient = _context.Patients.FirstOrDefault(p => p.UserId == userId);
+
+            var patientId = _context.Patients
+                .Where(p => p.UserId == userId)
+                .Select(p => p.PatientId)
+                .FirstOrDefault();
+
+            if (patientId == 0)
+                return Unauthorized();
 
             var appointment = new Appointment
             {
                 DoctorId = vm.DoctorId,
-                PatientId = 1, // replace with logged-in patient ID
+                PatientId = patientId,
                 AppointmentDate = slotDateTime,
                 Status = "scheduled",
                 PaymentStatus = "pending",
@@ -117,81 +144,145 @@ namespace Wellora.Areas.Patient.Controllers
             return RedirectToAction("PatientAppointment");
         }
 
+        // =========================
+        // AVAILABLE DATES (6 MONTH RULE)
+        // =========================
+        private List<DateTime> GenerateAvailableDates(int doctorId)
+        {
+            var today = DateTime.Today;
+            var end = today.AddMonths(6);
+
+            var schedules = _context.DoctorSchedules
+                .Where(s => s.DoctorId == doctorId && s.IsActive)
+                .ToList();
+
+            var result = new List<DateTime>();
+
+            for (var d = today; d <= end; d = d.AddDays(1))
+            {
+                int dbDay = (int)d.DayOfWeek == 0 ? 7 : (int)d.DayOfWeek;
+
+                if (schedules.Any(s => s.DayOfWeek == dbDay))
+                    result.Add(d);
+            }
+
+            return result;
+        }
+
+        // =========================
+        // CALENDAR BUILDER
+        // =========================
+        private List<CalendarCell> BuildCalendarCells(
+            List<DateTime> availableDates,
+            int year,
+            int month)
+        {
+            var cells = new List<CalendarCell>();
+
+            var start = new DateTime(year, month, 1);
+            var days = DateTime.DaysInMonth(year, month);
+
+            var offset = ((int)start.DayOfWeek + 6) % 7; // Monday=0
+            int day = 1;
+
+            for (int i = 0; i < 42; i++) // 6x7 grid
+            {
+                if (i < offset || day > days)
+                {
+                    cells.Add(new CalendarCell { Date = null });
+                }
+                else
+                {
+                    var date = new DateTime(year, month, day);
+
+                    cells.Add(new CalendarCell
+                    {
+                        Date = date,
+                        IsAvailable = availableDates.Contains(date)
+                    });
+
+                    day++;
+                }
+            }
+
+            return cells;
+        }
+
+        [HttpGet]
+        public IActionResult GetCalendar(int doctorId, int year, int month)
+        {
+            var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
+            if (doctor == null) return NotFound();
+
+            var availableDates = GenerateAvailableDates(doctor.DoctorId);
+            var cells = BuildCalendarCells(availableDates, year, month);
+
+            return PartialView("_CalendarPartial", cells);
+        }
+
+
+
+
+
+
+
+
+        //this the second page of this controller
+
+        [HttpGet]
         public IActionResult PatientAppointment()
         {
             return View();
         }
 
-        // ---------------- Helper Methods ----------------
-
-        private List<DateTime> GenerateAvailableDates(DoctorEntity doctor)
+        // Secure AJAX JSON Endpoint calling the external Service Layer
+        [HttpGet("/Patient/MakeAppointment/GetUpcomingAppointments")]
+        public IActionResult GetUpcomingAppointments(string sortBy = "nearest", string feeSort = "", string timeSlot = "")
         {
-            var availableDates = new List<DateTime>();
-            var today = DateTime.Today;
-            var endDate = today.AddMonths(6);
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
 
-            var daysAvailable = doctor.DaysAvailable?.Split('_') ?? Array.Empty<string>();
+            var userId = int.Parse(userIdClaim);
 
-            for (var date = today; date <= endDate; date = date.AddDays(1))
-            {
-                var dayName = date.ToString("ddd"); // Mon, Tue, etc.
-                if (daysAvailable.Any(d => dayName.StartsWith(d, StringComparison.OrdinalIgnoreCase)))
-                {
-                    availableDates.Add(date);
-                }
-            }
+            var patientId = _context.Patients
+                .Where(p => p.UserId == userId)
+                .Select(p => p.PatientId)
+                .FirstOrDefault();
 
-            return availableDates;
+            if (patientId == 0) return PartialView("_AppointmentTableRows", new List<PatientAppointmentItem>());
+
+            // Query data via service layer
+            var dataMatrix = _appointmentService.GetFilteredAppointmentsForPatient(patientId, sortBy, feeSort, timeSlot);
+
+            // Render partial view directly to HTML string stream response
+            return PartialView("_AppointmentTableRows", dataMatrix);
         }
 
-        private AppointmentBookingViewModel GenerateSlots(DoctorEntity doctor, DateTime date)
+
+        //Page 3 this is only view the ticket for the appointment
+
+        // Add this method inside your existing MakeAppointmentController class
+        [HttpGet]
+        public IActionResult ViewTicket(int id)
         {
-            var vm = new AppointmentBookingViewModel();
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
 
-            var duration = doctor.AppointmentDurationMin ?? 30;
-            var clinicRanges = doctor.ClinicHours?.Split(',') ?? Array.Empty<string>();
-            var breakRanges = doctor.BreakTimes?.Split(',') ?? Array.Empty<string>();
+            var userId = int.Parse(userIdClaim);
 
-            var morning = new List<string>();
-            var afternoon = new List<string>();
-            var evening = new List<string>();
+            // Get patient context ID
+            var patientId = _context.Patients
+                .Where(p => p.UserId == userId)
+                .Select(p => p.PatientId)
+                .FirstOrDefault();
 
-            foreach (var range in clinicRanges)
-            {
-                var times = range.Split('-');
-                if (times.Length != 2) continue;
+            if (patientId == 0) return RedirectToAction("PatientAppointments");
 
-                var start = DateTime.Parse(times[0]);
-                var end = DateTime.Parse(times[1]);
+            // Fetch unified record details using our secure method
+            var ticketDetails = _appointmentService.GetAppointmentTicketDetails(id, patientId);
+            if (ticketDetails == null) return NotFound();
 
-                for (var slot = start; slot < end; slot = slot.AddMinutes(duration))
-                {
-                    // Skip breaks
-                    if (breakRanges.Any(br =>
-                    {
-                        var brTimes = br.Split('-');
-                        if (brTimes.Length != 2) return false;
-                        var brStart = DateTime.Parse(brTimes[0]);
-                        var brEnd = DateTime.Parse(brTimes[1]);
-                        return slot >= brStart && slot < brEnd;
-                    }))
-                    {
-                        continue;
-                    }
-
-                    var formatted = slot.ToString("hh:mm tt"); // AM/PM
-                    if (slot.Hour < 12) morning.Add(formatted);
-                    else if (slot.Hour < 17) afternoon.Add(formatted);
-                    else evening.Add(formatted);
-                }
-            }
-
-            vm.MorningSlots = morning;
-            vm.AfternoonSlots = afternoon;
-            vm.EveningSlots = evening;
-
-            return vm;
+            return View(ticketDetails);
         }
-
     }
 }

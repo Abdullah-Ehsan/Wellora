@@ -24,11 +24,11 @@ namespace Wellora.Models
 
         [StringLength(20)]
         [Column("payment_method")]
-        public string PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
 
         [StringLength(20)]
         [Column("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Column("timestamp")]
         public DateTime? Timestamp { get; set; }
@@ -36,9 +36,9 @@ namespace Wellora.Models
         // Navigation Properties
 
         [ForeignKey("AppointmentId")]
-        public virtual Appointment Appointment { get; set; }
+        public virtual Appointment? Appointment { get; set; }
 
         [ForeignKey("PatientId")]
-        public virtual Patient Patient { get; set; }
+        public virtual Patient? Patient { get; set; }
     }
 }

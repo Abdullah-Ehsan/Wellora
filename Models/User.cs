@@ -18,16 +18,16 @@ namespace Wellora.Models
         public string? Username { get; set; }
 
         [Column("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Column("password_hash")]
-        public string PasswordHash { get; set; }
+        public string? PasswordHash { get; set; }
 
         [Column("role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         [Column("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }

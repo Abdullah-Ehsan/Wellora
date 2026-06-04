@@ -1,0 +1,118 @@
+﻿@using Wellora.Areas.Patient.ViewModels.MakeAppointment
+@model DetailedAppointmentTicketViewModel
+@{
+    ViewData["Title"] = "Appointment Ticket #" + Model.AppointmentId;
+    bool autoPrint = Context.Request.Query["autoPrint"] == "true";
+}
+
+<link rel="stylesheet" href="~/css/patient/PatientAppointment.css" asp-append-version="true">
+
+<div class="ticket-page-container container my-5">
+
+    <div class="ticket-actions-toolbar d-flex justify-content-between align-items-center mb-4 no-print">
+        <a href="@Url.Action("PatientAppointments", "MakeAppointment")" class="btn btn-outline-secondary font-weight-bold">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+        <button onclick="window.print()" class="btn btn-success font-weight-bold px-4">
+            <img src="@Url.Content("~/images/Patient/Appointment/print.png")" alt="Print" class="toolbar-print-icon mr-2" /> Print Ticket / Save PDF
+        </button>
+    </div>
+
+    <div class="appointment-invoice-card p-5 bg-white border rounded shadow-sm mx-auto">
+
+        <div class="invoice-branding-header d-flex justify-content-between align-items-center border-bottom pb-4 mb-4">
+            <div>
+                <h1 class="text-teal font-weight-bold m-0" style="color: var(--dark-teal);">WELLORA</h1>
+                <p class="text-muted small m-0">Healthcare Management Platform</p>
+            </div>
+            <div class="text-right">
+                <h4 class="font-weight-bold text-uppercase text-muted m-0">Appointment Slip</h4>
+                <p class="m-0 font-weight-bold text-teal">ID: #@Model.AppointmentId</p>
+            </div>
+        </div>
+
+        <!-- Update this specific Patient Information row fragment inside ViewTicket.cshtml -->
+        <div class="info-section-block mb-4 p-4 rounded-lg" style="background-color: var(--light-teal-bg);">
+            <h5 class="section-title-label text-uppercase tracking-wider font-weight-bold mb-3">Patient Information</h5>
+            <div class="d-flex align-items-center">
+                <img src="@(string.IsNullOrEmpty(Model.PatientPhoto) ? Url.Content("~/User/Patient/Profile_Picture/default.png") : Url.Content("~/" + Model.PatientPhoto))"
+                     alt="Patient Picture" class="ticket-avatar-circle mr-4" />
+                <div class="profile-meta-grid flex-grow-1 row">
+                    <div class="col-md-6">
+                        <p class="mb-1"><span class="text-muted small">Full Name:</span> <br><strong class="h5 font-weight-bold">@Model.PatientName</strong></p>
+                        <p class="mb-0"><span class="text-muted small">Patient Reference ID:</span> <br><strong>WP-@Model.PatientId</strong></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-0"><span class="text-muted small">Gender / Age:</span> <br><strong>@Model.PatientGender / @Model.PatientAge Years</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section-block mb-4 p-4 rounded-lg border">
+            <h5 class="section-title-label text-uppercase tracking-wider font-weight-bold mb-3" style="color: var(--btn-teal);">Assigned Practitioner</h5>
+            <div class="d-flex align-items-center">
+                <img src="@(string.IsNullOrEmpty(Model.DoctorPhoto) ? Url.Content("~/User/Doctor/Profile_Picture/default.png") : Url.Content("~/" + Model.DoctorPhoto))"
+                     alt="Doctor Picture" class="ticket-avatar-circle mr-4" />
+                <div>
+                    <h4 class="font-weight-bold m-0" style="color: var(--dark-teal);">Dr. @Model.DoctorName</h4>
+                    <p class="m-0 text-muted font-weight-bold">@Model.Specialization</p>
+                    <p class="m-0 text-secondary small">@Model.SubSpecialization</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section-block mb-4">
+            <h5 class="section-title-label text-uppercase tracking-wider font-weight-bold mb-3">Schedule & Transaction Specifications</h5>
+            <div class="row text-center bg-light m-0 py-3 rounded-lg border">
+                <div class="col-3 border-right">
+                    <span class="text-muted small text-uppercase font-weight-bold">Weekday</span>
+                    <h5 class="font-weight-bold mt-1 text-dark">@Model.AppointmentDate.ToString("dddd")</h5>
+                </div>
+                <div class="col-3 border-right">
+                    <span class="text-muted small text-uppercase font-weight-bold">Calendar Date</span>
+                    <h5 class="font-weight-bold mt-1 text-dark">@Model.AppointmentDate.ToString("dd/MM/yyyy")</h5>
+                </div>
+                <div class="col-3 border-right">
+                    <span class="text-muted small text-uppercase font-weight-bold">Time Slot</span>
+                    <h5 class="font-weight-bold mt-1 text-dark">@Model.AppointmentDate.ToString("hh:mm tt")</h5>
+                </div>
+                <div class="col-3">
+                    <span class="text-muted small text-uppercase font-weight-bold">Booking Status</span>
+                    <h5 class="font-weight-bold mt-1 text-success text-uppercase">@Model.Status</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section-block mb-4 row p-3 bg-light mx-0 rounded-lg border align-items-center">
+            <div class="col-md-6">
+               <!-- <p class="m-0 small text-muted">Document Generated: @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</p> -->
+                <p class="m-0 font-weight-bold text-secondary">Payment Method Status: <span class="text-uppercase text-dark">@Model.PaymentStatus</span></p>
+            </div>
+            <div class="col-md-6 text-right">
+                <span class="text-muted text-uppercase small font-weight-bold d-block">Total Consultation Fee</span>
+                <span class="h2 font-weight-bold text-teal" style="color: var(--dark-teal);">Rs. @Model.ConsultationFee.ToString("F2")</span>
+            </div>
+        </div>
+
+        <div class="ticket-legal-footer text-center border-top pt-3 mt-4 text-muted small">
+            <p class="mb-1">Please bring this copy to the verification desk 15 minutes before your time window slot.</p>
+            <p class="m-0">&copy; @DateTime.Now.Year Wellora System Network Inc. All Rights Reserved.</p>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @if (autoPrint)
+    {
+        <script>
+            // Automatically launch native print overlay execution immediately once structural data rendering achieves completion
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    window.print();
+                }, 400);
+            });
+        </script>
+    }
+}

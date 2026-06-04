@@ -1,5 +1,161 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Wellora.Areas.Patient.ViewModels.PatientDashboardViewModel
 @{
+    ViewData["Title"] = "Patient Dashboard";
 }
+
+<link rel="stylesheet" href="~/css/patient/PatientDashboard.css" asp-append-version="true">
+
+<div class="dashboard-page-container container-fluid py-4 px-5">
+
+    <div class="profile-summary-panel card border-0 shadow-sm p-4 mb-4 bg-white">
+        <div class="row align-items-center">
+            <div class="col-xl-3 col-lg-4 text-center mb-3 mb-lg-0">
+                <img src="@(string.IsNullOrEmpty(Model.ProfilePhoto) ? Url.Content("~/User/Patient/Profile_Picture/default.png") : Url.Content("~/" + Model.ProfilePhoto))"
+                     alt="Patient Profile" class="dashboard-avatar-fixed" />
+            </div>
+            <div class="col-xl-9 col-lg-8">
+                <div class="profile-header-meta">
+                    <span class="badge badge-teal text-uppercase mb-2">Patient Account Directory</span>
+                    <h1 class="display-5 font-weight-bold mb-1 text-dark">@Model.FullName</h1>
+                    <p class="text-muted font-weight-bold mb-3" style="font-size: 1.1rem;">WP-Patient ID: <span class="text-teal">#@Model.PatientId</span></p>
+
+                    <div class="row border-top pt-3 mt-2 grid-info-fields">
+                        <div class="col-md-4 mb-2">
+                            <span class="text-muted small d-block">Username Handle</span>
+                            <strong>@@@Model.Username</strong>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <span class="text-muted small d-block">Email Node</span>
+                            <strong>@Model.Email</strong>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <span class="text-muted small d-block">Gender</span>
+                            <strong>@Model.Gender</strong>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <span class="text-muted small d-block">Calculated Age</span>
+                            <strong>@Model.Age Years</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+
+        <div class="col-lg-6 mb-4 mb-lg-0 d-flex flex-column" style="gap: 20px;">
+            <div class="card border-0 shadow-sm p-4 bg-white flex-grow-1">
+                <h4 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-uppercase small tracking-wider">Analytics & Trends Summary</h4>
+                <div class="row text-center mt-2">
+                    <div class="col-6 border-right py-2">
+                        <span class="text-muted small d-block font-weight-bold text-uppercase">Most Visited Doctor</span>
+                        <h6 class="font-weight-bold text-teal mt-1">@Model.MostVisitedDoctor</h6>
+                    </div>
+                    <div class="col-6 py-2">
+                        <span class="text-muted small d-block font-weight-bold text-uppercase">Highest Cost Consultation</span>
+                        <h6 class="font-weight-bold text-danger mt-1">@Model.MostExpensiveDoctor</h6>
+                    </div>
+                </div>
+                <div class="bg-light rounded p-3 mt-4 text-center border">
+                    <span class="text-muted text-uppercase small font-weight-bold d-block">Total Treatment Investment</span>
+                    <span class="h2 font-weight-bold text-dark">Rs. @Model.TotalExpenditure.ToString("F2")</span>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm p-4 bg-white flex-grow-1">
+                <h4 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-uppercase small tracking-wider">Appointment Volume Trajectory</h4>
+                <div class="d-flex align-items-center justify-content-center h-100 py-3" style="min-height:180px; background: #fafafa; border: 2px dashed #eee; border-radius:8px;">
+                    <span class="text-muted font-weight-bold small"><i class="bi bi-graph-up mr-2"></i> [Chart Engine Context Render Node]</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm p-4 bg-white h-100">
+                <h4 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-uppercase small tracking-wider">Top 3 Upcoming Appointments</h4>
+
+                @if (!Model.UpcomingAppointments.Any())
+                {
+                    <div class="text-center py-5">
+                        <p class="text-muted font-weight-bold m-0">No active appointments configured scheduled.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped appointment-dashboard-table m-0">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Doctor Name</th>
+                                    <th>Specialty</th>
+                                    <th>Date / Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var app in Model.UpcomingAppointments)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@(string.IsNullOrEmpty(app.DoctorPhoto) ? Url.Content("~/User/Doctor/Profile_Picture/default.png") : Url.Content("~/" + app.DoctorPhoto))"
+                                                 alt="Practitioner" class="dashboard-table-thumb" />
+                                        </td>
+                                        <td><span class="font-weight-bold text-dark">Dr. @app.DoctorName</span></td>
+                                        <td><span class="badge badge-light-teal font-weight-bold">@app.Specialization</span></td>
+                                        <td>
+                                            <small class="d-block font-weight-bold text-dark">@app.AppointmentDate.ToString("dd/MM/yyyy")</small>
+                                            <small class="text-muted">@app.AppointmentDate.ToString("hh:mm tt")</small>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm p-4 mb-4 bg-white">
+        <h4 class="font-weight-bold text-dark border-bottom pb-2 mb-4 text-uppercase small tracking-wider">Clinical Account Specific Profile Data</h4>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <span class="text-muted small d-block">Blood Categorization</span>
+                <span class="font-weight-bold text-teal h5 m-0">@Model.BloodGroup</span>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <span class="text-muted small d-block">Preferred Language</span>
+                <span class="font-weight-bold text-dark">@Model.PreferredLanguage</span>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <span class="text-muted small d-block">Emergency Contact Name</span>
+                <span class="font-weight-bold text-dark">@Model.EmergencyContactName</span>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <span class="text-muted small d-block">Emergency Contact Phone</span>
+                <span class="font-weight-bold text-dark">@Model.EmergencyContactPhone</span>
+            </div>
+        </div>
+        <div class="row border-top pt-3 mt-2">
+            <div class="col-md-4 mb-3">
+                <span class="text-muted small d-block">Configured Residential Address</span>
+                <span class="font-weight-bold text-dark" style="font-size:0.95rem;">@Model.Address</span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <span class="text-muted small d-block">Allergies Profile Ledger</span>
+                <span class="font-weight-bold text-danger" style="font-size:0.95rem;">@Model.Allergies</span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <span class="text-muted small d-block">Active Diagnosed Medical Conditions</span>
+                <span class="font-weight-bold text-dark" style="font-size:0.95rem;">@Model.MedicalConditions</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-timeline-footer border-top pt-3 d-flex justify-content-between text-muted small px-2">
+        <span>Account First Enrolled Date: <strong>@(Model.CreatedAt?.ToString("dd/MM/yyyy hh:mm tt") ?? "Initial Synchronization Setup")</strong></span>
+        <span>Account Profile Latest Update Footprint: <strong>@(Model.UpdatedAt?.ToString("dd/MM/yyyy hh:mm tt") ?? "No Modifying Adjustments Made")</strong></span>
+    </div>
+
+</div>

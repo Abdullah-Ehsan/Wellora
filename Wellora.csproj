@@ -26,6 +26,8 @@
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Doctor\Views\Shared\" />
+    <Folder Include="Areas\Patient\ViewModels\PatientProfile\" />
+    <Folder Include="Areas\Patient\Views\PatientTransaction\" />
     <Folder Include="wwwroot\images\About\" />
     <Folder Include="wwwroot\images\Error\" />
     <Folder Include="wwwroot\images\Patient\AIChat\" />
