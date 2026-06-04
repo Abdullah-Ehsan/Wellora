@@ -159,3 +159,38 @@ h2, h3, h5 {
         border: 2px solid var(--dark-teal);
         transform: scale(1.05); /* makes it bigger on hover */
     }
+
+
+/* Table base */
+.doctor-schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #ffffff; /* white background */
+}
+
+    /* Header row */
+    .doctor-schedule-table thead {
+        background-color: #006d77; /* dark teal */
+        color: #ffffff;
+    }
+
+    /* Work day rows */
+    .doctor-schedule-table .work-day {
+        background-color: #83c5be; /* medium teal */
+        color: #003d3b; /* dark text for contrast */
+    }
+
+    /* Off day rows */
+    .doctor-schedule-table .off-day {
+        background-color: #edf6f9; /* light teal */
+        color: #006d77; /* dark teal text */
+        font-style: italic;
+    }
+
+    /* Borders */
+    .doctor-schedule-table th,
+    .doctor-schedule-table td {
+        border: 1px solid #006d77;
+        padding: 8px;
+    }

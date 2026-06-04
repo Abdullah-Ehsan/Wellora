@@ -1,365 +1,202 @@
-﻿// appointmentbooking.js
-// Full, self-contained script for calendar, slots, modal, and confirmation.
-// Assumes Razor injects `window.doctorId` (and optionally `window.doctorName`) BEFORE this file is included.
+﻿document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", () => {
-    // ----------------- Config / State -----------------
-    const doctorId = (typeof window.doctorId !== "undefined") ? String(window.doctorId) : null;
-    const doctorName = (typeof window.doctorName !== "undefined") ? String(window.doctorName) : null;
-
-    if (!doctorId) {
-        console.error("doctorId is missing. Ensure Razor injects window.doctorId before this script.");
-        return;
-    }
-
-    const today = new Date();
-    let currentYear = today.getFullYear();
-    let currentMonth = today.getMonth(); // 0-based
-    let displayedYear = currentYear;
-    let displayedMonth = currentMonth;
-    const maxMonth = new Date(today.getFullYear(), today.getMonth() + 6, 1);
-
+    // -----------------------------
+    // STATE
+    // -----------------------------
     let selectedDate = null;
     let selectedSlot = null;
 
-    // ----------------- Helpers -----------------
-    function safeGet(id) { return document.getElementById(id); }
+    const prevBtn = document.getElementById("prevMonth");
+    const nextBtn = document.getElementById("nextMonth");
+    const monthLabel = document.getElementById("monthLabel");
 
-    function showToast(message, timeout = 6000) {
-        const toast = document.createElement("div");
-        toast.className = "toast-custom";
-        toast.innerHTML = `<span>${message}</span><button aria-label="Close toast">×</button>`;
-        const btn = toast.querySelector("button");
-        btn?.addEventListener("click", () => toast.remove());
-        document.body.appendChild(toast);
-        setTimeout(() => { if (toast.parentElement) toast.remove(); }, timeout);
+    let year = window.currentYear;
+    let month = window.currentMonth; // 0-based
+
+    // -----------------------------
+    // TOAST
+    // -----------------------------
+    function showToast(message, timeout = 3000) {
+        const existing = document.querySelector(".toast-overlay");
+        if (existing) existing.remove();
+
+        const overlay = document.createElement("div");
+        overlay.className = "toast-overlay";
+
+        overlay.innerHTML = `
+            <div class="toast-custom">
+                <div class="toast-header">Notification</div>
+                <div class="toast-body">${message}</div>
+                <div class="toast-footer">
+                    <button class="btn btn-teal">Close</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+
+        overlay.querySelector("button").addEventListener("click", () => overlay.remove());
+        setTimeout(() => overlay.remove(), timeout);
     }
 
-    // ----------------- Calendar: load & render -----------------
-    function loadCalendar(year, month) {
-        fetch(`/Patient/MakeAppointment/GetAvailableDates?doctorId=${doctorId}&year=${year}&month=${month + 1}`, { credentials: "same-origin" })
-            .then(res => {
-                if (!res.ok) throw new Error(`Failed to load dates: ${res.status}`);
-                return res.json();
-            })
-            .then(dates => renderCalendar(year, month, Array.isArray(dates) ? dates : []))
-            .catch(err => {
-                console.error(err);
-                showToast("Unable to load calendar. Please try again later.");
-                // render an empty calendar so UI doesn't break
-                renderCalendar(year, month, []);
-            });
-    }
+    window.showToast = showToast;
 
-    // Always render 6 rows (6 * 7 = 42 cells) so calendar height is consistent
-    function renderCalendar(year, month, availableDates) {
-        const firstDayIndex = (new Date(year, month, 1).getDay() + 6) % 7; // Monday = 0
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
+    // -----------------------------
+    // DATE CLICK (EVENT DELEGATION)
+    // -----------------------------
+    document.addEventListener("click", function (e) {
 
-        let html = "<table class='calendar-table' role='grid' aria-label='Calendar'><thead><tr>";
-        ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].forEach(d => html += `<th scope="col">${d}</th>`);
-        html += "</tr></thead><tbody>";
+        const dateEl = e.target.closest(".date-card.available");
 
-        for (let row = 0; row < 6; row++) {
-            html += "<tr>";
-            for (let col = 0; col < 7; col++) {
-                const globalIndex = row * 7 + col;
-                const dayNumber = globalIndex - firstDayIndex + 1;
+        if (dateEl) {
 
-                if (dayNumber > 0 && dayNumber <= daysInMonth) {
-                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
-                    const isAvailable = availableDates.includes(dateStr);
-                    const cardClass = isAvailable ? "date-card available" : "date-card unavailable";
-                    html += `<td><div tabindex="${isAvailable ? 0 : -1}" class="${cardClass}" data-date="${dateStr}">${dayNumber}</div></td>`;
-                } else {
-                    // placeholder to keep grid consistent
-                    html += `<td><div class="date-card placeholder" aria-hidden="true"></div></td>`;
-                }
-            }
-            html += "</tr>";
+            document.querySelectorAll(".date-card")
+                .forEach(x => x.classList.remove("selected"));
+
+            dateEl.classList.add("selected");
+
+            selectedDate = dateEl.dataset.date;
+            document.getElementById("SelectedDate").value = selectedDate;
+
+            showToast("Selected " + selectedDate);
+
+            loadSlots(selectedDate);
         }
 
-        html += "</tbody></table>";
+        // -----------------------------
+        // SLOT CLICK
+        // -----------------------------
+        const slotEl = e.target.closest(".slot-btn.available");
 
-        const container = safeGet("calendarContainer");
-        if (!container) {
-            console.error("Missing #calendarContainer element in DOM.");
-            return;
+        if (slotEl) {
+
+            document.querySelectorAll(".slot-btn")
+                .forEach(x => x.classList.remove("selected"));
+
+            slotEl.classList.add("selected");
+
+            selectedSlot = slotEl.dataset.slot;
+            document.getElementById("SelectedSlot").value = selectedSlot;
+
+            showToast("Selected slot " + selectedSlot);
         }
-        container.innerHTML = html;
+    });
 
-        const monthLabel = safeGet("monthLabel");
-        if (monthLabel) {
-            monthLabel.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
-        }
-
-        // Prev/Next button states
-        const prevBtn = safeGet("prevMonth");
-        if (prevBtn) prevBtn.disabled = (year === currentYear && month === currentMonth);
-
-        const nextBtn = safeGet("nextMonth");
-        const nextDate = new Date(year, month + 1, 1);
-        if (nextBtn) nextBtn.disabled = (nextDate > maxMonth);
-
-        // Attach click/keyboard handlers to available date-cards
-        const availableCards = container.querySelectorAll(".date-card.available");
-        availableCards.forEach(card => {
-            card.addEventListener("click", () => {
-                selectDateCard(card);
-            });
-            card.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    selectDateCard(card);
-                }
-            });
-        });
-
-        // Auto-select first available date if none selected
-        if (!selectedDate) {
-            const first = availableCards[0];
-            if (first) {
-                selectDateCard(first);
-            } else {
-                // clear slots if no available dates
-                renderSlots("morningSlots", []);
-                renderSlots("afternoonSlots", []);
-                renderSlots("eveningSlots", []);
-            }
-        }
-    }
-
-    function selectDateCard(card) {
-        const container = safeGet("calendarContainer");
-        if (!container) return;
-        container.querySelectorAll(".date-card.selected").forEach(c => c.classList.remove("selected"));
-        card.classList.add("selected");
-        selectedDate = card.dataset.date;
-        loadSlots(selectedDate);
-    }
-
-    // ----------------- Slots: load & render -----------------
+    // -----------------------------
+    // LOAD SLOTS (AJAX)
+    // -----------------------------
+    // -----------------------------
+    // LOAD SLOTS (AJAX Optimization)
+    // -----------------------------
     function loadSlots(date) {
-        fetch(`/Patient/MakeAppointment/GetAvailableSlots?doctorId=${doctorId}&date=${date}`, { credentials: "same-origin" })
-            .then(res => {
-                if (!res.ok) throw new Error(`Failed to load slots: ${res.status}`);
-                return res.json();
+
+        fetch(`/Patient/MakeAppointment/GetAvailableSlots?doctorId=${window.doctorId}&date=${date}`)
+            .then(response => {
+                // Intercept errors cleanly before attempting JSON interpretation
+                if (!response.ok) {
+                    throw new Error(`Network response error: Status ${response.status}`);
+                }
+                return response.json();
             })
-            .then(slots => {
-                renderSlots("morningSlots", slots?.MorningSlots ?? []);
-                renderSlots("afternoonSlots", slots?.AfternoonSlots ?? []);
-                renderSlots("eveningSlots", slots?.EveningSlots ?? []);
+            .then(data => {
+                console.log("Database Slots Received:", data);
+                updateSlots(data);
             })
             .catch(err => {
-                console.error(err);
-                showToast("Unable to load time slots. Please try again later.");
-                renderSlots("morningSlots", []);
-                renderSlots("afternoonSlots", []);
-                renderSlots("eveningSlots", []);
+                console.error("AJAX Processing Error: ", err);
+                showToast("Failed to communicate with database scheduler.");
             });
     }
 
-    function renderSlots(containerId, slots) {
-        const container = safeGet(containerId);
+    // -----------------------------
+    // UPDATE SLOTS UI
+    // -----------------------------
+    function updateSlots(data) {
+
+        render(".morning-slots", data.morningSlots);
+        render(".afternoon-slots", data.afternoonSlots);
+        render(".evening-slots", data.eveningSlots);
+
+        selectedSlot = null;
+        document.getElementById("SelectedSlot").value = "";
+    }
+
+    function render(containerSelector, slots) {
+
+        const container = document.querySelector(containerSelector);
         if (!container) return;
+
         container.innerHTML = "";
 
-        if (!Array.isArray(slots) || slots.length === 0) {
-            // show subtle empty state
-            const empty = document.createElement("div");
-            empty.style.padding = "10px";
-            empty.style.color = "rgba(0,63,63,0.6)";
-            empty.textContent = "No slots";
-            container.appendChild(empty);
+        for (let i = 0; i < 10; i++) {
+
+            const slot = slots[i];
+
+            if (!slot || !slot.time) {
+                container.innerHTML += `
+                    <button type="button" class="slot-btn placeholder-slot" disabled>—</button>
+                `;
+            }
+            else {
+                container.innerHTML += `
+                    <button type="button"
+                            class="slot-btn ${slot.isAvailable ? "available" : "unavailable"}"
+                            data-slot="${slot.time}"
+                            ${slot.isAvailable ? "" : "disabled"}>
+                        ${slot.time}
+                    </button>
+                `;
+            }
+        }
+    }
+
+    // -----------------------------
+    // MONTH NAVIGATION
+    // -----------------------------
+    function renderMonthLabel() {
+        const d = new Date(year, month, 1);
+        monthLabel.textContent =
+            d.toLocaleString("default", { month: "long", year: "numeric" });
+    }
+
+    function changeMonth(offset) {
+
+        month += offset;
+
+        if (month < 0) {
+            month = 11;
+            year--;
+        }
+
+        if (month > 11) {
+            month = 0;
+            year++;
+        }
+
+        const max = new Date(window.currentYear, window.currentMonth + 6, 1);
+        const current = new Date(year, month, 1);
+
+        if (current > max) {
+            showToast("Only 6 months ahead allowed");
+            month -= offset;
             return;
         }
 
-        slots.forEach(slot => {
-            const btn = document.createElement("button");
-            btn.className = "slot-btn";
-            btn.type = "button";
-            btn.textContent = slot;
-            btn.addEventListener("click", () => {
-                // deselect others
-                document.querySelectorAll(".slots-section .slot-btn").forEach(b => b.classList.remove("selected"));
-                btn.classList.add("selected");
-                selectedSlot = slot;
-            });
-            container.appendChild(btn);
-        });
+        // reload page with new month (server-driven calendar)
+        window.location.href =
+            `/Patient/MakeAppointment/AppointmentBooking?doctorId=${window.doctorId}&year=${year}&month=${month + 1}`;
     }
 
-    // ----------------- Confirm appointment -----------------
-    const confirmBtn = safeGet("confirmBtn");
-    confirmBtn?.addEventListener("click", () => {
-        const paymentEl = document.querySelector("input[name='payment']:checked");
-        const payment = paymentEl ? paymentEl.value : null;
-
-        if (!selectedDate || !selectedSlot) {
-            showToast("Please select a date and time slot.");
-            return;
-        }
-
-        // Optional: show a confirmation modal before POST
-        const detailsHtml = `
-      <p><strong>Doctor</strong>: ${doctorName ?? "Selected Doctor"}</p>
-      <p><strong>Date</strong>: ${selectedDate}</p>
-      <p><strong>Time</strong>: ${selectedSlot}</p>
-      <p style="margin-top:12px">Proceed to confirm this appointment.</p>
-    `;
-        showModal("Confirm Appointment", detailsHtml, [
-            { text: "Close", className: "modal-close-btn", action: closeModal },
-            {
-                text: "Confirm", className: "btn-teal", action: () => {
-                    // disable confirm to prevent double submits
-                    confirmBtn.disabled = true;
-                    fetch("/Patient/MakeAppointment/Confirm", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            DoctorId: doctorId,
-                            SelectedDate: selectedDate,
-                            SelectedSlot: selectedSlot,
-                            PaymentMethod: payment
-                        }),
-                        credentials: "same-origin"
-                    })
-                        .then(res => {
-                            confirmBtn.disabled = false;
-                            if (res.ok) {
-                                closeModal();
-                                window.location.href = "/Patient/MakeAppointment/PatientAppointment";
-                            } else {
-                                closeModal();
-                                showToast("Error confirming appointment.");
-                            }
-                        })
-                        .catch(err => {
-                            confirmBtn.disabled = false;
-                            console.error(err);
-                            closeModal();
-                            showToast("Network error while confirming appointment.");
-                        });
-                }
-            }
-        ]);
+    prevBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        changeMonth(-1);
     });
 
-    // ----------------- Month navigation -----------------
-    safeGet("prevMonth")?.addEventListener("click", () => {
-        if (!(displayedYear === currentYear && displayedMonth === currentMonth)) {
-            displayedMonth--;
-            if (displayedMonth < 0) { displayedMonth = 11; displayedYear--; }
-            selectedDate = null;
-            loadCalendar(displayedYear, displayedMonth);
-        }
+    nextBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        changeMonth(1);
     });
 
-    safeGet("nextMonth")?.addEventListener("click", () => {
-        const nextDate = new Date(displayedYear, displayedMonth + 1, 1);
-        if (nextDate <= maxMonth) {
-            displayedMonth++;
-            if (displayedMonth > 11) { displayedMonth = 0; displayedYear++; }
-            selectedDate = null;
-            loadCalendar(displayedYear, displayedMonth);
-        }
-    });
+    renderMonthLabel();
 
-    // ----------------- Modal helpers (overlay + frosted background) -----------------
-    function showModal(title, htmlContent, footerButtons = null) {
-        // Create overlay if missing
-        let overlay = document.querySelector(".modal-overlay");
-        if (!overlay) {
-            overlay = document.createElement("div");
-            overlay.className = "modal-overlay";
-            overlay.innerHTML = `
-        <div class="modal-card" role="dialog" aria-modal="true">
-          <div class="modal-header"></div>
-          <div class="modal-body"></div>
-          <div class="modal-footer"></div>
-        </div>
-      `;
-            document.body.appendChild(overlay);
-        }
-
-        const header = overlay.querySelector(".modal-header");
-        const body = overlay.querySelector(".modal-body");
-        const footer = overlay.querySelector(".modal-footer");
-
-        header.textContent = title || "Details";
-        body.innerHTML = htmlContent || "";
-        footer.innerHTML = "";
-
-        // Add footer buttons (array of {text, className, action})
-        if (Array.isArray(footerButtons) && footerButtons.length) {
-            footerButtons.forEach(btnCfg => {
-                const btn = document.createElement("button");
-                btn.textContent = btnCfg.text || "Close";
-                btn.className = btnCfg.className || "modal-close-btn";
-                btn.addEventListener("click", () => {
-                    if (typeof btnCfg.action === "function") btnCfg.action();
-                });
-                footer.appendChild(btn);
-            });
-        } else {
-            // default close button
-            const closeBtn = document.createElement("button");
-            closeBtn.className = "modal-close-btn";
-            closeBtn.textContent = "Close";
-            closeBtn.addEventListener("click", closeModal);
-            footer.appendChild(closeBtn);
-        }
-
-        // show overlay
-        requestAnimationFrame(() => overlay.classList.add("open"));
-        // prevent background scroll
-        document.documentElement.style.overflow = "hidden";
-
-        // close when clicking outside modal-card
-        overlay.addEventListener("click", overlayClickHandler);
-    }
-
-    function overlayClickHandler(e) {
-        if (e.target && e.target.classList && e.target.classList.contains("modal-overlay")) {
-            closeModal();
-        }
-    }
-
-    function closeModal() {
-        const overlay = document.querySelector(".modal-overlay");
-        if (!overlay) return;
-        overlay.classList.remove("open");
-        overlay.removeEventListener("click", overlayClickHandler);
-        // allow animation to finish then remove
-        setTimeout(() => {
-            overlay.remove();
-            document.documentElement.style.overflow = "";
-        }, 260);
-    }
-
-    // ----------------- Initial load -----------------
-    loadCalendar(displayedYear, displayedMonth);
-
-    // Defensive prefetch: ensure first available date loads slots even if race occurs
-    fetch(`/Patient/MakeAppointment/GetAvailableDates?doctorId=${doctorId}&year=${displayedYear}&month=${displayedMonth + 1}`, { credentials: "same-origin" })
-        .then(res => { if (!res.ok) throw new Error("prefetch failed"); return res.json(); })
-        .then(dates => {
-            if (Array.isArray(dates) && dates.length > 0 && !selectedDate) {
-                selectedDate = dates[0];
-                loadSlots(selectedDate);
-            }
-        })
-        .catch(() => { /* ignore prefetch errors */ });
-
-    // Accessibility: keyboard navigation for month buttons
-    const prev = safeGet("prevMonth"), next = safeGet("nextMonth");
-    [prev, next].forEach(btn => {
-        if (!btn) return;
-        btn.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                btn.click();
-            }
-        });
-    });
 });

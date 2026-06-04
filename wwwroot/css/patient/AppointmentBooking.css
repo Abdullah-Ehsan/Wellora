@@ -1,10 +1,6 @@
-﻿/* AppointmentBooking.css
-   Teal-only palette, rounded cards, consistent 6-row calendar + header/modal styling
-*/
-
-/* ---------- Color variables ---------- */
+﻿/* ---------- Color variables ---------- */
 :root {
-    --teal-900: #003f3f; /* darkest */
+    --teal-900: #003f3f;
     --teal-800: #004d4d;
     --teal-700: #006666;
     --teal-600: #007f7f;
@@ -23,11 +19,9 @@ html, body {
     background: var(--page-bg);
     font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
     color: var(--teal-900);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* ---------- Container and sections ---------- */
+/* ---------- Container ---------- */
 .appointment-page {
     max-width: 1320px;
     margin: 28px auto;
@@ -37,7 +31,7 @@ html, body {
     box-shadow: 0 18px 50px rgba(0,63,63,0.08);
 }
 
-/* Doctor header: picture + info side-by-side */
+/* ---------- Doctor header ---------- */
 .doctor-header {
     display: flex;
     gap: 18px;
@@ -49,7 +43,6 @@ html, body {
     margin-bottom: 18px;
 }
 
-/* Doctor photo block */
 .doctor-photo {
     width: 300px;
     height: 300px;
@@ -57,93 +50,33 @@ html, body {
     object-fit: cover;
     border: 3px solid rgba(255,255,255,0.12);
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
 }
 
-/* Doctor info block (name, spec, fee) */
-.doctor-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 6px 4px;
-    flex: 1;
-    background: linear-gradient(180deg, rgba(0,63,63,0.06), rgba(0,63,63,0.02));
-    border-radius: 10px;
-}
-
-    .doctor-info h2 {
-        margin: 0;
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: var(--white);
-    }
-
-    .doctor-info p {
-        margin: 0;
-        color: rgba(255,255,255,0.92);
-    }
-
-.doctor-fee {
-    margin-top: 6px;
-    font-weight: 700;
-    color: var(--white);
-    background: rgba(255,255,255,0.06);
-    padding: 6px 10px;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-/* ---------- Calendar section ---------- */
+/* ---------- Calendar ---------- */
 .calendar-section {
     margin-top: 14px;
-    padding: 16px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(0,127,127,0.02), rgba(0,127,127,0.01));
 }
 
-/* Month label centered, bold, teal */
 .month-label {
     text-align: center;
     font-weight: 800;
     color: var(--teal-700);
     font-size: 1.45rem;
-    margin-bottom: 10px;
 }
 
-/* Calendar table: no borders, fixed layout, consistent spacing */
 .calendar-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 10px;
     table-layout: fixed;
-    background: transparent;
-    margin: 0;
 }
 
-    /* Weekday header */
     .calendar-table thead th {
         font-weight: 800;
         color: var(--teal-800);
-        font-size: 0.95rem;
-        padding: 6px 0;
-        background: transparent;
-        border: none;
     }
 
-    /* Remove any default table borders/underlines */
-    .calendar-table, .calendar-table th, .calendar-table td {
-        border: none;
-        text-decoration: none;
-    }
-
-        /* Each cell holds a date-card rectangle */
-        .calendar-table tbody td {
-            padding: 0;
-            vertical-align: top;
-            text-align: center;
-        }
-
-/* Date card base: rounded rectangle */
+/* ---------- DATE CARDS ---------- */
 .date-card {
     margin: 6px;
     border-radius: 12px;
@@ -153,238 +86,143 @@ html, body {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    border: 2px solid transparent;
-    box-shadow: 0 6px 18px rgba(0,63,63,0.06);
+    transition: 180ms ease;
 }
 
-    /* Default: all boxes are light teal */
-    .date-card.placeholder,
-    .date-card.unavailable {
+    /* placeholder / empty */
+    .date-card.placeholder {
         background: var(--teal-200);
         color: var(--teal-800);
-        cursor: default;
     }
 
-    /* Available dates: dark teal with white text */
+    /* unavailable date */
+    .date-card.unavailable {
+        background: #e0e0e0;
+        color: #888;
+        cursor: not-allowed;
+    }
+
+    /* available date */
     .date-card.available {
         background: var(--teal-800);
         color: var(--white);
         cursor: pointer;
-        border: 2px solid rgba(255,255,255,0.04);
     }
 
-        /* Hover for available */
         .date-card.available:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 40px rgba(0,63,63,0.14);
             background: var(--teal-700);
+            transform: translateY(-4px);
         }
 
-    /* Selected date: deeper gradient and light border */
+    /* selected date */
     .date-card.selected {
-        background: linear-gradient(180deg, var(--teal-900), var(--teal-800));
-        color: var(--white);
-        border: 2px solid var(--teal-300);
-        transform: translateY(-4px);
-    }
-
-/* Force consistent 6 rows of dates (6 * 7 = 42 cells) */
-.calendar-table tbody tr {
-    height: 86px;
-}
-
-/* Remove focus outlines but keep accessibility focus style */
-.date-card:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(0,127,127,0.12);
-}
-
-/* ---------- Slots section ---------- */
-.slots-section {
-    margin-top: 14px;
-    padding: 14px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(0,127,127,0.02), rgba(0,127,127,0.01));
-}
-
-/* Slot buttons */
-.slot-btn {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    background: var(--teal-300);
-    border: 2px solid transparent;
-    padding: 10px;
-    color: var(--teal-900);
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
-}
-
-    .slot-btn:hover {
-        background: var(--teal-600);
-        color: var(--white);
-        transform: translateY(-3px);
-    }
-
-    /* Selected slot: white background, dark teal text, light teal border */
-    .slot-btn.selected {
         background: var(--white);
         color: var(--teal-800);
-        border: 2px solid var(--teal-300);
-        box-shadow: 0 10px 26px rgba(0,63,63,0.08);
+        border: 2px solid var(--teal-800);
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(0,63,63,0.25);
     }
 
-    /* Unavailable slot */
-    .slot-btn.unavailable {
-        background: #f3f3f3;
-        color: #9a9a9a;
-        cursor: not-allowed;
-        border: 1px solid #eee;
-    }
-
-/* ---------- Buttons ---------- */
-.btn-teal {
-    background: var(--teal-800);
-    color: var(--white);
-    padding: 14px 36px;
-    font-size: 1.05rem;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    transition: transform 160ms ease, box-shadow 160ms ease;
+/* ---------- SLOTS ---------- */
+.slots-section {
+    margin-top: 20px;
 }
 
-    .btn-teal:hover {
-        transform: scale(1.06);
-        box-shadow: 0 18px 46px rgba(0,63,63,0.16);
-    }
-
-/* ---------- Radio buttons (teal) ---------- */
-.form-check-input {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid var(--teal-600);
-    background: var(--white);
-    appearance: none;
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    cursor: pointer;
+.slots-grid {
+    display: grid;
+    grid-template-rows: repeat(10, 40px);
+    gap: 8px;
 }
 
-    .form-check-input:checked {
-        background: var(--teal-800);
-        border-color: var(--teal-800);
-    }
-
-/* ---------- Toast (centered frosted) ---------- */
-.toast-custom {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));
-    color: var(--teal-900);
-    padding: 18px 22px;
-    border-radius: 14px;
-    backdrop-filter: blur(8px) saturate(120%);
-    box-shadow: 0 18px 60px rgba(0,63,63,0.18);
-    z-index: 9999;
-    min-width: 320px;
-    text-align: center;
+/* base slot */
+.slot-btn {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    font-weight: 700;
+    border: 2px solid transparent;
+    transition: all 140ms ease;
 }
 
-    .toast-custom button {
-        background: transparent;
-        border: none;
-        color: var(--teal-800);
-        font-size: 18px;
+    /* available slot */
+    .slot-btn.available {
+        background: var(--teal-300);
+        color: var(--teal-900);
         cursor: pointer;
     }
 
-/* ---------- Modal overlay and card (multi-teal mix) ---------- */
-.modal-overlay {
+        .slot-btn.available:hover {
+            background: var(--teal-600);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+    /* selected slot */
+    .slot-btn.selected {
+        background: var(--teal-900);
+        color: white;
+        border: 2px solid var(--teal-300);
+        box-shadow: 0 10px 26px rgba(0,63,63,0.25);
+    }
+
+    /* unavailable slot (booked / break / past) */
+    .slot-btn.unavailable {
+        background: #e0e0e0;
+        color: #888;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    /* placeholder slot */
+    .slot-btn.placeholder-slot {
+        background: #f3f3f3;
+        color: #aaa;
+        cursor: not-allowed;
+        border: 1px dashed #ddd;
+    }
+
+/* ---------- PAYMENT ---------- */
+.payment-section {
+    margin-top: 20px;
+}
+
+.form-check-label {
+    font-weight: 600;
+}
+
+/* ---------- CONFIRM BUTTON ---------- */
+.btn-teal {
+    background: var(--teal-800);
+    color: white;
+    padding: 14px 36px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+}
+
+/* ---------- TOAST ---------- */
+.toast-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(6, 30, 30, 0.36);
-    backdrop-filter: blur(8px) saturate(120%);
-    z-index: 2000;
+    background: rgba(255,255,255,0.6);
     display: flex;
-    align-items: center;
     justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 220ms ease;
+    align-items: center;
+    z-index: 9999;
 }
 
-    .modal-overlay.open {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-.modal-card {
-    width: min(820px, 94%);
-    border-radius: 18px;
+.toast-custom {
+    width: 400px;
+    background: white;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 40px 120px rgba(0,63,63,0.28);
-    transform: translateY(12px);
-    transition: transform 220ms ease, opacity 220ms ease;
-    background: linear-gradient(180deg, rgba(0,127,127,0.06), rgba(0,63,63,0.03));
-    border: 1px solid rgba(0,63,63,0.08);
 }
 
-/* Modal header: bold teal band with white text */
-.modal-header {
-    padding: 18px 22px;
-    background: linear-gradient(90deg, var(--teal-600), var(--teal-800));
-    color: var(--white);
-    font-weight: 800;
-    font-size: 1.15rem;
-}
-
-/* Modal body: soft white with teal tint */
-.modal-body {
-    padding: 22px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,255,255,0.96));
-    color: var(--teal-900);
-    min-height: 160px;
-}
-
-/* Modal footer with Close button */
-.modal-footer {
-    padding: 16px 22px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    background: linear-gradient(180deg, rgba(250,255,255,0.98), rgba(245,255,255,0.98));
-}
-
-.modal-close-btn {
-    background: linear-gradient(180deg, var(--teal-300), var(--teal-400));
-    color: var(--teal-800);
-    border: none;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: transform 140ms ease, box-shadow 140ms ease;
-}
-
-    .modal-close-btn:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 36px rgba(0,63,63,0.12);
-    }
-
-/* ---------- Responsive tweaks ---------- */
+/* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
+
     .doctor-header {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
     }
 
     .doctor-photo {
@@ -392,11 +230,7 @@ html, body {
         height: 120px;
     }
 
-    .calendar-table thead th {
-        font-size: 0.85rem;
-    }
-
-    .calendar-table tbody tr {
-        height: 72px;
+    .slots-grid {
+        grid-template-rows: repeat(10, 45px);
     }
 }
