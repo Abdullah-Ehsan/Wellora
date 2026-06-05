@@ -1,0 +1,47 @@
+{
+  "version": "3.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "htmx.org@2.0.10",
+      "destination": "wwwroot/lib/htmx.org/",
+      "files": [
+        "LICENSE",
+        "package.json",
+        "README.md",
+        "dist/htmx.amd.js",
+        "dist/htmx.cjs.js",
+        "dist/htmx.esm.d.ts",
+        "dist/htmx.esm.js",
+        "dist/htmx.js",
+        "dist/htmx.min.js",
+        "dist/htmx.min.js.gz",
+        "dist/ext/ajax-header.js",
+        "dist/ext/alpine-morph.js",
+        "dist/ext/class-tools.js",
+        "dist/ext/client-side-templates.js",
+        "dist/ext/debug.js",
+        "dist/ext/disable-element.js",
+        "dist/ext/event-header.js",
+        "dist/ext/head-support.js",
+        "dist/ext/include-vals.js",
+        "dist/ext/json-enc.js",
+        "dist/ext/loading-states.js",
+        "dist/ext/method-override.js",
+        "dist/ext/morphdom-swap.js",
+        "dist/ext/multi-swap.js",
+        "dist/ext/path-deps.js",
+        "dist/ext/path-params.js",
+        "dist/ext/preload.js",
+        "dist/ext/rails-method.js",
+        "dist/ext/README.md",
+        "dist/ext/remove-me.js",
+        "dist/ext/response-targets.js",
+        "dist/ext/restored.js",
+        "dist/ext/sse.js",
+        "dist/ext/ws.js",
+        "editors/jetbrains/htmx.web-types.json"
+      ]
+    }
+  ]
+}
