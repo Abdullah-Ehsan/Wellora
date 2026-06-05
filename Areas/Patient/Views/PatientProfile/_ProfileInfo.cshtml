@@ -1,0 +1,40 @@
+﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.ProfileInfoViewModel
+
+<div class="card">
+    <h2>Profile Information</h2>
+    <form hx-post="/PatientProfile/UpdateProfileInfo" hx-target="#profileContent">
+        <div>
+            <label>Full Name</label>
+            <input type="text" name="FullName" value="@Model.FullName" />
+        </div>
+        <div>
+            <label>Date of Birth</label>
+            <input type="date" name="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+        </div>
+        <div>
+            <label>Gender</label>
+            <input type="text" name="Gender" value="@Model.Gender" />
+        </div>
+        <div>
+            <label>Address</label>
+            <input type="text" name="Address" value="@Model.Address" />
+        </div>
+        <div>
+            <label>Preferred Language</label>
+            <input type="text" name="PreferredLanguage" value="@Model.PreferredLanguage" />
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email" name="Email" value="@Model.Email" />
+        </div>
+        <div>
+            <label>Username</label>
+            <input type="text" name="Username" value="@Model.Username" />
+        </div>
+        <div>
+            <label>Profile Photo URL</label>
+            <input type="text" name="ProfilePhoto" value="@Model.ProfilePhoto" />
+        </div>
+        <button type="submit" class="btn-teal">Save Profile Info</button>
+    </form>
+</div>

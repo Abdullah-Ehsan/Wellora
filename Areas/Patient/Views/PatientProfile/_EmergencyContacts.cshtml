@@ -1,0 +1,16 @@
+﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.EmergencyContactsViewModel
+
+<div class="card">
+    <h2>Emergency Contacts</h2>
+    <form hx-post="/PatientProfile/UpdateEmergencyContacts" hx-target="#profileContent">
+        <div>
+            <label>Contact Name</label>
+            <input type="text" name="EmergencyContactName" value="@Model.EmergencyContactName" />
+        </div>
+        <div>
+            <label>Contact Phone</label>
+            <input type="text" name="EmergencyContactPhone" value="@Model.EmergencyContactPhone" />
+        </div>
+        <button type="submit" class="btn-teal">Save Emergency Contact</button>
+    </form>
+</div>

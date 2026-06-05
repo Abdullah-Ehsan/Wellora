@@ -1,0 +1,24 @@
+﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.MedicalHistoryViewModel
+
+<div class="card">
+    <h2>Medical History</h2>
+    <form hx-post="/PatientProfile/UpdateMedicalHistory" hx-target="#profileContent">
+        <div>
+            <label>Allergies</label>
+            <textarea name="Allergies">@Model.Allergies</textarea>
+        </div>
+        <div>
+            <label>Medical Conditions</label>
+            <textarea name="MedicalConditions">@Model.MedicalConditions</textarea>
+        </div>
+        <div>
+            <label>Medications</label>
+            <textarea name="Medications">@Model.Medications</textarea>
+        </div>
+        <div>
+            <label>Blood Group</label>
+            <input type="text" name="BloodGroup" value="@Model.BloodGroup" />
+        </div>
+        <button type="submit" class="btn-teal">Save Medical History</button>
+    </form>
+</div>
