@@ -395,3 +395,4 @@ wwwroot/User/Admin/Profile_Picture/*
 !wwwroot/User/Patient/Banner/
 !wwwroot/User/Admin/Banner/
 
+/appsettings.Development.json
