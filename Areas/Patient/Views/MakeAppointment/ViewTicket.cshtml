@@ -40,7 +40,7 @@
                 <div class="profile-meta-grid flex-grow-1 row">
                     <div class="col-md-6">
                         <p class="mb-1"><span class="text-muted small">Full Name:</span> <br><strong class="h5 font-weight-bold">@Model.PatientName</strong></p>
-                        <p class="mb-0"><span class="text-muted small">Patient Reference ID:</span> <br><strong>WP-@Model.PatientId</strong></p>
+                        <p class="mb-0"><span class="text-muted small">Patient Reference ID:</span> <br><strong> @Model.PatientId</strong></p>
                     </div>
                     <div class="col-md-6">
                         <p class="mb-0"><span class="text-muted small">Gender / Age:</span> <br><strong>@Model.PatientGender / @Model.PatientAge Years</strong></p>
@@ -86,7 +86,7 @@
 
         <div class="info-section-block mb-4 row p-3 bg-light mx-0 rounded-lg border align-items-center">
             <div class="col-md-6">
-               <!-- <p class="m-0 small text-muted">Document Generated: @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</p> -->
+                <p class="m-0 small text-muted">Document Generated: @Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</p> 
                 <p class="m-0 font-weight-bold text-secondary">Payment Method Status: <span class="text-uppercase text-dark">@Model.PaymentStatus</span></p>
             </div>
             <div class="col-md-6 text-right">
