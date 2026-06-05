@@ -397,3 +397,4 @@ wwwroot/User/Admin/Profile_Picture/*
 !wwwroot/User/Admin/Banner/
 
 /appsettings.Development.json
+appsettings.Development.json
