@@ -373,6 +373,7 @@ obj/
 /wwwroot/images/About/Wakeel.jpeg
 /appsettings.json
 /appsettings.Development.json
+appsettings.Development.json
 
 appsettings.jsonwwwroot/User/Doctor/Profile_Picture/*
 wwwroot/User/Patient/Profile_Picture/*
