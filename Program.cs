@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Wellora.Areas.Patient.Services.PatientProfile;
 using Wellora.Areas.Patient.Services.Scheduling;
-using Wellora.Services.Dashboard;
 using Wellora.Data;
+using Wellora.Services;
+using Wellora.Services.Dashboard;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,10 +66,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         };
     });
 
+
+//Home Section Conact page
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+
+
+//Areas
+
 //Patient Services
 builder.Services.AddScoped<AppointmentSlotService>();
 builder.Services.AddScoped<PatientAppointmentService>();
 builder.Services.AddScoped<DashboardService>();
+builder.Services.AddScoped<PatientProfileService>();
 
 
 
