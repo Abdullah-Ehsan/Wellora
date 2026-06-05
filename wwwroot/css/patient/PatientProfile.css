@@ -1,0 +1,76 @@
+﻿.profile-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8ffff;
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #004d4d; /* dark teal */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    .sidebar a {
+        display: block;
+        padding: 12px;
+        color: white;
+        text-decoration: none;
+    }
+
+        .sidebar a.active,
+        .sidebar a:hover {
+            background-color: #008080; /* medium teal */
+        }
+
+.profile-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #e0f7f7; /* light teal */
+}
+
+
+
+/*Partial view of mdeical hostory*/
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+    .card h2 {
+        color: #004d4d; /* dark teal */
+        margin-bottom: 15px;
+    }
+
+    .card textarea,
+    .card select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .card button {
+        background: linear-gradient(90deg, #008080, #20b2aa);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+
+/*Partial view emergency*/
+
+    .card input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
