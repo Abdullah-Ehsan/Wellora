@@ -1,0 +1,87 @@
+﻿/* Section titles */
+.section-title {
+    color: #004d4d; /* Dark teal highlight */
+    border-bottom: 2px solid #004d4d;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Character image */
+.character-img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,77,77,0.5);
+}
+
+/* Contact info items */
+.contact-details .info-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 1.2rem;
+}
+
+.contact-details .icon {
+    color: #004d4d;
+    margin-right: 15px;
+}
+
+/* Map section */
+.map-section iframe {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,77,77,0.3);
+}
+
+/* Contact form */
+.message-box {
+    height: 60px;
+}
+
+.btn-teal {
+    background-color: #20c997; /* Light teal */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-teal:hover {
+        background-color: #17a2b8; /* Medium teal hover */
+    }
+
+/* Newsletter */
+.newsletter-form input {
+    border-radius: 0;
+}
+
+.newsletter-form .btn {
+    border-radius: 0;
+}
+
+/* Validation feedback (Bootstrap + jQuery Unobtrusive Validation) */
+input.input-validation-error,
+textarea.input-validation-error {
+    border-color: #dc3545; /* Red border */
+}
+
+input.valid,
+textarea.valid {
+    border-color: #28a745; /* Green border */
+}
+
+.text-danger {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .info-section {
+        flex-direction: column;
+    }
+
+    .contact-details {
+        margin-top: 20px;
+    }
+}
