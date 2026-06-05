@@ -1,73 +1,124 @@
-﻿/* Section titles */
+﻿/* General page container */
+.contact-page {
+    background: linear-gradient(to bottom, #e6f9f9, #ffffff);
+    padding: 40px;
+    border-radius: 12px;
+}
+
+/* Section titles */
 .section-title {
-    color: #004d4d; /* Dark teal highlight */
-    border-bottom: 2px solid #004d4d;
+    color: #004d4d;
+    border-bottom: 3px solid #004d4d;
     padding-bottom: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Character image */
 .character-img {
     max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,77,77,0.5);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,77,77,0.5);
 }
 
-/* Contact info items */
+/* First Main Div: Contact Info */
+.info-section {
+    background: linear-gradient(135deg, #b2f0f0, #80d9d9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,77,77,0.3);
+}
+
 .contact-details .info-item {
     display: flex;
     align-items: center;
-    margin: 15px 0;
-    font-size: 1.2rem;
-}
-
-.contact-details .icon {
+    margin: 25px 0;
+    font-size: 1.3rem;
     color: #004d4d;
-    margin-right: 15px;
 }
 
-/* Map section */
-.map-section iframe {
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,77,77,0.3);
-}
-
-/* Contact form */
-.message-box {
+.icon-img {
+    background-color: #20c997;
+    padding: 15px;
+    border-radius: 50%;
+    width: 60px;
     height: 60px;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0,77,77,0.4);
+}
+
+/* Second Main Div: Map Section */
+.map-section {
+    background: linear-gradient(135deg, #cceeee, #99dddd);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,77,77,0.3);
+}
+
+    .map-section iframe {
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,77,77,0.3);
+    }
+
+/* Third Main Div: Contact Form */
+.contact-form {
+    background: linear-gradient(135deg, #e0f7f7, #b2ebeb);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,77,77,0.3);
+}
+
+.message-box {
+    height: 120px;
+    resize: vertical;
 }
 
 .btn-teal {
-    background-color: #20c997; /* Light teal */
+    background-color: #20c997;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease;
+    padding: 14px 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
 }
 
     .btn-teal:hover {
-        background-color: #17a2b8; /* Medium teal hover */
+        background-color: #17a2b8;
+        transform: scale(1.05);
     }
 
-/* Newsletter */
-.newsletter-form input {
-    border-radius: 0;
+/* Fourth Main Div: Newsletter */
+.newsletter-form {
+    background: linear-gradient(135deg, #d9fafa, #a3e6e6);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,77,77,0.3);
 }
 
-.newsletter-form .btn {
-    border-radius: 0;
-}
+    .newsletter-form input {
+        border-radius: 6px;
+        border: 1px solid #20c997;
+        padding: 12px;
+    }
 
-/* Validation feedback (Bootstrap + jQuery Unobtrusive Validation) */
+    .newsletter-form .btn {
+        border-radius: 6px;
+    }
+
+/* Validation feedback */
 input.input-validation-error,
 textarea.input-validation-error {
-    border-color: #dc3545; /* Red border */
+    border-color: #dc3545;
 }
 
 input.valid,
 textarea.valid {
-    border-color: #28a745; /* Green border */
+    border-color: #28a745;
 }
 
 .text-danger {

@@ -6,78 +6,82 @@
 
 <link rel="stylesheet" href="~/css/Contact.css" />
 
-<div class="container contact-page">
-    <!-- Contact Info Header -->
+<div class="container contact-page" >
+    <!-- First Main Div: Contact Info -->
     <h2 class="section-title">Contact Info</h2>
-
-    <!-- Info Section -->
     <div class="row align-items-center info-section">
         <!-- Left: Character Image -->
         <div class="col-md-4 text-center">
             <img src="~/images/Contact/cythnia_as_doctor.png" alt="Character" class="img-fluid character-img" />
         </div>
 
-        <!-- Right: Contact Details -->
+        <!-- Right: Contact Details (4 rows) -->
         <div class="col-md-8 contact-details">
             <div class="info-item">
-                <i class="fas fa-phone fa-2x icon"></i>
-                <span>@Model.Phone</span>
+                <img src="~/images/Icons/phone-call.png" alt="Phone Icon" class="icon-img" />
+                <span>+44 20 7946 0958</span>
             </div>
             <div class="info-item">
-                <i class="fas fa-envelope fa-2x icon"></i>
-                <span>@Model.Email</span>
+                <img src="~/images/Icons/telephone.png" alt="Telephone Icon" class="icon-img" />
+                <span>+44 161 496 0000</span>
             </div>
             <div class="info-item">
-                <i class="fas fa-map-marker-alt fa-2x icon"></i>
-                <span>@Model.Address</span>
+                <img src="~/images/Icons/email.png" alt="Mail Icon" class="icon-img" />
+                <span>info@example.co.uk</span>
+            </div>
+            <div class="info-item">
+                <img src="~/images/Icons/address.png" alt="Address Icon" class="icon-img" />
+                <span>Lake District, Cumbria, UK</span>
             </div>
         </div>
     </div>
 
-    <!-- Google Map -->
+    <!-- Second Main Div: Address with Map -->
+    <h2 class="section-title mt-5">Address</h2>
     <div class="map-section mt-4">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.123456!2d74.533!3d32.492!..."
-                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+        <!-- Exact Google Maps embed for Zugspitze -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2693.548228!2d10.9855!3d47.4210!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479d6f9c9f0b9f0b%3A0x123456789abcdef!2sZugspitze!5e0!3m2!1sen!2sde!4v1712345678901"
+                width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy">
         </iframe>
     </div>
 
-    <!-- Contact Form -->
+    <!-- Third Main Div: Contact Form -->
     <h2 class="section-title mt-5">Contact Form</h2>
     <form asp-action="SendMessage" method="post" class="contact-form">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="Form.FirstName"></label>
-                <input asp-for="Form.FirstName" class="form-control" />
+                <input asp-for="Form.FirstName" class="form-control" placeholder="First Name" />
                 <span asp-validation-for="Form.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="Form.LastName"></label>
-                <input asp-for="Form.LastName" class="form-control" />
+                <input asp-for="Form.LastName" class="form-control" placeholder="Last Name" />
                 <span asp-validation-for="Form.LastName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Form.Email"></label>
-            <input asp-for="Form.Email" class="form-control" />
+            <input asp-for="Form.Email" class="form-control" placeholder="Email Address" />
             <span asp-validation-for="Form.Email" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Form.Message"></label>
-            <textarea asp-for="Form.Message" class="form-control message-box"></textarea>
+            <textarea asp-for="Form.Message" class="form-control message-box mb-3" placeholder="Your Message"></textarea>
             <span asp-validation-for="Form.Message" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-teal">Send</button>
+        <button type="submit" class="btn btn-teal btn-lg">Send Message</button>
     </form>
 
-    <!-- Newsletter -->
+    <!-- Fourth Main Div: Newsletter -->
     <h2 class="section-title mt-5">Newsletter</h2>
     <form asp-action="Subscribe" method="post" class="newsletter-form">
         <div class="form-row align-items-end">
-            <div class="form-group col-md-9">
-                <input type="email" name="NewsletterEmail" class="form-control" placeholder="Enter your Gmail" required />
+            <div class="form-group col-md-9 mb-3">
+                <input type="email" name="NewsletterEmail" class="form-control" placeholder="Enter your email" required />
             </div>
             <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-teal btn-block">Subscribe</button>
+                <button type="submit" class="btn btn-teal btn-block btn-lg">Subscribe</button>
             </div>
         </div>
     </form>
