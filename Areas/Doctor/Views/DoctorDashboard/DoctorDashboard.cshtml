@@ -1,0 +1,136 @@
+﻿@model Wellora.Areas.Doctor.ViewModels.DoctorDashboard.DoctorDashboardViewModel
+
+<link rel="stylesheet" href="~/css/doctor/DoctorDashboard.css" />
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<div class="dashboard-container">
+
+    <!-- ================= HEADER ================= -->
+    <div class="doctor-header">
+
+        <div class="doctor-image-box">
+            
+            <img src="@(string.IsNullOrEmpty(Model.Header.ProfilePhoto) ? Url.Content("~/User/Doctor/Profile_Picture/default.png") : Url.Content("~/" + Model.Header.ProfilePhoto))"
+                 alt="Patient Profile" class="dashboard-avatar-fixed" />
+        </div>
+
+        <div class="doctor-info-box">
+            <h2>DR @Model.Header.FullName</h2>
+            <p>Username: @Model.Header.Username</p>
+            <p>Doctor ID: @Model.Header.DoctorId</p>
+            <p>Email: @Model.Header.Email</p>
+            <p>Specialization: @Model.Header.Specialization</p>
+        </div>
+
+    </div>
+
+    <!-- ================= PERSONAL INFO ================= -->
+    <div class="section-box">
+        <h3>Personal Information</h3>
+
+        <div class="info-grid">
+            <p>Gender: @Model.PersonalInfo.Gender</p>
+            <p>Country: @Model.PersonalInfo.Country</p>
+            <p>Contact: @Model.PersonalInfo.ContactNumber</p>
+            <p>Hospital: @Model.PersonalInfo.HospitalAddress</p>
+            <p>Languages: @Model.PersonalInfo.LanguagesSpoken</p>
+        </div>
+    </div>
+
+    <!-- ================= TODAY APPOINTMENTS + PATIENT STATS ================= -->
+    <div class="two-column">
+
+        <!-- LEFT: TODAY APPOINTMENTS -->
+        <div class="box">
+            <h3>Today Appointments</h3>
+
+            @foreach (var appt in Model.TodayAppointments)
+            {
+                <div class="appointment-card">
+                    <img src="@appt.PatientPhoto" />
+                    <div>
+                        <strong>@appt.PatientName</strong>
+                        <p>@appt.Allergies</p>
+                        <span>@appt.AppointmentDate.ToString("hh:mm tt")</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- RIGHT: PATIENT STATS -->
+        <div class="box">
+
+            <h3>Top Spending Patient</h3>
+            <p>@Model.PatientStats.HighestSpendingPatient.PatientName</p>
+
+            <h3>Most Visited Patient</h3>
+            <p>@Model.PatientStats.MostVisitedPatient.PatientName</p>
+
+        </div>
+
+    </div>
+
+    <!-- ================= REVENUE ================= -->
+    <div class="section-box">
+        <h3>Revenue Overview</h3>
+
+        <div class="revenue-grid">
+            <div>Today: @Model.Revenue.TodayRevenue</div>
+            <div>Monthly: @Model.Revenue.MonthlyRevenue</div>
+            <div>Total: @Model.Revenue.TotalRevenue</div>
+        </div>
+    </div>
+
+    <!-- ================= GRAPHS ================= -->
+    <div class="section-box">
+
+        <h3>Monthly Visits</h3>
+        <div id="monthlyChart"></div>
+
+        <h3>Weekly Visits</h3>
+        <div id="weeklyChart"></div>
+
+        <h3>Yearly Revenue</h3>
+        <div id="revenueChart"></div>
+
+    </div>
+
+    <!-- ================= WEEKLY SCHEDULE ================= -->
+    <div class="section-box">
+
+        <h3>Weekly Schedule</h3>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Working Hours</th>
+                    <th>Break</th>
+                    <th>Duration</th>
+                    <th>Max Patients</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var row in Model.WeeklySchedule)
+                {
+                    <tr class="@(row.IsOffDay ? "off-day" : "")">
+                        <td>@row.DayName</td>
+                        <td>@row.WorkingHours</td>
+                        <td>@row.BreakTime</td>
+                        <td>@row.Duration</td>
+                        <td>@row.MaxPatients</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    window.doctorDashboardData = @Html.Raw(Json.Serialize(Model.Graphs));
+</script>
+
+<script src="~/js/doctor/doctordashboard.js"></script>
