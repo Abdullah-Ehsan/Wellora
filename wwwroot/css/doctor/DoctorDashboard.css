@@ -1,0 +1,90 @@
+﻿.dashboard-container {
+    padding: 20px;
+    background: #f8fdfd;
+    color: #0d4b48;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.doctor-header {
+    display: flex;
+    gap: 20px;
+    background: #7dbebe;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.doctor-image-box img {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.doctor-info-box {
+    color: white;
+}
+
+/* SECTION BOX */
+.section-box {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #004d4d;
+}
+
+/* TWO COLUMN */
+.two-column {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.box {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* APPOINTMENT CARD */
+.appointment-card {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+    .appointment-card img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+/* REVENUE */
+.revenue-grid {
+    display: flex;
+    gap: 20px;
+}
+
+/* TABLE */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .schedule-table th {
+        background: #006d77;
+        color: white;
+        padding: 10px;
+    }
+
+    .schedule-table td {
+        background: #83c5be;
+        padding: 10px;
+    }
+
+.off-day {
+    opacity: 0.5;
+}
