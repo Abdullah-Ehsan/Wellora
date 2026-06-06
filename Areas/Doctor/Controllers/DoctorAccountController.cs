@@ -8,8 +8,8 @@ using System.Security.Claims;
 using Wellora.Models;
 using Wellora.Data;
 using Wellora.Areas.Doctor.Models;
-using Wellora.Areas.Doctor.ViewModels;
 using DoctorEntity = Wellora.Areas.Doctor.Models.Doctor;
+using Wellora.Areas.Doctor.ViewModels.DoctorAccount;
 
 
 
@@ -76,8 +76,7 @@ namespace Wellora.Areas.Doctor.Controllers
                     UserId = user.UserId, // foreign key
                     FullName = $"{model.FirstName} {model.LastName}",
                     DateOfBirth = new DateOnly(1900, 1, 1), 
-                    Gender = "other", 
-                    LicenseNumber = "0000000000", 
+                    Gender = "other",
                     Specialization = "General", 
                     ConsultationFee = 0.00m, 
                     CreatedAt = DateTime.UtcNow,
@@ -127,6 +126,22 @@ namespace Wellora.Areas.Doctor.Controllers
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
+            // Get doctor profile
+            var doctor = await _context.Doctors
+                .SingleOrDefaultAsync(d => d.UserId == user.UserId);
+
+            if (doctor == null)
+            {
+                ModelState.AddModelError("", "Doctor profile not found.");
+                return View(model);
+            }
+
+            // Add DoctorId claim
+            claims.Add(
+                new Claim("CurrentDoctorId", doctor.DoctorId.ToString())
+            );
+
+
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             // Sign in
@@ -140,7 +155,7 @@ namespace Wellora.Areas.Doctor.Controllers
                 });
 
             // Redirect to dashboard
-            return RedirectToAction("AIChat", "Doctor", new { area = "Doctor" });
+            return RedirectToAction("DoctorDashboard", "DoctorDashboard", new { area = "Doctor" });
         }
 
         [HttpGet]
