@@ -42,6 +42,14 @@
         "dist/ext/ws.js",
         "editors/jetbrains/htmx.web-types.json"
       ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "apexcharts@5.3.5",
+      "destination": "wwwroot/lib/apexcharts/",
+      "files": [
+        "apexcharts.min.js"
+      ]
     }
   ]
 }

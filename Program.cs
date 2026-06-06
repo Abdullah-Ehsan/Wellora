@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Wellora.Areas.Doctor.Services.DoctorDashboard.DoctorDashboardService;
 using Wellora.Areas.Patient.Services.PatientProfile;
 using Wellora.Areas.Patient.Services.Scheduling;
 using Wellora.Data;
 using Wellora.Services;
 using Wellora.Services.Dashboard;
+using Wellora.Services.DoctorDashboard;
+using Wellora.Services.DoctorDashboard.Contracts;
+using Wellora.Services.DoctorDashboard.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +85,19 @@ builder.Services.AddScoped<DashboardService>();
 builder.Services.AddScoped<PatientProfileService>();
 
 
+
+
+
+//Doctor Services
+
+//Dashboard of the doctor
+builder.Services.AddScoped<IDoctorDashboardService, DoctorDashboardService>();
+
+builder.Services.AddScoped<IAppointmentDashboardService, AppointmentDashboardService>();
+builder.Services.AddScoped<IPatientDashboardService, PatientDashboardService>();
+builder.Services.AddScoped<IRevenueDashboardService, RevenueDashboardService>();
+builder.Services.AddScoped<IGraphDashboardService, GraphDashboardService>();
+builder.Services.AddScoped<IScheduleDashboardService, ScheduleDashboardService>();
 
 
 var app = builder.Build();
