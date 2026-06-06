@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Wellora.Areas.Doctor.ViewModels
+namespace Wellora.Areas.Doctor.ViewModels.DoctorAccount
 {
     public class DoctorLoginViewModel
     {
