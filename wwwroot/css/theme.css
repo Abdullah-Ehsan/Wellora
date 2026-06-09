@@ -1,0 +1,138 @@
+﻿:root {
+    /* =========================================================
+     🟦 CORE NEUTRALS
+  ========================================================= */
+
+    --white: #ffffff;
+    --black: #000000;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    /* =========================================================
+     🟢 TEAL SCALE (PRIMARY THEME)
+  ========================================================= */
+
+    --teal-50: #e6fffb;
+    --teal-100: #bffaf0;
+    --teal-200: #8ef0e1;
+    --teal-300: #5ed9c8;
+    --teal-400: #36c2b0;
+    --teal-500: #1aa99a; /* base */
+    --teal-600: #128b7e;
+    --teal-700: #0e6e64;
+    --teal-800: #0a4f48;
+    --teal-900: #063632;
+    /* =========================================================
+     🎯 SEMANTIC (USE THESE IN UI)
+  ========================================================= */
+
+    --primary: var(--teal-500);
+    --primary-hover: var(--teal-600);
+    --primary-dark: var(--teal-700);
+    --primary-light: var(--teal-300);
+    /* =========================================================
+     🌊 ANALOGOUS COLORS (similar to teal)
+     (blue-green / green / aqua variations)
+  ========================================================= */
+
+    --aqua-50: #e6ffff;
+    --aqua-100: #bffcff;
+    --aqua-200: #8ef6ff;
+    --aqua-300: #5ee8f5;
+    --aqua-400: #36d4e6;
+    --aqua-500: #1abac9;
+    --aqua-600: #1297a3;
+    --aqua-700: #0e747d;
+    --aqua-800: #0a5257;
+    --aqua-900: #063639;
+    --green-50: #e8fff1;
+    --green-100: #c6f7d9;
+    --green-200: #9ff0bd;
+    --green-300: #6fe49b;
+    --green-400: #40d27d;
+    --green-500: #22c55e;
+    --green-600: #16a34a;
+    --green-700: #12823b;
+    --green-800: #0f5f2c;
+    --green-900: #0b3d1d;
+    /* =========================================================
+     🔴 OPPOSITE COLORS (COMPLEMENTARY TO TEAL)
+     (red / coral / warm tones)
+  ========================================================= */
+
+    --coral-50: #fff1f0;
+    --coral-100: #ffd6d1;
+    --coral-200: #ffb3aa;
+    --coral-300: #ff8a7d;
+    --coral-400: #ff5e4d;
+    --coral-500: #ff3b2f;
+    --coral-600: #e52a20;
+    --coral-700: #b81f18;
+    --coral-800: #8a1611;
+    --coral-900: #5a0e0b;
+    /* warm orange accent (secondary opposite family) */
+    --orange-50: #fff7e6;
+    --orange-100: #ffe3b3;
+    --orange-200: #ffcf80;
+    --orange-300: #ffb84d;
+    --orange-400: #ffa41a;
+    --orange-500: #ff8c00;
+    --orange-600: #e67300;
+    --orange-700: #b85c00;
+    --orange-800: #8a4500;
+    --orange-900: #5c2e00;
+    /* =========================================================
+     🎯 OPTIONAL UI SEMANTICS
+  ========================================================= */
+
+    --success: var(--green-500);
+    --danger: var(--coral-500);
+    --warning: var(--orange-400);
+}
+
+
+
+.dark {
+    --white: #000000;
+    --black: #ffffff;
+    --gray-50: #0b0f14;
+    --gray-100: #111827;
+    --gray-200: #1f2937;
+    --gray-300: #374151;
+    --gray-400: #4b5563;
+    --gray-500: #6b7280;
+    --gray-600: #9ca3af;
+    --gray-700: #d1d5db;
+    --gray-800: #e5e7eb;
+    --gray-900: #f9fafb;
+    /* TEAL adjusted for dark mode (brighter, more visible) */
+    --teal-50: #042f2e;
+    --teal-100: #064e4a;
+    --teal-200: #0a6b63;
+    --teal-300: #0e8f84;
+    --teal-400: #12b3a4;
+    --teal-500: #1ed6c4;
+    --teal-600: #2fe6d2;
+    --teal-700: #52f0df;
+    --teal-800: #7af7ea;
+    --teal-900: #a6fff4;
+    /* Semantic overrides */
+    --primary: var(--teal-400);
+    --primary-hover: var(--teal-300);
+    --primary-bg: #052c2a;
+    --success: #22c55e;
+    --danger: #ff4d4d;
+    --warning: #ffb020;
+    /* Dark surfaces */
+    --bg: #0b0f14;
+    --surface: #111827;
+    --text: #f9fafb;
+    --border: #1f2937;
+}
