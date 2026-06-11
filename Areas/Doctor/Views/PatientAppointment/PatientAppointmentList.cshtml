@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Doctor DashBoard";
+}
+
+@model IEnumerable<Wellora.Areas.Doctor.ViewModels.PatientAppointment.PatientAppointmentListViewModel>
+
+<link rel="stylesheet" href="~/css/doctor/PatientAppointmentList.css" />
+
+<div class="container-fluid px-0 py-3 appointments-container">
+
+    <div class="row g-0 w-100">
+
+        <!-- Sidebar -->
+        <aside class="filter-sidebar col-md-3 col-lg-2">
+
+            <h5 class="mb-3">Filters</h5>
+
+            <input type="text"
+                   class="form-control mb-3"
+                   placeholder="Search by name"
+                   name="search"
+                   hx-get="@Url.Action("Index")"
+                   hx-trigger="keyup changed delay:300ms"
+                   hx-target="#appointments-list" />
+
+            <label class="form-label text-white">Gender</label>
+
+            <select class="form-select mb-3"
+                    name="gender"
+                    hx-get="@Url.Action("Index")"
+                    hx-target="#appointments-list"
+                    hx-trigger="change">
+
+                <option value="">All</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+
+            </select>
+
+        </aside>
+
+        <!-- Main -->
+        <main class="appointments-section col-md-9 col-lg-10">
+
+            <div class="card shadow-sm p-3 w-100">
+
+                <h4 class="mb-3">Appointments</h4>
+
+                <div id="appointments-list">
+                    @await Html.PartialAsync("_AppointmentsPartial", Model)
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>

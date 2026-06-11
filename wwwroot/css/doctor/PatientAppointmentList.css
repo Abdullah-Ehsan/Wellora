@@ -1,0 +1,187 @@
+﻿/* ================================
+   Layout Container
+================================ */
+
+.appointments-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ================================
+   Sidebar (TEAL FIXED & STRONG)
+================================ */
+
+.filter-sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, var(--teal-800), var(--teal-900));
+    color: var(--white);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-right: 2px solid var(--teal-700);
+}
+
+    .filter-sidebar h3,
+    .filter-sidebar h5 {
+        color: var(--teal-100);
+    }
+
+    .filter-sidebar input,
+    .filter-sidebar select {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 6px;
+        border: none;
+        background: var(--teal-700);
+        color: white;
+    }
+
+        .filter-sidebar input::placeholder {
+            color: var(--teal-300);
+        }
+
+/* ================================
+   Appointment Section
+================================ */
+
+.appointments-section {
+    flex: 1;
+    background: var(--gray-50);
+    padding: 2rem;
+}
+
+/* ================================
+   Appointment Row (FIXED STRUCTURE)
+   IMPORTANT: NO FLEX LAYOUT HERE
+================================ */
+
+.appointment-row {
+    background: var(--teal-100);
+    transition: all 0.2s ease;
+    border-radius: 10px;
+}
+
+    /* Alternating rows */
+    .appointment-row:nth-child(even) {
+        background: var(--teal-200);
+    }
+
+    /* Hover effect */
+    .appointment-row:hover {
+        background: var(--teal-300) !important;
+        cursor: pointer;
+    }
+
+/* ================================
+   Patient Image (STRICT SIZE)
+================================ */
+
+.patient-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+}
+
+/* ================================
+   TEXT (KEEP CLEAN ALIGNMENT)
+================================ */
+
+.patient-info h5 {
+    margin: 0;
+    color: var(--teal-900);
+}
+
+/* First appointment text (BLUE as requested earlier) */
+.text-primary.small {
+    color: #0d6efd !important;
+}
+
+/* muted text fix */
+.text-muted {
+    color: var(--gray-700) !important;
+}
+
+/* ================================
+   BUTTON (VIEW LINK)
+================================ */
+
+.btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+    .btn-outline-primary:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+/* ================================
+   IMPORTANT FIX FOR ROW ALIGNMENT
+   (This is what stops "center chaos")
+================================ */
+
+.appointment-row .row {
+    width: 100%;
+    margin: 0;
+}
+
+.appointment-row .col,
+.appointment-row .col-auto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* keep columns aligned like table */
+.appointment-row .col {
+    min-width: 120px;
+}
+
+/* ================================
+   VIEW LINK (BLUE)
+================================ */
+
+.view-link {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .view-link:hover {
+        text-decoration: underline;
+    }
+
+/* ================================
+   Pagination
+================================ */
+
+.pagination a {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+}
+
+    .pagination a.active,
+    .pagination .page-item.active .page-link {
+        background: var(--primary);
+        color: white;
+    }
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 768px) {
+    .patient-photo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .appointment-row .col {
+        min-width: 150px;
+    }
+}

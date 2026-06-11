@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Wellora.Areas.Doctor.ViewModels.PatientAppointment.PatientAppointmentListViewModel>
+
+<div class="appointment-list d-flex flex-column gap-2">
+
+    @foreach (var appt in Model)
+    {
+        <div class="appointment-row row align-items-center g-0 px-3 py-2">
+
+            <!-- PHOTO -->
+            <div class="col-auto">
+                <img src="@(string.IsNullOrEmpty(appt.ProfilePhoto)
+                                             ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                                             : Url.Content("~/" + appt.ProfilePhoto))"
+                 class="patient-photo" />
+        </div>
+
+            <!-- NAME -->
+            <div class="col name-col ps-3">
+                <div class="fw-bold">@appt.PatientName</div>
+
+            
+            </div>
+
+            <!-- GENDER + AGE -->
+            <div class="col">
+                <div class="small text-muted">Gender</div>
+                <div>@appt.Gender</div>
+            </div>
+
+            <div class="col">
+                <div class="small text-muted">Age</div>
+                <div>@appt.Age</div>
+            </div>
+
+            <!-- LAST APPOINTMENT -->
+            <div class="col">
+                <div class="small text-muted">Last</div>
+                    @if (appt.IsFirstAppointment)
+                    {
+                    <div class="text-primary small" style="color:#057741">First Appointment</div>
+                    }
+                    else
+                    {
+                        <div class="text-muted small">
+                            Last: @appt.LastVisitedDate?.ToString("dd MMM yyyy")
+                        </div>
+                    }
+            </div>
+
+            <!-- UPCOMING -->
+            <div class="col">
+                <div class="small text-muted">Upcoming</div>
+                <div>@appt.AppointmentDate.ToString("dd MMM yyyy hh:mm tt")</div>
+            </div>
+
+            <!-- LINK -->
+            <div class="col-auto text-end">
+                <a asp-action="PatientDetail"
+                   asp-controller="PatientDetail"
+                   asp-area="Doctor"
+                   asp-route-patientId="@appt.PatientId"
+                   asp-route-appointmentId="@appt.AppointmentId"
+                   class="view-link btn btn-sm btn-primary">
+                    View
+                </a>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<!-- Pagination --> 
+<div class="d-flex justify-content-center mt-4"> 
+    <nav> 
+        <ul class="pagination"> 
+            
+            @{
+                int totalPages = ViewBag.TotalPages; 
+                int currentPage = ViewBag.CurrentPage; 
+
+                for (int i = Math.Max(1, currentPage - 1); 
+                i <= Math.Min(totalPages, currentPage + 1); 
+                i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")"> 
+                        <a class="page-link @(i == currentPage ? "active" : "")" hx-get="@Url.Action("Index", 
+                            new { page = i })" hx-target="#appointments-list">
+                            @i 
+                        </a> 
+                    </li>
+                }
+
+            }
+        </ul> 
+    </nav> 
+</div>
