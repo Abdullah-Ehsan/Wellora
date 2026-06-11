@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Wellora.ViewModels.PatientDetail.AppointmentSummaryViewModel>
+
+<div class="appointments-container">
+    @if (!Model.Any())
+    {
+        <div class="row w-100">
+            <div class="col-md-6 text-center">
+                <img src="~/images/Patient/Appointment/no_appointment.png"
+                     style="width:598px;height:939px;" />
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <p>The patient has no previous appointments. This is the first one.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < 10; i++)
+                {
+                    if (i < Model.Count())
+                    {
+                        var appt = Model.ElementAt(i);
+                        <tr>
+                            <td>@appt.AppointmentId</td>
+                            <td>@appt.AppointmentDate.ToString("dddd, dd MMM yyyy")</td>
+                            <td>@appt.AppointmentDate.ToString("hh:mm tt")</td>
+                            <td>@appt.Status</td>
+                            <td>@appt.PaymentStatus</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-muted">Placeholder</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,123 @@
+﻿@model Wellora.ViewModels.PatientDetail.PatientDetailViewModel
+<link rel="stylesheet" href="~/css/doctor/PatientDetail.css" />
+
+<div class="container mt-4">
+    <!-- Patient Header -->
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img src="@(string.IsNullOrEmpty(@Model.Patient.ProfilePhoto)
+                   ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                       : Url.Content("~/" + @Model.Patient.ProfilePhoto))"
+                            class="patient-photo" />
+        </div>
+        <div class="col-md-9">
+            <h2 class="patient-section-title">@Model.Patient.FullName</h2>
+            <p><strong>Gender:</strong> @Model.Patient.Gender</p>
+            <p><strong>DOB:</strong> @Model.Patient.DateOfBirth</p>
+            <p><strong>Age:</strong> @Model.Age</p>
+        </div>
+    </div>
+
+    <!-- Current Appointment -->
+    <h4 class="patient-section-title">Current Appointment</h4>
+    <div class="appointment-card">
+        <p><strong>ID:</strong> @Model.CurrentAppointment.AppointmentId</p>
+        <p><strong>Date:</strong> @Model.CurrentAppointment.AppointmentDate.ToString("dddd, dd MMM yyyy hh:mm tt")</p>
+    </div>
+
+    <!-- Previous Appointments -->
+    <h4 class="patient-section-title">Previous Appointments</h4>
+    <div class="appointments-container">
+        @if (!Model.PreviousAppointments.Any())
+        {
+            <div class="row w-100">
+                <div class="col-md-6 text-center">
+                    <img src="~/images/Patient/Appointment/no_appointment.png"
+                         style="width:598px;height:939px;" />
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center no-appointments-box">
+                    <p>The patient has no previous appointments.</p> <br />
+                    <p>This is the first one.</p>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < 10; i++)
+                    {
+                        if (i < Model.PreviousAppointments.Count)
+                        {
+                            var appt = Model.PreviousAppointments[i];
+                            <tr>
+                                <td>@appt.AppointmentId</td>
+                                <td>@appt.AppointmentDate.ToString("dddd, dd MMM yyyy")</td>
+                                <td>@appt.AppointmentDate.ToString("hh:mm tt")</td>
+                                <td>@appt.Status</td>
+                                <td>@appt.PaymentStatus</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-muted">Placeholder</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <div class="mt-3">
+        <p>Total Appointments: @Model.TotalAppointments</p>
+        @if (Model.LastAppointment != null)
+        {
+            <p>
+                Last Appointment: @Model.LastAppointment.AppointmentDate.ToString("dddd, dd MMM yyyy hh:mm tt") <br />
+                Time Passed: @Model.LastAppointmentTimePassed
+            </p>
+        }
+    </div>
+
+    <!-- Important Info -->
+    <h4 class="patient-section-title">Important Info</h4>
+    <p><strong>Blood Group:</strong> @(string.IsNullOrEmpty(Model.Patient.BloodGroup) ? "Not discovered" : Model.Patient.BloodGroup)</p>
+    <p><strong>Allergies:</strong> @(string.IsNullOrEmpty(Model.Patient.Allergies) ? "None" : Model.Patient.Allergies)</p>
+    <p><strong>Medical Conditions:</strong> @(string.IsNullOrEmpty(Model.Patient.MedicalConditions) ? "None" : Model.Patient.MedicalConditions)</p>
+    <p><strong>Medications:</strong> @(string.IsNullOrEmpty(Model.Patient.Medications) ? "None" : Model.Patient.Medications)</p>
+    <p><strong>Address:</strong> @(string.IsNullOrEmpty(Model.Patient.Address) ? "Not provided" : Model.Patient.Address)</p>
+    <p><strong>Emergency Contact:</strong> @(string.IsNullOrEmpty(Model.Patient.EmergencyContactName) ? "Not provided" : Model.Patient.EmergencyContactName) - @(string.IsNullOrEmpty(Model.Patient.EmergencyContactPhone) ? "Not provided" : Model.Patient.EmergencyContactPhone)</p>
+    <p><strong>Preferred Language:</strong> @(string.IsNullOrEmpty(Model.Patient.PreferredLanguage) ? "Not provided" : Model.Patient.PreferredLanguage)</p>
+
+    <!-- Actions -->
+    <div class="d-flex gap-3 mt-3">
+        <button class="btn btn-confirm">Confirm Appointment</button>
+        <button class="btn btn-cancel">Cancel Appointment</button>
+        <a asp-action="Diagnose" asp-route-id="@Model.CurrentAppointment.AppointmentId" class="btn btn-diagnose">Write Diagnose</a>
+    </div>
+
+    <!-- Notes -->
+    <div class="mt-3">
+        <form asp-action="SaveNote" asp-route-id="@Model.CurrentAppointment.AppointmentId" method="post">
+            <textarea class="form-control notes-box" name="Note" placeholder="Write note..."></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Save Note</button>
+        </form>
+    </div>
+
+    <!-- Report -->
+    <div class="mt-3">
+        <a href="#" class="report-link">Report</a>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+﻿/* PatientDetail custom overrides */
+
+/* Section titles */
+.patient-section-title {
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Patient photo */
+.patient-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary);
+}
+
+/* Appointment card styling */
+.appointment-card {
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-left: 5px solid var(--primary);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .appointment-card:hover {
+        transform: scale(1.02);
+        background-color: var(--gray-100);
+    }
+
+    .appointment-card strong {
+        color: var(--primary-dark);
+    }
+
+/* Buttons */
+.btn-confirm {
+    background-color: var(--success);
+    color: var(--white);
+}
+
+    .btn-confirm:hover {
+        background-color: var(--green-600);
+        color: var(--white);
+    }
+
+.btn-cancel {
+    background-color: var(--danger);
+    color: var(--white);
+}
+
+    .btn-cancel:hover {
+        background-color: var(--coral-600);
+        color: var(--white);
+    }
+
+.btn-diagnose {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+    .btn-diagnose:hover {
+        background-color: var(--primary-hover);
+        color: var(--white);
+    }
+
+/* Notes box */
+.notes-box {
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    padding: 0.5rem;
+}
+
+/* Report link */
+.report-link {
+    color: var(--danger);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+    .report-link:hover {
+        text-decoration: underline;
+    }
+
+
+
+.appointments-container {
+    width: 100%;
+    min-height: 939px; /* match image height */
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background-color: var(--gray-50);
+    padding: 1rem;
+}
+
+p {
+    color: var(--teal-800);
+}
+
+.no-appointments-box {
+    background-color: var(--primary-dark); /* dark teal from your theme */
+    color: var(--white);
+    max-height: 500px; /* match image height */
+    text-align: center;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+    .no-appointments-box p {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color:white;
+    }
+
+
+strong{
+    color: var(--teal-700);
+}
+
+p{
+    color: var(--teal-800);
+}
