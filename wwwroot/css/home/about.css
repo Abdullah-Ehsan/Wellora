@@ -28,7 +28,7 @@
 }
 
 .banner-img {
-    max-height: 120px;
+    max-height: 200px;
     max-width: 100%;
     object-fit: contain;
 }
@@ -201,8 +201,8 @@
    MEMBER IMAGE POSITION FIXES
 ================================ */
 .team-card img {
-    width: 85px;
-    height: 85px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
