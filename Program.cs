@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Wellora.Areas.Doctor.Services.DoctorDashboard.Contracts;
 using Wellora.Areas.Doctor.Services.DoctorDashboard.DoctorDashboardService;
+using Wellora.Areas.Doctor.Services.DoctorDashboard.Services;
 using Wellora.Areas.Patient.Services.PatientProfile;
 using Wellora.Areas.Patient.Services.Scheduling;
 using Wellora.Data;
@@ -78,7 +80,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 
 //Areas
 
-//Patient Services
+//                Patient Services
 builder.Services.AddScoped<AppointmentSlotService>();
 builder.Services.AddScoped<PatientAppointmentService>();
 builder.Services.AddScoped<DashboardService>();
@@ -88,11 +90,12 @@ builder.Services.AddScoped<PatientProfileService>();
 
 
 
-//Doctor Services
+//              Doctor Services
 
 //Dashboard of the doctor
 builder.Services.AddScoped<IDoctorDashboardService, DoctorDashboardService>();
 
+builder.Services.AddScoped<IDoctorInfoDashboardService, DoctorInfoDashboardService>();
 builder.Services.AddScoped<IAppointmentDashboardService, AppointmentDashboardService>();
 builder.Services.AddScoped<IPatientDashboardService, PatientDashboardService>();
 builder.Services.AddScoped<IRevenueDashboardService, RevenueDashboardService>();
