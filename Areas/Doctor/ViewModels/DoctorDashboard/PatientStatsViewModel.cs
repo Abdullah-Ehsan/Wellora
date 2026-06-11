@@ -2,8 +2,8 @@
 {
     public class PatientStatsViewModel
     {
-        public PatientSummaryViewModel HighestSpendingPatient { get; set; } = new();
+        public List<PatientSummaryViewModel> TopSpendingPatients { get; set; } = new();
 
-        public PatientSummaryViewModel MostVisitedPatient { get; set; } = new();
+        public List<PatientSummaryViewModel> TopVisitedPatients { get; set; } = new();
     }
 }

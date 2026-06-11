@@ -11,5 +11,7 @@
         public int AppointmentCount { get; set; }
 
         public decimal TotalSpent { get; set; }
+
+        public DateTime? LastAppointmentDate { get; set; }
     }
 }

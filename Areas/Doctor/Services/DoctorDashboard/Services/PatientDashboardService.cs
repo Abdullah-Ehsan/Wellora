@@ -20,21 +20,21 @@ namespace Wellora.Services.DoctorDashboard.Services
         // =========================================
         public async Task<PatientStatsViewModel> GetPatientStatsAsync(int doctorId)
         {
-            var highest = (await GetTopSpendingPatientsAsync(doctorId, 1)).FirstOrDefault();
+            var topSpending = await GetTopSpendingPatientsAsync(doctorId, 3);
 
-            var mostVisited = (await GetMostVisitedPatientsAsync(doctorId, 1)).FirstOrDefault();
+            var topVisited = await GetMostVisitedPatientsAsync(doctorId, 3);
 
             return new PatientStatsViewModel
             {
-                HighestSpendingPatient = highest ?? new PatientSummaryViewModel(),
-                MostVisitedPatient = mostVisited ?? new PatientSummaryViewModel()
+                TopSpendingPatients = topSpending,
+                TopVisitedPatients = topVisited
             };
         }
 
         // =========================================
         // TOP SPENDING PATIENT (SUM OF CONSULTATION FEE)
         // =========================================
-        public async Task<List<PatientSummaryViewModel>> GetTopSpendingPatientsAsync(int doctorId, int top = 1)
+        public async Task<List<PatientSummaryViewModel>> GetTopSpendingPatientsAsync(int doctorId, int top = 3)
         {
             var result = await _context.Appointments
                 .Include(a => a.Patient)
@@ -50,8 +50,12 @@ namespace Wellora.Services.DoctorDashboard.Services
                     PatientId = g.Key.PatientId,
                     PatientName = g.Key.FullName,
                     PatientPhoto = g.Key.ProfilePhoto,
+
                     AppointmentCount = g.Count(),
-                    TotalSpent = g.Sum(x => x.ConsultationFee)
+
+                    TotalSpent = g.Sum(x => x.ConsultationFee),
+
+                    LastAppointmentDate = g.Max(x => x.AppointmentDate)  
                 })
                 .OrderByDescending(x => x.TotalSpent)
                 .Take(top)
@@ -63,7 +67,7 @@ namespace Wellora.Services.DoctorDashboard.Services
         // =========================================
         // MOST VISITED PATIENT (COUNT OF APPOINTMENTS)
         // =========================================
-        public async Task<List<PatientSummaryViewModel>> GetMostVisitedPatientsAsync(int doctorId, int top = 1)
+        public async Task<List<PatientSummaryViewModel>> GetMostVisitedPatientsAsync(int doctorId, int top = 3)
         {
             var result = await _context.Appointments
                 .Include(a => a.Patient)
@@ -79,8 +83,12 @@ namespace Wellora.Services.DoctorDashboard.Services
                     PatientId = g.Key.PatientId,
                     PatientName = g.Key.FullName,
                     PatientPhoto = g.Key.ProfilePhoto,
+
                     AppointmentCount = g.Count(),
-                    TotalSpent = g.Sum(x => x.ConsultationFee)
+
+                    TotalSpent = g.Sum(x => x.ConsultationFee),
+
+                    LastAppointmentDate = g.Max(x => x.AppointmentDate)   
                 })
                 .OrderByDescending(x => x.AppointmentCount)
                 .Take(top)

@@ -1,7 +1,12 @@
 ﻿@model Wellora.Areas.Doctor.ViewModels.DoctorDashboard.DoctorDashboardViewModel
+@using Wellora.Areas.Doctor.ViewModels.DoctorDashboard
 
 <link rel="stylesheet" href="~/css/doctor/DoctorDashboard.css" />
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+@{
+    ViewData["Title"] = "Doctor DashBoard";
+}
 
 <div class="dashboard-container">
 
@@ -11,10 +16,10 @@
         <div class="doctor-image-box">
             
             <img src="@(string.IsNullOrEmpty(Model.Header.ProfilePhoto) ? Url.Content("~/User/Doctor/Profile_Picture/default.png") : Url.Content("~/" + Model.Header.ProfilePhoto))"
-                 alt="Patient Profile" class="dashboard-avatar-fixed" />
+                 alt="Doctor Profile" class="dashboard-avatar-fixed" />
         </div>
 
-        <div class="doctor-info-box">
+        <div class="doctor-info-box pt-5">
             <h2>DR @Model.Header.FullName</h2>
             <p>Username: @Model.Header.Username</p>
             <p>Doctor ID: @Model.Header.DoctorId</p>
@@ -29,47 +34,181 @@
         <h3>Personal Information</h3>
 
         <div class="info-grid">
-            <p>Gender: @Model.PersonalInfo.Gender</p>
+            <p>Gender: @Model.PersonalInfo.DisplayGender</p>
             <p>Country: @Model.PersonalInfo.Country</p>
             <p>Contact: @Model.PersonalInfo.ContactNumber</p>
             <p>Hospital: @Model.PersonalInfo.HospitalAddress</p>
             <p>Languages: @Model.PersonalInfo.LanguagesSpoken</p>
+            <p>Age: @Model.PersonalInfo.Age</p>
+            <p>DOB: @Model.PersonalInfo.DateOfBirth</p>
         </div>
     </div>
 
     <!-- ================= TODAY APPOINTMENTS + PATIENT STATS ================= -->
     <div class="two-column">
 
-        <!-- LEFT: TODAY APPOINTMENTS -->
+        <!-- LEFT PANEL -->
         <div class="box">
+
             <h3>Today Appointments</h3>
 
-            @foreach (var appt in Model.TodayAppointments)
+            @{
+                var appointments = Model.TodayAppointments ?? new List<TodayAppointmentViewModel>();
+            }
+
+            @for (int i = 0; i < 10; i++)
             {
-                <div class="appointment-card">
-                    <img src="@appt.PatientPhoto" />
+                var appt = i < appointments.Count ? appointments[i] : null;
+
+                if (appt != null)
+                {
+                    <div class="appointment-slot filled mb-2">
+
+                        <img src="@(string.IsNullOrEmpty(appt.PatientPhoto)
+                                                 ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                                                 : Url.Content("~/" + appt.PatientPhoto))"
+                     style="width:60px;height:60px;border-radius:50%;object-fit:cover;" />
+
+                        <div>
+                            <strong>@appt.PatientName</strong><br />
+                            <small>@appt.Allergies</small><br />
+                            <small>@appt.AppointmentDate.ToString("hh:mm tt")</small>
+                        </div>
+
+                    </div>
+                        }
+                else
+                {
+                    <div class="appointment-slot empty mb-2">
+
+                        <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.1);"></div>
+
+                        <div>
+                            <strong>Available Slot</strong><br />
+                            <small>No appointment</small><br />
+                            <small>--:--</small>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+        <!-- RIGHT PANEL -->
+        <div class="box" style="padding:20px; display:flex; flex-direction:column; gap:15px;">
+
+            <h3>Top Visited Patients</h3>
+
+            @foreach (var p in Model.PatientStats?.TopVisitedPatients ?? new())
+            {
+                <div class="d-flex align-items-center gap-3 mb-3 p-3"
+                    style="background:#83c5be; border-radius:10px; color:white;">
+
+                    <img src="@(string.IsNullOrEmpty(p.PatientPhoto)
+                        ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                            : Url.Content("~/" + p.PatientPhoto))"
+                                style="width:60px;height:60px;border-radius:50%;object-fit:cover;" />
+
                     <div>
-                        <strong>@appt.PatientName</strong>
-                        <p>@appt.Allergies</p>
-                        <span>@appt.AppointmentDate.ToString("hh:mm tt")</span>
+                        <strong>@p.PatientName</strong><br />
+                        <small>Visits: @p.AppointmentCount</small><br />
+                        <small>Last: @p.LastAppointmentDate?.ToString("dd MMM yyyy")</small>
                     </div>
                 </div>
             }
-        </div>
 
-        <!-- RIGHT: PATIENT STATS -->
-        <div class="box">
+            <h3>Top Spending Patients</h3>
 
-            <h3>Top Spending Patient</h3>
-            <p>@Model.PatientStats.HighestSpendingPatient.PatientName</p>
+            @foreach (var p in Model.PatientStats?.TopSpendingPatients ?? new())
+            {
+                <div class="d-flex align-items-center gap-3 mb-3 p-3"
+                        style="background:#83c5be; border-radius:10px; color:white;">
 
-            <h3>Most Visited Patient</h3>
-            <p>@Model.PatientStats.MostVisitedPatient.PatientName</p>
+                    <img src="@(string.IsNullOrEmpty(p.PatientPhoto)
+                        ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                        : Url.Content("~/" + p.PatientPhoto))"
+                            style="width:60px;height:60px;border-radius:50%;object-fit:cover;" />
+
+                    <div>
+                        <strong>@p.PatientName</strong><br />
+                        <small>Total Spent: @p.TotalSpent</small><br />
+                        <small>Last: @p.LastAppointmentDate?.ToString("dd MMM yyyy")</small>
+                    </div>
+                </div>
+            }
 
         </div>
 
     </div>
 
+    <!-- ================= time and date ================= -->
+    <div class="mt-2 mb-2">
+        @{
+            var now = DateTime.Now;
+        }
+
+        <div class="w-100 text-white">
+
+            <!-- HEADER -->
+            <div class="px-4 py-3" style="background:#115e59;">
+                <h4 class="m-0">Current Day and Time</h4>
+            </div>
+
+            <!-- STATIC INFO -->
+            <div class="px-4 py-4" style="background:#0f766e;">
+
+                <div class="row text-center">
+
+                    <div class="col-md-4 mb-3">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded">
+                            <small>Date</small>
+                            <h5 class="mt-1">@now.ToString("dd-MM-yyyy")</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded">
+                            <small>Month</small>
+                            <h5 class="mt-1">@now.ToString("MMMM")</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded">
+                            <small>Day</small>
+                            <h5 class="mt-1">@now.ToString("dddd")</h5>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- LIVE TIME SECTION -->
+            <div class="px-4 py-4" style="background:#0d5a54;">
+
+                <div class="row text-center">
+
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded">
+                            <small>24H Live Time</small>
+                            <h5 class="mt-1" id="live24"></h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 bg-dark bg-opacity-25 rounded">
+                            <small>AM/PM Live Time</small>
+                            <h5 class="mt-1" id="live12"></h5>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
     <!-- ================= REVENUE ================= -->
     <div class="section-box">
         <h3>Revenue Overview</h3>
@@ -103,11 +242,11 @@
         <table class="schedule-table">
             <thead>
                 <tr>
-                    <th>Day</th>
-                    <th>Working Hours</th>
-                    <th>Break</th>
-                    <th>Duration</th>
-                    <th>Max Patients</th>
+                    <th class="text-center">Day</th>
+                    <th class="text-center">Working Hours</th>
+                    <th class="text-center">Break</th>
+                    <th class="text-center">Duration</th>
+                    <th class="text-center">Max Patients</th>
                 </tr>
             </thead>
 
@@ -115,11 +254,11 @@
                 @foreach (var row in Model.WeeklySchedule)
                 {
                     <tr class="@(row.IsOffDay ? "off-day" : "")">
-                        <td>@row.DayName</td>
-                        <td>@row.WorkingHours</td>
-                        <td>@row.BreakTime</td>
-                        <td>@row.Duration</td>
-                        <td>@row.MaxPatients</td>
+                        <td class="text-center">@row.DayName</td>
+                        <td class="text-center">@row.WorkingHours</td>
+                        <td class="text-center">@row.BreakTime</td>
+                        <td class="text-center">@row.Duration</td>
+                        <td class="text-center">@row.MaxPatients</td>
                     </tr>
                 }
             </tbody>
@@ -127,10 +266,97 @@
 
     </div>
 
+    <div class="section-box">
+        <h3>Clinical Practice</h3>
+
+        <div class="info-grid">
+            <p>YearsExperience: @Model.ClinicalPractice.YearsExperience</p>
+            <p>TelemedicineAvailable: @Model.ClinicalPractice.TelemedicineAvailable</p>
+            <p>ConsultationFee: @Model.ClinicalPractice.ConsultationFee</p>
+        </div>
+    </div>
+
+
+    <div class="section-box">
+        <h3>Credentials Information</h3>
+
+        <div class="info-grid">
+            <p>LicenseNumber: @Model.Credentials.LicenseNumber</p>
+            <p>PmdcNumber: @Model.Credentials.PmdcNumber</p>
+            <p>Qualifications: @Model.Credentials.Qualifications</p>
+            <p>MedicalSchool: @Model.Credentials.MedicalSchool</p>
+            <p>Certifications: @Model.Credentials.Certifications</p>
+        </div>
+    </div>
+
+
+    <div class="section-box">
+        <h3>Specialties Information</h3>
+
+        <div class="info-grid">
+            <p>Specialization: @Model.Specialties.Specialization</p>
+            <p>SubSpecialties: @Model.Specialties.SubSpecialties</p>
+            <p>ServicesOffered: @Model.Specialties.ServicesOffered</p>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <h3>Publication Information</h3>
+
+        <div class="info-grid">
+            <p>Biography: @Model.Publications.Biography</p>
+            <p>Achievements: @Model.Publications.Achievements</p>
+            <p>Publications: @Model.Publications.Publications</p>
+            <p>SocialLinks: @Model.Publications.SocialLinks</p>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <div class="row">
+            <div class="col-6">
+                <p>CreatedAt: @Model.Publications.CreatedAt</p>
+            </div>
+            <div class="col-6">
+                <p class="text-end">UpdatedAt: @Model.Publications.UpdatedAt</p>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
     window.doctorDashboardData = @Html.Raw(Json.Serialize(Model.Graphs));
 </script>
+
+
+
+<script>
+    function updateClock() {
+
+        const now = new Date();
+
+        // 24-hour format
+        document.getElementById("live24").textContent =
+            now.toLocaleTimeString('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+
+        // AM/PM format
+        document.getElementById("live12").textContent =
+            now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+
 
 <script src="~/js/doctor/doctordashboard.js"></script>

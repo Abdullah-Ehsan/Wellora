@@ -29,11 +29,9 @@ namespace Wellora.Areas.Doctor.Controllers
                 return Unauthorized();
             }
 
-            System.Diagnostics.Debug.WriteLine($"DoctorId FROM CLAIM: {doctorId}");
-
             var model = await _dashboardService.GetDashboardAsync(doctorId);
 
-            System.Diagnostics.Debug.WriteLine($"DoctorId IN MODEL: {model.DoctorId}");
+            
 
             return View(model);
         }

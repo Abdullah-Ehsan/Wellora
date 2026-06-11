@@ -24,6 +24,8 @@ namespace Wellora.Services.DoctorDashboard.Services
             var data = await _context.Appointments
                 .AsNoTracking()
                 .Where(a => a.DoctorId == doctorId && a.AppointmentDate.Date == today)
+                .OrderBy(a => a.AppointmentDate)   
+                .Take(10)                          
                 .Select(a => new TodayAppointmentViewModel
                 {
                     AppointmentId = a.AppointmentId,
@@ -33,7 +35,7 @@ namespace Wellora.Services.DoctorDashboard.Services
                     Allergies = a.Patient.Allergies,
                     AppointmentDate = a.AppointmentDate
                 })
-                .ToListAsync();   // 🔥 MUST BE FINAL
+                .ToListAsync();
 
             return data;
         }
