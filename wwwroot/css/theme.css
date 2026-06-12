@@ -1,105 +1,409 @@
 ﻿:root {
+
     /* =========================================================
      🟦 CORE NEUTRALS
   ========================================================= */
 
-    --white: #ffffff;
-    --black: #000000;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #1f2937;
-    --gray-900: #111827;
+
+
+
+
+    /* ===== WHITE SCALE (cool-neutral whites) ===== */
+
+    --white-25: #ffffff; /* pure white / max surface */
+    --white-50: #fcfcfd; /* almost pure white */
+    --white-75: #fafafa; /* soft UI background */
+    --white-100: #f9fafb; /* your current gray-50 equivalent */
+    --white-150: #f7f8fa; /* subtle cool tint */
+    --white-200: #f5f6f8; /* light surface elevation */
+    --white-250: #f2f4f7; /* card background soft */
+    --white-300: #eef1f4; /* faint separation layer */
+    --white-400: #e9edf1; /* strong surface tint */
+    --white-500: #e5e7eb; /* neutral divider zone */
+    --white-600: #dfe3e8; /* muted surface */
+    --white-700: #d6dbe2; /* deeper soft gray-white */
+    --white-800: #cfd6de; /* shadowed white */
+    --white-900: #c7cfd8; /* strongest white tint */
+    --white-1000: #bfc8d3; /* darkest "white" before gray */
+
+
+
+
+
+
+    /* ===== BLACK SCALE (cool-neutral blacks) ===== */
+
+    --black-25: #0b0f14; /* almost black background */
+    --black-50: #0f141a; /* soft dark background */
+    --black-75: #121821; /* elevated dark surface */
+    --black-100: #111827; /* your current gray-900 equivalent */
+    --black-150: #161f2b; /* dark card surface */
+    --black-200: #1b2432; /* elevated container */
+    --black-250: #1f2937; /* your current gray-800 */
+    --black-300: #243041; /* soft border dark */
+    --black-400: #2c3a4f; /* muted UI structure */
+    --black-500: #374151; /* your current gray-700 */
+    --black-600: #455166; /* mid-dark UI */
+    --black-700: #4b5563; /* your current gray-600 */
+    --black-800: #5b6676; /* lifted dark tone */
+    --black-900: #6b7280; /* your current gray-500 */
+    --black-1000: #7a8394; /* lightest dark tone before gray */
+
+
+
+
+
+
+
+    /* ===== GRAY SCALE (neutral UI ramp) ===== */
+
+    --gray-25: #fbfbfc; /* near-white neutral */
+    --gray-50: #f9fafb; /* your current base light bg */
+    --gray-75: #f6f7f9; /* soft neutral surface */
+    --gray-100: #f3f4f6; /* light background tint */
+    --gray-150: #eff1f4; /* subtle separation */
+    --gray-200: #e5e7eb; /* borders / dividers */
+    --gray-250: #dcdfe4; /* soft border emphasis */
+    --gray-300: #d1d5db; /* muted UI elements */
+    --gray-350: #c4c9d1; /* inactive UI */
+    --gray-400: #9ca3af; /* disabled text */
+    --gray-450: #8b93a1; /* secondary text */
+    --gray-500: #6b7280; /* mid text / icons */
+    --gray-550: #5e6675; /* strong secondary */
+    --gray-600: #4b5563; /* dark text */
+    --gray-650: #404a5a; /* deeper UI text */
+    --gray-700: #374151; /* headings */
+    --gray-750: #2e3746; /* strong contrast text */
+    --gray-800: #1f2937; /* very dark surface */
+    --gray-850: #1a2230; /* near-black UI */
+    --gray-900: #111827; /* deep text / dark mode base */
+    --gray-950: #0b0f14; /* almost black */
+    --gray-1000: #05070a; /* pure UI depth black */
+
+
+
+
+
+
+
+
+
+
     /* =========================================================
      🟢 TEAL SCALE (PRIMARY THEME)
   ========================================================= */
 
-    --teal-50: #e6fffb;
-    --teal-100: #bffaf0;
-    --teal-200: #8ef0e1;
-    --teal-300: #5ed9c8;
-    --teal-400: #36c2b0;
-    --teal-500: #1aa99a; /* base */
-    --teal-600: #128b7e;
-    --teal-700: #0e6e64;
-    --teal-800: #0a4f48;
-    --teal-900: #063632;
-    /* =========================================================
-     🎯 SEMANTIC (USE THESE IN UI)
-  ========================================================= */
 
-    --primary: var(--teal-500);
-    --primary-hover: var(--teal-600);
-    --primary-dark: var(--teal-700);
-    --primary-light: var(--teal-300);
+
+
+    /* ===== TEAL SCALE (extended precision ramp) ===== */
+
+    --teal-25: #f3fffd; /* almost white teal tint */
+    --teal-50: #e6fffb; /* very light mint-teal background */
+    --teal-75: #d9fdf7; /* soft aqua mist */
+    --teal-100: #bffaf0; /* light pastel teal */
+    --teal-150: #a6f5e8; /* soft aqua-teal highlight */
+    --teal-200: #8ef0e1; /* light UI accent */
+    --teal-250: #76ead8; /* gentle interactive hover */
+    --teal-300: #5ed9c8; /* soft primary tint */
+    --teal-350: #46c7b6; /* mid-light active state */
+    --teal-400: #36c2b0; /* strong accent color */
+    --teal-450: #27b3a2; /* near-primary interaction */
+    --teal-500: #1aa99a; /* base brand teal (PRIMARY) */
+    --teal-550: #17968a; /* slightly deeper active state */
+    --teal-600: #128b7e; /* primary hover / pressed */
+    --teal-650: #107a6f; /* deeper UI emphasis */
+    --teal-700: #0e6e64; /* strong dark teal */
+    --teal-750: #0c5f57; /* deep accent / borders */
+    --teal-800: #0a4f48; /* very dark teal */
+    --teal-850: #08413b; /* near-ink teal */
+    --teal-900: #063632; /* ultra dark UI depth */
+    --teal-950: #042925; /* almost black teal */
+    --teal-1000: #021d1a; /* deepest teal / near-black */
+
+
+
+
+
+
     /* =========================================================
      🌊 ANALOGOUS COLORS (similar to teal)
      (blue-green / green / aqua variations)
   ========================================================= */
 
-    --aqua-50: #e6ffff;
-    --aqua-100: #bffcff;
-    --aqua-200: #8ef6ff;
-    --aqua-300: #5ee8f5;
-    --aqua-400: #36d4e6;
-    --aqua-500: #1abac9;
-    --aqua-600: #1297a3;
-    --aqua-700: #0e747d;
-    --aqua-800: #0a5257;
-    --aqua-900: #063639;
-    --green-50: #e8fff1;
-    --green-100: #c6f7d9;
-    --green-200: #9ff0bd;
-    --green-300: #6fe49b;
-    --green-400: #40d27d;
-    --green-500: #22c55e;
-    --green-600: #16a34a;
-    --green-700: #12823b;
-    --green-800: #0f5f2c;
-    --green-900: #0b3d1d;
+
+
+
+    /* ===== AQUA SCALE (cool cyan/blue-green UI ramp) ===== */
+
+    --aqua-25: #f2ffff; /* near-white aqua mist */
+    --aqua-50: #e6ffff; /* very light aqua background */
+    --aqua-75: #d9fdff; /* soft icy tint */
+    --aqua-100: #bffcff; /* pale aqua highlight */
+    --aqua-150: #a6f7ff; /* soft glow tint */
+    --aqua-200: #8ef6ff; /* light UI accent */
+    --aqua-250: #76eef7; /* hover background */
+    --aqua-300: #5ee8f5; /* soft interactive state */
+    --aqua-350: #46dcea; /* active soft action */
+    --aqua-400: #36d4e6; /* strong accent */
+    --aqua-450: #27c6d8; /* near-primary aqua */
+    --aqua-500: #1abac9; /* base aqua (PRIMARY SUPPORT) */
+    --aqua-550: #18aab8; /* pressed state */
+    --aqua-600: #1297a3; /* hover / emphasis */
+    --aqua-650: #0f858f; /* deeper interaction */
+    --aqua-700: #0e747d; /* strong aqua */
+    --aqua-750: #0c646b; /* deep accent */
+    --aqua-800: #0a5257; /* very dark aqua */
+    --aqua-850: #084245; /* near-deep teal */
+    --aqua-900: #063639; /* darkest aqua */
+    --aqua-950: #042b2e; /* near-black aqua tint */
+    --aqua-1000: #021f21; /* deepest aqua black */
+
+
+
+
+
+
+
+    /* ===== GREEN SCALE (success / positive UI ramp) ===== */
+
+    --green-25: #f3fff7; /* almost white green tint */
+    --green-50: #e8fff1; /* very light success background */
+    --green-75: #dcfde9; /* soft mint layer */
+    --green-100: #c6f7d9; /* pale success highlight */
+    --green-150: #b1f2ca; /* soft active success */
+    --green-200: #9ff0bd; /* light success UI */
+    --green-250: #88e9aa; /* hover success */
+    --green-300: #6fe49b; /* soft success action */
+    --green-350: #58db8a; /* active success state */
+    --green-400: #40d27d; /* strong success accent */
+    --green-450: #31c36e; /* near-primary green */
+    --green-500: #22c55e; /* base success green */
+    --green-550: #1fb154; /* pressed success */
+    --green-600: #16a34a; /* hover / emphasis */
+    --green-650: #148f41; /* deeper success */
+    --green-700: #12823b; /* strong success */
+    --green-750: #106f33; /* dark success tone */
+    --green-800: #0f5f2c; /* very dark green */
+    --green-850: #0d4d24; /* near-deep forest */
+    --green-900: #0b3d1d; /* darkest success tone */
+    --green-950: #072c15; /* near-black green */
+    --green-1000: #041f0f; /* deepest green black */
+
+
+
+
+
+
+
+
+
+
+
+
     /* =========================================================
      🔴 OPPOSITE COLORS (COMPLEMENTARY TO TEAL)
      (red / coral / warm tones)
   ========================================================= */
 
-    --coral-50: #fff1f0;
-    --coral-100: #ffd6d1;
-    --coral-200: #ffb3aa;
-    --coral-300: #ff8a7d;
-    --coral-400: #ff5e4d;
-    --coral-500: #ff3b2f;
-    --coral-600: #e52a20;
-    --coral-700: #b81f18;
-    --coral-800: #8a1611;
-    --coral-900: #5a0e0b;
-    /* warm orange accent (secondary opposite family) */
-    --orange-50: #fff7e6;
-    --orange-100: #ffe3b3;
-    --orange-200: #ffcf80;
-    --orange-300: #ffb84d;
-    --orange-400: #ffa41a;
-    --orange-500: #ff8c00;
-    --orange-600: #e67300;
-    --orange-700: #b85c00;
-    --orange-800: #8a4500;
-    --orange-900: #5c2e00;
-    /* =========================================================
-     🎯 OPTIONAL UI SEMANTICS
-  ========================================================= */
 
+
+
+
+
+    /* ===== CORAL SCALE (danger / error / destructive UI ramp) ===== */
+
+    --coral-25: #fff6f5; /* almost white warm red tint */
+    --coral-50: #fff1f0; /* very light error background */
+    --coral-75: #ffeae8; /* soft danger tint */
+    --coral-100: #ffd6d1; /* light error highlight */
+    --coral-150: #ffc2bb; /* soft warning-red tint */
+    --coral-200: #ffb3aa; /* light UI error state */
+    --coral-250: #ff9d91; /* hover background */
+    --coral-300: #ff8a7d; /* soft destructive action */
+    --coral-350: #ff7466; /* active warning state */
+    --coral-400: #ff5e4d; /* strong alert accent */
+    --coral-450: #ff4a3c; /* near-primary danger */
+    --coral-500: #ff3b2f; /* base danger (ERROR) */
+    --coral-550: #f03428; /* pressed destructive state */
+    --coral-600: #e52a20; /* hover / emphasis */
+    --coral-650: #cc241b; /* deeper alert */
+    --coral-700: #b81f18; /* strong danger */
+    --coral-750: #9f1a14; /* dark warning tone */
+    --coral-800: #8a1611; /* very dark red */
+    --coral-850: #6f110d; /* near-blood dark */
+    --coral-900: #5a0e0b; /* deepest coral red */
+    --coral-950: #3f0907; /* near-black red tint */
+    --coral-1000: #2a0504; /* deepest destructive tone */
+
+
+
+
+
+
+    /* ===== ORANGE SCALE (warning / accent / energy UI ramp) ===== */
+
+    --orange-25: #fff9f2; /* near-white warm glow */
+    --orange-50: #fff7e6; /* very light warm background */
+    --orange-75: #fff1d6; /* soft amber tint */
+    --orange-100: #ffe3b3; /* light warning highlight */
+    --orange-150: #ffd699; /* soft active glow */
+    --orange-200: #ffcf80; /* light UI warning state */
+    --orange-250: #ffc266; /* hover background */
+    --orange-300: #ffb84d; /* soft action accent */
+    --orange-350: #ffa933; /* active warm state */
+    --orange-400: #ffa41a; /* strong accent warning */
+    --orange-450: #ff9a0d; /* near-primary energy */
+    --orange-500: #ff8c00; /* base orange (WARNING) */
+    --orange-550: #f07f00; /* pressed state */
+    --orange-600: #e67300; /* hover / emphasis */
+    --orange-650: #cc6600; /* deeper warning */
+    --orange-700: #b85c00; /* strong orange */
+    --orange-750: #9f4f00; /* dark warm tone */
+    --orange-800: #8a4500; /* very dark orange */
+    --orange-850: #733900; /* near-brown orange */
+    --orange-900: #5c2e00; /* deepest orange */
+    --orange-950: #3f1f00; /* near-black warm tone */
+    --orange-1000: #2a1400; /* deepest warm accent */
+
+
+
+
+
+    /* =========================================================
+   🎯 SEMANTIC COLOR SYSTEM (UI LAYER ONLY)
+   Never use raw palette directly in components
+========================================================= */
+
+
+
+
+    /* ===== PRIMARY (brand / main actions) ===== */
+    --primary: var(--teal-500);
+    --primary-hover: var(--teal-600);
+    --primary-active: var(--teal-700);
+    --primary-light: var(--teal-300);
+    --primary-subtle: var(--teal-50);
+
+
+
+    /* ===== SUCCESS (positive actions / success states) ===== */
     --success: var(--green-500);
+    --success-hover: var(--green-600);
+    --success-active: var(--green-700);
+    --success-light: var(--green-100);
+    --success-subtle: var(--green-50);
+
+
+
+
+    /* ===== DANGER (errors / destructive actions) ===== */
     --danger: var(--coral-500);
-    --warning: var(--orange-400);
+    --danger-hover: var(--coral-600);
+    --danger-active: var(--coral-700);
+    --danger-light: var(--coral-100);
+    --danger-subtle: var(--coral-50);
+
+
+
+    /* ===== WARNING (alerts / attention / energy) ===== */
+    --warning: var(--orange-500);
+    --warning-hover: var(--orange-600);
+    --warning-active: var(--orange-700);
+    --warning-light: var(--orange-100);
+    --warning-subtle: var(--orange-50);
+
+
+
+
+    /* =========================================================
+   🧠 SYSTEM TOKENS — MISSING FUNCTIONAL LAYER
+   Add this to both :root and .dark (with overrides where noted)
+    ========================================================= */
+
+
+
+    /* =============================
+   🔵 INFO (missing semantic color)
+    ============================= */
+    --info: var(--aqua-500);
+    --info-hover: var(--aqua-400);
+    --info-active: var(--aqua-600);
+    --info-subtle: var(--aqua-100);
+
+
+
+    /* =============================
+   📴 DISABLED / MUTED STATES
+    ============================= */
+    --disabled: var(--gray-400);
+    --disabled-bg: var(--gray-100);
+    --disabled-border: var(--gray-200);
+    --disabled-text: var(--gray-500);
+
+
+
+    /* =============================
+   🧱 SURFACE DEPTH (UI layers)
+    ============================= */
+    --surface-2: var(--gray-100);
+    --surface-3: var(--gray-200);
+    --surface-inverse: var(--black);
+    --on-surface-inverse: var(--white);
+
+
+
+    /* =============================
+   🎭 OVERLAY / MODALS / BACKDROP
+    ============================= */
+    --overlay: rgba(0, 0, 0, 0.5);
+    --overlay-soft: rgba(0, 0, 0, 0.3);
+
+
+
+    /* =============================
+   🎯 FOCUS SYSTEM (accessibility)
+    ============================= */
+    --focus: var(--teal-400);
+    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--primary) 35%, transparent);
+
+
+
+    /* fallback if color-mix unsupported:
+    --focus-ring: 0 0 0 3px var(--teal-300);
+    */
+    /* =============================
+    🧱 BORDER VARIANTS
+    ============================= */
+    --border-muted: var(--gray-100);
+    --border-strong: var(--gray-300);
+    --border-subtle: var(--gray-200);
+
+
+
+    /* =============================
+   🏷️ OPTIONAL BADGE SYSTEM HELPERS
+    ============================= */
+    --badge-radius: 999px;
+    --badge-padding-x: 0.5rem;
+    --badge-padding-y: 0.25rem;
+
+
+    /* =============================
+    📊 OPTIONAL DATA COLORS (future-proofing)
+    ============================= */
+    --chart-1: var(--teal-500);
+    --chart-2: var(--green-500);
+    --chart-3: var(--orange-500);
+    --chart-4: var(--coral-500);
+    --chart-5: var(--aqua-500);
 }
 
 
 
 .dark {
+
+
     --white: #000000;
     --black: #ffffff;
     --gray-50: #0b0f14;
@@ -112,6 +416,9 @@
     --gray-700: #d1d5db;
     --gray-800: #e5e7eb;
     --gray-900: #f9fafb;
+
+
+
     /* TEAL adjusted for dark mode (brighter, more visible) */
     --teal-50: #042f2e;
     --teal-100: #064e4a;
@@ -122,7 +429,9 @@
     --teal-600: #2fe6d2;
     --teal-700: #52f0df;
     --teal-800: #7af7ea;
-    --teal-900: #a6fff4;
+
+
+
     /* Semantic overrides */
     --primary: var(--teal-400);
     --primary-hover: var(--teal-300);
@@ -130,9 +439,92 @@
     --success: #22c55e;
     --danger: #ff4d4d;
     --warning: #ffb020;
+
+
     /* Dark surfaces */
     --bg: #0b0f14;
     --surface: #111827;
     --text: #f9fafb;
     --border: #1f2937;
+
+
+
+    /* =============================
+     🧱 SURFACE SYSTEM
+  ============================= */
+    --bg: #0b0f14;
+    --surface: #111827;
+    --surface-2: #1f2937;
+    --surface-3: #243041;
+    --text: #f9fafb;
+    --text-muted: #d1d5db;
+    --border: #1f2937;
+    --border-strong: #374151;
+
+
+
+    /* =============================
+     🎯 PRIMARY (teal system)
+  ============================= */
+    --primary: var(--teal-400);
+    --primary-hover: var(--teal-300);
+    --primary-active: var(--teal-500);
+    --primary-subtle: var(--teal-100);
+    --primary-bg: var(--teal-50);
+
+
+
+    /* =============================
+     🟢 SUCCESS
+  ============================= */
+    --success: var(--green-500);
+    --success-hover: var(--green-400);
+    --success-active: var(--green-600);
+    --success-subtle: var(--green-100);
+
+
+
+    /* =============================
+     🔴 DANGER
+  ============================= */
+    --danger: var(--coral-500);
+    --danger-hover: var(--coral-400);
+    --danger-active: var(--coral-600);
+    --danger-subtle: var(--coral-100);
+
+
+
+    /* =============================
+     🟠 WARNING
+  ============================= */
+    --warning: var(--orange-500);
+    --warning-hover: var(--orange-400);
+    --warning-active: var(--orange-600);
+    --warning-subtle: var(--orange-100);
+
+
+    /* =============================
+     🎯 FOCUS / ACCESSIBILITY
+  ============================= */
+    --focus: var(--teal-400);
+    --ring: var(--teal-300);
+
+
+
+    /* =============================
+   🌑 DARK MODE OVERRIDES
+    ============================= */
+
+    --info: var(--aqua-400);
+    --info-subtle: var(--aqua-100);
+    --disabled: var(--gray-600);
+    --disabled-bg: var(--gray-800);
+    --disabled-border: var(--gray-700);
+    --disabled-text: var(--gray-500);
+    /* stronger overlay for dark UI */
+    --overlay: rgba(0, 0, 0, 0.7);
+    --overlay-soft: rgba(0, 0, 0, 0.4);
+    /* surfaces */
+    --surface-2: var(--gray-200);
+    --surface-3: var(--gray-300);
 }
