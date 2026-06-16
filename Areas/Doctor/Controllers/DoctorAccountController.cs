@@ -141,6 +141,9 @@ namespace Wellora.Areas.Doctor.Controllers
                 new Claim("CurrentDoctorId", doctor.DoctorId.ToString())
             );
 
+            claims.Add(
+                new Claim("ProfilePicturePath", doctor.ProfilePhoto ?? "")
+            );
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
