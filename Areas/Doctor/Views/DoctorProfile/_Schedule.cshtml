@@ -1,0 +1,152 @@
+﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorScheduleUpdateViewModel
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title mb-4">Weekly Schedule & Breaks</h5>
+
+        <form asp-action="UpdateScheduleAndBreaks"
+              asp-controller="DoctorProfile"
+              method="post">
+
+            <input type="hidden" name="DoctorId" value="@Model.DoctorId" />
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle schedule-table">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Break Start</th>
+                            <th>Break End</th>
+                            <th>Max Patients</th>
+                            <th>Appointment Duration</th>
+                            <th>Day Active</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int i = 0; i < Model.ScheduleRows.Count; i++)
+                        {
+                            var schedule = Model.ScheduleRows[i];
+                            var breakRow = Model.Breaks
+                            .FirstOrDefault(b => b.DayOfWeek == schedule.DayOfWeek);
+
+                            var rowClass = schedule.IsActive ? "" : "inactive-row";
+
+                            <tr class="@rowClass">
+
+                                <!-- Day -->
+                                <td>
+                                    @GetDayName(schedule.DayOfWeek)
+                                    <input type="hidden"
+                                           name="ScheduleRows[@i].DayOfWeek"
+                                           value="@schedule.DayOfWeek" />
+                                </td>
+
+                                <!-- Start Time -->
+                                <td>
+                                    <input class="form-control"
+                                           type="time"
+                                           step="900"
+                                           name="ScheduleRows[@i].StartTime"
+                                           value="@schedule.StartTime.ToString(@"hh\:mm")" />
+                                </td>
+
+                                <!-- End Time -->
+                                <td>
+                                    <input class="form-control"
+                                           type="time"
+                                           step="900"
+                                           name="ScheduleRows[@i].EndTime"
+                                           value="@schedule.EndTime.ToString(@"hh\:mm")" />
+                                </td>
+
+                                <!-- Break Start -->
+                                <td>
+                                    <input class="form-control"
+                                           type="time"
+                                           step="900"
+                                           name="Breaks[@i].BreakStart"
+                                           value="@(breakRow?.BreakStart.ToString(@"hh\:mm"))" />
+                                </td>
+
+                                <!-- Break End -->
+                                <td>
+                                    <input class="form-control"
+                                           type="time"
+                                           step="900"
+                                           name="Breaks[@i].BreakEnd"
+                                           value="@(breakRow?.BreakEnd.ToString(@"hh\:mm"))" />
+                                </td>
+
+                                <!-- Max Patients -->
+                                <td>
+                                    <input class="form-control"
+                                           type="number"
+                                           min="1"
+                                           max="50"
+                                           name="ScheduleRows[@i].MaxPatientsPerDay"
+                                           value="@schedule.MaxPatientsPerDay" />
+                                </td>
+
+                                <!-- Duration -->
+                                <td>
+                                    <select class="form-select"
+                                            name="ScheduleRows[@i].AppointmentDurationMin">
+
+                                        @foreach (var duration in new[] { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 })
+                                        {
+                                            <option value="@duration"
+                                                    selected="@(schedule.AppointmentDurationMin == duration)">
+                                                @duration
+                                            </option>
+                                        }
+
+                                    </select>
+                                </td>
+
+                                <!-- Active -->
+                                <td class="text-center">
+                                    <input type="checkbox"
+                                           class="form-check-input day-toggle"
+                                           name="ScheduleRows[@i].IsActive"
+                                           value="true"
+                                           @(schedule.IsActive ? "checked" : "") />
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+            <!-- Save -->
+            <div class="text-end mt-3">
+                <button type="submit" class="btn btn-primary">
+                    💾 Save Schedule & Breaks
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@functions {
+    private string GetDayName(int dayOfWeek)
+    {
+        return dayOfWeek switch
+        {
+            1 => "Monday",
+            2 => "Tuesday",
+            3 => "Wednesday",
+            4 => "Thursday",
+            5 => "Friday",
+            6 => "Saturday",
+            7 => "Sunday",
+            _ => "Unknown"
+        };
+    }
+}

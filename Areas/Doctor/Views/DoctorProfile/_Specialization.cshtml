@@ -1,0 +1,48 @@
+﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorDetailsViewModel
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title mb-4">Specialization & Services</h5>
+
+        <form asp-action="UpdateSpecialization" asp-controller="DoctorProfile" method="post">
+            <input type="hidden" asp-for="DoctorId" />
+
+            <!-- Specialization -->
+            <div class="mb-3">
+                <label asp-for="Specialization" class="form-label">Specialization</label>
+                <input asp-for="Specialization" class="form-control" />
+            </div>
+
+            <!-- Sub Specialties -->
+            <div class="mb-3">
+                <label asp-for="SubSpecialties" class="form-label">Sub Specialties</label>
+                <input asp-for="SubSpecialties" class="form-control" />
+            </div>
+
+            <!-- Services Offered -->
+            <div class="mb-3">
+                <label asp-for="ServicesOffered" class="form-label">Services Offered</label>
+                <textarea asp-for="ServicesOffered" class="form-control" rows="3"></textarea>
+            </div>
+
+            <!-- Years of Experience -->
+            <div class="mb-3">
+                <label asp-for="YearsExperience" class="form-label">Years of Experience</label>
+                <input asp-for="YearsExperience" class="form-control" type="number" min="0" />
+            </div>
+
+            <!-- Qualifications -->
+            <div class="mb-3">
+                <label asp-for="Qualifications" class="form-label">Qualifications</label>
+                <textarea asp-for="Qualifications" class="form-control" rows="2"></textarea>
+            </div>
+
+            <!-- Save Button -->
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">
+                    💾 Save Specialization & Services
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

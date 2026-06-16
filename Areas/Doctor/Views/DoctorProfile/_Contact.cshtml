@@ -1,0 +1,38 @@
+﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorDetailsViewModel
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title mb-4">Languages & Contact</h5>
+
+        <form asp-action="UpdateContact" asp-controller="DoctorProfile" method="post">
+            <input type="hidden" asp-for="DoctorId" />
+
+            <div class="row">
+                <!-- Languages Spoken -->
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LanguagesSpoken" class="form-label">Languages Spoken</label>
+                    <input asp-for="LanguagesSpoken" class="form-control" placeholder="e.g. English, Urdu, Punjabi" />
+                </div>
+
+                <!-- Contact Number -->
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ContactNumber" class="form-label">Contact Number</label>
+                    <input asp-for="ContactNumber" class="form-control" type="tel" placeholder="+92-xxx-xxxxxxx" />
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="mb-3">
+                <label asp-for="SocialLinks" class="form-label">Social Links</label>
+                <textarea asp-for="SocialLinks" class="form-control" rows="3" placeholder="Add LinkedIn, Twitter, etc."></textarea>
+            </div>
+
+            <!-- Save Button -->
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">
+                    💾 Save Contact Info
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

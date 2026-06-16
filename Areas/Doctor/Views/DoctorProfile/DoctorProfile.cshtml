@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Doctor Profile";
+}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-md-3 d-flex flex-column sidebar border-end">
+
+            <!-- Top Settings -->
+            <div class="p-3 border-bottom">
+                <a class="nav-link sidebar-link"
+                   hx-get="@Url.Action("SettingsPartial", "DoctorProfile", new { area = "Doctor" })"
+                   hx-target="#profileContent"
+                   hx-swap="innerHTML">
+                    ⚙️ Settings
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav flex-column flex-grow-1">
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("ProfilePartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Profile
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("PasswordPartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Change Password
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("SchedulePartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Schedule & Breaks
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("SpecializationPartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Specialization & Services
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("AchievementsPartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Achievements & Biography
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("ContactPartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Languages & Contact
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link"
+                       hx-get="@Url.Action("ClinicalInfoPartial", "DoctorProfile", new { area = "Doctor" })"
+                       hx-target="#profileContent"
+                       hx-swap="innerHTML">
+                        Clinical Info
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Bottom Logout -->
+            <div class="p-3 border-top mt-auto">
+                <form asp-area=""
+                      asp-controller="Account"
+                      asp-action="Logout"
+                      method="post">
+                    <button type="submit" class="btn btn-danger w-100">
+                        🚪 Logout
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Content Area -->
+        <div class="col-md-9 p-4">
+
+            <div id="profileContent"
+                 hx-get="@Url.Action("ProfilePartial", "DoctorProfile", new { area = "Doctor" })"
+                 hx-trigger="load"
+                 hx-target="this"
+                 hx-swap="innerHTML">
+
+                <div class="text-center">
+                    <div class="spinner-border text-primary"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:1050">
+    <div id="toastContainer"></div>
+</div>
