@@ -25,9 +25,9 @@
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Doctor\ViewModels\PatientGetReported\" />
+    <Folder Include="Areas\Doctor\ViewModels\PatientGetDiagnose\" />
     <Folder Include="Areas\Patient\Views\PatientTransaction\" />
-    <Folder Include="wwwroot\css\home\" />
-    <Folder Include="wwwroot\css\error\" />
     <Folder Include="wwwroot\images\Error\" />
     <Folder Include="wwwroot\images\Patient\AIChat\" />
     <Folder Include="wwwroot\js\admin\" />
@@ -52,5 +52,11 @@
 
   <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
 </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Doctor\Views\DoctorProfile\DoctorProfile.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
