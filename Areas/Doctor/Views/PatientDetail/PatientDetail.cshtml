@@ -1,4 +1,8 @@
 ﻿@model Wellora.ViewModels.PatientDetail.PatientDetailViewModel
+@{
+    ViewBag.Title = "Patient Detail";
+}
+
 <link rel="stylesheet" href="~/css/doctor/PatientDetail.css" />
 
 <div class="container mt-4">
@@ -105,7 +109,11 @@
     <div class="d-flex gap-3 mt-3">
         <button class="btn btn-confirm">Confirm Appointment</button>
         <button class="btn btn-cancel">Cancel Appointment</button>
-        <a asp-action="Diagnose" asp-route-id="@Model.CurrentAppointment.AppointmentId" class="btn btn-diagnose">Write Diagnose</a>
+        <a asp-area="Doctor" asp-controller="PatientGetDiagnose" asp-action="PatientDiagnoses" 
+            asp-route-appointmentid="@Model.CurrentAppointment.AppointmentId" 
+             asp-route-patientid="@Model.Patient.PatientId" class="btn btn-diagnose">
+             Write Diagnose
+        </a>
     </div>
 
     <!-- Notes -->
@@ -118,6 +126,9 @@
 
     <!-- Report -->
     <div class="mt-3">
-        <a href="#" class="report-link">Report</a>
+        <a asp-area="Doctor" asp-controller="PatientGetReported" asp-action="PatientReported" asp-route-patientid="@Model.Patient.PatientId" 
+            class="report-link">
+            Report
+        </a>
     </div>
 </div>
