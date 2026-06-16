@@ -88,3 +88,101 @@
 .off-day {
     opacity: 0.5;
 }
+
+
+.two-column .box {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.appointment-empty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    min-height: 65px;
+    border-radius: 8px;
+    background: rgba(131, 197, 190, 0.12);
+    border: 1px dashed rgba(131, 197, 190, 0.4);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.appointment-empty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    min-height: 65px;
+    border-radius: 8px;
+    background: rgba(131, 197, 190, 0.10);
+    border: 1px dashed rgba(131, 197, 190, 0.4);
+}
+
+.placeholder-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient( 90deg, rgba(131, 197, 190, 0.2), rgba(255, 255, 255, 0.08), rgba(131, 197, 190, 0.2) );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+.placeholder-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.placeholder-line {
+    height: 10px;
+    border-radius: 4px;
+    background: linear-gradient( 90deg, rgba(131, 197, 190, 0.2), rgba(255, 255, 255, 0.08), rgba(131, 197, 190, 0.2) );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+    .placeholder-line.short {
+        width: 80px;
+    }
+
+    .placeholder-line.medium {
+        width: 120px;
+    }
+
+    .placeholder-line.small {
+        width: 60px;
+    }
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+
+.appointment-slot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    min-height: 65px;
+    border-radius: 8px;
+}
+
+    /* REAL DATA */
+    .appointment-slot.filled {
+        background: #83c5be; /* your teal */
+        color: white;
+    }
+
+    /* EMPTY SLOT */
+    .appointment-slot.empty {
+        background: #4d7c7a; /* darker medium teal */
+        color: rgba(255,255,255,0.7);
+    }
