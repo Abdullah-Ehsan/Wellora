@@ -1,48 +1,138 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to Wellora - Intelligent Healthcare";
 }
 
-@section Styles {
-    <link rel="stylesheet" href="~/css/home/privacy.css" asp-append-version="true" />
-}
+<link rel="stylesheet" href="~/css/home/Home.css" />
 
+<div class="home-wrapper">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!-- ================= HERO SECTION ================= -->
+    <section class="home-hero">
+        <div class="hero-content">
+            <span class="hero-badge">Smart Healthcare Platform</span>
+            <h1 class="hero-title">Your Health, Simplified and Guided by Intelligence.</h1>
+            <p class="hero-subtitle">
+                Connect with verified medical specialists, book appointments with zero wait time, pay online or on-site, and get 24/7 symptom triage powered by Cynthia AI.
+            </p>
+            <div class="hero-actions">
+                <a asp-area="Patient" asp-controller="DoctorInformation" asp-action="DoctorListing" class="btn btn-primary-wellora">
+                    Find a Doctor
+                </a>
+                <a asp-area="Patient" asp-controller="PatientAI" asp-action="Index" class="btn btn-outline-wellora">
+                    Chat with Cynthia
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="hero-image-card">
+                <img src="@Url.Content("~/images/Patient/AIChat/lora_withoutglasses_greeting.png")"
+                     alt="Cynthia AI Healthcare Assistant"
+                     class="hero-mascot" />
+                <div class="mascot-badge">
+                    <span class="pulse-dot"></span>
+                    <span>Hi, I'm Cynthia! Your 24/7 AI Guide</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= KEY SERVICES GRID ================= -->
+    <section class="home-section">
+        <div class="section-heading">
+            <h2>Streamlined Care for Everyone</h2>
+            <p>From initial triage to your follow-up, every step is coordinated seamlessly.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📅</div>
+                <h4>Instant Appointments</h4>
+                <p>Browse licensed specialists by field, view live weekly availability, and reserve your consultation in seconds.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💳</div>
+                <h4>Flexible Payments</h4>
+                <p>Choose the payment method that fits your routine: secure digital payments online or pay cash directly at the clinic.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💬</div>
+                <h4>AI Healthcare Companion</h4>
+                <p>Discuss your symptoms with Cynthia before booking to find the exact specialty and care level you require.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h4>Verified Specialists Only</h4>
+                <p>Every doctor on Wellora undergoes administrative license verification before they can accept appointments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SHOWCASE: APPOINTMENT EXPERIENCE ================= -->
+    <section class="home-section showcase-section">
+        <div class="showcase-container">
+            <div class="showcase-visual">
+                <img src="@Url.Content("~/images/Patient/Appointment/no_appointment.png")"
+                     alt="Effortless Appointment Scheduling"
+                     class="showcase-image" />
+            </div>
+
+            <div class="showcase-text">
+                <span class="showcase-tag">No More Long Waiting Lines</span>
+                <h2>Never Miss or Misplace an Appointment</h2>
+                <p>
+                    Managing clinic visits should not be stressful. With Wellora's live appointment tracking, you always know your slot time, doctor's room status, and your scheduled dates.
+                </p>
+                <ul class="showcase-list">
+                    <li>Real-time slot confirmation with direct SMS and portal alerts.</li>
+                    <li>Transparent fee breakdowns with zero surprise clinic charges.</li>
+                    <li>Access your complete prescription and visit history in one place.</li>
+                </ul>
+                <div class="mt-4">
+                    <a asp-area="Patient" asp-controller="DoctorInformation" asp-action="DoctorListing" class="btn btn-primary-wellora">
+                        Browse Doctors Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= AI BANNER: MEET CYNTHIA ================= -->
+    <section class="home-section ai-feature-banner">
+        <div class="ai-banner-content">
+            <div class="ai-badge">Powered by AI</div>
+            <h2>Tired of guessing your symptoms?</h2>
+            <p>
+                Meet <strong>Cynthia</strong>, our clinical triage assistant. Tell her how you feel in plain language, and she will help categorize your symptoms and guide you toward the right specialist.
+            </p>
+            <a asp-area="Patient" asp-controller="PatientAI" asp-action="Index" class="btn btn-ai-cta">
+                Start Free Consultation with Cynthia →
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= DOCTOR RECRUITMENT & REGISTRATION CTA ================= -->
+    <section class="home-section doctor-recruit-section">
+        <div class="doctor-recruit-card">
+            <div class="recruit-text">
+                <span class="recruit-badge">For Healthcare Professionals</span>
+                <h2>Are You a Doctor? Join Wellora Today.</h2>
+                <p>
+                    Expand your patient reach, automate your daily schedules, manage appointments, and track your clinic revenue with our dedicated Doctor Dashboard.
+                </p>
+            </div>
+            <div class="recruit-actions">
+                <a asp-area="Doctor" asp-controller="DoctorAccount" asp-action="DoctorRegistration" class="btn btn-doctor-register">
+                    Register as a Doctor
+                </a>
+                <a asp-area="Doctor" asp-controller="DoctorAccount" asp-action="DoctorLogin" class="btn btn-doctor-login">
+                    Doctor Portal Login
+                </a>
+            </div>
+        </div>
+    </section>
+
 </div>
-
-
-@model IEnumerable<Wellora.Models.User>
-
-<h2>Users in Database</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>UserId</th>
-            <th>First</th>
-            <th>last</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>CreatedAt</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.UserId</td>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.Username</td>
-                <td>@user.Email</td>
-                <td>@user.Role</td>
-                <td>@user.Status</td>
-                <td>@user.CreatedAt</td>
-            </tr>
-        }
-    </tbody>
-</table>

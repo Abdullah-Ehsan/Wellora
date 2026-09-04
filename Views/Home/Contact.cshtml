@@ -45,46 +45,7 @@
         </iframe>
     </div>
 
-    <!-- Third Main Div: Contact Form -->
-    <h2 class="section-title mt-5">Contact Form</h2>
-    <form asp-action="SendMessage" method="post" class="contact-form">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label asp-for="Form.FirstName"></label>
-                <input asp-for="Form.FirstName" class="form-control" placeholder="First Name" />
-                <span asp-validation-for="Form.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-6">
-                <label asp-for="Form.LastName"></label>
-                <input asp-for="Form.LastName" class="form-control" placeholder="Last Name" />
-                <span asp-validation-for="Form.LastName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Form.Email"></label>
-            <input asp-for="Form.Email" class="form-control" placeholder="Email Address" />
-            <span asp-validation-for="Form.Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Form.Message"></label>
-            <textarea asp-for="Form.Message" class="form-control message-box mb-3" placeholder="Your Message"></textarea>
-            <span asp-validation-for="Form.Message" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-teal btn-lg">Send Message</button>
-    </form>
-
-    <!-- Fourth Main Div: Newsletter -->
-    <h2 class="section-title mt-5">Newsletter</h2>
-    <form asp-action="Subscribe" method="post" class="newsletter-form">
-        <div class="form-row align-items-end">
-            <div class="form-group col-md-9 mb-3">
-                <input type="email" name="NewsletterEmail" class="form-control" placeholder="Enter your email" required />
-            </div>
-            <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-teal btn-block btn-lg">Subscribe</button>
-            </div>
-        </div>
-    </form>
+    
 </div>
 
 @section Scripts {

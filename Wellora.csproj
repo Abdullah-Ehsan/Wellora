@@ -24,15 +24,17 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Admin\" />
     <Folder Include="Areas\Admin\Views\Admin\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Doctor\ViewModels\PatientGetReported\" />
     <Folder Include="Areas\Doctor\ViewModels\PatientGetDiagnose\" />
+    <Folder Include="Areas\Patient\ViewModels\PatientAI\" />
     <Folder Include="Areas\Patient\Views\PatientTransaction\" />
+    <Folder Include="wwwroot\css\home\NewFolder\" />
+    <Folder Include="wwwroot\css\patient\patientai\" />
     <Folder Include="wwwroot\images\Error\" />
     <Folder Include="wwwroot\images\Patient\AIChat\" />
-    <Folder Include="wwwroot\js\admin\" />
     <Folder Include="wwwroot\js\account\" />
     <Folder Include="wwwroot\js\patient\" />
+    <Folder Include="wwwroot\User\Patient\Outside_Doctor_Picture\Profile_Picture\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +53,10 @@
   <PackageReference Include="MySql.Data" Version="9.7.0" />
 
   <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+
+  <PackageReference Include="QuestPDF" Version="2026.8.0" />
+
+  <PackageReference Include="Stripe.net" Version="52.4.0" />
 </ItemGroup>
 
   <ItemGroup>

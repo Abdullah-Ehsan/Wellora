@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using QuestPDF.Infrastructure;
+using Stripe;
+using Wellora.Areas.Admin.Services.AdminAnalytics.Interfaces;
+using Wellora.Areas.Admin.Services.AdminAnalytics.Services;
+using Wellora.Areas.Admin.Services.DoctorStats.Interfaces;
+using Wellora.Areas.Admin.Services.DoctorStats.Services;
 using Wellora.Areas.Doctor.Services;
 using Wellora.Areas.Doctor.Services.DoctorDashboard.Contracts;
 using Wellora.Areas.Doctor.Services.DoctorDashboard.DoctorDashboardService;
 using Wellora.Areas.Doctor.Services.DoctorDashboard.Services;
 using Wellora.Areas.Doctor.Services.DoctorProfile;
+using Wellora.Areas.Doctor.Services.DoctorProfile.Interfaces;
+using Wellora.Areas.Doctor.Services.DoctorProfile.Services;
 using Wellora.Areas.Patient.Services.PatientProfile;
 using Wellora.Areas.Patient.Services.Scheduling;
 using Wellora.Data;
@@ -17,12 +25,17 @@ using Wellora.Services.DoctorDashboard.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+StripeConfiguration.ApiKey =
+    builder.Configuration["Stripe:SecretKey"];
+
 // Add MySQL connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     ));
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -44,9 +57,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                 {
                     context.Response.Redirect("/Admin/AdminAccount/AdminLogin");
                 }
-                else
+                else if (path.StartsWithSegments("/Patient"))
                 {
                     context.Response.Redirect("/Patient/PatientAccount/PatientLogin");
+                }
+                else
+                {
+                    context.Response.Redirect("/Home/Index");
                 }
 
                 return Task.CompletedTask;
@@ -64,9 +81,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                 {
                     context.Response.Redirect("/Admin/AdminAccount/AccessDenied");
                 }
-                else
+                else if (path.StartsWithSegments("/Patient"))
                 {
                     context.Response.Redirect("/Patient/PatientAccount/AccessDenied");
+                }
+                else
+                {
+                    context.Response.Redirect("/Home/Index");
                 }
 
                 return Task.CompletedTask;
@@ -117,6 +138,7 @@ builder.Services.AddScoped<IScheduleDashboardService, ScheduleDashboardService>(
 
 //Doctor Profile
 builder.Services.AddScoped<IDoctorProfileService, DoctorProfileService>();
+builder.Services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
 
 
 
@@ -124,6 +146,18 @@ builder.Services.AddScoped<IDoctorProfileService, DoctorProfileService>();
 
 
 //-------------------------------Admin-----------------------------------------
+
+//Admin Analitics
+builder.Services.AddScoped<IAdminAnalyticsService, AdminAnalyticsService>();
+
+//Doctor Stats
+builder.Services.AddScoped<IDoctorStatsService, DoctorStatsService>();
+
+
+
+
+
+
 
 var app = builder.Build();
 

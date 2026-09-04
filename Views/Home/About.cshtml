@@ -4,7 +4,7 @@
 
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 <link href="~/css/home/about.css" rel="stylesheet" />
 
 <div class="about-page">
@@ -19,12 +19,25 @@
         <div class="project-banner">
             <div class="row align-items-center text-center">
                 <div class="col-md-6 mb-3">
-                    <img src="~/images/About/college.png" class="banner-img" /> <br />
-                    <a href="">Government Jinnah Islamia Graduate College</a>
+                    <img src="~/images/About/college.png" class="banner-img" />
+                    <br />
+                    <a href="https://www.jinnahislamia.edu.pk/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="institution-link">
+                        Government Jinnah Islamia Graduate College
+                    </a>
                 </div>
+
                 <div class="col-md-6 mb-3">
-                    <img src="~/images/About/universityofpunjab.png" class="banner-img" /> <br />
-                    <a href="">University Of Punjab</a>
+                    <img src="~/images/About/universityofpunjab.png" class="banner-img" />
+                    <br />
+                    <a href="https://pu.edu.pk/"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="institution-link">
+                        University Of Punjab
+                    </a>
                 </div>
             </div>
             <p class="banner-text">
@@ -35,12 +48,42 @@
 
     <!-- SUPERVISOR -->
     <section class="container-fluid text-center mb-5">
-        <h3 class="section-title">Project Supervisor</h3>
+        <h3 class="section-title">Our Mentor & Supervisor</h3>
 
         <div class="supervisor-card mx-auto">
-            <img src="~/images/About/Sir_Khizar.jpeg" alt="Supervisor" />
+            <div class="supervisor-badge">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Project Supervisor</span>
+            </div>
+
+            <div class="supervisor-image-wrapper">
+                <img src="~/images/About/Sir_Khizar.jpeg"
+                     alt="Sir Khizar Butt"
+                     class="supervisor-image" />
+            </div>
+
             <h5>Sir Khizar Butt</h5>
-            <span>Supervisor – Department of Computer Science</span>
+
+            <span class="supervisor-designation">
+                Supervisor – Department of Computer Science
+            </span>
+
+            <div class="supervisor-divider"></div>
+
+            <p class="supervisor-message">
+                His guidance, mentorship, and continuous encouragement played
+                a fundamental role in shaping our project. Through his valuable
+                feedback and support, he helped us turn our ideas into a
+                practical and meaningful final-year project.
+            </p>
+
+            <div class="supervisor-thanks">
+                <i class="fas fa-quote-left"></i>
+                <span>
+                    A mentor who guided us, challenged us, and helped us grow.
+                </span>
+                <i class="fas fa-quote-right"></i>
+            </div>
         </div>
     </section>
 
@@ -147,14 +190,14 @@
                     <div class="team-card">
                         <i class="fab fa-github fa-3x github-icon"></i>
                         <h6>Project GitHub</h6>
-                        <a href="https://github.com/YourProjectRepo" target="_blank">Visit</a>
+                        <a href="https://github.com/Abdullah-Ehsan/Wellora" target="_blank">Visit</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="team-card">
                         <i class="fab fa-docker fa-3x docker-icon"></i>
                         <h6>DockerHub</h6>
-                        <a href="https://hub.docker.com/r/YourProjectDocker" target="_blank">Visit</a>
+                        <a href="https://hub.docker.com/u/abdullahehsan001" target="_blank">Visit</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -243,7 +286,7 @@
                     <div class="team-card">
                         <i class="fab fa-kaggle fa-3x kaggle-icon"></i>
                         <h6>Kaggle Dataset</h6>
-                        <a href="https://www.kaggle.com/YourProjectDataset" target="_blank">Visit</a>
+                        <a href="https://www.kaggle.com/abdullahehsan001" target="_blank">Visit</a>
                     </div>
                 </div>
             </div>

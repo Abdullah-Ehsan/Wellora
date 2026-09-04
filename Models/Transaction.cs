@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Wellora.Areas.Patient.Models;
-using Wellora.Models;
 
 namespace Wellora.Models
 {
@@ -22,13 +21,21 @@ namespace Wellora.Models
         [Column("amount")]
         public decimal Amount { get; set; }
 
+        [Required]
         [StringLength(20)]
         [Column("payment_method")]
-        public string? PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; } = null!;
 
+        [Required]
         [StringLength(20)]
         [Column("status")]
-        public string? Status { get; set; }
+        public string Status { get; set; } = null!;
+
+        [Column("stripe_session_id")]
+        public string? StripeSessionId { get; set; }
+
+        [Column("stripe_payment_intent_id")]
+        public string? StripePaymentIntentId { get; set; }
 
         [Column("timestamp")]
         public DateTime? Timestamp { get; set; }

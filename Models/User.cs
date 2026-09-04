@@ -29,6 +29,10 @@ namespace Wellora.Models
         [Column("status")]
         public string? Status { get; set; }
 
+        [Column("account_situation")]
+        public string? AccountSituation { get; set; }
+
+
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
 

@@ -24,9 +24,30 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <a href="@Url.Action("Index", "Home", new { area = ViewBag.Area })" class="btn-home">
-            Go Back to Dashboard
-        </a>
+        @if (User.IsInRole("admin"))
+        {
+            <a href="@Url.Action("AdminDashboard", "AdminDashboard", new { area = "Admin" })" class="btn-home">
+                Go Back to Dashboard
+            </a>
+        }
+        else if (User.IsInRole("doctor"))
+        {
+            <a href="@Url.Action("DoctorDashboard", "DoctorDashboard", new { area = "Doctor" })" class="btn-home">
+                Go Back to Dashboard
+            </a>
+        }
+        else if (User.IsInRole("patient"))
+        {
+            <a href="@Url.Action("PatientDashboard", "Patient", new { area = "Patient" })" class="btn-home">
+                Go Back to Dashboard
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Home", new { area = ViewBag.Area })" class="btn-home">
+                Go Back to Dashboard
+            </a>
+        }
     }
     else
     {

@@ -22,6 +22,8 @@ namespace Wellora.Data
 
         public DbSet<Appointment> Appointments { get; set; }
 
+        public DbSet<Transaction> Transactions { get; set; }
+
 
         // Patient Models
         public DbSet<Patient> Patients { get; set; }
@@ -29,6 +31,10 @@ namespace Wellora.Data
         public DbSet<AIDiagnosis> AIDiagnosises { get; set; }
 
         public DbSet<AIChatHistory> AIChatHistories { get; set; }
+
+        public DbSet<OutsideDoctor> OutsideDoctors { get; set; }
+        public DbSet<PatientOutsideDoctor> PatientOutsideDoctors { get; set; }
+
 
 
         //Doctor Models
@@ -39,6 +45,8 @@ namespace Wellora.Data
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
 
         public DbSet<DoctorScheduleHistory> DoctorScheduleHistorys { get; set; }
+
+
 
         //Admin Models
         public DbSet<Admin> Admins { get; set; }
