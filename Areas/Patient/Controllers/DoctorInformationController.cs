@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Wellora.Areas.Doctor.Models;
 using Wellora.Areas.Patient.ViewModels;
 using Wellora.Areas.Patient.ViewModels.DoctorInformation;
@@ -22,7 +23,7 @@ namespace Wellora.Areas.Patient.Controllers
         {
             int pageSize = 16; // 4 rows × 4 cards
 
-            var doctors = _context.Doctors.AsQueryable();
+            var doctors = _context.Doctors.Where(d => d.DoctorAvailable == true);
 
             // Apply filters with normalization
             if (!string.IsNullOrEmpty(specialty))
@@ -78,6 +79,20 @@ namespace Wellora.Areas.Patient.Controllers
             var doctor = _context.Doctors.FirstOrDefault(d => d.DoctorId == id);
             if (doctor == null)
                 return NotFound();
+
+            var patientIdClaim = User.FindFirstValue("CurrentPatientId");
+
+            if (!int.TryParse(patientIdClaim, out int patientId))
+                return Unauthorized();
+
+            var patient = _context.Patients
+                .FirstOrDefault(p => p.PatientId == patientId);
+
+            if (patient == null)
+                return NotFound("Patient profile not found.");
+
+            bool isPrimaryDoctor = patient.PrimaryDoctorId == doctor.DoctorId;
+
 
             // Fetch all schedules and breaks for this doctor
             var schedules = _context.DoctorSchedules
@@ -143,6 +158,11 @@ namespace Wellora.Areas.Patient.Controllers
                 MedicalSchool = doctor.MedicalSchool,
                 Certifications = doctor.Certifications,
                 Qualifications = doctor.Qualifications,
+                PrimaryMedicalDegree = doctor.PrimaryMedicalDegree,
+                PostgraduateDegree = doctor.PostgraduateDegree,
+                SuperSpecialty = doctor.SuperSpecialty,
+                ProfessionalCertification = doctor.ProfessionalCertification,
+                AdditionalDegree = doctor.AdditionalDegree,
                 YearsExperience = doctor.YearsExperience,
                 TelemedicineAvailable = doctor.TelemedicineAvailable,
                 ConsultationFee = doctor.ConsultationFee,
@@ -156,10 +176,73 @@ namespace Wellora.Areas.Patient.Controllers
                 SocialLinks = doctor.SocialLinks,
                 CreatedAt = doctor.CreatedAt,
                 UpdatedAt = doctor.UpdatedAt,
-                Schedules = scheduleViewModels
+                Schedules = scheduleViewModels,
+                IsPrimaryDoctor = isPrimaryDoctor
             };
 
             return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SetPrimaryDoctor(int doctorId)
+        {
+            var patientIdClaim = User.FindFirstValue("CurrentPatientId");
+
+            if (!int.TryParse(patientIdClaim, out int patientId))
+                return Unauthorized();
+
+            var patient = _context.Patients
+                .FirstOrDefault(p => p.PatientId == patientId);
+
+            if (patient == null)
+                return NotFound("Patient profile not found.");
+
+            var doctorExists = _context.Doctors
+                .Any(d => d.DoctorId == doctorId);
+
+            if (!doctorExists)
+                return NotFound("Doctor not found.");
+
+            patient.PrimaryDoctorId = doctorId;
+            patient.UpdatedAt = DateTime.UtcNow;
+
+            _context.SaveChanges();
+
+            return RedirectToAction(
+                nameof(DoctorDetail),
+                new { id = doctorId }
+            );
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemovePrimaryDoctor(int doctorId)
+        {
+            var patientIdClaim = User.FindFirstValue("CurrentPatientId");
+
+            if (!int.TryParse(patientIdClaim, out int patientId))
+                return Unauthorized();
+
+            var patient = _context.Patients
+                .FirstOrDefault(p => p.PatientId == patientId);
+
+            if (patient == null)
+                return NotFound("Patient profile not found.");
+
+            if (patient.PrimaryDoctorId == doctorId)
+            {
+                patient.PrimaryDoctorId = null;
+                patient.UpdatedAt = DateTime.UtcNow;
+
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(
+                nameof(DoctorDetail),
+                new { id = doctorId }
+            );
         }
 
     }

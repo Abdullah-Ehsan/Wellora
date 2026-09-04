@@ -26,6 +26,15 @@ namespace Wellora.Areas.Patient.Controllers
             _context = context;
         }
 
+
+        [HttpGet]
+        public IActionResult AccountBanned(string role = "patient")
+        {
+            ViewBag.Role = role;
+            return View();
+        }
+
+
         [HttpGet]
         public IActionResult PatientRegistration()
         {
@@ -60,7 +69,8 @@ namespace Wellora.Areas.Patient.Controllers
                     Username = model.Username, // new field
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),
                     Role = "patient",
-                    Status = "active", // default enum value
+                    Status = "active",
+                    AccountSituation = "no_banned",// default enum value
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
@@ -91,7 +101,23 @@ namespace Wellora.Areas.Patient.Controllers
 
 
 
+        //for logging out
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PatientLogout()
+        {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
 
+            return RedirectToAction(
+                "PatientLogin",
+                "PatientAccount",
+                new { area = "Patient" }
+            );
+        }
+
+        //logging in
         public IActionResult PatientLogin()
         {
             return View();
@@ -113,6 +139,13 @@ namespace Wellora.Areas.Patient.Controllers
                 return View(model);
             }
 
+            // Verify account situation
+            if (user.AccountSituation == "banned")
+            {
+                ViewBag.Role = user.Role;
+                return View("AccountBanned");
+            }
+
             // Build claims
             var claims = new List<Claim>
             {
@@ -121,6 +154,25 @@ namespace Wellora.Areas.Patient.Controllers
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role, user.Role.ToLower())
             };
+
+            // Get patient profile
+            var patient = await _context.Patients
+                .SingleOrDefaultAsync(d => d.UserId == user.UserId);
+
+            if (patient == null)
+            {
+                ModelState.AddModelError("", "Patient profile not found.");
+                return View(model);
+            }
+
+            // Add AdminId claim
+            claims.Add(
+                new Claim("CurrentPatientId", patient.PatientId.ToString())
+            );
+
+            claims.Add(
+                new Claim("ProfilePicturePath", patient.ProfilePhoto ?? "")
+            );
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

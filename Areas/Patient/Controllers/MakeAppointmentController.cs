@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using Wellora.Areas.Patient.Services.Scheduling;
 using Wellora.Areas.Patient.ViewModels.MakeAppointment;
 using Wellora.Data;
@@ -11,22 +16,162 @@ namespace Wellora.Areas.Patient.Controllers
 {
     [Area("Patient")]
     [Authorize(Roles = "patient")]
-    
+
 
     public class MakeAppointmentController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly AppointmentSlotService _slotService;
         private readonly PatientAppointmentService _appointmentService;
+        private readonly IConfiguration _configuration;
+        private readonly ICompositeViewEngine _viewEngine;
+
 
         public MakeAppointmentController(
             ApplicationDbContext context,
             AppointmentSlotService slotService,
-            PatientAppointmentService appointmentService)
+            PatientAppointmentService appointmentService,
+            IConfiguration configuration,
+            ICompositeViewEngine viewEngine)
         {
             _context = context;
             _slotService = slotService;
             _appointmentService = appointmentService;
+            _configuration = configuration;
+            _viewEngine = viewEngine;
+        }
+
+
+
+        //================
+        //payment conmfirm from the stripe
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> StripeWebhook()
+        {
+            var json = await new StreamReader(HttpContext.Request.Body)
+                .ReadToEndAsync();
+
+            var stripeSignature = Request.Headers["Stripe-Signature"];
+
+            try
+            {
+                var webhookSecret = _configuration["Stripe:WebhookSecret"];
+
+                var stripeEvent = Stripe.EventUtility.ConstructEvent(
+                    json,
+                    stripeSignature,
+                    webhookSecret
+                );
+
+                if (stripeEvent.Type == Stripe.EventTypes.CheckoutSessionCompleted)
+                {
+                    var session = stripeEvent.Data.Object as Stripe.Checkout.Session;
+
+                    if (session != null &&
+                        session.Metadata.TryGetValue(
+                            "AppointmentId",
+                            out var appointmentIdString) &&
+                        int.TryParse(appointmentIdString, out var appointmentId))
+                    {
+                        // ==========================================
+                        // FIND APPOINTMENT
+                        // ==========================================
+
+                        var appointment = await _context.Appointments
+                            .FirstOrDefaultAsync(a =>
+                                a.AppointmentId == appointmentId);
+
+                        if (appointment != null)
+                        {
+                            // ==========================================
+                            // UPDATE APPOINTMENT
+                            // ==========================================
+
+                            appointment.PaymentStatus = "paid";
+                            appointment.PaymentMethod = "Online";
+
+                            // ==========================================
+                            // FIND TRANSACTION
+                            // ==========================================
+
+                            var transaction = await _context.Transactions
+                                .FirstOrDefaultAsync(t =>
+                                    t.AppointmentId == appointmentId);
+
+                            if (transaction != null)
+                            {
+                                // ==========================================
+                                // UPDATE TRANSACTION
+                                // ==========================================
+
+                                transaction.Status = "paid";
+
+                                // Stripe Checkout Session ID
+                                transaction.StripeSessionId = session.Id;
+
+                                // Stripe Payment Intent ID
+                                transaction.StripePaymentIntentId =
+                                    session.PaymentIntentId;
+
+                                transaction.Timestamp = DateTime.Now;
+                            }
+
+                            // ==========================================
+                            // SAVE BOTH
+                            // ==========================================
+
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+
+
+                return Ok();
+            }
+            catch (StripeException)
+            {
+                return BadRequest();
+            }
+        }
+
+        private string RenderPartialViewToString(
+            string viewName,
+            object model)
+        {
+            ViewData.Model = model;
+
+            using var writer = new StringWriter();
+
+            var viewResult = _viewEngine.FindView(
+                ControllerContext,
+                viewName,
+                false
+            );
+
+            if (!viewResult.Success)
+            {
+                throw new InvalidOperationException(
+                    $"View '{viewName}' was not found."
+                );
+            }
+
+            var viewContext = new ViewContext(
+                ControllerContext,
+                viewResult.View,
+                ViewData,
+                TempData,
+                writer,
+                new HtmlHelperOptions()
+            );
+
+            viewResult.View.RenderAsync(viewContext)
+                .GetAwaiter()
+                .GetResult();
+
+            return writer.GetStringBuilder().ToString();
+
+
         }
 
         // =========================
@@ -141,7 +286,89 @@ namespace Wellora.Areas.Patient.Controllers
             _context.Appointments.Add(appointment);
             _context.SaveChanges();
 
+
+            var transaction = new Transaction
+            {
+                AppointmentId = appointment.AppointmentId,
+                PatientId = patientId,
+                Amount = appointment.ConsultationFee,
+                PaymentMethod = vm.PaymentMethod == "Onsite"
+                    ? "cash"
+                    : "online",
+                Status = "pending",
+                Timestamp = DateTime.Now
+            };
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges();
+            //return RedirectToAction("PatientAppointment");
+
+            // ==========================================
+            // ONSITE PAYMENT
+            // ==========================================
+
+            if (vm.PaymentMethod == "Onsite")
+            {
+                return RedirectToAction("PatientAppointment");
+            }
+
+            // ==========================================
+            // ONLINE PAYMENT
+            // ==========================================
+
+            if (vm.PaymentMethod == "Online")
+            {
+                var domain = $"{Request.Scheme}://{Request.Host}";
+
+                var options = new Stripe.Checkout.SessionCreateOptions
+                {
+                    Mode = "payment",
+
+                    LineItems = new List<Stripe.Checkout.SessionLineItemOptions>
+                    {
+                        new Stripe.Checkout.SessionLineItemOptions
+                        {
+                            PriceData = new Stripe.Checkout.SessionLineItemPriceDataOptions
+                            {
+                                Currency = "pkr",
+
+                                UnitAmount =
+                                (long)(vm.ConsultationFee * 100),
+
+                                ProductData =
+                                new Stripe.Checkout.SessionLineItemPriceDataProductDataOptions
+                                {
+                                    Name = "Doctor Consultation"
+                                }
+                             },
+
+                            Quantity = 1
+                        }
+                    },
+
+                    Metadata = new Dictionary<string, string>
+                    {
+                        {
+                            "AppointmentId",
+                                appointment.AppointmentId.ToString()
+                        }
+                    },
+
+                    SuccessUrl =
+                        $"{domain}/Patient/MakeAppointment/PaymentSuccess?session_id={{CHECKOUT_SESSION_ID}}",
+
+                    CancelUrl =
+                        $"{domain}/Patient/MakeAppointment/PaymentCancel"
+                };
+
+                var service = new Stripe.Checkout.SessionService();
+
+                var session = service.Create(options);
+
+                return Redirect(session.Url);
+            }
+
             return RedirectToAction("PatientAppointment");
+
         }
 
         // =========================
@@ -236,11 +463,18 @@ namespace Wellora.Areas.Patient.Controllers
         }
 
         // Secure AJAX JSON Endpoint calling the external Service Layer
+        // Secure AJAX JSON/HTML Endpoint calling the external Service Layer
         [HttpGet("/Patient/MakeAppointment/GetUpcomingAppointments")]
-        public IActionResult GetUpcomingAppointments(string sortBy = "nearest", string feeSort = "", string timeSlot = "")
+        public IActionResult GetUpcomingAppointments(
+            string sortBy = "nearest",
+            string feeSort = "",
+            string timeSlot = "",
+            int page = 1)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
+
+            if (string.IsNullOrEmpty(userIdClaim))
+                return Unauthorized();
 
             var userId = int.Parse(userIdClaim);
 
@@ -249,14 +483,56 @@ namespace Wellora.Areas.Patient.Controllers
                 .Select(p => p.PatientId)
                 .FirstOrDefault();
 
-            if (patientId == 0) return PartialView("_AppointmentTableRows", new List<PatientAppointmentItem>());
+            if (patientId == 0)
+            {
+                return PartialView("_AppointmentTableRows",
+                    new List<PatientAppointmentItem>());
+            }
 
-            // Query data via service layer
-            var dataMatrix = _appointmentService.GetFilteredAppointmentsForPatient(patientId, sortBy, feeSort, timeSlot);
+            // Safety
+            if (page < 1)
+                page = 1;
 
-            // Render partial view directly to HTML string stream response
-            return PartialView("_AppointmentTableRows", dataMatrix);
+            const int pageSize = 14;
+
+            // Get all filtered appointments from your service
+            var allAppointments =
+                _appointmentService.GetFilteredAppointmentsForPatient(
+                    patientId,
+                    sortBy,
+                    feeSort,
+                    timeSlot
+                ).ToList();
+
+            // Total number of appointments
+            var totalAppointments = allAppointments.Count;
+
+            // Calculate total pages
+            var totalPages = (int)Math.Ceiling(
+                totalAppointments / (double)pageSize
+            );
+
+            // If requested page is outside range
+            if (totalPages > 0 && page > totalPages)
+                page = totalPages;
+
+            // Get only the 14 appointments for this page
+            var appointments = allAppointments
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            // Pass pagination information to partial
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalAppointments = totalAppointments;
+
+            return PartialView(
+                "_AppointmentTableRows",
+                appointments
+            );
         }
+
 
 
         //Page 3 this is only view the ticket for the appointment
@@ -284,5 +560,21 @@ namespace Wellora.Areas.Patient.Controllers
 
             return View(ticketDetails);
         }
+
+
+        //payments views
+
+        [HttpGet]
+        public IActionResult PaymentSuccess(string session_id)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult PaymentCancel()
+        {
+            return View();
+        }
+
     }
 }
