@@ -7,5 +7,8 @@
         public List<DoctorScheduleRow> ScheduleRows { get; set; } = new();
 
         public List<DoctorBreakViewModel> Breaks { get; set; } = new();
+
+        public List<string?> ScheduleStatus { get; set; } = new();
+
     }
 }

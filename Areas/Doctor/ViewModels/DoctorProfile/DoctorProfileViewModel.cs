@@ -23,6 +23,9 @@
 
         // Flag for new vs existing profile
         public bool IsNewProfile => string.IsNullOrEmpty(ProfilePhotoPath) && string.IsNullOrEmpty(FirstName);
+
+
+        public DoctorScheduleViewModel Schedule { get; set; } = new();
     }
 
 }

@@ -1,12 +1,22 @@
-﻿namespace Wellora.Areas.Doctor.ViewModels.DoctorProfile
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Wellora.Areas.Doctor.ViewModels.DoctorProfile
 {
     public class ChangePasswordViewModel
     {
         public int UserId { get; set; }
 
-        public string? OldPassword { get; set; }
-        public string? NewPassword { get; set; }
-        public string? ConfirmPassword { get; set; }
+        [Required]
+        public string OldPassword { get; set; } = string.Empty;
+
+        [Required]
+        [MinLength(8)]
+        public string NewPassword { get; set; } = string.Empty;
+
+        [Required]
+        [Compare(nameof(NewPassword))]
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
+
 
 }
