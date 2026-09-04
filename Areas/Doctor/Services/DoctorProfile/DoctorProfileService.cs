@@ -86,31 +86,48 @@ namespace Wellora.Areas.Doctor.Services.DoctorProfile
             _context.DoctorSchedules.RemoveRange(existingSchedules);
             foreach (var row in model.ScheduleRows)
             {
+                // Only "On" rows are saved.
+                // "Off" and "-" are not saved.
+                if (row.Status != true)
+                    continue;
+
+                // Start and end time are required for an active schedule.
+                if (!row.StartTime.HasValue || !row.EndTime.HasValue)
+                    continue;
+
                 var entity = new DoctorSchedule
                 {
                     DoctorId = model.DoctorId,
                     DayOfWeek = row.DayOfWeek,
-                    StartTime = row.StartTime,
-                    EndTime = row.EndTime,
-                    MaxPatientsPerDay = row.MaxPatientsPerDay,
-                    AppointmentDurationMin = row.AppointmentDurationMin,
-                    IsActive = row.IsActive
+
+                    StartTime = row.StartTime.Value,
+                    EndTime = row.EndTime.Value,
+
+                    MaxPatientsPerDay = row.MaxPatientsPerDay ?? 1,
+                    AppointmentDurationMin = row.AppointmentDurationMin ?? 30,
+                    BufferTimeMin = row.BufferTimeMin ?? 0
                 };
+
                 _context.DoctorSchedules.Add(entity);
             }
+
 
             // Replace breaks
             _context.DoctorBreaks.RemoveRange(existingBreaks);
             foreach (var br in model.Breaks)
             {
-                var entity = new DoctorBreak
+                // Only insert if both start and end break times were selected
+                if (br.BreakStart.HasValue && br.BreakEnd.HasValue)
                 {
-                    DoctorId = model.DoctorId,
-                    DayOfWeek = br.DayOfWeek,
-                    BreakStart = br.BreakStart,
-                    BreakEnd = br.BreakEnd
-                };
-                _context.DoctorBreaks.Add(entity);
+                    var entity = new DoctorBreak
+                    {
+                        DoctorId = model.DoctorId,
+                        DayOfWeek = br.DayOfWeek,
+                        BreakStart = br.BreakStart.Value,
+                        BreakEnd = br.BreakEnd.Value
+                    };
+                    _context.DoctorBreaks.Add(entity);
+                }
             }
 
             _context.SaveChanges();
@@ -177,7 +194,7 @@ namespace Wellora.Areas.Doctor.Services.DoctorProfile
 
             doctor.Specialization = Capitalize(model.Specialization);
             doctor.SubSpecialties = Capitalize(model.SubSpecialties);
-            doctor.Qualifications = model.Qualifications; // keep raw text (degrees, etc.)
+            //doctor.Qualifications = model.Qualifications; // keep raw text (degrees, etc.)
             doctor.Certifications = model.Certifications; // keep raw text
             doctor.YearsExperience = model.YearsExperience;
 
@@ -243,7 +260,7 @@ namespace Wellora.Areas.Doctor.Services.DoctorProfile
             // ✅ Medical school, certifications, qualifications
             doctor.MedicalSchool = model.MedicalSchool;
             doctor.Certifications = model.Certifications;
-            doctor.Qualifications = model.Qualifications;
+            //doctor.Qualifications = model.Qualifications;
 
             
 

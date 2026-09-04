@@ -65,7 +65,8 @@ namespace Wellora.Areas.Doctor.Services.DoctorDashboard.Services
             {
                 YearsExperience = doctor.YearsExperience,
                 TelemedicineAvailable = doctor.TelemedicineAvailable,
-                ConsultationFee = doctor.ConsultationFee
+                ConsultationFee = doctor.ConsultationFee,
+                DoctorAvailable = doctor.DoctorAvailable,
             };
         }
 
@@ -82,10 +83,16 @@ namespace Wellora.Areas.Doctor.Services.DoctorDashboard.Services
             {
                 LicenseNumber = doctor.LicenseNumber,
                 PmdcNumber = doctor.PmdcNumber,
-                Qualifications = doctor.Qualifications,
+
+                PrimaryMedicalDegree = doctor.PrimaryMedicalDegree,
+                PostgraduateDegree = doctor.PostgraduateDegree,
+                SuperSpecialty = doctor.SuperSpecialty,
+                ProfessionalCertification = doctor.ProfessionalCertification,
+
                 MedicalSchool = doctor.MedicalSchool,
                 Certifications = doctor.Certifications
             };
+
         }
 
 
