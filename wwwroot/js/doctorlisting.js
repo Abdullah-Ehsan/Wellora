@@ -18,7 +18,15 @@ function applyFilters(pageNumber = 1) {
 
     const query = `?pageNumber=${pageNumber}&specialty=${specialty}&language=${language}&gender=${gender}`;
 
-    fetch("/Patient/DoctorInformation/DoctorListing" + query, {
+
+    //hard coded for the patient area only
+    //fetch("/Patient/DoctorInformation/DoctorListing" + query, {
+    //    headers: { "X-Requested-With": "XMLHttpRequest" }
+    //})
+
+
+    //now its soft coded now it will work with patients  and admins
+    fetch(doctorListingUrl + query, {
         headers: { "X-Requested-With": "XMLHttpRequest" }
     })
         .then(response => {

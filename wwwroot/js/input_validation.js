@@ -1,18 +1,77 @@
 ﻿// Toggle password visibility with eye icons
+// =====================================================
+// TOGGLE PASSWORD VISIBILITY
+// Supports Bootstrap Icons and Font Awesome
+// =====================================================
+
 function togglePassword(inputId, iconId) {
+
     var input = document.getElementById(inputId);
     var icon = document.getElementById(iconId);
 
+    if (!input || !icon) {
+        return;
+    }
+
+
+    // =================================================
+    // SHOW PASSWORD
+    // =================================================
+
     if (input.type === "password") {
+
         input.type = "text";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye"); // open green eye
-    } else {
+
+
+        // Bootstrap Icons
+        if (icon.classList.contains("bi-eye-slash")) {
+
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+
+        }
+
+
+        // Font Awesome
+        if (icon.classList.contains("fa-eye-slash")) {
+
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+
+        }
+
+    }
+
+
+    // =================================================
+    // HIDE PASSWORD
+    // =================================================
+
+    else {
+
         input.type = "password";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash"); // closed green eye
+
+
+        // Bootstrap Icons
+        if (icon.classList.contains("bi-eye")) {
+
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+
+        }
+
+
+        // Font Awesome
+        if (icon.classList.contains("fa-eye")) {
+
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+
+        }
+
     }
 }
+
 
 // Email validation
 function validateEmail(inputId, errorId) {
