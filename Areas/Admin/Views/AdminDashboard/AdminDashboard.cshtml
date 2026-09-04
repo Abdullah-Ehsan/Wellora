@@ -1,0 +1,98 @@
+﻿@model Wellora.Areas.Admin.ViewModels.AdminDashboard.AdminDashboardViewModel
+
+<link rel="stylesheet" href="~/css/admin/AdminDashboard.css" />
+
+<div class="profile-page container-fluid">
+
+    <!-- HEADER -->
+    <div class="profile-header mb-4">
+        <h3 class="mb-0">@Model.FullName</h3>
+        <small>Admin Dashboard Profile</small>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- LEFT SIDE -->
+        <div class="col-lg-4">
+            <div class="profile-card text-center">
+
+                <img src="@(string.IsNullOrEmpty(Model.ProfilePicture)
+                                 ? Url.Content("~/User/Admin/Profile_Picture/Default.png")
+                                 : Url.Content("~/" + Model.ProfilePicture))"
+                     class="profile-img mb-3"
+                     alt="Profile Picture" />
+
+                <h5 class="mb-1">@Model.FullName</h5>
+                <p class="text-muted mb-3">@Model.AdminType</p>
+
+                <span class="status-badge @(Model.Status == "Active" ? "status-active" : "status-inactive")">
+                    @Model.Status
+                </span>
+
+                <hr />
+
+                <div class="text-start">
+
+                    <div class="mb-2">
+                        <div class="info-label">Username</div>
+                        <div class="info-value">@Model.Username</div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">@Model.Email</div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="info-label">User ID</div>
+                        <div class="info-value">@Model.UserId</div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="info-label">Admin ID</div>
+                        <div class="info-value">@Model.AdminId</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-8">
+
+            <div class="profile-card">
+
+                <h5 class="mb-3">Detailed Information</h5>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <div class="info-label">Age</div>
+                        <div class="info-value">
+                            @(Model.Age.HasValue? Model.Age + " years" : "N/A")
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="info-label">Gender</div>
+                        <div class="info-value">@Model.Gender</div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="info-label">Contact</div>
+                        <div class="info-value">@Model.ContactNumber</div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="info-label">Address</div>
+                        <div class="info-value">@Model.Address</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

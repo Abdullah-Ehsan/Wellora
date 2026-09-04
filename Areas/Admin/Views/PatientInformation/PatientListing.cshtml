@@ -1,0 +1,38 @@
+﻿@using Wellora.Areas.Admin.ViewModels.PatientInformation
+@model PatientListingViewModel
+
+@{
+    ViewData["Title"] = "Patient Listing";
+}
+
+<link rel="stylesheet" href="~/css/patient/DoctorListing.css" />
+
+<div class="container-fluid doctor-listing">
+    <div class="row">
+        <!-- Filter Panel -->
+        <div class="col-md-3 filter-panel">
+            <h4>Filters</h4>
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="genderFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="male" selected="@(Model.SelectedGender == "male")">Male</option>
+                    <option value="female" selected="@(Model.SelectedGender == "female")">Female</option>
+                    <option value="other" selected="@(Model.SelectedGender == "other")">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div id="patientCardsContainer">
+                @await Html.PartialAsync("_PatientCardsPartial", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const patientListingUrl = '@Url.Action("PatientListing", "PatientInformation", new { area = "Admin" })';
+</script>
+
+<script src="~/js/admin/patientlisting.js"></script>

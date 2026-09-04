@@ -1,0 +1,1005 @@
+﻿@model Wellora.Areas.Admin.ViewModels.AdminAnalytics.AdminAnalyticsViewModel
+
+@{
+    ViewData["Title"] = "Admin Analytics";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/admin/analytics/admin-analytics.css"
+          asp-append-version="true" />
+}
+
+<div class="admin-analytics-page">
+
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="admin-analytics-header mb-4">
+        <div>
+            <h1 class="admin-analytics-title">
+                <i class="bi bi-bar-chart-line me-2"></i>
+                Analytics
+            </h1>
+
+            <p class="admin-analytics-subtitle mb-0">
+                Overview of platform activity, finances, patients, appointments, and doctors.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="admin-analytics-section">
+
+        <div class="admin-analytics-section-heading">
+            <div class="admin-section-icon">
+                <i class="bi bi-speedometer2"></i>
+            </div>
+
+            <div>
+                <h2>Overview</h2>
+                <p>Key statistics across Wellora.</p>
+            </div>
+        </div>
+
+
+        <div class="row g-3">
+
+            <!-- Revenue -->
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="admin-analytics-stat-card">
+
+                    <div class="admin-analytics-stat-icon">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+
+                    <div class="admin-analytics-stat-content">
+                        <span>Total Revenue</span>
+
+                        <strong>
+                            @Model.Summary.TotalRevenue.ToString("N2")
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Appointments -->
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="admin-analytics-stat-card">
+
+                    <div class="admin-analytics-stat-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+
+                    <div class="admin-analytics-stat-content">
+                        <span>Total Appointments</span>
+
+                        <strong>
+                            @Model.Summary.TotalAppointments.ToString("N0")
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Patients -->
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="admin-analytics-stat-card">
+
+                    <div class="admin-analytics-stat-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div class="admin-analytics-stat-content">
+                        <span>Total Patients</span>
+
+                        <strong>
+                            @Model.Summary.TotalPatients.ToString("N0")
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Doctors -->
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="admin-analytics-stat-card">
+
+                    <div class="admin-analytics-stat-icon">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
+
+                    <div class="admin-analytics-stat-content">
+                        <span>Total Doctors</span>
+
+                        <strong>
+                            @Model.Summary.TotalDoctors.ToString("N0")
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row g-3 mt-0">
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-stat-card">
+
+                    <div class="admin-analytics-stat-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div class="admin-analytics-stat-content">
+                        <span>Average Consultation Fee</span>
+
+                        <strong>
+                            @Model.Summary.AverageConsultationFee.ToString("N2")
+                        </strong>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINANCIAL ANALYTICS
+    ====================================================== -->
+
+    <section class="admin-analytics-section">
+
+        <div class="admin-analytics-section-heading">
+            <div class="admin-section-icon">
+                <i class="bi bi-wallet2"></i>
+            </div>
+
+            <div>
+                <h2>Financial Analytics</h2>
+                <p>Revenue, transactions, payment status, and payment methods.</p>
+            </div>
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Revenue Over Time -->
+
+            <div class="col-12 col-xl-8">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Revenue Over Time</h3>
+                            <p>Paid transaction revenue by date.</p>
+                        </div>
+
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="revenueOverTimeChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Payment Status -->
+
+            <div class="col-12 col-xl-4">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Payment Status</h3>
+                            <p>Transaction status distribution.</p>
+                        </div>
+
+                        <i class="bi bi-pie-chart"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container admin-analytics-chart-container-small">
+                        <canvas id="paymentStatusChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Payment Methods -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Payment Methods</h3>
+                            <p>Cash versus online transactions.</p>
+                        </div>
+
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="paymentMethodsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Revenue By Payment Method -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Revenue By Payment Method</h3>
+                            <p>Paid revenue generated through each method.</p>
+                        </div>
+
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="revenueByPaymentMethodChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Transaction Outcomes -->
+
+            <div class="col-12">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Transaction Outcomes</h3>
+                            <p>Overview of successful and unsuccessful transactions.</p>
+                        </div>
+
+                        <i class="bi bi-arrow-left-right"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="transactionOutcomesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         APPOINTMENT ANALYTICS
+    ====================================================== -->
+
+    <section class="admin-analytics-section">
+
+        <div class="admin-analytics-section-heading">
+            <div class="admin-section-icon">
+                <i class="bi bi-calendar3"></i>
+            </div>
+
+            <div>
+                <h2>Appointment Analytics</h2>
+                <p>Appointment trends, statuses, payment information, and revenue.</p>
+            </div>
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Appointment Trend -->
+
+            <div class="col-12 col-xl-8">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Appointments Over Time</h3>
+                            <p>Number of appointments by date.</p>
+                        </div>
+
+                        <i class="bi bi-calendar-week"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="appointmentsOverTimeChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Appointment Status -->
+
+            <div class="col-12 col-xl-4">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Appointment Status</h3>
+                            <p>Scheduled, checked, and cancelled appointments.</p>
+                        </div>
+
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container admin-analytics-chart-container-small">
+                        <canvas id="appointmentStatusChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Appointment Payment Status -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Appointment Payment Status</h3>
+                            <p>Payment status attached to appointments.</p>
+                        </div>
+
+                        <i class="bi bi-receipt"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="appointmentPaymentStatusChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Weekday -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Appointments By Weekday</h3>
+                            <p>Which days receive the most appointments.</p>
+                        </div>
+
+                        <i class="bi bi-calendar-day"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="appointmentsByWeekdayChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Consultation Revenue -->
+
+            <div class="col-12">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Consultation Revenue</h3>
+                            <p>Total consultation fees by appointment date.</p>
+                        </div>
+
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="consultationRevenueChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PATIENT ANALYTICS
+    ====================================================== -->
+
+    <section class="admin-analytics-section">
+
+        <div class="admin-analytics-section-heading">
+            <div class="admin-section-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <div>
+                <h2>Patient Analytics</h2>
+                <p>Patient visits, spending, demographics, languages, and doctors.</p>
+            </div>
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Top Visited -->
+
+            <div class="col-12 col-xl-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Top 10 Most Visited Patients</h3>
+                            <p>Patients with the highest number of appointments.</p>
+                        </div>
+
+                        <i class="bi bi-person-lines-fill"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="topVisitedPatientsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Top Spending -->
+
+            <div class="col-12 col-xl-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Top 10 Spending Patients</h3>
+                            <p>Patients with the highest paid transaction totals.</p>
+                        </div>
+
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="topSpendingPatientsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Gender -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Patient Gender Distribution</h3>
+                            <p>Distribution of registered patients by gender.</p>
+                        </div>
+
+                        <i class="bi bi-gender-ambiguous"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container admin-analytics-chart-container-small">
+                        <canvas id="patientGenderChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Age Groups -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Patient Age Groups</h3>
+                            <p>Distribution of patients by age range.</p>
+                        </div>
+
+                        <i class="bi bi-person-vcard"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="patientAgeGroupsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Languages -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Preferred Languages</h3>
+                            <p>Languages selected by patients.</p>
+                        </div>
+
+                        <i class="bi bi-translate"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="preferredLanguagesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Primary Doctor -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Patients By Primary Doctor</h3>
+                            <p>Number of patients assigned to each primary doctor.</p>
+                        </div>
+
+                        <i class="bi bi-person-heart"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="patientsByPrimaryDoctorChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DOCTOR ANALYTICS
+    ====================================================== -->
+
+    <section class="admin-analytics-section">
+
+        <div class="admin-analytics-section-heading">
+            <div class="admin-section-icon">
+                <i class="bi bi-person-badge"></i>
+            </div>
+
+            <div>
+                <h2>Doctor Analytics</h2>
+                <p>Specializations, education, experience, availability, workload, and revenue.</p>
+            </div>
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Specializations -->
+
+            <div class="col-12 col-xl-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Doctors By Specialization</h3>
+                            <p>Number of doctors in each specialization.</p>
+                        </div>
+
+                        <i class="bi bi-diagram-3"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="doctorSpecializationsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Sub Specialties -->
+
+            <div class="col-12 col-xl-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Doctors By Sub-Specialty</h3>
+                            <p>Distribution of doctors across sub-specialties.</p>
+                        </div>
+
+                        <i class="bi bi-diagram-2"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="doctorSubSpecialtiesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Gender -->
+
+            <div class="col-12 col-md-6 col-xl-4">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Doctor Gender</h3>
+                            <p>Gender distribution.</p>
+                        </div>
+
+                        <i class="bi bi-gender-ambiguous"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container admin-analytics-chart-container-small">
+                        <canvas id="doctorGenderChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Experience -->
+
+            <div class="col-12 col-md-6 col-xl-4">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Experience</h3>
+                            <p>Doctors grouped by experience.</p>
+                        </div>
+
+                        <i class="bi bi-award"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="doctorExperienceChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Consultation Fees -->
+
+            <div class="col-12 col-md-6 col-xl-4">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Consultation Fees</h3>
+                            <p>Doctors grouped by consultation fee.</p>
+                        </div>
+
+                        <i class="bi bi-cash"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="doctorFeeChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Telemedicine -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Telemedicine Availability</h3>
+                            <p>Doctors offering telemedicine services.</p>
+                        </div>
+
+                        <i class="bi bi-camera-video"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container admin-analytics-chart-container-small">
+                        <canvas id="telemedicineChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Countries -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Doctors By Country</h3>
+                            <p>Distribution of doctors by country.</p>
+                        </div>
+
+                        <i class="bi bi-globe2"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="doctorCountriesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Primary Medical Degree -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Primary Medical Degrees</h3>
+                            <p>Doctors grouped by primary medical degree.</p>
+                        </div>
+
+                        <i class="bi bi-mortarboard"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="primaryMedicalDegreesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Postgraduate Degrees -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Postgraduate Degrees</h3>
+                            <p>Distribution of postgraduate qualifications.</p>
+                        </div>
+
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="postgraduateDegreesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Super Specialties -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Super Specialties</h3>
+                            <p>Doctors grouped by super specialty.</p>
+                        </div>
+
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="superSpecialtiesChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Professional Certifications -->
+
+            <div class="col-12 col-md-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Professional Certifications</h3>
+                            <p>Distribution of professional certifications.</p>
+                        </div>
+
+                        <i class="bi bi-patch-check"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="professionalCertificationsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Medical Schools -->
+
+            <div class="col-12">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Medical Schools</h3>
+                            <p>Doctors grouped by medical school.</p>
+                        </div>
+
+                        <i class="bi bi-building"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="medicalSchoolsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Busiest Doctors -->
+
+            <div class="col-12 col-xl-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Top 10 Busiest Doctors</h3>
+                            <p>Doctors with the highest appointment volume.</p>
+                        </div>
+
+                        <i class="bi bi-person-workspace"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="busiestDoctorsChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Doctor Revenue -->
+
+            <div class="col-12 col-xl-6">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Top 10 Doctors By Revenue</h3>
+                            <p>Doctors generating the highest paid revenue.</p>
+                        </div>
+
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container">
+                        <canvas id="doctorRevenueChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Doctor Performance -->
+
+            <div class="col-12">
+                <div class="admin-analytics-chart-card">
+
+                    <div class="admin-analytics-chart-header">
+                        <div>
+                            <h3>Doctor Performance</h3>
+                            <p>Appointments, completed visits, cancellations, and revenue.</p>
+                        </div>
+
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
+
+                    <div class="admin-analytics-chart-container admin-analytics-chart-container-large">
+                        <canvas id="doctorPerformanceChart"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================================
+     CHART DATA
+========================================================= -->
+
+<script>
+
+    const analyticsData = {
+
+        financial: {
+            revenueOverTime: @Html.Raw(Json.Serialize(Model.Financial.RevenueOverTime)),
+            paymentStatus: @Html.Raw(Json.Serialize(Model.Financial.PaymentStatus)),
+            paymentMethods: @Html.Raw(Json.Serialize(Model.Financial.PaymentMethods)),
+            revenueByPaymentMethod: @Html.Raw(Json.Serialize(Model.Financial.RevenueByPaymentMethod)),
+            transactionOutcomes: @Html.Raw(Json.Serialize(Model.Financial.TransactionOutcomes))
+        },
+
+        appointments: {
+            overTime: @Html.Raw(Json.Serialize(Model.Appointments.AppointmentsOverTime)),
+            status: @Html.Raw(Json.Serialize(Model.Appointments.AppointmentStatus)),
+            paymentStatus: @Html.Raw(Json.Serialize(Model.Appointments.AppointmentPaymentStatus)),
+            byWeekday: @Html.Raw(Json.Serialize(Model.Appointments.AppointmentsByWeekday)),
+            consultationRevenue: @Html.Raw(Json.Serialize(Model.Appointments.ConsultationRevenue))
+        },
+
+        patients: {
+            topVisited: @Html.Raw(Json.Serialize(Model.Patients.TopVisitedPatients)),
+            topSpending: @Html.Raw(Json.Serialize(Model.Patients.TopSpendingPatients)),
+            gender: @Html.Raw(Json.Serialize(Model.Patients.GenderDistribution)),
+            ageGroups: @Html.Raw(Json.Serialize(Model.Patients.AgeGroups)),
+            languages: @Html.Raw(Json.Serialize(Model.Patients.PreferredLanguages)),
+            primaryDoctors: @Html.Raw(Json.Serialize(Model.Patients.PatientsByPrimaryDoctor))
+        },
+
+        doctors: {
+            specializations: @Html.Raw(Json.Serialize(Model.Doctors.Specializations)),
+            subSpecialties: @Html.Raw(Json.Serialize(Model.Doctors.SubSpecialties)),
+            gender: @Html.Raw(Json.Serialize(Model.Doctors.GenderDistribution)),
+            experience: @Html.Raw(Json.Serialize(Model.Doctors.ExperienceGroups)),
+            fees: @Html.Raw(Json.Serialize(Model.Doctors.ConsultationFeeDistribution)),
+            telemedicine: @Html.Raw(Json.Serialize(Model.Doctors.TelemedicineAvailability)),
+            countries: @Html.Raw(Json.Serialize(Model.Doctors.Countries)),
+            primaryMedicalDegrees: @Html.Raw(Json.Serialize(Model.Doctors.PrimaryMedicalDegrees)),
+            postgraduateDegrees: @Html.Raw(Json.Serialize(Model.Doctors.PostgraduateDegrees)),
+            superSpecialties: @Html.Raw(Json.Serialize(Model.Doctors.SuperSpecialties)),
+            professionalCertifications: @Html.Raw(Json.Serialize(Model.Doctors.ProfessionalCertifications)),
+            medicalSchools: @Html.Raw(Json.Serialize(Model.Doctors.MedicalSchools)),
+            busiestDoctors: @Html.Raw(Json.Serialize(Model.Doctors.BusiestDoctors)),
+            revenue: @Html.Raw(Json.Serialize(Model.Doctors.DoctorRevenue)),
+            performance: @Html.Raw(Json.Serialize(Model.Doctors.Performance))
+        }
+
+    };
+
+</script>
+
+
+@section Scripts {
+
+    <script src="~/js/admin/analytics/admin-analytics.js"
+            asp-append-version="true"></script>
+
+}

@@ -1,0 +1,116 @@
+﻿@using Wellora.Areas.Admin.ViewModels.PatientInformation
+@model PatientViewModel
+
+@{
+    ViewData["Title"] = "Patient Profile";
+}
+
+<link rel="stylesheet" href="~/css/Patient/DoctorDetail.css" />
+
+<div class="container doctor-detail">
+    <!-- Top Section -->
+    <div class="row mb-4">
+        <div class="col-md-4 text-center">
+            <img src="@(string.IsNullOrEmpty(Model.ProfilePhoto)
+                                          ? Url.Content("~/User/Patient/Profile_Picture/default.png")
+                                          : Url.Content("~/" + Model.ProfilePhoto))"
+                 alt="@Model.FullName" class="img-fluid rounded-circle profile-photo" />
+        </div>
+        <div class="col-md-8 d-flex flex-column justify-content-center position-relative light-teal-box">
+            <h2 class="doctor-name">@Model.FullName</h2>
+            <h5 class="doctor-specialization">Patient ID: #@Model.PatientId</h5>
+            <p class="doctor-sub">Username: @(Model.Username ?? "N/A") </p>
+            <p class="doctor-sub">Email: @(Model.Email ?? "N/A")</p>
+            
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PATIENT ACCOUNT STATUS
+         ========================================================= -->
+
+    <section class="doctor-status-section">
+        <div class="doctor-status-header">
+            <h3>Patient Status</h3>
+            <p>Manage the patient's account status.</p>
+        </div>
+
+        <div class="doctor-status-groups">
+            <!-- ACCOUNT STATUS -->
+            <div class="status-group">
+                <div class="status-group-title">
+                    <span class="status-icon">🛡️</span>
+                    <div>
+                        <h4>Account Status</h4>
+                        <span>Control whether this patient is banned.</span>
+                    </div>
+                </div>
+
+                <div class="status-buttons">
+                    <!-- BANNED -->
+                    <form asp-area="Admin"
+                          asp-controller="PatientInformation"
+                          asp-action="BanPatient"
+                          method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="patientId" value="@Model.PatientId" />
+                        <button type="submit"
+                                class="doctor-status-btn banned-btn @(Model.AccountSituation == "banned" ? "status-selected" : "")">
+                            <span class="status-dot"></span>
+                            <span>Banned</span>
+                        </button>
+                    </form>
+
+                    <!-- NOT BANNED -->
+                    <form asp-area="Admin"
+                          asp-controller="PatientInformation"
+                          asp-action="UnbanPatient"
+                          method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="patientId" value="@Model.PatientId" />
+                        <button type="submit"
+                                class="doctor-status-btn not-banned-btn @(Model.AccountSituation != "banned" ? "status-selected" : "")">
+                            <span class="status-dot"></span>
+                            <span>Not Banned</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Base Information -->
+    <section class="info-section">
+        <h3>Base Information</h3>
+        <p><strong>Full Name:</strong> @Model.FullName</p>
+        <p><strong>Gender:</strong> @Model.Gender</p>
+        <p><strong>Date of Birth:</strong> @Model.DateOfBirth.ToString("yyyy-MM-dd")</p>
+        <p><strong>Address:</strong> @Model.Address</p>
+        <p><strong>Preferred Language:</strong> @Model.PreferredLanguage</p>
+    </section>
+
+    <!-- Emergency Information -->
+    <section class="info-section">
+        <h3>Emergency Information</h3>
+        <p><strong>Emergency Contact Name:</strong> @Model.EmergencyContactName</p>
+        <p><strong>Emergency Contact Phone:</strong> @Model.EmergencyContactPhone</p>
+    </section>
+
+    <!-- Medical Information -->
+    <section class="info-section">
+        <h3>Medical Information</h3>
+        <p><strong>Blood Group:</strong> @Model.BloodGroup</p>
+        <p><strong>Primary Doctor ID:</strong> @(Model.PrimaryDoctorId.HasValue? Model.PrimaryDoctorId.ToString() : "None Assigned")</p>
+        <p><strong>Allergies:</strong> @Model.Allergies</p>
+        <p><strong>Medical Conditions:</strong> @Model.MedicalConditions</p>
+        <p><strong>Medications:</strong> @Model.Medications</p>
+    </section>
+
+    <!-- Additional Information -->
+    <section class="info-section">
+        <h3>Additional Information</h3>
+        <p><strong>User ID:</strong> @Model.UserId</p>
+        <p><strong>Created At:</strong> @Model.CreatedAt</p>
+        <p><strong>Updated At:</strong> @Model.UpdatedAt</p>
+    </section>
+</div>

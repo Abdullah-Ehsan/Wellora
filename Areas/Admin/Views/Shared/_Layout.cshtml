@@ -8,48 +8,109 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/theme.css" />
+    <link rel="stylesheet" href="~/css/admin/AdminProfileMenu.css" />
+    <link rel="stylesheet"
+          href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+    @RenderSection("Styles", required: false)
+
+
 </head>
 <body>
     <div class="container-fluid p-0">
 
-        <!-- Header: Only visible when a Patient is logged in -->
-        @if (User.Identity.IsAuthenticated && User.IsInRole("doctor"))
-                {
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
+        <!-- Header: Only visible when a Admin is logged in -->
+        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+        {
+            <header>
+                <nav class="navbar navbar-expand-lg border-bottom admin-navbar">
+                    <div class="container-fluid">
 
-                    <!-- Left: Logo + Website Name -->
-                        <a class="navbar-brand d-flex align-items-center" asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="DoctorDashboard">
-                        <img src="~/images/logo.png" alt="Logo" style="height:40px;" />
-                        <span class="ms-2">Wellora</span>
-                    </a>
+                        <!-- Left: Logo + Website Name -->
+                            <a class="navbar-brand d-flex align-items-center" asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="DoctorDashboard">
+                                <img src="~/images/logo.png" alt="Logo" style="height:40px;" />
+                                <span class="ms-2">Wellora</span>
+                            </a>
 
-                    <!-- Center: Navigation Links -->
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="DoctorDashboard">DashBoard</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="DoctorProfile" asp-action="DoctorProfile">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="PatientAppointment" asp-action="PatientAppointmentlist">Patients</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="DoctorInformation" asp-action="DoctorListing">Doctors</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="MakeAppointment" asp-action="PatientAppointment">Appointments</a></li>
-                    </ul>
+                        <!-- Center: Navigation Links -->
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminDashboard" asp-action="AdminDashboard">DashBoard</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminProfile" asp-action="AdminProfile">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AdminAnalytics" asp-action="AdminAnalytics">Analytics</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="DoctorInformation" asp-action="DoctorListing">Doctors</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="PatientInformation" asp-action="PatientListing">Patients</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="AccountCreation" asp-action="Index">Accounts</a></li>
+                        </ul>
 
-                    <!-- Right: Profile Picture -->
                         <!-- Right: Profile Picture -->
+                        <!-- Right: Profile Picture 
                         <div class="d-flex align-items-center">
+                            //@{
+                                /*var profilePicPath = User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value;
+
+                                var profilePic = string.IsNullOrWhiteSpace(profilePicPath)
+                                ? Url.Content("~/User/Admin/Profile_Picture/Default.png")
+                                : Url.Content("~/" + profilePicPath.TrimStart('/'));*/
+                            }
+                            <img src="Url.Content(profilePic)" alt="Profile" class="rounded-circle" style="height:40px;width:40px;" />
+                        </div>
+                        -->
+
+                        <!-- Right: Profile Picture Dropdown -->
+                        <div class="dropdown">
+
                             @{
-                                var profilePicPath = User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value;
+                                var profilePicPath = User.Claims
+                                .FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value;
 
                                 var profilePic = string.IsNullOrWhiteSpace(profilePicPath)
                                 ? Url.Content("~/User/Admin/Profile_Picture/Default.png")
                                 : Url.Content("~/" + profilePicPath.TrimStart('/'));
                             }
-                            <img src="@Url.Content(profilePic)" alt="Profile" class="rounded-circle" style="height:40px;width:40px;" />
+
+                            <!-- Profile Picture Button -->
+                            <button class="btn p-0 border-0 bg-transparent"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+
+                                <img src="@Url.Content(profilePic)"
+                                     alt="Profile"
+                                     class="rounded-circle"
+                                     style="height:40px;width:40px;object-fit:cover;" />
+
+                            </button>
+
+
+                            <!-- Profile Dropdown -->
+                            <ul class="dropdown-menu dropdown-menu-end admin-profile-menu">
+
+                                <!-- Night Mode -->
+                            <li>
+                                <partial name="_ThemeToggle" />
+                            </li>
+
+
+
+                                <!-- Divider -->
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+
+                                <!-- Logout -->
+                                <li>
+                                    <partial name="_AdminLogout" />
+                                </li>
+
+                            </ul>
+
                         </div>
-                </div>
-            </nav>
-        </header>
-                }
+
+                    </div>
+                </nav>
+            </header>
+        }
+
 
         <!-- Main Content -->
         <main role="main" class="pb-0">
@@ -57,7 +118,7 @@
         </main>
 
         <!-- Footer: Always visible -->
-        <footer class="border-top bg-light text-muted py-3">
+        <footer class="border-top text-muted py-3 admin-footer">
             <div class="container text-center">
                 <p>&copy; 2025 - 2026 project | This is Wellora, the medical website for healthcare solutions.</p>
                 <p>
@@ -74,8 +135,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/apexcharts/apexcharts.min.js"></script>
+    <script src="~/lib/chart.js/chart.umd.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/website_darkmode.js" asp-append-version="true"></script>
+
     
-    @RenderSection("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
