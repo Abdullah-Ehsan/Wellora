@@ -42,8 +42,24 @@ namespace Wellora.Areas.Doctor.Models
         [Column("years_experience")]
         public int? YearsExperience { get; set; }
 
-        [Column("qualifications")]
+        [Column("qualifications")]   //needs to be removed but not yet
         public string? Qualifications { get; set; }
+
+        [Column("primary_medical_degree")]
+        public string? PrimaryMedicalDegree { get; set; }
+
+        [Column("postgraduate_degree")]
+        public string? PostgraduateDegree { get; set; }
+
+        [Column("super_specialty")]
+        public string? SuperSpecialty { get; set; }
+
+        [Column("professional_certification")]
+        public string? ProfessionalCertification { get; set; }
+
+        [Column("additional_degree")]
+        public string? AdditionalDegree { get; set; }
+
 
 
         [Column("telemedicine_available")]
@@ -82,6 +98,10 @@ namespace Wellora.Areas.Doctor.Models
 
         [Column("certifications")]
         public string? Certifications { get; set; }
+
+        [Column("doctor_available")]
+        public bool? DoctorAvailable { get; set; }
+
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }
