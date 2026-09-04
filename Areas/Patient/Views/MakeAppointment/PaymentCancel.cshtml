@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Payment Cancelled";
+}
+
+<div class="container mt-5 text-center">
+
+    <h2 class="text-danger">
+        Payment Cancelled
+    </h2>
+
+    <p>
+        Your payment was cancelled.
+    </p>
+
+    <a asp-area="Patient"
+       asp-controller="MakeAppointment"
+       asp-action="PatientAppointment"
+       class="btn btn-secondary">
+        Back to Appointments
+    </a>
+
+</div>

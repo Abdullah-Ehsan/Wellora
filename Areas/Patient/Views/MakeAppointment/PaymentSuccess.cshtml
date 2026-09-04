@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Payment Successful";
+}
+
+<div class="container mt-5 text-center">
+
+    <h2 class="text-success">
+        Payment Successful!
+    </h2>
+
+    <p>
+        Your payment has been submitted successfully.
+    </p>
+
+    <p>
+        Your appointment will appear in your appointments
+        once the payment has been confirmed.
+    </p>
+
+    <a asp-area="Patient"
+       asp-controller="MakeAppointment"
+       asp-action="PatientAppointment"
+       class="btn btn-primary">
+        View My Appointments
+    </a>
+
+</div>

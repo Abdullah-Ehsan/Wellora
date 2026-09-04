@@ -4,7 +4,7 @@
 @if (Model == null || !Model.Any())
 {
     <tr>
-        <td colspan="6" class="text-center py-5 border-0">
+        <td colspan="7" class="text-center py-5 border-0">
             <div id="emptyStateFlag"></div>
         </td>
     </tr>
@@ -17,18 +17,23 @@ else
             <td class="image-col-width">
                 <div class="doctor-table-profile-cell">
                     <img src="@(string.IsNullOrEmpty(item.ProfilePhoto)
-                                                          ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
-                                                          : Url.Content("~/" + item.ProfilePhoto))"
-                 alt="Doctor Avatar" class="doctor-thumbnail-pic" />
+                                                               ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                                                               : Url.Content("~/" + item.ProfilePhoto))"
+                 alt="Doctor Avatar"
+                 class="doctor-thumbnail-pic" />
         </div>
     </td>
 
             <td>
-                <span class="doctor-name-text">Dr. @item.DoctorName</span>
+                <span class="doctor-name-text">
+                    Dr. @item.DoctorName
+                </span>
             </td>
 
             <td>
-                <span class="specialization-badge">@item.Specialization</span>
+                <span class="specialization-badge">
+                    @item.Specialization
+                </span>
             </td>
 
             <td class="date-cell-highlight">
@@ -45,15 +50,117 @@ else
 
             <td>
                 <div class="table-action-buttons-cell">
-                    <a href="@Url.Action("ViewTicket", "MakeAppointment", new { area = "Patient", id = item.AppointmentId })"
-                       class="btn-table-action btn-view text-decoration-none">View</a>
 
-                    <a href="@Url.Action("ViewTicket", "MakeAppointment", new { area = "Patient", id = item.AppointmentId, autoPrint = true })"
-                       class="btn-table-action btn-print" title="Print Ticket">
-                        <img src="@Url.Content("~/images/Patient/Appointment/print.png")" alt="Print" class="btn-print-icon" />
+                    <a href="@Url.Action(
+                                               "ViewTicket",
+                                               "MakeAppointment",
+                                               new
+                                               {
+                                                   area = "Patient",
+                                                   id = item.AppointmentId
+                                               })"
+               class="btn-table-action btn-view text-decoration-none">
+                View
+            </a>
+
+                    <a href="@Url.Action(
+                                               "ViewTicket",
+                                               "MakeAppointment",
+                                               new
+                                               {
+                                                   area = "Patient",
+                                                   id = item.AppointmentId,
+                                                   autoPrint = true
+                                               })"
+               class="btn-table-action btn-print"
+               title="Print Ticket">
+
+                        <img src="@Url.Content("~/images/Patient/Appointment/print.png")"
+                             alt="Print"
+                             class="btn-print-icon" />
+
                     </a>
+
                 </div>
             </td>
         </tr>
     }
+}
+
+@* =========================================================
+   PAGINATION
+   ========================================================= *@
+
+@if (ViewBag.TotalPages != null && ViewBag.TotalPages > 1)
+{
+    <tr class="pagination-row">
+        <td colspan="7" class="pagination-cell">
+
+            <div class="appointments-pagination"
+                 data-current-page="@ViewBag.CurrentPage"
+                 data-total-pages="@ViewBag.TotalPages">
+
+                <button type="button"
+                        class="pagination-btn pagination-prev"
+                        data-page="@(ViewBag.CurrentPage - 1)"
+                        @(ViewBag.CurrentPage <= 1 ? "disabled" : "")>
+                    ‹
+                </button>
+
+                @{
+                    int currentPage = ViewBag.CurrentPage;
+                    int totalPages = ViewBag.TotalPages;
+
+                    int startPage = Math.Max(1, currentPage - 2);
+                    int endPage = Math.Min(totalPages, currentPage + 2);
+                }
+
+                @if (startPage > 1)
+                {
+                    <button type="button"
+                            class="pagination-btn pagination-number"
+                            data-page="1">
+                        1
+                    </button>
+
+                    @if (startPage > 2)
+                    {
+                        <span class="pagination-dots">...</span>
+                    }
+                }
+
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <button type="button"
+                            class="pagination-btn pagination-number @(i == currentPage ? "active" : "")"
+                            data-page="@i">
+                        @i
+                    </button>
+                }
+
+                @if (endPage < totalPages)
+                {
+                    @if (endPage < totalPages - 1)
+                    {
+                        <span class="pagination-dots">...</span>
+                    }
+
+                    <button type="button"
+                            class="pagination-btn pagination-number"
+                            data-page="@totalPages">
+                        @totalPages
+                    </button>
+                }
+
+                <button type="button"
+                        class="pagination-btn pagination-next"
+                        data-page="@(ViewBag.CurrentPage + 1)"
+                        @(ViewBag.CurrentPage >= totalPages ? "disabled" : "")>
+                    ›
+                </button>
+
+            </div>
+
+        </td>
+    </tr>
 }

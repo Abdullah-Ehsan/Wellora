@@ -1,15 +1,15 @@
 ﻿@using Wellora.Areas.Patient.ViewModels.MakeAppointment
 @model IEnumerable<PatientAppointmentItem>
+
 @{
     ViewData["Title"] = "Upcoming Appointments";
 }
 
 <link rel="stylesheet" href="~/css/patient/PatientAppointment.css" asp-append-version="true">
-
 <div class="appointments-page-wrapper container-fluid p-0">
     <div class="split-layout-grid d-flex align-items-stretch min-vh-100">
-
         <aside class="filter-sidebar-panel flex-shrink-0 mt-2">
+
             <div class="sidebar-main-title border-bottom pb-3 mb-4 text-uppercase tracking-wider font-weight-bold">
                 Filter Directory
             </div>
@@ -18,7 +18,9 @@
                 <label class="filter-group-title text-white-50 small font-weight-bold text-uppercase mb-2 d-block">
                     Date Order Priority
                 </label>
-                <select id="dateSortFilter" class="custom-select-box form-control border-0 shadow-sm">
+
+                <select id="dateSortFilter"
+                        class="custom-select-box form-control border-0 shadow-sm">
                     <option value="nearest">Nearest First</option>
                     <option value="farthest">Farthest First</option>
                 </select>
@@ -28,7 +30,9 @@
                 <label class="filter-group-title text-white-50 small font-weight-bold text-uppercase mb-2 d-block">
                     Consultation Fee
                 </label>
-                <select id="feeSortFilter" class="custom-select-box form-control border-0 shadow-sm">
+
+                <select id="feeSortFilter"
+                        class="custom-select-box form-control border-0 shadow-sm">
                     <option value="">All Fee Layouts</option>
                     <option value="lowToHigh">Lowest Fee First</option>
                     <option value="highToLow">Highest Fee First</option>
@@ -39,19 +43,26 @@
                 <label class="filter-group-title text-white-50 small font-weight-bold text-uppercase mb-2 d-block">
                     Time Window Slots
                 </label>
-                <select id="timeSlotFilter" class="custom-select-box form-control border-0 shadow-sm">
+
+                <select id="timeSlotFilter"
+                        class="custom-select-box form-control border-0 shadow-sm">
                     <option value="">All Day Windows</option>
                     <option value="morning">Morning (3 AM - 12 PM)</option>
                     <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
                     <option value="evening">Evening (5 PM - 3 AM)</option>
                 </select>
             </div>
+
         </aside>
 
-        <main class="appointments-feed-list flex-grow-1 px-2 pt-2 bg-white">
 
-            <div id="tableWrapper" class="table-responsive-wrapper table-responsive shadow-sm border rounded d-none w-100">
+        <main class="appointments-feed-list flex-grow-1 px-2 pt-2">
+
+            <div id="tableWrapper"
+                 class="table-responsive-wrapper table-responsive shadow-sm border rounded d-none w-100">
+
                 <table class="appointments-data-table table m-0">
+
                     <thead>
                         <tr>
                             <th scope="col" class="border-0"></th>
@@ -63,18 +74,29 @@
                             <th scope="col" class="border-0">Actions</th>
                         </tr>
                     </thead>
+
                     <tbody id="appointmentsTableBody">
                     </tbody>
+
                 </table>
+
             </div>
 
-            <div id="emptyStateContainer" class="d-none w-100 text-center py-0">
+            <div id="emptyStateContainer"
+                 class="d-none w-100 text-center py-0">
             </div>
+
         </main>
 
+
     </div>
+
 </div>
 
 @section Scripts {
-    <script src="~/js/patientappointment.js" asp-append-version="true"></script>
+
+    <script src="~/js/patientappointment.js"
+            asp-append-version="true"></script>
+
+
 }
