@@ -1,24 +1,243 @@
 ﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.MedicalHistoryViewModel
 
-<div class="card">
-    <h2>Medical History</h2>
-    <form hx-post="/PatientProfile/UpdateMedicalHistory" hx-target="#profileContent">
-        <div>
-            <label>Allergies</label>
-            <textarea name="Allergies">@Model.Allergies</textarea>
+<link rel="stylesheet"
+      href="~/css/patient/profile/medical_history.css"
+      asp-append-version="true" />
+
+<div class="patient-profile-info">
+
+    <div class="card patient-profile-card">
+
+        <!-- =========================================================
+             HEADER
+             ========================================================= -->
+        <div class="card-header">
+
+            <div class="d-flex align-items-center gap-2">
+
+                <div class="patient-section-icon">
+                    <i class="bi bi-heart-pulse"></i>
+                </div>
+
+                <div>
+                    <h5 class="mb-0">
+                        Medical History
+                    </h5>
+
+                    <small class="text-muted">
+                        Keep your important medical information up to date
+                    </small>
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            <label>Medical Conditions</label>
-            <textarea name="MedicalConditions">@Model.MedicalConditions</textarea>
+
+
+        <div class="card-body">
+
+            <form method="post"
+                  hx-post="@Url.Action(
+                                                  "UpdateMedicalHistory",
+                                                  "PatientProfile",
+                                                  new { area = "Patient" }
+                                              )"
+                  hx-target="#profileContent"
+                  hx-swap="innerHTML"
+                  hx-indicator="#profileLoading">
+
+                @Html.AntiForgeryToken()
+
+
+                <div class="row g-4">
+
+
+                    <!-- =================================================
+                         ALLERGIES
+                         ================================================= -->
+                    <div class="col-12">
+
+                        <label for="allergies"
+                               class="form-label">
+
+                            Allergies
+
+                        </label>
+
+                        <textarea id="allergies"
+                                  name="Allergies"
+                                  class="form-control medical-history-textarea"
+                                  rows="4"
+                                  maxlength="500"
+                                  placeholder="List any allergies, or type 'None' if you have no known allergies.">@Model.Allergies</textarea>
+
+                        <div class="form-text">
+                            Maximum 500 characters.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MEDICAL CONDITIONS
+                         ================================================= -->
+                    <div class="col-12">
+
+                        <label for="medicalConditions"
+                               class="form-label">
+
+                            Medical Conditions
+
+                        </label>
+
+                        <textarea id="medicalConditions"
+                                  name="MedicalConditions"
+                                  class="form-control medical-history-textarea"
+                                  rows="4"
+                                  maxlength="500"
+                                  placeholder="Describe any current or previous medical conditions.">@Model.MedicalConditions</textarea>
+
+                        <div class="form-text">
+                            Maximum 500 characters.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MEDICATIONS
+                         ================================================= -->
+                    <div class="col-12">
+
+                        <label for="medications"
+                               class="form-label">
+
+                            Medications
+
+                        </label>
+
+                        <textarea id="medications"
+                                  name="Medications"
+                                  class="form-control medical-history-textarea"
+                                  rows="4"
+                                  maxlength="500"
+                                  placeholder="List any medications you currently take.">@Model.Medications</textarea>
+
+                        <div class="form-text">
+                            Maximum 500 characters.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                    BLOOD GROUP
+                    ================================================= -->
+                    <div class="col-12">
+
+                        <label class="form-label">
+                            Blood Group
+                        </label>
+
+                        <div class="row g-2">
+
+                            <!-- Blood Type -->
+                            <div class="col-12 col-md-6">
+
+                                <select name="BloodType"
+                                        id="bloodType"
+                                        class="form-select">
+
+                                    <option value="">
+                                        Select blood type
+                                    </option>
+
+                                    <option value="A"
+                                            selected="@(Model.BloodGroup?.StartsWith("A") == true && !Model.BloodGroup.StartsWith("AB"))">
+                                        A
+                                    </option>
+
+                                    <option value="B"
+                                            selected="@(Model.BloodGroup?.StartsWith("B") == true)">
+                                        B
+                                    </option>
+
+                                    <option value="AB"
+                                            selected="@(Model.BloodGroup?.StartsWith("AB") == true)">
+                                        AB
+                                    </option>
+
+                                    <option value="O"
+                                            selected="@(Model.BloodGroup?.StartsWith("O") == true)">
+                                        O
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- Rh Factor -->
+                            <div class="col-12 col-md-6">
+
+                                <select name="BloodRh"
+                                        id="bloodRh"
+                                        class="form-select">
+
+                                    <option value="">
+                                        Select Rh factor
+                                    </option>
+
+                                    <option value="+"
+                                            selected="@(Model.BloodGroup?.EndsWith("+") == true)">
+                                        Positive (+)
+                                    </option>
+
+                                    <option value="-"
+                                            selected="@(Model.BloodGroup?.EndsWith("-") == true)">
+                                        Negative (-)
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-text">
+                            Select your blood type and Rh factor.
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+                <!-- =====================================================
+                     SAVE BUTTON
+                     ===================================================== -->
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button type="submit"
+                            class="btn patient-save-button">
+
+                        <i class="bi bi-check-lg me-1"></i>
+
+                        Save Medical History
+
+                    </button>
+
+                </div>
+
+            </form>
+
         </div>
-        <div>
-            <label>Medications</label>
-            <textarea name="Medications">@Model.Medications</textarea>
-        </div>
-        <div>
-            <label>Blood Group</label>
-            <input type="text" name="BloodGroup" value="@Model.BloodGroup" />
-        </div>
-        <button type="submit" class="btn-teal">Save Medical History</button>
-    </form>
+
+    </div>
+
 </div>
+
+
+

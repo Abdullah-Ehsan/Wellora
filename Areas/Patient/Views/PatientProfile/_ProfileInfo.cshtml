@@ -1,40 +1,485 @@
 ﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.ProfileInfoViewModel
 
-<div class="card">
-    <h2>Profile Information</h2>
-    <form hx-post="/PatientProfile/UpdateProfileInfo" hx-target="#profileContent">
-        <div>
-            <label>Full Name</label>
-            <input type="text" name="FullName" value="@Model.FullName" />
+<link rel="stylesheet"
+      href="~/css/patient/profile/profile_info.css"
+      asp-append-version="true" />
+
+<div class="patient-profile-info">
+
+    <form method="post"
+          enctype="multipart/form-data"
+          hx-post="@Url.Action(
+                                  "UpdateProfileInfo",
+                                  "PatientProfile",
+                                  new { area = "Patient" }
+                              )"
+          hx-target="#profileContent"
+          hx-swap="innerHTML"
+          hx-indicator="#profileLoading">
+
+        @Html.AntiForgeryToken()
+
+        <!-- PROFILE PHOTO -->
+        <div class="card patient-profile-card mb-4">
+
+            <div class="card-body">
+
+                <div class="patient-profile-photo-section text-center">
+
+                    <div class="patient-profile-photo-wrapper mx-auto">
+
+                        <img src="@(string.IsNullOrEmpty(Model.ProfilePhoto)
+                                                                   ? Url.Content("~/User/Patient/Profile_Picture/default.png")
+                                                                   : Url.Content("~/" + Model.ProfilePhoto))"
+                             alt="Patient Profile"
+                             class="patient-profile-photo"
+                             id="profilePhotoPreview" />
+
+                    </div>
+
+                    <div class="mt-3">
+
+                        <label for="profilePhotoFile"
+                               class="btn btn-outline-primary">
+
+                            <i class="bi bi-camera me-1"></i>
+                            Change Photo
+
+                        </label>
+
+                        <input type="file"
+                               id="profilePhotoFile"
+                               name="profilePhotoFile"
+                               class="d-none"
+                               accept="image/jpeg,image/png,image/webp" />
+
+                    </div>
+
+                    <div class="small text-muted mt-2">
+                        JPG, PNG or WebP. Maximum recommended size: 5 MB.
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            <label>Date of Birth</label>
-            <input type="date" name="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+
+
+        <!-- PERSONAL INFORMATION -->
+        <div class="card patient-profile-card mb-4">
+
+            <div class="card-header">
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <div class="patient-section-icon">
+                        <i class="bi bi-person"></i>
+                    </div>
+
+                    <div>
+
+                        <h5 class="mb-0">
+                            Personal Information
+                        </h5>
+
+                        <small class="text-muted">
+                            Update your personal information
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <!-- FIRST NAME -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="firstName"
+                               class="form-label">
+
+                            First Name
+
+                        </label>
+
+                        <input type="text"
+                               id="firstName"
+                               name="FirstName"
+                               class="form-control"
+                               value="@Model.FirstName"
+                               maxlength="100"
+                               autocomplete="given-name"
+                               placeholder="Enter first name"
+                               required />
+
+                    </div>
+
+
+                    <!-- LAST NAME -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="lastName"
+                               class="form-label">
+
+                            Last Name
+
+                        </label>
+
+                        <input type="text"
+                               id="lastName"
+                               name="LastName"
+                               class="form-control"
+                               value="@Model.LastName"
+                               maxlength="100"
+                               autocomplete="family-name"
+                               placeholder="Enter last name"
+                               required />
+
+                    </div>
+
+
+                    <!-- DATE OF BIRTH -->
+                    <div class="col-12 col-md-6">
+
+                        <label class="form-label">
+                            Date of Birth
+                        </label>
+
+                        <div class="row g-2">
+
+                            <!-- MONTH -->
+                            <div class="col-5">
+
+                                <select class="form-select"
+                                        name="DateOfBirthMonth"
+                                        required>
+
+                                    <option value="">
+                                        Month
+                                    </option>
+
+                                    @for (int month = 1; month <= 12; month++)
+                                    {
+                                        <option value="@month"
+                                                selected="@(Model.DateOfBirth.Month == month)">
+
+                                            @(new DateTime(2000, month, 1).ToString("MMMM"))
+
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- DAY -->
+                            <div class="col-3">
+
+                                <select class="form-select"
+                                        name="DateOfBirthDay"
+                                        required>
+
+                                    <option value="">
+                                        Day
+                                    </option>
+
+                                    @for (int day = 1; day <= 31; day++)
+                                    {
+                                        <option value="@day"
+                                                selected="@(Model.DateOfBirth.Day == day)">
+
+                                            @day
+
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- YEAR -->
+                            <div class="col-4">
+
+                                <select class="form-select"
+                                        name="DateOfBirthYear"
+                                        required>
+
+                                    <option value="">
+                                        Year
+                                    </option>
+
+                                    @{
+                                        var currentYear = DateTime.UtcNow.Year;
+                                    }
+
+                                    @for (
+                                                                        int year = currentYear;
+                                                                        year >= currentYear - 120;
+                                                                        year--
+                                                                        )
+                                    {
+                                        <option value="@year"
+                                                selected="@(Model.DateOfBirth.Year == year)">
+
+                                            @year
+
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENDER -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="gender"
+                               class="form-label">
+
+                            Gender
+
+                        </label>
+
+                        <select id="gender"
+                                name="Gender"
+                                class="form-select"
+                                required>
+
+                            <option value="">
+                                Select gender
+                            </option>
+
+                            <option value="male"
+                                    selected="@(Model.Gender == "male")">
+                                Male
+                            </option>
+
+                            <option value="female"
+                                    selected="@(Model.Gender == "female")">
+                                Female
+                            </option>
+
+                            <option value="other"
+                                    selected="@(Model.Gender == "other")">
+                                Other
+                            </option>
+
+                            <option value="prefer_not_to_say"
+                                    selected="@(Model.Gender == "prefer_not_to_say")">
+                                Prefer not to say
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+                    <div class="col-12">
+
+                        <label for="address"
+                               class="form-label">
+
+                            Address
+
+                        </label>
+
+                        <textarea id="address"
+                                  name="Address"
+                                  class="form-control"
+                                  rows="3"
+                                  maxlength="255"
+                                  autocomplete="street-address"
+                                  placeholder="Enter your address">@Model.Address</textarea>
+
+                    </div>
+
+
+                    <!-- PREFERRED LANGUAGE -->
+                    <div class="col-12">
+
+                        <label for="preferredLanguage"
+                               class="form-label">
+
+                            Preferred Language
+
+                        </label>
+
+                        <input type="text"
+                               id="preferredLanguage"
+                               name="PreferredLanguage"
+                               class="form-control"
+                               value="@Model.PreferredLanguage"
+                               maxlength="30"
+                               placeholder="Type language (e.g. English, Urdu)"
+                               autocomplete="language" />
+
+                        <div class="form-text">
+                            Enter your preferred language. You can enter more than one language separated by a comma.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            <label>Gender</label>
-            <input type="text" name="Gender" value="@Model.Gender" />
+
+
+        <!-- ACCOUNT INFORMATION -->
+        <div class="card patient-profile-card mb-4">
+
+            <div class="card-header">
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <div class="patient-section-icon">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+
+                    <div>
+
+                        <h5 class="mb-0">
+                            Account Information
+                        </h5>
+
+                        <small class="text-muted">
+                            Your login and account details
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <!-- EMAIL -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="email"
+                               class="form-label">
+
+                            Email
+
+                        </label>
+
+                        <input type="email"
+                               id="email"
+                               name="Email"
+                               class="form-control"
+                               value="@Model.Email"
+                               maxlength="255"
+                               autocomplete="email"
+                               placeholder="Enter email address"
+                               required />
+
+                    </div>
+
+
+                    <!-- USERNAME -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="username"
+                               class="form-label">
+
+                            Username
+
+                        </label>
+
+                        <input type="text"
+                               id="username"
+                               name="Username"
+                               class="form-control"
+                               value="@Model.Username"
+                               maxlength="100"
+                               autocomplete="username"
+                               placeholder="Enter username"
+                               required />
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            <label>Address</label>
-            <input type="text" name="Address" value="@Model.Address" />
+
+
+        <!-- SAVE -->
+        <div class="d-flex justify-content-end mb-3">
+
+            <button type="submit"
+                    class="btn patient-save-button">
+
+                <i class="bi bi-check-lg me-1"></i>
+
+                Save Profile Information
+
+            </button>
+
         </div>
-        <div>
-            <label>Preferred Language</label>
-            <input type="text" name="PreferredLanguage" value="@Model.PreferredLanguage" />
-        </div>
-        <div>
-            <label>Email</label>
-            <input type="email" name="Email" value="@Model.Email" />
-        </div>
-        <div>
-            <label>Username</label>
-            <input type="text" name="Username" value="@Model.Username" />
-        </div>
-        <div>
-            <label>Profile Photo URL</label>
-            <input type="text" name="ProfilePhoto" value="@Model.ProfilePhoto" />
-        </div>
-        <button type="submit" class="btn-teal">Save Profile Info</button>
+
     </form>
+
 </div>
+
+
+<script>
+
+    document.addEventListener("change", function (event) {
+
+        if (event.target.id !== "profilePhotoFile") {
+            return;
+        }
+
+        const file = event.target.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+
+            event.target.value = "";
+
+            return;
+        }
+
+        const preview =
+            document.getElementById("profilePhotoPreview");
+
+        if (!preview) {
+            return;
+        }
+
+        const imageUrl =
+            URL.createObjectURL(file);
+
+        preview.src = imageUrl;
+
+        preview.onload = function () {
+            URL.revokeObjectURL(imageUrl);
+        };
+
+    });
+
+</script>

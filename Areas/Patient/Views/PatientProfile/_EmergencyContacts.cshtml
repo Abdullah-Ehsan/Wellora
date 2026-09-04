@@ -1,16 +1,117 @@
 ﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.EmergencyContactsViewModel
 
-<div class="card">
-    <h2>Emergency Contacts</h2>
-    <form hx-post="/PatientProfile/UpdateEmergencyContacts" hx-target="#profileContent">
-        <div>
-            <label>Contact Name</label>
-            <input type="text" name="EmergencyContactName" value="@Model.EmergencyContactName" />
+<link rel="stylesheet"
+      href="~/css/patient/profile/profile_info.css"
+      asp-append-version="true" />
+
+<div class="patient-profile-info">
+
+    <div class="card patient-profile-card">
+
+        <div class="card-header">
+
+            <div class="d-flex align-items-center gap-2">
+
+                <div class="patient-section-icon">
+                    <i class="bi bi-telephone-plus"></i>
+                </div>
+
+                <div>
+                    <h5 class="mb-0">
+                        Emergency Contact
+                    </h5>
+
+                    <small class="text-muted">
+                        Add someone who can be contacted in case of an emergency
+                    </small>
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            <label>Contact Phone</label>
-            <input type="text" name="EmergencyContactPhone" value="@Model.EmergencyContactPhone" />
+
+
+        <div class="card-body">
+
+            <form method="post"
+                  hx-post="@Url.Action(
+                                                  "UpdateEmergencyContacts",
+                                                  "PatientProfile",
+                                                  new { area = "Patient" }
+                                              )"
+                  hx-target="#profileContent"
+                  hx-swap="innerHTML"
+                  hx-indicator="#profileLoading">
+
+                @Html.AntiForgeryToken()
+
+
+                <div class="row g-3">
+
+                    <!-- Contact Name -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="EmergencyContactName"
+                               class="form-label">
+
+                            Contact Name
+
+                        </label>
+
+                        <input type="text"
+                               id="EmergencyContactName"
+                               name="EmergencyContactName"
+                               class="form-control"
+                               value="@Model.EmergencyContactName"
+                               maxlength="100"
+                               autocomplete="name"
+                               placeholder="Enter contact name" />
+
+                    </div>
+
+
+                    <!-- Contact Phone -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="EmergencyContactPhone"
+                               class="form-label">
+
+                            Contact Phone
+
+                        </label>
+
+                        <input type="tel"
+                               id="EmergencyContactPhone"
+                               name="EmergencyContactPhone"
+                               class="form-control"
+                               value="@Model.EmergencyContactPhone"
+                               maxlength="20"
+                               autocomplete="tel"
+                               placeholder="Enter phone number" />
+
+                    </div>
+
+                </div>
+
+
+                <!-- Save Button -->
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button type="submit"
+                            class="btn patient-save-button">
+
+                        <i class="bi bi-check-lg me-1"></i>
+
+                        Save Emergency Contact
+
+                    </button>
+
+                </div>
+
+            </form>
+
         </div>
-        <button type="submit" class="btn-teal">Save Emergency Contact</button>
-    </form>
+
+    </div>
+
 </div>

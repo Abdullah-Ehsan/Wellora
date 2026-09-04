@@ -1,6 +1,380 @@
-﻿@model dynamic
+﻿@model Wellora.Areas.Patient.ViewModels.PatientProfile.OutsideDoctorViewModel
 
-<div class="card">
-    <h2>Doctor Information</h2>
-    <p>No doctor information available yet.</p>
+<link rel="stylesheet"
+      href="~/css/patient/profile/doctor_info.css"
+      asp-append-version="true" />
+
+<div class="patient-profile-info">
+
+    <div class="card patient-profile-card">
+
+        <!-- =========================================================
+             HEADER
+             ========================================================= -->
+        <div class="card-header">
+
+            <div class="d-flex align-items-center gap-2">
+
+                <div class="patient-section-icon">
+                    <i class="bi bi-person-badge"></i>
+                </div>
+
+                <div>
+                    <h5 class="mb-0">
+                        Doctor Information
+                    </h5>
+
+                    <small class="text-muted">
+                        Primary doctor information
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <!-- =====================================================
+                 INFORMATION NOTICE
+                 ===================================================== -->
+
+            <div class="doctor-catalog-notice">
+
+                <div class="doctor-catalog-notice-icon">
+                    <i class="bi bi-info-circle"></i>
+                </div>
+
+                <div>
+
+                    <h6 class="mb-1">
+                        Before adding a doctor
+                    </h6>
+
+                    <p class="mb-0">
+                        Only fill in this section if your current or
+                        previous primary doctor is not available in the
+                        Wellora doctor catalog.
+                    </p>
+
+                    <p class="mb-0 mt-1">
+                        If your doctor is already in the catalog, please
+                        select your doctor from the catalog instead.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form method="post"
+                  enctype="multipart/form-data"
+                  hx-post="@Url.Action(
+                                                  "UpdateDoctorInfo",
+                                                  "PatientProfile",
+                                                  new { area = "Patient" }
+                                              )"
+                  hx-target="#profileContent"
+                  hx-swap="innerHTML"
+                  hx-indicator="#profileLoading">
+
+                @Html.AntiForgeryToken()
+
+
+                <!-- =================================================
+                     DOCTOR PHOTO
+                     ================================================= -->
+
+                <div class="doctor-photo-section text-center">
+
+                    <div class="doctor-photo-wrapper mx-auto">
+
+                        @if (!string.IsNullOrWhiteSpace(Model.DoctorPhoto))
+                        {
+                            <img src="@Url.Content("~/" + Model.DoctorPhoto)"
+                                 alt="Doctor Photo"
+                                 class="doctor-profile-photo"
+                                 id="doctorPhotoPreview" />
+                        }
+                        else
+                        {
+                            <div class="doctor-profile-photo-placeholder"
+                                 id="doctorPhotoPreview">
+
+                                <i class="bi bi-person-badge"></i>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="mt-3">
+
+                        <label for="doctorPhotoFile"
+                               class="btn btn-outline-primary doctor-photo-button">
+
+                            <i class="bi bi-camera me-1"></i>
+
+                            Change Doctor Photo
+
+                        </label>
+
+                        <input type="file"
+                               id="doctorPhotoFile"
+                               name="doctorPhotoFile"
+                               class="d-none"
+                               accept="image/jpeg,image/png,image/webp" />
+
+                    </div>
+
+
+                    <div class="small text-muted mt-2">
+                        JPG, PNG or WebP. Maximum recommended size: 5 MB.
+                    </div>
+
+                </div>
+
+
+                <hr class="doctor-section-divider" />
+
+
+                <!-- =================================================
+                     DOCTOR INFORMATION
+                     ================================================= -->
+
+                <div class="row g-3">
+
+
+                    <!-- Doctor Name -->
+                    <div class="col-12">
+
+                        <label for="doctorName"
+                               class="form-label">
+
+                            Doctor Name
+
+                        </label>
+
+                        <input type="text"
+                               id="doctorName"
+                               name="DoctorName"
+                               class="form-control"
+                               value="@Model.DoctorName"
+                               maxlength="150"
+                               autocomplete="name"
+                               placeholder="Enter doctor's full name"
+                               required />
+
+                    </div>
+
+
+                    <!-- Specialty -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="doctorSpecialty"
+                               class="form-label">
+
+                            Specialty
+
+                        </label>
+
+                        <input type="text"
+                               id="doctorSpecialty"
+                               name="DoctorSpecialty"
+                               class="form-control"
+                               value="@Model.DoctorSpecialty"
+                               maxlength="100"
+                               placeholder="e.g. Cardiologist" />
+
+                    </div>
+
+
+                    <!-- Hospital -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="hospitalName"
+                               class="form-label">
+
+                            Hospital / Clinic
+
+                        </label>
+
+                        <input type="text"
+                               id="hospitalName"
+                               name="HospitalName"
+                               class="form-control"
+                               value="@Model.HospitalName"
+                               maxlength="200"
+                               placeholder="Enter hospital or clinic name" />
+
+                    </div>
+
+
+                    <!-- City -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="hospitalCity"
+                               class="form-label">
+
+                            City
+
+                        </label>
+
+                        <input type="text"
+                               id="hospitalCity"
+                               name="HospitalCity"
+                               class="form-control"
+                               value="@Model.HospitalCity"
+                               maxlength="100"
+                               autocomplete="address-level2"
+                               placeholder="Enter city" />
+
+                    </div>
+
+
+                    <!-- Country -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="hospitalCountry"
+                               class="form-label">
+
+                            Country
+
+                        </label>
+
+                        <input type="text"
+                               id="hospitalCountry"
+                               name="HospitalCountry"
+                               class="form-control"
+                               value="@Model.HospitalCountry"
+                               maxlength="100"
+                               autocomplete="country-name"
+                               placeholder="Enter country" />
+
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="doctorPhone"
+                               class="form-label">
+
+                            Phone Number
+
+                        </label>
+
+                        <input type="tel"
+                               id="doctorPhone"
+                               name="DoctorPhone"
+                               class="form-control"
+                               value="@Model.DoctorPhone"
+                               maxlength="30"
+                               autocomplete="tel"
+                               placeholder="Enter doctor's phone number" />
+
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="doctorEmail"
+                               class="form-label">
+
+                            Email Address
+
+                        </label>
+
+                        <input type="email"
+                               id="doctorEmail"
+                               name="DoctorEmail"
+                               class="form-control"
+                               value="@Model.DoctorEmail"
+                               maxlength="150"
+                               autocomplete="email"
+                               placeholder="Enter doctor's email address" />
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SAVE BUTTON
+                     ================================================= -->
+
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button type="submit"
+                            class="btn patient-save-button">
+
+                        <i class="bi bi-check-lg me-1"></i>
+
+                        Save Doctor Information
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+<script>
+
+    /*
+     * Doctor photo preview.
+     */
+
+    document.addEventListener("change", function (event) {
+
+        if (event.target.id !== "doctorPhotoFile") {
+            return;
+        }
+
+        const file = event.target.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        const preview =
+            document.getElementById("doctorPhotoPreview");
+
+        if (!preview) {
+            return;
+        }
+
+        const imageUrl =
+            URL.createObjectURL(file);
+
+        if (preview.tagName === "IMG") {
+
+            preview.src = imageUrl;
+
+        }
+        else {
+
+            const image =
+                document.createElement("img");
+
+            image.src = imageUrl;
+            image.alt = "Doctor Photo";
+            image.className = "doctor-profile-photo";
+            image.id = "doctorPhotoPreview";
+
+            preview.replaceWith(image);
+        }
+
+    });
+
+</script>
