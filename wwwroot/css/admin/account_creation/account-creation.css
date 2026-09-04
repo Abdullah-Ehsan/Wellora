@@ -1,0 +1,443 @@
+﻿/* =========================================================
+   ADMIN ACCOUNT CREATION PAGE
+========================================================= */
+
+.admin-account-page {
+    min-height: 100vh;
+    background-color: var(--gray-50);
+    color: var(--gray-800);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.admin-account-header {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+    .admin-account-header h4 {
+        color: var(--gray-800);
+        font-weight: 600;
+    }
+
+    .admin-account-header p {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+    }
+
+
+/* =========================================================
+   PAGE BODY
+========================================================= */
+
+.admin-account-body {
+    padding: 1.5rem;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.admin-account-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
+}
+
+
+    /* =========================================================
+   CARD HEADER
+========================================================= */
+
+    .admin-account-card .card-header {
+        padding: 1.25rem 1.5rem;
+        background-color: var(--white-25);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+        .admin-account-card .card-header h5 {
+            color: var(--gray-800);
+            font-weight: 600;
+        }
+
+        .admin-account-card .card-header p {
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+
+
+/* =========================================================
+   SECTION ICON
+========================================================= */
+
+.admin-section-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0.65rem;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.admin-account-card .card-body {
+    padding: 1.5rem;
+}
+
+
+/* =========================================================
+   FORM LABELS
+========================================================= */
+
+.admin-account-card .form-label {
+    margin-bottom: 0.5rem;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+.admin-account-card .form-control,
+.admin-account-card .form-select {
+    min-height: 44px;
+    border: 1px solid var(--border-strong);
+    border-radius: 0.5rem;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+
+    /* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+    .admin-account-card .form-control::placeholder {
+        color: var(--gray-500);
+        opacity: 0.8;
+    }
+
+
+    /* =========================================================
+   FOCUS
+========================================================= */
+
+    .admin-account-card .form-control:focus,
+    .admin-account-card .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* =========================================================
+   PASSWORD INPUT GROUP
+========================================================= */
+
+.admin-account-card .input-group .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+/* =========================================================
+   GENERATE PASSWORD BUTTON
+========================================================= */
+
+.admin-generate-password-button {
+    min-height: 44px;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--primary);
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+    .admin-generate-password-button:hover {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: var(--white-25);
+    }
+
+
+/* =========================================================
+   FORM HELP TEXT
+========================================================= */
+
+.admin-account-card .form-text {
+    margin-top: 0.4rem;
+    color: var(--gray-500);
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.admin-account-card .text-danger {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.admin-account-divider {
+    margin: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--border-subtle);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   SAVE / CREATE BUTTON
+========================================================= */
+
+.admin-save-button {
+    min-height: 42px;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--primary);
+    border-radius: 0.5rem;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+    .admin-save-button:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: var(--white-25);
+    }
+
+    .admin-save-button:active {
+        background-color: var(--primary-active);
+        border-color: var(--primary-active);
+        transform: translateY(1px);
+    }
+
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.admin-account-alert {
+    border-radius: 0.6rem;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   ADMIN CARD
+========================================================= */
+
+.admin-admin-card {
+    border-color: var(--border-subtle);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .admin-account-page {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+
+/* =========================================================
+   DARK PAGE HEADER
+========================================================= */
+
+.dark .admin-account-header {
+    background-color: var(--surface);
+    border-color: var(--border) !important;
+}
+
+    .dark .admin-account-header h4 {
+        color: var(--text);
+    }
+
+    .dark .admin-account-header p {
+        color: var(--text-muted);
+    }
+
+
+/* =========================================================
+   DARK CARD
+========================================================= */
+
+.dark .admin-account-card {
+    background-color: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+
+    /* =========================================================
+   DARK CARD HEADER
+========================================================= */
+
+    .dark .admin-account-card .card-header {
+        background-color: var(--surface);
+        border-color: var(--border);
+    }
+
+        .dark .admin-account-card .card-header h5 {
+            color: var(--text);
+        }
+
+        .dark .admin-account-card .card-header p {
+            color: var(--text-muted);
+        }
+
+
+    /* =========================================================
+   DARK FORM LABEL
+========================================================= */
+
+    .dark .admin-account-card .form-label {
+        color: var(--text);
+    }
+
+
+    /* =========================================================
+   DARK FORM CONTROLS
+========================================================= */
+
+    .dark .admin-account-card .form-control,
+    .dark .admin-account-card .form-select {
+        background-color: var(--surface-2);
+        border-color: var(--border-strong);
+        color: var(--text);
+    }
+
+        .dark .admin-account-card .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+
+    /* =========================================================
+   DARK FORM HELP
+========================================================= */
+
+    .dark .admin-account-card .form-text {
+        color: var(--text-muted);
+    }
+
+
+/* =========================================================
+   DARK DIVIDER
+========================================================= */
+
+.dark .admin-account-divider {
+    border-color: var(--border);
+}
+
+
+/* =========================================================
+   DARK GENERATE BUTTON
+========================================================= */
+
+.dark .admin-generate-password-button {
+    background-color: var(--primary-bg);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+    .dark .admin-generate-password-button:hover {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: var(--white-25);
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .admin-account-header {
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .admin-account-body {
+        padding: 1rem;
+    }
+
+    .admin-account-card .card-header {
+        padding: 1rem;
+    }
+
+    .admin-account-card .card-body {
+        padding: 1rem;
+    }
+
+    .admin-save-button {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 575.98px) {
+
+    .admin-account-header h4 {
+        font-size: 1.1rem;
+    }
+
+    .admin-account-header p {
+        font-size: 0.82rem;
+    }
+
+    .admin-account-card .card-header h5 {
+        font-size: 1rem;
+    }
+
+    .admin-account-card .card-header p {
+        font-size: 0.8rem;
+    }
+
+    .admin-section-icon {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 1rem;
+    }
+
+    .admin-generate-password-button {
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+}

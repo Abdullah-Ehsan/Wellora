@@ -119,3 +119,90 @@ footer a {
         background-color: #17a589;
         color: #fff;
     }
+
+
+
+
+
+
+
+
+/* =========================================================
+   PATIENT LAYOUT HEADER & FOOTER - DARK MODE
+========================================================= */
+
+/* Header / Navbar */
+.dark header .navbar {
+    background-color: var(--surface) !important;
+    border-color: var(--border) !important;
+}
+
+.dark header .navbar-brand {
+    color: var(--text) !important;
+}
+
+    .dark header .navbar-brand:hover {
+        color: var(--text) !important;
+    }
+
+
+/* Navigation links */
+.dark header .navbar .nav-link {
+    color: var(--text-muted) !important;
+}
+
+    .dark header .navbar .nav-link:hover,
+    .dark header .navbar .nav-link:focus {
+        color: var(--primary) !important;
+    }
+
+
+/* Profile dropdown button */
+.dark header .navbar .dropdown > .btn {
+    background-color: transparent !important;
+}
+
+
+/* Profile dropdown */
+.dark header .navbar .dropdown-menu {
+    background-color: var(--surface) !important;
+    border-color: var(--border) !important;
+}
+
+    .dark header .navbar .dropdown-menu .dropdown-item {
+        color: var(--text) !important;
+    }
+
+        .dark header .navbar .dropdown-menu .dropdown-item:hover {
+            background-color: var(--primary-bg) !important;
+            color: var(--primary) !important;
+        }
+
+
+/* Dropdown divider */
+.dark header .navbar .dropdown-divider {
+    border-color: var(--border) !important;
+}
+
+
+/* =========================================================
+   FOOTER - DARK MODE
+========================================================= */
+
+.dark footer {
+    background-color: var(--surface) !important;
+    border-color: var(--border) !important;
+    color: var(--text-muted) !important;
+}
+
+    .dark footer p {
+        color: var(--text-muted) !important;
+    }
+
+    .dark footer a {
+        color: var(--text-muted) !important;
+    }
+
+        .dark footer a:hover {
+            color: var(--primary) !important;
+        }

@@ -1,0 +1,60 @@
+﻿.profile-page {
+    background: var(--gray-50);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* LEFT CARD */
+.profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+/* PROFILE IMAGE */
+.profile-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px; /* square but soft */
+    border: 4px solid var(--primary);
+    background: var(--gray-200);
+}
+
+/* INFO BOXES */
+.info-label {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+.info-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+/* HEADER STRIP */
+.profile-header {
+    background: linear-gradient(135deg, var(--primary), var(--aqua-400));
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+}
+
+/* BADGES */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--badge-radius);
+    font-size: 0.8rem;
+}
+
+.status-active {
+    background: var(--success);
+    color: white;
+}
+
+.status-inactive {
+    background: var(--danger);
+    color: white;
+}

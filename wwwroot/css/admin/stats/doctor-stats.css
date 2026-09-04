@@ -1,0 +1,1679 @@
+﻿/* =========================================================
+   DOCTOR STATS PAGE
+========================================================= */
+
+.doctor-stats-page {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 32px 28px 60px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.doctor-stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding: 26px 30px;
+    background: linear-gradient( 135deg, #ffffff 0%, #f5fbfa 100% );
+    border: 1px solid #dcebea;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(20, 94, 89, 0.06);
+}
+
+.doctor-stats-header-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.doctor-stats-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    color: #ffffff;
+    background: linear-gradient( 135deg, #167c78, #0f5f5b );
+    font-size: 25px;
+    box-shadow: 0 7px 18px rgba(22, 124, 120, 0.20);
+}
+
+.doctor-stats-header h1 {
+    margin: 0 0 5px;
+    color: #173f3d;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.doctor-stats-header p {
+    margin: 0;
+    color: #6c8180;
+    font-size: 14px;
+}
+
+    .doctor-stats-header p strong {
+        color: #167c78;
+    }
+
+.doctor-stats-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 17px;
+    color: #167c78;
+    background: #ffffff;
+    border: 1px solid #cfe1df;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+    .doctor-stats-back-btn:hover {
+        color: #ffffff;
+        background: #167c78;
+        border-color: #167c78;
+    }
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.doctor-stats-section {
+    margin-bottom: 32px;
+}
+
+.doctor-stats-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 18px;
+}
+
+.doctor-section-icon {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #167c78;
+    background: #eaf6f5;
+    border-radius: 12px;
+    font-size: 19px;
+}
+
+.doctor-stats-section-heading h2 {
+    margin: 0;
+    color: #193f3d;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.doctor-stats-section-heading p {
+    margin: 2px 0 0;
+    color: #7a8d8c;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   DOCTOR PROFILE
+========================================================= */
+
+.doctor-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #dfeceb;
+    border-radius: 17px;
+    box-shadow: 0 7px 25px rgba(20, 94, 89, 0.05);
+}
+
+.doctor-profile-image {
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #eaf6f5;
+}
+
+    .doctor-profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.doctor-profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #167c78;
+    font-size: 36px;
+}
+
+.doctor-profile-details h2 {
+    margin: 0;
+    color: #173f3d;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.doctor-specialization {
+    margin: 4px 0 14px;
+    color: #167c78;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.doctor-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+}
+
+    .doctor-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: #718483;
+        font-size: 13px;
+    }
+
+    .doctor-meta i {
+        color: #167c78;
+    }
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.doctor-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.doctor-stat-card {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 19px;
+    background: #ffffff;
+    border: 1px solid #dfebea;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(20, 94, 89, 0.045);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .doctor-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(20, 94, 89, 0.09);
+    }
+
+.doctor-stat-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #167c78;
+    background: #eaf6f5;
+    border-radius: 12px;
+    font-size: 19px;
+}
+
+.doctor-stat-card span {
+    display: block;
+    margin-bottom: 4px;
+    color: #7b8c8b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.doctor-stat-card strong {
+    display: block;
+    color: #193f3d;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PERFORMANCE
+========================================================= */
+
+.doctor-performance-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.doctor-performance-card {
+    position: relative;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #dfebea;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(20, 94, 89, 0.045);
+}
+
+.performance-icon {
+    width: 37px;
+    height: 37px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #167c78;
+    background: #eaf6f5;
+    border-radius: 10px;
+}
+
+.doctor-performance-card span {
+    display: block;
+    color: #758786;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.doctor-performance-card strong {
+    display: block;
+    color: #173f3d;
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   HIGHLIGHTS
+========================================================= */
+
+.doctor-highlight-grid,
+.doctor-financial-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.doctor-highlight-card {
+    padding: 20px;
+    background: linear-gradient( 135deg, #f8fcfb, #edf8f7 );
+    border: 1px solid #d6e9e7;
+    border-radius: 15px;
+}
+
+    .doctor-highlight-card span {
+        display: block;
+        color: #6e8583;
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+
+    .doctor-highlight-card strong {
+        display: block;
+        color: #167c78;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .doctor-highlight-card small {
+        display: block;
+        margin-top: 5px;
+        color: #7f9290;
+        font-size: 12px;
+    }
+
+.revenue-highlight strong {
+    color: #167c78;
+}
+
+
+/* =========================================================
+   CHART GRID
+========================================================= */
+
+.doctor-chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.doctor-chart-card {
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #dfeceb;
+    border-radius: 16px;
+    box-shadow: 0 7px 23px rgba(20, 94, 89, 0.045);
+}
+
+    .doctor-chart-card.chart-wide {
+        grid-column: span 2;
+    }
+
+.doctor-chart-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px 21px 5px;
+}
+
+    .doctor-chart-header h3 {
+        margin: 0;
+        color: #193f3d;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .doctor-chart-header p {
+        margin: 4px 0 0;
+        color: #80908f;
+        font-size: 12px;
+    }
+
+    .doctor-chart-header > i {
+        color: #167c78;
+        font-size: 20px;
+    }
+
+.doctor-chart-container {
+    width: 100%;
+    min-height: 320px;
+    padding: 8px 15px 15px;
+    box-sizing: border-box;
+}
+
+.doctor-chart-small {
+    min-height: 290px;
+}
+
+
+/* =========================================================
+   PATIENT SUMMARY
+========================================================= */
+
+.doctor-patient-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.doctor-patient-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    background: #ffffff;
+    border: 1px solid #dfeceb;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(20, 94, 89, 0.045);
+}
+
+    .doctor-patient-summary-card > i {
+        width: 43px;
+        height: 43px;
+        min-width: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #167c78;
+        background: #eaf6f5;
+        border-radius: 11px;
+    }
+
+    .doctor-patient-summary-card span {
+        display: block;
+        color: #7a8d8c;
+        font-size: 12px;
+    }
+
+    .doctor-patient-summary-card strong {
+        display: block;
+        margin-top: 2px;
+        color: #193f3d;
+        font-size: 21px;
+    }
+
+
+/* =========================================================
+   UPCOMING APPOINTMENTS
+========================================================= */
+
+.upcoming-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.upcoming-summary-card {
+    padding: 19px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #dfeceb;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(20, 94, 89, 0.045);
+}
+
+    .upcoming-summary-card span {
+        display: block;
+        color: #788b89;
+        font-size: 12px;
+    }
+
+    .upcoming-summary-card strong {
+        display: block;
+        margin-top: 5px;
+        color: #167c78;
+        font-size: 27px;
+    }
+
+
+/* =========================================================
+   UPCOMING TABLE
+========================================================= */
+
+.upcoming-table-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #dfeceb;
+    border-radius: 16px;
+    box-shadow: 0 7px 23px rgba(20, 94, 89, 0.045);
+}
+
+.upcoming-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 19px 21px;
+    border-bottom: 1px solid #e5efee;
+}
+
+    .upcoming-table-header h3 {
+        margin: 0;
+        color: #193f3d;
+        font-size: 16px;
+    }
+
+    .upcoming-table-header span {
+        color: #167c78;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+.doctor-upcoming-table {
+    margin: 0;
+    color: #526967;
+}
+
+    .doctor-upcoming-table thead th {
+        padding: 13px 18px;
+        color: #6f8582;
+        background: #f7fbfa;
+        border-bottom: 1px solid #e3eeec;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+    }
+
+    .doctor-upcoming-table tbody td {
+        padding: 15px 18px;
+        vertical-align: middle;
+        border-bottom: 1px solid #edf3f2;
+        font-size: 13px;
+    }
+
+    .doctor-upcoming-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+.patient-name {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #294845;
+    font-weight: 600;
+}
+
+.patient-avatar {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #167c78;
+    background: #eaf6f5;
+    border-radius: 50%;
+}
+
+.appointment-date strong {
+    display: block;
+    color: #3c5653;
+    font-size: 12px;
+}
+
+.appointment-date small {
+    display: block;
+    margin-top: 2px;
+    color: #899a98;
+    font-size: 11px;
+}
+
+.status-badge,
+.payment-badge {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #eaf6f5;
+    color: #167c78;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.payment-badge {
+    background: #f0f5f4;
+    color: #607572;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-upcoming-state {
+    padding: 50px 25px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #dfeceb;
+    border-radius: 16px;
+}
+
+    .empty-upcoming-state > div {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #167c78;
+        background: #eaf6f5;
+        border-radius: 50%;
+        font-size: 25px;
+    }
+
+    .empty-upcoming-state h3 {
+        margin: 0;
+        color: #284744;
+        font-size: 17px;
+    }
+
+    .empty-upcoming-state p {
+        margin: 6px 0 0;
+        color: #849492;
+        font-size: 13px;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .doctor-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .doctor-performance-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .upcoming-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 992px) {
+
+    .doctor-stats-page {
+        padding: 25px 20px 50px;
+    }
+
+    .doctor-stats-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .doctor-stats-back-btn {
+        align-self: flex-start;
+    }
+
+    .doctor-chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-chart-card.chart-wide {
+        grid-column: span 1;
+    }
+
+    .doctor-highlight-grid,
+    .doctor-financial-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-patient-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .doctor-stats-page {
+        padding: 18px 14px 40px;
+    }
+
+    .doctor-stats-header {
+        padding: 20px;
+    }
+
+        .doctor-stats-header h1 {
+            font-size: 24px;
+        }
+
+    .doctor-stats-header-content {
+        align-items: flex-start;
+    }
+
+    .doctor-stats-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        font-size: 20px;
+    }
+
+    .doctor-profile-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .doctor-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .doctor-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-performance-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .upcoming-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .doctor-chart-container {
+        min-height: 290px;
+    }
+
+    .doctor-chart-small {
+        min-height: 270px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .doctor-performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .upcoming-summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .doctor-profile-image {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+    }
+
+    .doctor-profile-details h2 {
+        font-size: 20px;
+    }
+
+    .doctor-stats-section-heading h2 {
+        font-size: 18px;
+    }
+
+    .doctor-chart-header {
+        padding: 17px 17px 4px;
+    }
+
+    .doctor-chart-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+
+/* =========================================================
+   DARK MODE SUPPORT
+========================================================= */
+
+[data-theme="dark"] .doctor-stats-header,
+[data-theme="dark"] .doctor-profile-card,
+[data-theme="dark"] .doctor-stat-card,
+[data-theme="dark"] .doctor-performance-card,
+[data-theme="dark"] .doctor-chart-card,
+[data-theme="dark"] .doctor-patient-summary-card,
+[data-theme="dark"] .upcoming-summary-card,
+[data-theme="dark"] .upcoming-table-card,
+[data-theme="dark"] .empty-upcoming-state {
+    background: #172b2a;
+    border-color: #294341;
+}
+
+    [data-theme="dark"] .doctor-stats-header h1,
+    [data-theme="dark"] .doctor-profile-details h2,
+    [data-theme="dark"] .doctor-stats-section-heading h2,
+    [data-theme="dark"] .doctor-stat-card strong,
+    [data-theme="dark"] .doctor-performance-card strong,
+    [data-theme="dark"] .doctor-chart-header h3,
+    [data-theme="dark"] .doctor-patient-summary-card strong,
+    [data-theme="dark"] .upcoming-table-header h3,
+    [data-theme="dark"] .empty-upcoming-state h3 {
+        color: #e5f2f0;
+    }
+
+    [data-theme="dark"] .doctor-stats-header p,
+    [data-theme="dark"] .doctor-stats-section-heading p,
+    [data-theme="dark"] .doctor-chart-header p,
+    [data-theme="dark"] .doctor-stat-card span,
+    [data-theme="dark"] .doctor-performance-card span,
+    [data-theme="dark"] .doctor-patient-summary-card span {
+        color: #9bb1ae;
+    }
+
+[data-theme="dark"] .doctor-upcoming-table thead th {
+    background: #1d3432;
+    color: #a7b9b7;
+}
+
+[data-theme="dark"] .doctor-upcoming-table tbody td {
+    border-color: #294341;
+    color: #b8c8c6;
+}
+
+[data-theme="dark"] .upcoming-table-header {
+    border-color: #294341;
+}
+
+
+/* =========================================================
+   DOCTOR STATISTICS - DARK MODE SURFACE OVERRIDES
+========================================================= */
+
+.dark .doctor-stats-page,
+[data-theme="dark"] .doctor-stats-page {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+
+    /* Main page header */
+
+    .dark .doctor-stats-page .page-header,
+    .dark .doctor-stats-page .stats-header,
+    .dark .doctor-stats-page .doctor-stats-header,
+    [data-theme="dark"] .doctor-stats-page .page-header,
+    [data-theme="dark"] .doctor-stats-page .stats-header,
+    [data-theme="dark"] .doctor-stats-page .doctor-stats-header {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* Header title and description */
+
+    .dark .doctor-stats-page h1,
+    .dark .doctor-stats-page h2,
+    .dark .doctor-stats-page h3,
+    .dark .doctor-stats-page h4,
+    [data-theme="dark"] .doctor-stats-page h1,
+    [data-theme="dark"] .doctor-stats-page h2,
+    [data-theme="dark"] .doctor-stats-page h3,
+    [data-theme="dark"] .doctor-stats-page h4 {
+        color: var(--text) !important;
+    }
+
+    .dark .doctor-stats-page p,
+    .dark .doctor-stats-page .subtitle,
+    .dark .doctor-stats-page .description,
+    .dark .doctor-stats-page .page-description,
+    [data-theme="dark"] .doctor-stats-page p,
+    [data-theme="dark"] .doctor-stats-page .subtitle,
+    [data-theme="dark"] .doctor-stats-page .description,
+    [data-theme="dark"] .doctor-stats-page .page-description {
+        color: var(--text-muted) !important;
+    }
+
+
+    /* Doctor profile / doctor information box */
+
+    .dark .doctor-stats-page .doctor-profile,
+    .dark .doctor-stats-page .doctor-info,
+    .dark .doctor-stats-page .profile-card,
+    .dark .doctor-stats-page .doctor-card,
+    [data-theme="dark"] .doctor-stats-page .doctor-profile,
+    [data-theme="dark"] .doctor-stats-page .doctor-info,
+    [data-theme="dark"] .doctor-stats-page .profile-card,
+    [data-theme="dark"] .doctor-stats-page .doctor-card {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* All statistic/info cards */
+
+    .dark .doctor-stats-page .stat-card,
+    .dark .doctor-stats-page .stats-card,
+    .dark .doctor-stats-page .summary-card,
+    .dark .doctor-stats-page .metric-card,
+    .dark .doctor-stats-page .info-card,
+    .dark .doctor-stats-page .performance-card,
+    .dark .doctor-stats-page .analytics-card,
+    [data-theme="dark"] .doctor-stats-page .stat-card,
+    [data-theme="dark"] .doctor-stats-page .stats-card,
+    [data-theme="dark"] .doctor-stats-page .summary-card,
+    [data-theme="dark"] .doctor-stats-page .metric-card,
+    [data-theme="dark"] .doctor-stats-page .info-card,
+    [data-theme="dark"] .doctor-stats-page .performance-card,
+    [data-theme="dark"] .doctor-stats-page .analytics-card {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+        /* Cards containing labels and values */
+
+        .dark .doctor-stats-page .stat-card *,
+        .dark .doctor-stats-page .stats-card *,
+        .dark .doctor-stats-page .summary-card *,
+        .dark .doctor-stats-page .metric-card *,
+        .dark .doctor-stats-page .info-card *,
+        .dark .doctor-stats-page .performance-card *,
+        [data-theme="dark"] .doctor-stats-page .stat-card *,
+        [data-theme="dark"] .doctor-stats-page .stats-card *,
+        [data-theme="dark"] .doctor-stats-page .summary-card *,
+        [data-theme="dark"] .doctor-stats-page .metric-card *,
+        [data-theme="dark"] .doctor-stats-page .info-card *,
+        [data-theme="dark"] .doctor-stats-page .performance-card * {
+            border-color: var(--border);
+        }
+
+
+    /* Muted labels inside cards */
+
+    .dark .doctor-stats-page .stat-label,
+    .dark .doctor-stats-page .card-label,
+    .dark .doctor-stats-page .metric-label,
+    .dark .doctor-stats-page .stat-description,
+    .dark .doctor-stats-page .muted,
+    [data-theme="dark"] .doctor-stats-page .stat-label,
+    [data-theme="dark"] .doctor-stats-page .card-label,
+    [data-theme="dark"] .doctor-stats-page .metric-label,
+    [data-theme="dark"] .doctor-stats-page .stat-description,
+    [data-theme="dark"] .doctor-stats-page .muted {
+        color: var(--text-muted) !important;
+    }
+
+
+    /* Numeric values */
+
+    .dark .doctor-stats-page .stat-value,
+    .dark .doctor-stats-page .metric-value,
+    .dark .doctor-stats-page .card-value,
+    [data-theme="dark"] .doctor-stats-page .stat-value,
+    [data-theme="dark"] .doctor-stats-page .metric-value,
+    [data-theme="dark"] .doctor-stats-page .card-value {
+        color: var(--text) !important;
+    }
+
+
+    /* Section headings */
+
+    .dark .doctor-stats-page .section-header,
+    .dark .doctor-stats-page .analytics-header,
+    .dark .doctor-stats-page .section-title,
+    [data-theme="dark"] .doctor-stats-page .section-header,
+    [data-theme="dark"] .doctor-stats-page .analytics-header,
+    [data-theme="dark"] .doctor-stats-page .section-title {
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* Chart cards and chart containers */
+
+    .dark .doctor-stats-page .chart-card,
+    .dark .doctor-stats-page .chart-container,
+    .dark .doctor-stats-page .chart-wrapper,
+    [data-theme="dark"] .doctor-stats-page .chart-card,
+    [data-theme="dark"] .doctor-stats-page .chart-container,
+    [data-theme="dark"] .doctor-stats-page .chart-wrapper {
+        background-color: var(--surface) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* Appointment table */
+
+    .dark .doctor-stats-page table,
+    [data-theme="dark"] .doctor-stats-page table {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+    }
+
+    .dark .doctor-stats-page thead,
+    [data-theme="dark"] .doctor-stats-page thead {
+        background-color: var(--surface-2) !important;
+    }
+
+    .dark .doctor-stats-page th,
+    .dark .doctor-stats-page td,
+    [data-theme="dark"] .doctor-stats-page th,
+    [data-theme="dark"] .doctor-stats-page td {
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+    .dark .doctor-stats-page tbody tr,
+    [data-theme="dark"] .doctor-stats-page tbody tr {
+        background-color: var(--surface) !important;
+    }
+
+        .dark .doctor-stats-page tbody tr:hover,
+        [data-theme="dark"] .doctor-stats-page tbody tr:hover {
+            background-color: var(--primary-bg) !important;
+        }
+
+
+    /* Empty state */
+
+    .dark .doctor-stats-page .empty-state,
+    .dark .doctor-stats-page .no-data,
+    [data-theme="dark"] .doctor-stats-page .empty-state,
+    [data-theme="dark"] .doctor-stats-page .no-data {
+        background-color: var(--surface) !important;
+        color: var(--text-muted) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* Icons and icon backgrounds */
+
+    .dark .doctor-stats-page .icon-wrapper,
+    .dark .doctor-stats-page .stat-icon,
+    .dark .doctor-stats-page .card-icon,
+    [data-theme="dark"] .doctor-stats-page .icon-wrapper,
+    [data-theme="dark"] .doctor-stats-page .stat-icon,
+    [data-theme="dark"] .doctor-stats-page .card-icon {
+        background-color: var(--primary-bg) !important;
+        color: var(--primary) !important;
+    }
+
+
+    /* Buttons */
+
+    .dark .doctor-stats-page button,
+    .dark .doctor-stats-page .btn,
+    [data-theme="dark"] .doctor-stats-page button,
+    [data-theme="dark"] .doctor-stats-page .btn {
+        border-color: var(--border) !important;
+    }
+
+
+    /* Remove remaining white backgrounds inside the page */
+
+    .dark .doctor-stats-page [style*="background: white"],
+    .dark .doctor-stats-page [style*="background-color: white"],
+    .dark .doctor-stats-page [style*="background:#fff"],
+    .dark .doctor-stats-page [style*="background: #fff"],
+    .dark .doctor-stats-page [style*="background-color:#fff"],
+    .dark .doctor-stats-page [style*="background-color: #fff"],
+    [data-theme="dark"] .doctor-stats-page [style*="background: white"],
+    [data-theme="dark"] .doctor-stats-page [style*="background-color: white"],
+    [data-theme="dark"] .doctor-stats-page [style*="background:#fff"],
+    [data-theme="dark"] .doctor-stats-page [style*="background: #fff"],
+    [data-theme="dark"] .doctor-stats-page [style*="background-color:#fff"],
+    [data-theme="dark"] .doctor-stats-page [style*="background-color: #fff"] {
+        background-color: var(--surface) !important;
+    }
+
+/* =========================================================
+   DOCTOR STATISTICS - ACTUAL DARK MODE BACKGROUNDS
+========================================================= */
+
+html.dark .doctor-stats-page {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+
+    /* Main header */
+
+    html.dark .doctor-stats-page .doctor-stats-header {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+    html.dark .doctor-stats-page .doctor-stats-header-content {
+        background-color: transparent !important;
+    }
+
+    html.dark .doctor-stats-page .doctor-stats-header h1 {
+        color: var(--text) !important;
+    }
+
+    html.dark .doctor-stats-page .doctor-stats-header p {
+        color: var(--text-muted) !important;
+    }
+
+
+    /* Doctor profile card */
+
+    html.dark .doctor-stats-page .doctor-profile-card {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+        html.dark .doctor-stats-page .doctor-profile-card h2 {
+            color: var(--text) !important;
+        }
+
+        html.dark .doctor-stats-page .doctor-profile-card p,
+        html.dark .doctor-stats-page .doctor-profile-card span {
+            color: var(--text-muted) !important;
+        }
+
+
+    /* Every section inside the page */
+
+    html.dark .doctor-stats-page .doctor-stats-section {
+        background-color: transparent !important;
+    }
+
+
+    /* Section headings */
+
+    html.dark .doctor-stats-page .doctor-stats-section-heading {
+        background-color: transparent !important;
+        color: var(--text) !important;
+    }
+
+        html.dark .doctor-stats-page .doctor-stats-section-heading h2 {
+            color: var(--text) !important;
+        }
+
+        html.dark .doctor-stats-page .doctor-stats-section-heading p {
+            color: var(--text-muted) !important;
+        }
+
+
+    /* All direct cards used by the statistics page */
+
+    html.dark .doctor-stats-page .doctor-stats-card,
+    html.dark .doctor-stats-page .doctor-stat-card,
+    html.dark .doctor-stats-page .stats-card,
+    html.dark .doctor-stats-page .stat-card,
+    html.dark .doctor-stats-page .performance-card,
+    html.dark .doctor-stats-page .analytics-card,
+    html.dark .doctor-stats-page .summary-card,
+    html.dark .doctor-stats-page .metric-card {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+        /* Force backgrounds of nested card elements */
+
+        html.dark .doctor-stats-page .doctor-stats-card > *,
+        html.dark .doctor-stats-page .doctor-stat-card > *,
+        html.dark .doctor-stats-page .stats-card > *,
+        html.dark .doctor-stats-page .stat-card > *,
+        html.dark .doctor-stats-page .performance-card > *,
+        html.dark .doctor-stats-page .analytics-card > *,
+        html.dark .doctor-stats-page .summary-card > *,
+        html.dark .doctor-stats-page .metric-card > * {
+            background-color: transparent !important;
+        }
+
+
+    /* Chart cards */
+
+    html.dark .doctor-stats-page .chart-card,
+    html.dark .doctor-stats-page .chart-panel,
+    html.dark .doctor-stats-page .chart-box {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* Remove inline white backgrounds */
+
+    html.dark .doctor-stats-page [style*="background-color: white"],
+    html.dark .doctor-stats-page [style*="background: white"],
+    html.dark .doctor-stats-page [style*="background-color: #fff"],
+    html.dark .doctor-stats-page [style*="background: #fff"],
+    html.dark .doctor-stats-page [style*="background-color:#fff"],
+    html.dark .doctor-stats-page [style*="background:#fff"],
+    html.dark .doctor-stats-page [style*="background-color: rgb(255, 255, 255)"],
+    html.dark .doctor-stats-page [style*="background: rgb(255, 255, 255)"] {
+        background-color: var(--surface) !important;
+    }
+
+
+    /* Generic white surfaces inside this page */
+
+    html.dark .doctor-stats-page .card,
+    html.dark .doctor-stats-page .panel,
+    html.dark .doctor-stats-page .box,
+    html.dark .doctor-stats-page .info-box {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
+
+
+    /* Text */
+
+    html.dark .doctor-stats-page h1,
+    html.dark .doctor-stats-page h2,
+    html.dark .doctor-stats-page h3,
+    html.dark .doctor-stats-page h4,
+    html.dark .doctor-stats-page strong {
+        color: var(--text) !important;
+    }
+
+    html.dark .doctor-stats-page p,
+    html.dark .doctor-stats-page small,
+    html.dark .doctor-stats-page .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+
+```css
+/* Doctor performance card - dark mode */
+html.dark .doctor-stats-page .doctor-performance-card {
+    background-color: var(--surface, #172b2a) !important;
+    border-color: var(--border, #294341) !important;
+    color: var(--text, #e8f2f0) !important;
+}
+
+/* Text inside the performance card */
+html.dark .doctor-stats-page .doctor-performance-card h1,
+html.dark .doctor-stats-page .doctor-performance-card h2,
+html.dark .doctor-stats-page .doctor-performance-card h3,
+html.dark .doctor-stats-page .doctor-performance-card h4,
+html.dark .doctor-stats-page .doctor-performance-card p,
+html.dark .doctor-stats-page .doctor-performance-card span,
+html.dark .doctor-stats-page .doctor-performance-card strong {
+    color: var(--text, #e8f2f0) !important;
+}
+
+/* Nested boxes inside the performance card */
+html.dark .doctor-stats-page .doctor-performance-card > *,
+html.dark .doctor-stats-page .doctor-performance-card .card-body,
+html.dark .doctor-stats-page .doctor-performance-card .card-content {
+    background-color: transparent !important;
+}
+
+
+
+```css
+/* =========================================================
+   DOCTOR STATS - COMPLETE DARK MODE OVERRIDES
+   ========================================================= */
+html.dark .doctor-stats-page {
+    background-color: var(--bg, #101c1b) !important;
+    color: var(--text, #e5f2f0) !important;
+}
+
+/* Header */
+html.dark .doctor-stats-page .doctor-stats-header {
+    background: var(--surface, #172b2a) !important;
+    border-color: var(--border, #294341) !important;
+    color: var(--text, #e5f2f0) !important;
+}
+
+    html.dark .doctor-stats-page .doctor-stats-header h1 {
+        color: var(--text, #e5f2f0) !important;
+    }
+
+    html.dark .doctor-stats-page .doctor-stats-header p {
+        color: var(--text-muted, #9bb1ae) !important;
+    }
+
+        html.dark .doctor-stats-page .doctor-stats-header p strong {
+            color: var(--primary, #5cc8bd) !important;
+        }
+
+/* Back button */
+html.dark .doctor-stats-page .doctor-stats-back-btn {
+    background: var(--surface-2, #203936) !important;
+    border-color: var(--border, #294341) !important;
+    color: var(--primary, #5cc8bd) !important;
+}
+
+/* Section headings */
+html.dark .doctor-stats-page .doctor-stats-section-heading h2 {
+    color: var(--text, #e5f2f0) !important;
+}
+
+html.dark .doctor-stats-page .doctor-stats-section-heading p {
+    color: var(--text-muted, #9bb1ae) !important;
+}
+
+/* Profile card */
+html.dark .doctor-stats-page .doctor-profile-card {
+    background: var(--surface, #172b2a) !important;
+    border-color: var(--border, #294341) !important;
+}
+
+html.dark .doctor-stats-page .doctor-profile-details h2 {
+    color: var(--text, #e5f2f0) !important;
+}
+
+html.dark .doctor-stats-page .doctor-meta span {
+    color: var(--text-muted, #9bb1ae) !important;
+}
+
+/* Summary cards */
+html.dark .doctor-stats-page .doctor-stat-card,
+html.dark .doctor-stats-page .doctor-performance-card,
+html.dark .doctor-stats-page .doctor-highlight-card,
+html.dark .doctor-stats-page .doctor-patient-summary-card,
+html.dark .doctor-stats-page .upcoming-summary-card,
+html.dark .doctor-stats-page .upcoming-table-card,
+html.dark .doctor-stats-page .empty-upcoming-state {
+    background: var(--surface, #172b2a) !important;
+    border-color: var(--border, #294341) !important;
+    color: var(--text, #e5f2f0) !important;
+}
+
+    /* Card labels */
+    html.dark .doctor-stats-page .doctor-stat-card span,
+    html.dark .doctor-stats-page .doctor-performance-card span,
+    html.dark .doctor-stats-page .doctor-highlight-card span,
+    html.dark .doctor-stats-page .doctor-highlight-card small,
+    html.dark .doctor-stats-page .doctor-patient-summary-card span,
+    html.dark .doctor-stats-page .upcoming-summary-card span {
+        color: var(--text-muted, #9bb1ae) !important;
+    }
+
+    /* Card values */
+    html.dark .doctor-stats-page .doctor-stat-card strong,
+    html.dark .doctor-stats-page .doctor-performance-card strong,
+    html.dark .doctor-stats-page .doctor-highlight-card strong,
+    html.dark .doctor-stats-page .doctor-patient-summary-card strong,
+    html.dark .doctor-stats-page .upcoming-summary-card strong {
+        color: var(--text, #e5f2f0) !important;
+    }
+
+/* Chart cards */
+html.dark .doctor-stats-page .doctor-chart-card {
+    background: var(--surface, #172b2a) !important;
+    border-color: var(--border, #294341) !important;
+}
+
+html.dark .doctor-stats-page .doctor-chart-header h3 {
+    color: var(--text, #e5f2f0) !important;
+}
+
+html.dark .doctor-stats-page .doctor-chart-header p {
+    color: var(--text-muted, #9bb1ae) !important;
+}
+
+/* Icon backgrounds */
+html.dark .doctor-stats-page .doctor-section-icon,
+html.dark .doctor-stats-page .doctor-stat-icon,
+html.dark .doctor-stats-page .performance-icon,
+html.dark .doctor-stats-page .doctor-patient-summary-card > i,
+html.dark .doctor-stats-page .doctor-profile-image,
+html.dark .doctor-stats-page .empty-upcoming-state > div {
+    background: var(--primary-bg, #203936) !important;
+    color: var(--primary, #5cc8bd) !important;
+}
+
+/* Upcoming table */
+html.dark .doctor-stats-page .upcoming-table-header {
+    border-color: var(--border, #294341) !important;
+}
+
+    html.dark .doctor-stats-page .upcoming-table-header h3 {
+        color: var(--text, #e5f2f0) !important;
+    }
+
+html.dark .doctor-stats-page .doctor-upcoming-table {
+    background: var(--surface, #172b2a) !important;
+    color: var(--text, #e5f2f0) !important;
+}
+
+    html.dark .doctor-stats-page .doctor-upcoming-table thead th {
+        background: var(--surface-2, #203936) !important;
+        color: var(--text-muted, #9bb1ae) !important;
+        border-color: var(--border, #294341) !important;
+    }
+
+    html.dark .doctor-stats-page .doctor-upcoming-table tbody tr,
+    html.dark .doctor-stats-page .doctor-upcoming-table tbody td {
+        background: var(--surface, #172b2a) !important;
+        color: var(--text, #e5f2f0) !important;
+        border-color: var(--border, #294341) !important;
+    }
+
+/* Remove white backgrounds from nested elements */
+html.dark .doctor-stats-page .doctor-performance-card *,
+html.dark .doctor-stats-page .doctor-stat-card *,
+html.dark .doctor-stats-page .doctor-highlight-card *,
+html.dark .doctor-stats-page .doctor-patient-summary-card *,
+html.dark .doctor-stats-page .doctor-chart-card * {
+    border-color: var(--border, #294341);
+}
+
+/* Empty state text */
+html.dark .doctor-stats-page .empty-upcoming-state h3 {
+    color: var(--text, #e5f2f0) !important;
+}
+
+html.dark .doctor-stats-page .empty-upcoming-state p {
+    color: var(--text-muted, #9bb1ae) !important;
+}
+
+```css
+/* Fix dark-mode status and payment badges */
+html.dark .doctor-stats-page .status-badge,
+html.dark .doctor-stats-page .payment-badge,
+html.dark .doctor-stats-page .appointment-status,
+html.dark .doctor-stats-page .payment-status {
+    background: transparent !important;
+    color: var(--text, #e5f2f0) !important;
+    border: 1px solid var(--border, #294341) !important;
+    box-shadow: none !important;
+}
+
+    /* Status colors */
+    html.dark .doctor-stats-page .status-badge.confirmed,
+    html.dark .doctor-stats-page .appointment-status.confirmed {
+        background: rgba(34, 197, 94, 0.16) !important;
+        color: #86efac !important;
+        border-color: rgba(34, 197, 94, 0.35) !important;
+    }
+
+    html.dark .doctor-stats-page .status-badge.pending,
+    html.dark .doctor-stats-page .appointment-status.pending {
+        background: rgba(234, 179, 8, 0.16) !important;
+        color: #fde047 !important;
+        border-color: rgba(234, 179, 8, 0.35) !important;
+    }
+
+    html.dark .doctor-stats-page .status-badge.cancelled,
+    html.dark .doctor-stats-page .appointment-status.cancelled {
+        background: rgba(239, 68, 68, 0.16) !important;
+        color: #fca5a5 !important;
+        border-color: rgba(239, 68, 68, 0.35) !important;
+    }
+
+    /* Payment colors */
+    html.dark .doctor-stats-page .payment-badge.paid,
+    html.dark .doctor-stats-page .payment-status.paid {
+        background: rgba(34, 197, 94, 0.16) !important;
+        color: #86efac !important;
+        border-color: rgba(34, 197, 94, 0.35) !important;
+    }
+
+    html.dark .doctor-stats-page .payment-badge.unpaid,
+    html.dark .doctor-stats-page .payment-status.unpaid {
+        background: rgba(239, 68, 68, 0.16) !important;
+        color: #fca5a5 !important;
+        border-color: rgba(239, 68, 68, 0.35) !important;
+    }
+
+/* Prevent charts from staying dark in light mode */
+html:not(.dark) .doctor-stats-page .doctor-chart-card,
+html:not(.dark) .doctor-stats-page .doctor-chart-container {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    border-color: #e5e7eb !important;
+}
+
+html:not(.dark) .doctor-stats-page .doctor-chart-header h3 {
+    color: #1f2937 !important;
+}
+
+html:not(.dark) .doctor-stats-page .doctor-chart-header p {
+    color: #6b7280 !important;
+}
+
+/* Chart.js canvas background */
+html:not(.dark) .doctor-stats-page canvas {
+    background: #ffffff !important;
+}
+
+```css
+/* =========================================================
+   DARK MODE - STATUS AND PAYMENT BADGES
+========================================================= */
+html.dark .doctor-stats-page .status-badge {
+    background: #263f3b !important;
+    background-color: #263f3b !important;
+    color: #8ee8d8 !important;
+    border: 1px solid #37645d !important;
+    box-shadow: none !important;
+}
+
+html.dark .doctor-stats-page .payment-badge {
+    background: #303a42 !important;
+    background-color: #303a42 !important;
+    color: #d5e0e8 !important;
+    border: 1px solid #4b5b66 !important;
+    box-shadow: none !important;
+}
+
+    /* Override any nested or inline white backgrounds */
+    html.dark .doctor-stats-page .status-badge *,
+    html.dark .doctor-stats-page .payment-badge * {
+        background: transparent !important;
+        color: inherit !important;
+    }
+
+/* =========================================================
+   LIGHT MODE - RESTORE ORIGINAL BADGE COLORS
+========================================================= */
+
+html:not(.dark) .doctor-stats-page .status-badge {
+    background: #eaf6f5 !important;
+    background-color: #eaf6f5 !important;
+    color: #167c78 !important;
+    border: none !important;
+}
+
+html:not(.dark) .doctor-stats-page .payment-badge {
+    background: #f0f5f4 !important;
+    background-color: #f0f5f4 !important;
+    color: #607572 !important;
+    border: none !important;
+}
+
+/* =========================================================
+   LIGHT MODE - FORCE CHARTS TO REMAIN LIGHT
+========================================================= */
+
+html:not(.dark) .doctor-stats-page .doctor-chart-card,
+html:not(.dark) .doctor-stats-page .doctor-chart-container,
+html:not(.dark) .doctor-stats-page .doctor-chart-small {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #284744 !important;
+    border-color: #dfeceb !important;
+}
+
+/* ApexCharts containers */
+html:not(.dark) .doctor-stats-page .apexcharts-canvas,
+html:not(.dark) .doctor-stats-page .apexcharts-svg,
+html:not(.dark) .doctor-stats-page .apexcharts-inner,
+html:not(.dark) .doctor-stats-page .apexcharts-graphical {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* ApexCharts text and labels in light mode */
+html:not(.dark) .doctor-stats-page .apexcharts-text,
+html:not(.dark) .doctor-stats-page .apexcharts-xaxis-label,
+html:not(.dark) .doctor-stats-page .apexcharts-yaxis-label,
+html:not(.dark) .doctor-stats-page .apexcharts-legend-text,
+html:not(.dark) .doctor-stats-page .apexcharts-title-text,
+html:not(.dark) .doctor-stats-page .apexcharts-subtitle-text {
+    fill: #607572 !important;
+    color: #607572 !important;
+}
+
+/* Chart grid lines in light mode */
+html:not(.dark) .doctor-stats-page .apexcharts-gridline {
+    stroke: #e5eeee !important;
+}
+
+/* Remove dark-mode filters/backgrounds from charts */
+html:not(.dark) .doctor-stats-page .apexcharts-svg,
+html:not(.dark) .doctor-stats-page .apexcharts-canvas svg {
+    filter: none !important;
+}
+
+/* Chart tooltip in light mode */
+html:not(.dark) .doctor-stats-page .apexcharts-tooltip {
+    background: #ffffff !important;
+    color: #284744 !important;
+    border: 1px solid #dfeceb !important;
+}
+
+html:not(.dark) .doctor-stats-page .apexcharts-tooltip-title {
+    background: #f7fbfa !important;
+    color: #284744 !important;
+    border-bottom: 1px solid #dfeceb !important;
+}
+
+```css
+/* =========================================================
+   FIX STATUS BADGE WHITE OVAL IN DARK MODE
+========================================================= */
+html.dark .doctor-stats-page .status-badge,
+html.dark .doctor-stats-page span.status-badge,
+html.dark .doctor-stats-page .badge.status-badge,
+html.dark .doctor-stats-page .status-badge[class*="bg-"] {
+    background: #263f3b !important;
+    background-color: #263f3b !important;
+    background-image: none !important;
+    color: #8ee8d8 !important;
+    border: 1px solid #37645d !important;
+    box-shadow: none !important;
+}
+
+/* Override Bootstrap status background classes */
+html.dark .doctor-stats-page .status-badge.bg-success,
+html.dark .doctor-stats-page .status-badge.bg-primary,
+html.dark .doctor-stats-page .status-badge.bg-info,
+html.dark .doctor-stats-page .status-badge.bg-warning,
+html.dark .doctor-stats-page .status-badge.bg-danger,
+html.dark .doctor-stats-page .status-badge.bg-secondary,
+html.dark .doctor-stats-page .status-badge.bg-light,
+html.dark .doctor-stats-page .status-badge.bg-white {
+    background: #263f3b !important;
+    background-color: #263f3b !important;
+    color: #8ee8d8 !important;
+}
+
+/* Remove any white background from children */
+html.dark .doctor-stats-page .status-badge *,
+html.dark .doctor-stats-page .status-badge::before,
+html.dark .doctor-stats-page .status-badge::after {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+/* Restore status badge in light mode */
+html:not(.dark) .doctor-stats-page .status-badge {
+    background: #eaf6f5 !important;
+    background-color: #eaf6f5 !important;
+    background-image: none !important;
+    color: #167c78 !important;
+    border: none !important;
+}
+
+/* FINAL DARK MODE STATUS BADGE FIX */
+html.dark .doctor-stats-page .doctor-upcoming-table .status-badge,
+html.dark .doctor-stats-page .status-badge,
+html.dark .doctor-stats-page span.status-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #263f3b !important;
+    background-color: #263f3b !important;
+    background-image: none !important;
+    color: #8ee8d8 !important;
+    -webkit-text-fill-color: #8ee8d8 !important;
+    border: 1px solid #37645d !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    padding: 5px 9px !important;
+    border-radius: 20px !important;
+}
+
+    /* Remove any pseudo-element creating the white oval */
+    html.dark .doctor-stats-page .status-badge::before,
+    html.dark .doctor-stats-page .status-badge::after {
+        content: none !important;
+        display: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+

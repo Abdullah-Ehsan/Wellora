@@ -1,0 +1,393 @@
+﻿/* =========================================================
+   ADMIN ANALYTICS
+   ========================================================= */
+
+.admin-analytics-page {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 32px 40px 60px;
+    box-sizing: border-box;
+}
+
+    /* Prevent children from creating horizontal overflow */
+    .admin-analytics-page,
+    .admin-analytics-page * {
+        box-sizing: border-box;
+    }
+
+        .admin-analytics-page .row {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+            .admin-analytics-page .row > * {
+                min-width: 0;
+            }
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.admin-analytics-header {
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.admin-analytics-title {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.admin-analytics-subtitle {
+    margin-top: 8px;
+    color: var(--secondary-text-color);
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.admin-analytics-section {
+    width: 100%;
+    margin-bottom: 42px;
+}
+
+.admin-analytics-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.admin-section-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 1.15rem;
+}
+
+.admin-analytics-section-heading h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.admin-analytics-section-heading p {
+    margin: 4px 0 0;
+    color: var(--secondary-text-color);
+    font-size: 0.88rem;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.admin-analytics-stat-card {
+    width: 100%;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    background: var(--card-background);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .admin-analytics-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+.admin-analytics-stat-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: rgba(13, 110, 253, 0.1);
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.admin-analytics-stat-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+    .admin-analytics-stat-content span {
+        color: var(--secondary-text-color);
+        font-size: 0.82rem;
+        font-weight: 500;
+    }
+
+    .admin-analytics-stat-content strong {
+        color: var(--text-color);
+        font-size: 1.45rem;
+        font-weight: 700;
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+
+/* =========================================================
+   CHART CARDS
+   ========================================================= */
+
+.admin-analytics-chart-card {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: 22px;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    background: var(--card-background);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.admin-analytics-chart-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+    .admin-analytics-chart-header > div {
+        min-width: 0;
+    }
+
+    .admin-analytics-chart-header h3 {
+        margin: 0;
+        color: var(--text-color);
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .admin-analytics-chart-header p {
+        margin: 5px 0 0;
+        color: var(--secondary-text-color);
+        font-size: 0.8rem;
+        line-height: 1.45;
+    }
+
+    .admin-analytics-chart-header > i {
+        flex-shrink: 0;
+        color: var(--primary-color);
+        font-size: 1.15rem;
+    }
+
+
+/* =========================================================
+   CHART CONTAINERS
+   ========================================================= */
+
+.admin-analytics-chart-container {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.admin-analytics-chart-container-small {
+    height: 280px;
+}
+
+.admin-analytics-chart-container-large {
+    height: 420px;
+}
+
+.admin-analytics-chart-container canvas {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1400px) {
+
+    .admin-analytics-page {
+        max-width: 1400px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+
+@media (max-width: 992px) {
+
+    .admin-analytics-page {
+        padding: 28px 24px 50px;
+    }
+
+    .admin-analytics-title {
+        font-size: 1.75rem;
+    }
+
+    .admin-analytics-section {
+        margin-bottom: 34px;
+    }
+
+    .admin-analytics-chart-container {
+        height: 300px;
+    }
+
+    .admin-analytics-chart-container-small {
+        height: 270px;
+    }
+
+    .admin-analytics-chart-container-large {
+        height: 380px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .admin-analytics-page {
+        padding: 24px 18px 45px;
+    }
+
+    .admin-analytics-section-heading {
+        align-items: flex-start;
+    }
+
+    .admin-section-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .admin-analytics-section-heading h2 {
+        font-size: 1.2rem;
+    }
+
+    .admin-analytics-stat-card {
+        padding: 18px;
+    }
+
+    .admin-analytics-chart-card {
+        padding: 18px;
+    }
+
+    .admin-analytics-chart-container {
+        height: 280px;
+    }
+
+    .admin-analytics-chart-container-small {
+        height: 260px;
+    }
+
+    .admin-analytics-chart-container-large {
+        height: 350px;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .admin-analytics-page {
+        padding: 20px 14px 40px;
+    }
+
+    .admin-analytics-header {
+        margin-bottom: 26px;
+    }
+
+    .admin-analytics-title {
+        font-size: 1.5rem;
+    }
+
+    .admin-analytics-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .admin-analytics-section-heading {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .admin-section-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    .admin-analytics-section-heading h2 {
+        font-size: 1.1rem;
+    }
+
+    .admin-analytics-section-heading p {
+        font-size: 0.78rem;
+    }
+
+    .admin-analytics-stat-card {
+        min-height: 95px;
+        padding: 16px;
+    }
+
+    .admin-analytics-stat-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+    }
+
+    .admin-analytics-stat-content strong {
+        font-size: 1.25rem;
+    }
+
+    .admin-analytics-chart-card {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .admin-analytics-chart-header {
+        margin-bottom: 14px;
+    }
+
+        .admin-analytics-chart-header h3 {
+            font-size: 0.92rem;
+        }
+
+        .admin-analytics-chart-header p {
+            font-size: 0.75rem;
+        }
+
+    .admin-analytics-chart-container,
+    .admin-analytics-chart-container-small {
+        height: 260px;
+    }
+
+    .admin-analytics-chart-container-large {
+        height: 320px;
+    }
+}

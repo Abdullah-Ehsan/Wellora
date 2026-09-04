@@ -1,0 +1,139 @@
+﻿.banned-page-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.banned-card {
+    max-width: 540px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #fee2e2;
+}
+
+.banned-icon-box {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px auto;
+    background: #fef2f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border: 2px solid #fecaca;
+}
+
+.banned-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #991b1b;
+    margin-bottom: 10px;
+}
+
+.banned-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #fee2e2;
+    color: #991b1b;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.banned-description {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.banned-instructions {
+    text-align: left;
+    background: #f9fafb;
+    border-left: 4px solid #ef4444;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+    .banned-instructions h5 {
+        margin: 0 0 10px 0;
+        color: #111827;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .banned-instructions ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #4b5563;
+        font-size: 0.9rem;
+    }
+
+    .banned-instructions li {
+        margin-bottom: 6px;
+    }
+
+.btn-banned-logout {
+    background: #115e59;
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+}
+
+    .btn-banned-logout:hover {
+        background: #0f766e;
+    }
+
+/* Dark Mode */
+.dark .banned-card {
+    background: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dark .banned-icon-box {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.dark .banned-title {
+    color: #f87171;
+}
+
+.dark .banned-badge {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+.dark .banned-description {
+    color: #d1d5db;
+}
+
+.dark .banned-instructions {
+    background: #111827;
+    border-left-color: #ef4444;
+}
+
+    .dark .banned-instructions h5 {
+        color: #f3f4f6;
+    }
+
+    .dark .banned-instructions ul {
+        color: #9ca3af;
+    }

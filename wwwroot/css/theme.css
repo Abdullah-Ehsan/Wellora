@@ -402,8 +402,6 @@
 
 
 .dark {
-
-
     --white: #000000;
     --black: #ffffff;
     --gray-50: #0b0f14;
@@ -416,9 +414,6 @@
     --gray-700: #d1d5db;
     --gray-800: #e5e7eb;
     --gray-900: #f9fafb;
-
-
-
     /* TEAL adjusted for dark mode (brighter, more visible) */
     --teal-50: #042f2e;
     --teal-100: #064e4a;
@@ -429,9 +424,6 @@
     --teal-600: #2fe6d2;
     --teal-700: #52f0df;
     --teal-800: #7af7ea;
-
-
-
     /* Semantic overrides */
     --primary: var(--teal-400);
     --primary-hover: var(--teal-300);
@@ -439,16 +431,11 @@
     --success: #22c55e;
     --danger: #ff4d4d;
     --warning: #ffb020;
-
-
     /* Dark surfaces */
     --bg: #0b0f14;
     --surface: #111827;
     --text: #f9fafb;
     --border: #1f2937;
-
-
-
     /* =============================
      🧱 SURFACE SYSTEM
   ============================= */
@@ -460,9 +447,6 @@
     --text-muted: #d1d5db;
     --border: #1f2937;
     --border-strong: #374151;
-
-
-
     /* =============================
      🎯 PRIMARY (teal system)
   ============================= */
@@ -471,9 +455,6 @@
     --primary-active: var(--teal-500);
     --primary-subtle: var(--teal-100);
     --primary-bg: var(--teal-50);
-
-
-
     /* =============================
      🟢 SUCCESS
   ============================= */
@@ -481,9 +462,6 @@
     --success-hover: var(--green-400);
     --success-active: var(--green-600);
     --success-subtle: var(--green-100);
-
-
-
     /* =============================
      🔴 DANGER
   ============================= */
@@ -491,9 +469,6 @@
     --danger-hover: var(--coral-400);
     --danger-active: var(--coral-600);
     --danger-subtle: var(--coral-100);
-
-
-
     /* =============================
      🟠 WARNING
   ============================= */
@@ -501,16 +476,11 @@
     --warning-hover: var(--orange-400);
     --warning-active: var(--orange-600);
     --warning-subtle: var(--orange-100);
-
-
     /* =============================
      🎯 FOCUS / ACCESSIBILITY
   ============================= */
     --focus: var(--teal-400);
     --ring: var(--teal-300);
-
-
-
     /* =============================
    🌑 DARK MODE OVERRIDES
     ============================= */
@@ -527,4 +497,549 @@
     /* surfaces */
     --surface-2: var(--gray-200);
     --surface-3: var(--gray-300);
+
+    /* =========================================================
+   WEBSITE DARK MODE - GLOBAL SURFACES
+    ========================================================= */
+
+    --bg: #0b0f14;
+    --surface: #111827;
+    --text: #f9fafb;
+    --text-muted: #d1d5db;
+    --border: #1f2937;
+    --border-strong: #374151;
+}
+
+    /* =========================================================
+   DARK MODE GLOBAL ELEMENTS
+========================================================= */
+
+    .dark body {
+        background-color: var(--bg);
+        color: var(--text);
+    }
+
+    .dark main {
+        color: var(--text);
+    }
+
+    .dark h1,
+    .dark h2,
+    .dark h3,
+    .dark h4,
+    .dark h5,
+    .dark h6 {
+        color: var(--text);
+    }
+
+    .dark p,
+    .dark span,
+    .dark label {
+        color: var(--text);
+    }
+
+
+
+/* =========================================================
+   ADMIN HEADER & FOOTER
+========================================================= */
+
+.admin-navbar {
+    background-color: var(--white-25);
+    color: var(--gray-800);
+}
+
+.admin-footer {
+    background-color: var(--white-25);
+    color: var(--gray-500);
+}
+
+
+/* =============================
+   DARK MODE
+============================= */
+
+.dark .admin-navbar {
+    background-color: var(--surface);
+    color: var(--text);
+}
+
+.dark .admin-footer {
+    background-color: var(--surface);
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   DARK MODE HEADER & FOOTER TEXT
+========================================================= */
+
+.dark .admin-navbar .nav-link {
+    color: var(--text) !important;
+}
+
+.dark .admin-navbar .navbar-brand {
+    color: var(--text) !important;
+}
+
+.dark .admin-footer,
+.dark .admin-footer a {
+    color: var(--text-muted) !important;
+}
+
+    .dark .admin-footer a:hover {
+        color: var(--primary) !important;
+    }
+
+
+/* =========================================================
+   DARK MODE - MAIN PAGE
+========================================================= */
+
+.dark body {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+.dark main {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+
+/* =========================================================
+   DOCTOR DETAIL PAGE THEME TOKENS
+   Add at the END of theme.css
+========================================================= */
+
+/* =============================
+   LIGHT MODE
+============================= */
+
+:root {
+    --doctor-page-bg: #eefefe;
+    --doctor-surface: var(--white-25);
+    --doctor-surface-soft: var(--gray-50);
+    --doctor-text: var(--gray-800);
+    --doctor-text-muted: var(--gray-600);
+    --doctor-dark-teal: var(--teal-800);
+    --doctor-medium-teal: var(--teal-500);
+    --doctor-light-teal: var(--teal-300);
+    --doctor-table-header: var(--teal-700);
+    --doctor-table-work: #83c5be;
+    --doctor-table-work-text: var(--teal-900);
+    --doctor-table-off: #edf6f9;
+    --doctor-table-off-text: var(--teal-700);
+    --doctor-shadow: rgba(0, 77, 77, 0.20);
+    --doctor-shadow-hover: rgba(0, 77, 77, 0.30);
+}
+
+
+/* =============================
+   DARK MODE
+============================= */
+
+.dark {
+    --doctor-page-bg: var(--bg);
+    --doctor-surface: var(--surface);
+    --doctor-surface-soft: var(--surface-2);
+    --doctor-text: var(--text);
+    --doctor-text-muted: var(--text-muted);
+    --doctor-dark-teal: var(--teal-800);
+    --doctor-medium-teal: var(--teal-500);
+    --doctor-light-teal: var(--teal-700);
+    --doctor-table-header: var(--teal-800);
+    --doctor-table-work: var(--teal-850);
+    --doctor-table-work-text: var(--text);
+    --doctor-table-off: var(--surface-2);
+    --doctor-table-off-text: var(--teal-400);
+    --doctor-shadow: rgba(0, 0, 0, 0.40);
+    --doctor-shadow-hover: rgba(26, 169, 154, 0.25);
+}
+
+
+/* =========================================================
+   APPOINTMENT BOOKING PAGE THEME
+   Light mode = existing teal theme
+   Dark mode = blue theme
+========================================================= */
+
+:root {
+    /* Page */
+    --appointment-page-bg: var(--gray-50);
+    --appointment-surface: var(--white-25);
+    --appointment-surface-soft: var(--gray-75);
+    --appointment-text: var(--gray-800);
+    --appointment-text-muted: var(--gray-600);
+    /* Borders */
+    --appointment-border: var(--teal-200);
+    --appointment-border-strong: var(--teal-500);
+    /* Primary */
+    --appointment-primary: var(--teal-500);
+    --appointment-primary-hover: var(--teal-600);
+    --appointment-primary-dark: var(--teal-800);
+    --appointment-primary-light: var(--teal-200);
+    /* Calendar */
+    --appointment-calendar-header: var(--teal-800);
+    --appointment-date-available: var(--teal-800);
+    --appointment-date-hover: var(--teal-700);
+    --appointment-date-selected: var(--white-25);
+    /* Slots */
+    --appointment-slot: var(--teal-300);
+    --appointment-slot-hover: var(--teal-600);
+    --appointment-slot-selected: var(--teal-900);
+    /* Disabled */
+    --appointment-disabled-bg: var(--gray-200);
+    --appointment-disabled-text: var(--gray-500);
+    /* Header */
+    --appointment-header-start: var(--teal-700);
+    --appointment-header-end: var(--teal-800);
+    /* Shadows */
+    --appointment-shadow: rgba(0, 63, 63, 0.10);
+    --appointment-shadow-strong: rgba(0, 63, 63, 0.25);
+}
+
+
+/* =========================================================
+   DARK MODE
+   Blue-based appointment page
+========================================================= */
+
+.dark {
+    /* Page */
+    --appointment-page-bg: var(--bg);
+    --appointment-surface: var(--surface);
+    --appointment-surface-soft: var(--surface-2);
+    --appointment-text: var(--text);
+    --appointment-text-muted: var(--text-muted);
+    /* Borders */
+    --appointment-border: #1e3a5f;
+    --appointment-border-strong: #3b82f6;
+    /* Primary BLUE */
+    --appointment-primary: #3b82f6;
+    --appointment-primary-hover: #60a5fa;
+    --appointment-primary-dark: #2563eb;
+    --appointment-primary-light: #1e3a8a;
+    /* Calendar */
+    --appointment-calendar-header: #60a5fa;
+    --appointment-date-available: #2563eb;
+    --appointment-date-hover: #3b82f6;
+    --appointment-date-selected: #111827;
+    /* Slots */
+    --appointment-slot: #1e40af;
+    --appointment-slot-hover: #2563eb;
+    --appointment-slot-selected: #60a5fa;
+    /* Disabled */
+    --appointment-disabled-bg: #1f2937;
+    --appointment-disabled-text: #6b7280;
+    /* Header */
+    --appointment-header-start: #1e3a8a;
+    --appointment-header-end: #1d4ed8;
+    /* Shadows */
+    --appointment-shadow: rgba(0, 0, 0, 0.40);
+    --appointment-shadow-strong: rgba(37, 99, 235, 0.30);
+}
+
+
+/* =========================================================
+   APPOINTMENT PAGE
+========================================================= */
+
+.appointment-page {
+    background-color: var(--appointment-surface);
+    color: var(--appointment-text);
+    box-shadow: 0 18px 50px var(--appointment-shadow);
+}
+
+
+    /* =========================================================
+   DOCTOR HEADER
+========================================================= */
+
+    .appointment-page .doctor-header {
+        background: linear-gradient( 90deg, var(--appointment-header-start), var(--appointment-header-end) );
+        color: var(--white-25);
+    }
+
+    .appointment-page .doctor-name,
+    .appointment-page .doctor-info h5,
+    .appointment-page .doctor-info p {
+        color: var(--white-25);
+    }
+
+    .appointment-page .doctor-fee {
+        color: var(--white-25);
+    }
+
+        .appointment-page .doctor-fee strong {
+            color: var(--white-25);
+        }
+
+
+    /* =========================================================
+   CALENDAR
+========================================================= */
+
+    .appointment-page .calendar-section,
+    .appointment-page .slots-section,
+    .appointment-page .payment-section {
+        color: var(--appointment-text);
+    }
+
+        .appointment-page .calendar-section h3,
+        .appointment-page .slots-section h3,
+        .appointment-page .payment-section h3 {
+            color: var(--appointment-text);
+        }
+
+
+    /* Month title */
+
+    .appointment-page .month-label {
+        color: var(--appointment-primary);
+    }
+
+
+    /* Calendar weekday headers */
+
+    .appointment-page .calendar-table thead th {
+        color: var(--appointment-text);
+    }
+
+
+    /* Calendar borders */
+
+    .appointment-page .calendar-table td {
+        border-color: var(--appointment-border);
+    }
+
+
+    /* Available date */
+
+    .appointment-page .date-card.available {
+        background-color: var(--appointment-date-available);
+        color: var(--white-25);
+        border: 1px solid var(--appointment-date-available);
+    }
+
+        .appointment-page .date-card.available:hover {
+            background-color: var(--appointment-date-hover);
+            color: var(--white-25);
+            box-shadow: 0 8px 20px var(--appointment-shadow-strong);
+        }
+
+
+    /* Selected date */
+
+    .appointment-page .date-card.selected {
+        background-color: var(--appointment-date-selected);
+        color: var(--appointment-primary);
+        border: 2px solid var(--appointment-primary);
+        box-shadow: 0 10px 25px var(--appointment-shadow-strong);
+    }
+
+
+    /* Placeholder dates */
+
+    .appointment-page .date-card.placeholder {
+        background-color: var(--appointment-surface-soft);
+        color: var(--appointment-text-muted);
+    }
+
+
+    /* Unavailable dates */
+
+    .appointment-page .date-card.unavailable {
+        background-color: var(--appointment-disabled-bg);
+        color: var(--appointment-disabled-text);
+        border: 1px solid var(--appointment-border);
+    }
+
+
+    /* =========================================================
+   CALENDAR NAVIGATION BUTTONS
+========================================================= */
+
+    .appointment-page .btn-outline-teal {
+        color: var(--appointment-primary);
+        border: 2px solid var(--appointment-primary);
+        background-color: transparent;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+        .appointment-page .btn-outline-teal:hover {
+            background-color: var(--appointment-primary);
+            border-color: var(--appointment-primary);
+            color: var(--white-25);
+        }
+
+
+    /* =========================================================
+   TIME SLOTS
+========================================================= */
+
+    .appointment-page .slots-section h5 {
+        color: var(--appointment-text);
+        font-weight: 700;
+    }
+
+
+    /* Available slot */
+
+    .appointment-page .slot-btn.available {
+        background-color: var(--appointment-slot);
+        color: var(--appointment-text);
+        border: 2px solid var(--appointment-border);
+    }
+
+        .appointment-page .slot-btn.available:hover {
+            background-color: var(--appointment-slot-hover);
+            color: var(--white-25);
+            border-color: var(--appointment-slot-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px var(--appointment-shadow-strong);
+        }
+
+
+    /* Selected slot */
+
+    .appointment-page .slot-btn.selected {
+        background-color: var(--appointment-slot-selected);
+        color: var(--white-25);
+        border: 2px solid var(--appointment-primary);
+        box-shadow: 0 8px 22px var(--appointment-shadow-strong);
+    }
+
+
+    /* Unavailable slot */
+
+    .appointment-page .slot-btn.unavailable {
+        background-color: var(--appointment-disabled-bg);
+        color: var(--appointment-disabled-text);
+        border-color: var(--appointment-border);
+    }
+
+
+    /* Placeholder slot */
+
+    .appointment-page .slot-btn.placeholder-slot {
+        background-color: var(--appointment-surface-soft);
+        color: var(--appointment-disabled-text);
+        border: 1px dashed var(--appointment-border);
+    }
+
+
+    /* =========================================================
+   PAYMENT
+========================================================= */
+
+    .appointment-page .payment-section {
+        border-top: 1px solid var(--appointment-border);
+        padding-top: 20px;
+    }
+
+    .appointment-page .form-check {
+        color: var(--appointment-text);
+    }
+
+        .appointment-page .form-check input[type="radio"] {
+            accent-color: var(--appointment-primary);
+        }
+
+
+    /* =========================================================
+   CONFIRM BUTTON
+========================================================= */
+
+    .appointment-page .btn-teal {
+        background-color: var(--appointment-primary-dark);
+        color: var(--white-25);
+        border: 2px solid var(--appointment-primary-dark);
+        transition: all 0.2s ease;
+        box-shadow: 0 6px 18px var(--appointment-shadow);
+    }
+
+        .appointment-page .btn-teal:hover {
+            background-color: var(--appointment-primary-hover);
+            border-color: var(--appointment-primary-hover);
+            color: var(--white-25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px var(--appointment-shadow-strong);
+        }
+
+
+    /* =========================================================
+   DOCTOR PHOTO
+========================================================= */
+
+    .appointment-page .doctor-photo {
+        border-color: rgba(255, 255, 255, 0.20);
+    }
+
+
+    /* =========================================================
+   TOAST
+========================================================= */
+
+    .appointment-page .toast-custom {
+        background-color: var(--appointment-surface);
+        color: var(--appointment-text);
+        border: 1px solid var(--appointment-border);
+        box-shadow: 0 15px 40px var(--appointment-shadow);
+    }
+
+    .appointment-page .toast-overlay {
+        background: var(--overlay);
+    }
+
+
+/* =========================================================
+   DARK MODE - EXTRA TEXT SAFETY
+========================================================= */
+
+.dark .appointment-page {
+    background-color: var(--appointment-surface);
+    color: var(--appointment-text);
+}
+
+    .dark .appointment-page h1,
+    .dark .appointment-page h2,
+    .dark .appointment-page h3,
+    .dark .appointment-page h4,
+    .dark .appointment-page h5,
+    .dark .appointment-page h6,
+    .dark .appointment-page p,
+    .dark .appointment-page label,
+    .dark .appointment-page span {
+        color: inherit;
+    }
+
+
+    /* Keep doctor header text white */
+
+    .dark .appointment-page .doctor-header,
+    .dark .appointment-page .doctor-header h2,
+    .dark .appointment-page .doctor-header h5,
+    .dark .appointment-page .doctor-header p,
+    .dark .appointment-page .doctor-header strong {
+        color: #ffffff;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .appointment-page {
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+        .appointment-page .doctor-photo {
+            width: 120px;
+            height: 120px;
+        }
 }
