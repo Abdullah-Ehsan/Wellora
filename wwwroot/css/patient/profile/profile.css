@@ -1,0 +1,388 @@
+﻿/* =========================================================
+   PATIENT PROFILE
+   SIDEBAR
+========================================================= */
+
+.patient-profile-page {
+    background-color: var(--bg, var(--gray-50));
+    color: var(--text, var(--gray-800));
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.patient-profile-sidebar {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+    color: var(--gray-800);
+}
+
+
+/* =========================================================
+   SIDEBAR HEADER
+========================================================= */
+
+.patient-sidebar-header {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+    .patient-sidebar-header h5 {
+        color: var(--gray-800);
+    }
+
+.patient-sidebar-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   SIDEBAR SECTION TITLE
+========================================================= */
+
+.patient-sidebar-section-title {
+    color: var(--gray-500);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   SIDEBAR LINKS
+========================================================= */
+
+.patient-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+
+/* Icon */
+
+.patient-sidebar-link-icon {
+    width: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-500);
+    font-size: 1rem;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+
+/* =========================================================
+   SIDEBAR HOVER
+========================================================= */
+
+.patient-sidebar-link:hover {
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    text-decoration: none;
+}
+
+    .patient-sidebar-link:hover .patient-sidebar-link-icon {
+        color: var(--primary);
+    }
+
+
+/* =========================================================
+   SIDEBAR ACTIVE
+========================================================= */
+
+.patient-sidebar-link.active {
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+    .patient-sidebar-link.active .patient-sidebar-link-icon {
+        color: var(--primary);
+    }
+
+
+    /* Slightly stronger active state */
+
+    .patient-sidebar-link.active:hover {
+        background-color: var(--primary-subtle);
+        color: var(--primary);
+    }
+
+
+/* =========================================================
+   SIDEBAR FOOTER
+========================================================= */
+
+.patient-sidebar-footer {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+
+/* =========================================================
+   PATIENT USER AREA
+========================================================= */
+
+.patient-user-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.patient-sidebar-user .fw-semibold {
+    color: var(--gray-700);
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.patient-logout-container {
+    width: 100%;
+}
+
+
+    /*
+   This works whether _PatientLogout uses
+   a button or an anchor.
+*/
+
+    .patient-logout-container a,
+    .patient-logout-container button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 0.6rem 0.75rem;
+        background-color: transparent;
+        color: var(--gray-600);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+
+        /* =========================================================
+   LOGOUT ICON
+========================================================= */
+
+        .patient-logout-container a i,
+        .patient-logout-container button i {
+            color: var(--gray-500);
+            transition: color 0.15s ease;
+        }
+
+
+        /* =========================================================
+   LOGOUT HOVER
+========================================================= */
+
+        .patient-logout-container a:hover,
+        .patient-logout-container button:hover {
+            background-color: var(--danger-subtle);
+            border-color: var(--danger-light);
+            color: var(--danger);
+            text-decoration: none;
+        }
+
+            .patient-logout-container a:hover i,
+            .patient-logout-container button:hover i {
+                color: var(--danger);
+            }
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.patient-profile-content {
+    background-color: var(--bg, var(--gray-50));
+}
+
+.patient-content-header {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+    .patient-content-header h4 {
+        color: var(--gray-800);
+    }
+
+/* =========================================================
+   MAIN CONTENT HEADER
+   DARK MODE
+========================================================= */
+
+.dark .patient-content-header {
+    background-color: var(--surface);
+    border-color: var(--border) !important;
+}
+
+    .dark .patient-content-header h4 {
+        color: var(--text);
+    }
+
+    .dark .patient-content-header #profileDescription {
+        color: var(--text-muted) !important;
+    }
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .patient-profile-page {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+
+/* Sidebar */
+
+.dark .patient-profile-sidebar {
+    background-color: var(--surface);
+    border-color: var(--border) !important;
+}
+
+
+/* Header */
+
+.dark .patient-sidebar-header {
+    background-color: var(--surface);
+    border-color: var(--border) !important;
+}
+
+    .dark .patient-sidebar-header h5 {
+        color: var(--text);
+    }
+
+
+/* Section title */
+
+.dark .patient-sidebar-section-title {
+    color: var(--text-muted);
+}
+
+
+/* Sidebar links */
+
+.dark .patient-sidebar-link {
+    color: var(--text-muted);
+}
+
+.dark .patient-sidebar-link-icon {
+    color: var(--gray-500);
+}
+
+
+/* Sidebar hover */
+
+.dark .patient-sidebar-link:hover {
+    background-color: var(--primary-bg);
+    color: var(--primary);
+}
+
+    .dark .patient-sidebar-link:hover .patient-sidebar-link-icon {
+        color: var(--primary);
+    }
+
+
+/* Sidebar active */
+
+.dark .patient-sidebar-link.active {
+    background-color: var(--primary-bg);
+    color: var(--primary);
+}
+
+    .dark .patient-sidebar-link.active .patient-sidebar-link-icon {
+        color: var(--primary);
+    }
+
+
+/* Footer */
+
+.dark .patient-sidebar-footer {
+    background-color: var(--surface);
+    border-color: var(--border) !important;
+}
+
+
+/* User */
+
+.dark .patient-sidebar-user .fw-semibold {
+    color: var(--text);
+}
+
+
+/* Logout */
+
+.dark .patient-logout-container a,
+.dark .patient-logout-container button {
+    color: var(--text-muted);
+}
+
+    .dark .patient-logout-container a i,
+    .dark .patient-logout-container button i {
+        color: var(--gray-500);
+    }
+
+
+    /* Logout hover */
+
+    .dark .patient-logout-container a:hover,
+    .dark .patient-logout-container button:hover {
+        background-color: var(--danger-subtle);
+        border-color: var(--danger-light);
+        color: var(--danger);
+    }
+
+        .dark .patient-logout-container a:hover i,
+        .dark .patient-logout-container button:hover i {
+            color: var(--danger);
+        }
+
+
+/* =========================================================
+   DOCTOR INFO / MEDICAL HISTORY / CHANGE PASSWORD
+   DARK MODE HEADERS ONLY
+========================================================= */
+
+.dark .patient-profile-card .card-header {
+    background-color: var(--surface);
+    border-bottom-color: var(--border);
+}
+
+    .dark .patient-profile-card .card-header h5 {
+        color: var(--text);
+    }
+
+    .dark .patient-profile-card .card-header small {
+        color: var(--text-muted) !important;
+    }
+
+
