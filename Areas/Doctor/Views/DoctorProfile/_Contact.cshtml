@@ -1,38 +1,528 @@
 ﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorDetailsViewModel
 
-<div class="card shadow-sm mb-4">
-    <div class="card-body">
-        <h5 class="card-title mb-4">Languages & Contact</h5>
+<link rel="stylesheet" href="~/css/doctor/profile/Contact.css" />
 
-        <form asp-action="UpdateContact" asp-controller="DoctorProfile" method="post">
+<div class="card contact-info-card mb-4">
+    <div class="card-body p-4">
+
+        <!-- Header -->
+        <div class="contact-info-header mb-4">
+            <div class="contact-info-header-content">
+
+                <div class="contact-info-header-icon">
+                    <i class="bi bi-person-vcard"></i>
+                </div>
+
+                <div>
+                    <h5 class="contact-info-title mb-1">
+                        Languages &amp; Contact
+                    </h5>
+
+                    <p class="contact-info-subtitle mb-0">
+                        Manage your spoken languages and professional contact details.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <form asp-action="UpdateContact"
+              asp-controller="DoctorProfile"
+              method="post"
+              id="contactInfoForm">
+
             <input type="hidden" asp-for="DoctorId" />
 
-            <div class="row">
-                <!-- Languages Spoken -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="LanguagesSpoken" class="form-label">Languages Spoken</label>
-                    <input asp-for="LanguagesSpoken" class="form-control" placeholder="e.g. English, Urdu, Punjabi" />
+            <!-- =====================================================
+                 LANGUAGES & CONTACT
+            ====================================================== -->
+
+            <div class="contact-section">
+
+                <div class="contact-section-header">
+                    <span class="contact-section-indicator"></span>
+
+                    <div>
+                        <h6 class="contact-section-title">
+                            Contact Information
+                        </h6>
+
+                        <p class="contact-section-description">
+                            Tell patients how they can communicate with you.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Contact Number -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="ContactNumber" class="form-label">Contact Number</label>
-                    <input asp-for="ContactNumber" class="form-control" type="tel" placeholder="+92-xxx-xxxxxxx" />
+
+                <div class="row g-4">
+
+                    <!-- Languages Spoken -->
+                    <div class="col-12 col-lg-6">
+
+                        <div class="contact-field-card">
+
+                            <div class="contact-field-header">
+
+                                <div class="contact-field-icon">
+                                    <i class="bi bi-translate"></i>
+                                </div>
+
+                                <div>
+                                    <label asp-for="LanguagesSpoken"
+                                           class="form-label contact-form-label mb-0">
+                                        Language Spoken
+                                    </label>
+
+                                    <div class="contact-field-hint">
+                                        Select the language you primarily communicate with patients in.
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <select asp-for="LanguagesSpoken"
+                                    class="form-select contact-form-control">
+
+                                <option value="">Select a language</option>
+
+                                <!-- Primary languages -->
+                                <option value="Urdu">اردو</option>
+                                <option value="English">English</option>
+                                <option value="German">Deutsch</option>
+
+                                <!-- Other languages -->
+                                <option value="Punjabi">ਪੰਜਾਬੀ</option>
+                                <option value="Sindhi">سنڌي</option>
+                                <option value="Pashto">پښتو</option>
+                                <option value="Balochi">بلوچی</option>
+                                <option value="Saraiki">سرائیکی</option>
+                                <option value="Hindko">ہندکو</option>
+                                <option value="Brahui">براہوی</option>
+                                <option value="Kashmiri">کٲشُر</option>
+                                <option value="Shina">شینا</option>
+                                <option value="Balti">بلتی</option>
+                                <option value="Wakhi">وخى</option>
+                                <option value="Burushaski">بروشسکی</option>
+                                <option value="Khowar">کھوار</option>
+                                <option value="Dari">دری</option>
+                                <option value="Persian">فارسی</option>
+                                <option value="Memoni">میمنی</option>
+                                <option value="Marwari">मारवाड़ी</option>
+                                <option value="Gujarati">ગુજરાતી</option>
+                                <option value="Hazargi">هزارگی</option>
+                                <option value="Torwali">توروالی</option>
+                                <option value="Gawri">گاؤری</option>
+                                <option value="Dameli">دامیلی</option>
+                                <option value="Kalasha">کلاشہ</option>
+                                <option value="Palula">پالولا</option>
+                                <option value="Ushojo">اوشوجو</option>
+                                <option value="Domaaki">دوماکی</option>
+                                <option value="Pahari">پہاڑی</option>
+                                <option value="Potohari">پوٹوہاری</option>
+                                <option value="Kohistani">کوہستانی</option>
+                                <option value="Gilgiti">گلگتی</option>
+                                <option value="Chitrali">چترالی</option>
+                                <option value="Arabic">العربية</option>
+                                <option value="Farsi">فارسی</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Contact Number -->
+                    <div class="col-12 col-lg-6">
+
+                        <div class="contact-field-card">
+
+                            <div class="contact-field-header">
+
+                                <div class="contact-field-icon">
+                                    <i class="bi bi-telephone"></i>
+                                </div>
+
+                                <div>
+                                    <label class="form-label contact-form-label mb-0">
+                                        Contact Number
+                                    </label>
+
+                                    <div class="contact-field-hint">
+                                        Select your country code and enter your phone number.
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-2">
+
+                                <!-- Country Code -->
+                                <div class="col-5 col-sm-4">
+
+                                    <select id="countryCode"
+                                            class="form-select contact-form-control">
+
+                                        <option value="+92" data-country="PK">
+                                            +92
+                                        </option>
+
+                                        <option value="+1" data-country="US">
+                                            +1
+                                        </option>
+
+                                        <option value="+44" data-country="GB">
+                                            +44
+                                        </option>
+
+                                        <option value="+49" data-country="DE">
+                                            +49
+                                        </option>
+
+                                        <option value="+971" data-country="AE">
+                                            +971
+                                        </option>
+
+                                        <option value="+966" data-country="SA">
+                                            +966
+                                        </option>
+
+                                        <option value="+974" data-country="QA">
+                                            +974
+                                        </option>
+
+                                        <option value="+968" data-country="OM">
+                                            +968
+                                        </option>
+
+                                        <option value="+973" data-country="BH">
+                                            +973
+                                        </option>
+
+                                        <option value="+965" data-country="KW">
+                                            +965
+                                        </option>
+
+                                        <option value="+91" data-country="IN">
+                                            +91
+                                        </option>
+
+                                        <option value="+93" data-country="AF">
+                                            +93
+                                        </option>
+
+                                        <option value="+61" data-country="AU">
+                                            +61
+                                        </option>
+
+                                        <option value="+81" data-country="JP">
+                                            +81
+                                        </option>
+
+                                        <option value="+33" data-country="FR">
+                                            +33
+                                        </option>
+
+                                        <option value="+39" data-country="IT">
+                                            +39
+                                        </option>
+
+                                        <option value="+90" data-country="TR">
+                                            +90
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Phone Number -->
+                                <div class="col-7 col-sm-8">
+
+                                    <input asp-for="PhoneNumber"
+                                           type="tel"
+                                           id="contactNumberInput"
+                                           class="form-control contact-form-control"
+                                           placeholder="3001234567"
+                                           autocomplete="tel" />
+
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Actual value submitted to server -->
+                            <input asp-for="ContactNumber"
+                                   type="hidden"
+                                   id="combinedContactNumber" />
+
+                            <div class="contact-number-preview">
+                                <span class="contact-number-preview-label">
+                                    Number:
+                                </span>
+
+                                <span id="contactNumberPreview">
+                                    @(string.IsNullOrWhiteSpace(Model.ContactNumber)
+                                                                        ? "Not set"
+                                                                        : Model.ContactNumber)
+                                </span>
+                            </div>
+
+                            <span asp-validation-for="ContactNumber"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
             </div>
 
-            <!-- Social Links -->
-            <div class="mb-3">
-                <label asp-for="SocialLinks" class="form-label">Social Links</label>
-                <textarea asp-for="SocialLinks" class="form-control" rows="3" placeholder="Add LinkedIn, Twitter, etc."></textarea>
+
+            <!-- =====================================================
+                 SOCIAL LINKS
+            ====================================================== -->
+
+            <div class="contact-section contact-social-section">
+
+                <div class="contact-section-header">
+
+                    <span class="contact-section-indicator"></span>
+
+                    <div>
+                        <h6 class="contact-section-title">
+                            Professional Social Links
+                        </h6>
+
+                        <p class="contact-section-description">
+                            Add a professional website or social profile where patients
+                            can learn more about you.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="contact-field-card">
+
+                    <div class="contact-field-header">
+
+                        <div class="contact-field-icon">
+                            <i class="bi bi-link-45deg"></i>
+                        </div>
+
+                        <div>
+                            <label asp-for="SocialLinks"
+                                   class="form-label contact-form-label mb-0">
+                                Profile URL
+                            </label>
+
+                            <div class="contact-field-hint">
+                                Enter a complete URL such as https://linkedin.com/in/your-name
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <input asp-for="SocialLinks"
+                           type="url"
+                           class="form-control contact-form-control"
+                           placeholder="https://linkedin.com/in/your-name"
+                           autocomplete="url" />
+
+                    <span asp-validation-for="SocialLinks"
+                          class="text-danger"></span>
+
+                </div>
+
             </div>
 
-            <!-- Save Button -->
-            <div class="text-end">
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Contact Info
+
+            <!-- =====================================================
+                 ACTIONS
+            ====================================================== -->
+
+            <div class="contact-form-actions">
+
+                <button type="submit"
+                        class="btn contact-save-button">
+
+                    <i class="bi bi-check2"></i>
+
+                    <span>
+                        Save Contact Info
+                    </span>
+
                 </button>
+
             </div>
+
         </form>
+
     </div>
 </div>
+
+
+<script>
+    console.log("CONTACT SCRIPT LOADED 1");
+
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("CONTACT SCRIPT LOADED 2");
+
+        const form = document.getElementById("contactInfoForm");
+        const countryCode = document.getElementById("countryCode");
+        const phoneInput = document.getElementById("contactNumberInput");
+        const combinedInput = document.getElementById("combinedContactNumber");
+        const preview = document.getElementById("contactNumberPreview");
+
+
+        function normalizeNumber(value) {
+
+            return (value || "")
+                .replace(/\s+/g, "")
+                .replace(/-/g, "")
+                .replace(/\(/g, "")
+                .replace(/\)/g, "");
+        }
+
+
+        function updateCombinedNumber() {
+
+            const phone = normalizeNumber(phoneInput.value);
+            const code = countryCode.value;
+
+            if (!phone) {
+
+                combinedInput.value = "";
+                preview.textContent = "Not set";
+
+                return;
+            }
+
+
+            // Remove + if user typed it manually
+            const cleanPhone = phone.startsWith("+")
+                ? phone.substring(1)
+                : phone;
+
+
+            // Keep digits only
+            const digits = cleanPhone.replace(/\D/g, "");
+
+
+            if (!digits) {
+
+                combinedInput.value = "";
+                preview.textContent = "Not set";
+
+                return;
+            }
+
+
+            const combined = code + digits;
+
+            combinedInput.value = combined;
+
+            preview.textContent = combined;
+        }
+
+
+        function loadExistingNumber() {
+
+            const existingNumber = normalizeNumber(
+                combinedInput.value
+            );
+
+
+            if (!existingNumber) {
+                return;
+            }
+
+
+            const options = Array.from(
+                countryCode.options
+            ).sort(function (a, b) {
+
+                return b.value.length - a.value.length;
+
+            });
+
+
+            const matchingOption = options.find(function (option) {
+
+                return existingNumber.startsWith(option.value);
+
+            });
+
+
+            if (matchingOption) {
+
+                countryCode.value = matchingOption.value;
+
+                phoneInput.value =
+                    existingNumber.substring(
+                        matchingOption.value.length
+                    );
+
+            } else {
+
+                phoneInput.value = existingNumber;
+            }
+
+
+            updateCombinedNumber();
+        }
+
+
+        /*
+         * Country code changed
+         */
+        countryCode.addEventListener(
+            "change",
+            updateCombinedNumber
+        );
+
+
+        /*
+         * Phone number changed
+         */
+        phoneInput.addEventListener(
+            "input",
+            updateCombinedNumber
+        );
+
+
+        /*
+         * IMPORTANT:
+         * Make absolutely sure the hidden field
+         * contains the phone number before POST.
+         */
+        form.addEventListener(
+            "submit",
+            function () {
+
+                updateCombinedNumber();
+
+                console.log(
+                    "Submitting ContactNumber:",
+                    combinedInput.value
+                );
+
+            }
+        );
+
+
+        /*
+         * Load saved number when page opens.
+         */
+        loadExistingNumber();
+
+    });
+</script>
+

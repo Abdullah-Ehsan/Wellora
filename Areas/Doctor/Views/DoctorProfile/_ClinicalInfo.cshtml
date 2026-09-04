@@ -1,76 +1,295 @@
 ﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorDetailsViewModel
 
-<div class="card shadow-sm mb-4">
-    <div class="card-body">
-        <h5 class="card-title mb-4">Clinical Information</h5>
+<link rel="stylesheet" href="~/css/doctor/profile/ClinicalInfo.css" />
 
-        <form asp-action="UpdateClinicalInfo" asp-controller="DoctorProfile" method="post">
+<div class="card clinical-info-card mb-4">
+    <div class="card-body p-4">
+
+        <div class="clinical-info-header mb-4">
+            <div>
+                <h5 class="clinical-info-title mb-1">
+                    Clinical Information
+                </h5>
+
+                <p class="clinical-info-subtitle mb-0">
+                    Manage your professional and clinical information.
+                </p>
+            </div>
+        </div>
+
+        <form asp-action="UpdateClinicalInfo"
+              asp-controller="DoctorProfile"
+              method="post">
+
             <input type="hidden" asp-for="DoctorId" />
 
-            <div class="row">
-                <!-- Hospital Address -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="HospitalAddress" class="form-label">Hospital Address</label>
-                    <textarea asp-for="HospitalAddress" class="form-control" rows="2"></textarea>
-                </div>
+            <!-- Hospital Information -->
+            <div class="clinical-section">
+                <div class="clinical-section-header">
+                    <span class="clinical-section-indicator"></span>
 
-                <!-- Country -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Country" class="form-label">Country</label>
-                    <input asp-for="Country" class="form-control" />
-                </div>
-            </div>
+                    <div>
+                        <h6 class="clinical-section-title">
+                            Hospital Information
+                        </h6>
 
-            <div class="row">
-                <!-- License Number -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="LicenseNumber" class="form-label">License Number</label>
-                    <input asp-for="LicenseNumber" class="form-control" />
-                </div>
-
-                <!-- PMDC Number -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="PmdcNumber" class="form-label">PMDC Number</label>
-                    <input asp-for="PmdcNumber" class="form-control" />
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Medical School -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="MedicalSchool" class="form-label">Medical School</label>
-                    <input asp-for="MedicalSchool" class="form-control" />
-                </div>
-
-                <!-- Certifications -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Certifications" class="form-label">Certifications</label>
-                    <textarea asp-for="Certifications" class="form-control" rows="2"></textarea>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Consultation Fee -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="ConsultationFee" class="form-label">Consultation Fee</label>
-                    <input asp-for="ConsultationFee" class="form-control" type="number" min="0" step="100" />
-                </div>
-
-                <!-- Telemedicine Available -->
-                <div class="col-md-6 mb-3 d-flex align-items-center">
-                    <div class="form-check mt-4">
-                        <input asp-for="TelemedicineAvailable" class="form-check-input" type="checkbox" />
-                        <label asp-for="TelemedicineAvailable" class="form-check-label">Telemedicine Available</label>
+                        <p class="clinical-section-description">
+                            Enter your primary hospital or clinic information.
+                        </p>
                     </div>
                 </div>
+
+                <div class="row g-3">
+
+                    <!-- Hospital Address -->
+                    <div class="col-12 col-md-8">
+                        <label asp-for="HospitalAddress"
+                               class="form-label clinical-form-label">
+                            Hospital Address
+                        </label>
+
+                        <textarea asp-for="HospitalAddress"
+                                  class="form-control clinical-form-control"
+                                  rows="3"
+                                  placeholder="Enter hospital or clinic address"></textarea>
+
+                        <span asp-validation-for="HospitalAddress"
+                              class="text-danger"></span>
+                    </div>
+
+                    <!-- Country -->
+                    <div class="col-12 col-md-4">
+                        <label asp-for="Country"
+                               class="form-label clinical-form-label">
+                            Country
+                        </label>
+
+                        <input asp-for="Country"
+                               class="form-control clinical-form-control"
+                               placeholder="Enter country" />
+
+                        <span asp-validation-for="Country"
+                              class="text-danger"></span>
+                    </div>
+
+                </div>
             </div>
 
-            <!-- Save Button -->
-            <div class="text-end">
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Clinical Info
-                </button>
+
+            <!-- Medical Credentials -->
+            <div class="clinical-section">
+
+                <div class="clinical-section-header">
+                    <span class="clinical-section-indicator"></span>
+
+                    <div>
+                        <h6 class="clinical-section-title">
+                            Medical Credentials
+                        </h6>
+
+                        <p class="clinical-section-description">
+                            Provide your medical registration and education details.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+
+                    <!-- License Number -->
+                    <div class="col-12 col-md-6">
+                        <label asp-for="LicenseNumber"
+                               class="form-label clinical-form-label">
+                            License Number
+                        </label>
+
+                        <input asp-for="LicenseNumber"
+                               class="form-control clinical-form-control"
+                               placeholder="Enter license number" />
+
+                        <span asp-validation-for="LicenseNumber"
+                              class="text-danger"></span>
+                    </div>
+
+                    <!-- PMDC Number -->
+                    <div class="col-12 col-md-6">
+                        <label asp-for="PmdcNumber"
+                               class="form-label clinical-form-label">
+                            PMDC Number
+                        </label>
+
+                        <input asp-for="PmdcNumber"
+                               class="form-control clinical-form-control"
+                               placeholder="Enter PMDC number" />
+
+                        <span asp-validation-for="PmdcNumber"
+                              class="text-danger"></span>
+                    </div>
+
+                    <!-- Medical School -->
+                    <div class="col-12 col-md-6">
+                        <label asp-for="MedicalSchool"
+                               class="form-label clinical-form-label">
+                            Medical School
+                        </label>
+
+                        <input asp-for="MedicalSchool"
+                               class="form-control clinical-form-control"
+                               placeholder="Enter medical school" />
+
+                        <span asp-validation-for="MedicalSchool"
+                              class="text-danger"></span>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="col-12 col-md-6">
+                        <label asp-for="Certifications"
+                               class="form-label clinical-form-label">
+                            Certifications
+                        </label>
+
+                        <textarea asp-for="Certifications"
+                                  class="form-control clinical-form-control"
+                                  rows="3"
+                                  placeholder="Enter certifications"></textarea>
+
+                        <span asp-validation-for="Certifications"
+                              class="text-danger"></span>
+                    </div>
+
+                </div>
             </div>
+
+
+            <!-- Consultation Settings -->
+            <div class="clinical-section mb-0">
+
+                <div class="clinical-section-header">
+                    <span class="clinical-section-indicator"></span>
+
+                    <div>
+                        <h6 class="clinical-section-title">
+                            Consultation Settings
+                        </h6>
+
+                        <p class="clinical-section-description">
+                            Configure your consultation fee and telemedicine availability.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row g-3 align-items-stretch">
+
+                    <!-- Consultation Fee -->
+                    <div class="col-12 col-md-6">
+
+                        <label asp-for="ConsultationFee"
+                               class="form-label clinical-form-label">
+                            Consultation Fee
+                        </label>
+
+                        <div class="clinical-fee-wrapper">
+
+                            <span class="clinical-currency">
+                                Rs.
+                            </span>
+
+                            <select asp-for="ConsultationFee"
+                                    class="form-select clinical-form-control clinical-fee-select">
+
+                                <option value="0.00">0</option>
+                                <option value="500.00">500</option>
+                                <option value="1000.00">1,000</option>
+                                <option value="1500.00">1,500</option>
+                                <option value="2000.00">2,000</option>
+                                <option value="2500.00">2,500</option>
+                                <option value="3000.00">3,000</option>
+                                <option value="5000.00">5,000</option>
+                                <option value="7000.00">7,000</option>
+                                <option value="9000.00">9,000</option>
+                                <option value="10000.00">10,000</option>
+
+                            </select>
+
+
+                        </div>
+
+                        <div class="clinical-field-hint">
+                            Select your consultation fee.
+                        </div>
+
+                        <span asp-validation-for="ConsultationFee"
+                              class="text-danger"></span>
+
+                    </div>
+
+
+                    <!-- Telemedicine -->
+                    <div class="col-12 col-md-6">
+
+                        <div class="clinical-telemedicine-box">
+
+                            <div class="clinical-telemedicine-content">
+
+                                <div class="clinical-telemedicine-icon">
+                                    <i class="bi bi-camera-video"></i>
+                                </div>
+
+                                <div>
+                                    <div class="clinical-telemedicine-title">
+                                        Telemedicine
+                                    </div>
+
+                                    <div class="clinical-telemedicine-description">
+                                        Allow patients to book online consultations.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-check form-switch clinical-switch">
+
+                                <input type="checkbox"
+                                       name="TelemedicineAvailable"
+                                       value="true"
+                                       class="form-check-input"
+                                       role="switch"
+                                       id="telemedicineSwitch"
+                                       @(Model.TelemedicineAvailable == true ? "checked" : "") />
+
+                                <input type="hidden"
+                                       name="TelemedicineAvailable"
+                                       value="false" />
+
+                                <label class="form-check-label"
+                                       for="telemedicineSwitch">
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!-- Actions -->
+            <div class="clinical-form-actions">
+
+                <button type="submit"
+                        class="btn clinical-save-button">
+
+                    <i class="bi bi-check2"></i>
+
+                    <span>Save Clinical Info</span>
+
+                </button>
+
+            </div>
+
         </form>
+
     </div>
 </div>

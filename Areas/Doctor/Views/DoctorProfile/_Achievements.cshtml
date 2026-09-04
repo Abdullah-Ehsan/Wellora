@@ -1,38 +1,204 @@
 ﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorDetailsViewModel
 
-<div class="card shadow-sm mb-4">
-    <div class="card-body">
-        <h5 class="card-title mb-4">Achievements & Biography</h5>
+<link rel="stylesheet" href="~/css/doctor/profile/AchievementsBiography.css" />
 
-        <form asp-action="UpdateAchievements" asp-controller="DoctorProfile" method="post">
+<div class="card achievements-card mb-4">
+    <div class="card-body p-4">
+
+        <!-- Header -->
+        <div class="achievements-header mb-4">
+            <div class="achievements-header-content">
+                <div class="achievements-header-icon">
+                    <i class="bi bi-award"></i>
+                </div>
+
+                <div>
+                    <h5 class="achievements-title mb-1">
+                        Achievements &amp; Biography
+                    </h5>
+
+                    <p class="achievements-subtitle mb-0">
+                        Highlight your professional journey, accomplishments,
+                        and published work.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <form asp-action="UpdateAchievements"
+              asp-controller="DoctorProfile"
+              method="post">
+
             <input type="hidden" asp-for="DoctorId" />
 
-            <div class="row">
-                <!-- Achievements -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Achievements" class="form-label">Achievements</label>
-                    <textarea asp-for="Achievements" class="form-control" rows="4" placeholder="List your career highlights"></textarea>
+
+            <!-- Professional Highlights -->
+            <div class="achievements-section">
+
+                <div class="achievements-section-header">
+                    <span class="achievements-section-indicator"></span>
+
+                    <div>
+                        <h6 class="achievements-section-title">
+                            Professional Highlights
+                        </h6>
+
+                        <p class="achievements-section-description">
+                            Share your most important career accomplishments
+                            and published work.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Publications -->
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Publications" class="form-label">Publications</label>
-                    <textarea asp-for="Publications" class="form-control" rows="4" placeholder="Add research papers or articles"></textarea>
+
+                <div class="row g-4">
+
+                    <!-- Achievements -->
+                    <div class="col-12 col-lg-6">
+
+                        <div class="achievements-field-card">
+
+                            <div class="achievements-field-header">
+                                <div class="achievements-field-icon">
+                                    <i class="bi bi-trophy"></i>
+                                </div>
+
+                                <div>
+                                    <label asp-for="Achievements"
+                                           class="form-label achievements-form-label mb-0">
+                                        Achievements
+                                    </label>
+
+                                    <div class="achievements-field-hint">
+                                        Awards, recognitions, milestones, and career highlights.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <textarea asp-for="Achievements"
+                                      class="form-control achievements-textarea"
+                                      rows="7"
+                                      placeholder="Describe your key achievements, awards, recognitions, or career milestones..."></textarea>
+
+                            <span asp-validation-for="Achievements"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Publications -->
+                    <div class="col-12 col-lg-6">
+
+                        <div class="achievements-field-card">
+
+                            <div class="achievements-field-header">
+                                <div class="achievements-field-icon">
+                                    <i class="bi bi-journal-text"></i>
+                                </div>
+
+                                <div>
+                                    <label asp-for="Publications"
+                                           class="form-label achievements-form-label mb-0">
+                                        Publications
+                                    </label>
+
+                                    <div class="achievements-field-hint">
+                                        Research papers, articles, journals, or other publications.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <textarea asp-for="Publications"
+                                      class="form-control achievements-textarea"
+                                      rows="7"
+                                      placeholder="Add your research papers, articles, journals, or other publications..."></textarea>
+
+                            <span asp-validation-for="Publications"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
             </div>
+
 
             <!-- Biography -->
-            <div class="mb-3">
-                <label asp-for="Biography" class="form-label">Biography</label>
-                <textarea asp-for="Biography" class="form-control" rows="6" placeholder="Write a short professional biography"></textarea>
+            <div class="achievements-section achievements-biography-section">
+
+                <div class="achievements-section-header">
+                    <span class="achievements-section-indicator"></span>
+
+                    <div>
+                        <h6 class="achievements-section-title">
+                            Professional Biography
+                        </h6>
+
+                        <p class="achievements-section-description">
+                            Tell patients about your professional background,
+                            experience, and approach to care.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="achievements-biography-wrapper">
+
+                    <div class="achievements-field-header">
+
+                        <div class="achievements-field-icon">
+                            <i class="bi bi-person-lines-fill"></i>
+                        </div>
+
+                        <div>
+                            <label asp-for="Biography"
+                                   class="form-label achievements-form-label mb-0">
+                                Biography
+                            </label>
+
+                            <div class="achievements-field-hint">
+                                Write a concise and professional introduction for your profile.
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <textarea asp-for="Biography"
+                              class="form-control achievements-biography-textarea"
+                              rows="8"
+                              placeholder="Write a short professional biography describing your experience, areas of expertise, professional journey, and approach to patient care..."></textarea>
+
+                    <span asp-validation-for="Biography"
+                          class="text-danger"></span>
+
+                </div>
+
             </div>
 
-            <!-- Save Button -->
-            <div class="text-end">
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Achievements & Biography
+
+            <!-- Actions -->
+            <div class="achievements-form-actions">
+
+                <button type="submit"
+                        class="btn achievements-save-button">
+
+                    <i class="bi bi-check2"></i>
+
+                    <span>
+                        Save Achievements &amp; Biography
+                    </span>
+
                 </button>
+
             </div>
+
         </form>
+
     </div>
 </div>

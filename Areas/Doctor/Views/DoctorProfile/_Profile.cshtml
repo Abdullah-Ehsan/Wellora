@@ -1,76 +1,267 @@
 ﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorProfileViewModel
 
-<div class="card shadow-sm mb-4">
-    <div class="card-body">
-        <h5 class="card-title mb-4">Profile Information</h5>
+@{
+    var profileImage = string.IsNullOrWhiteSpace(Model.ProfilePhotoPath)
+        ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+        : Url.Content("~/" + Model.ProfilePhotoPath.TrimStart('/'));
+}
 
-        <!-- Profile Photo -->
-        <div class="text-center mb-4">
-            <img src="@(string.IsNullOrEmpty(Model.ProfilePhotoPath) ? "/images/default-profile.png" : Model.ProfilePhotoPath)"
-                 class="profile-photo"
-                 alt="Profile Photo"
-                 hx-get="@Url.Action("UploadPhotoPartial")"
-                 hx-target="#profileContent" />
+
+
+<link rel="stylesheet" href="~/css/doctor/profile/doctor_profile.css" />
+
+
+<div class="doctor-profile-card">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <div class="doctor-profile-header">
+        <div>
+            <h5 class="doctor-profile-title">Profile Information</h5>
+            <p class="doctor-profile-subtitle">
+                Manage your personal information and profile photo.
+            </p>
         </div>
+    </div>
 
-        <!-- User Info Form -->
-        <form asp-action="UpdateProfile" asp-controller="DoctorProfile" method="post" enctype="multipart/form-data">
+
+    <!-- =========================
+         PROFILE CONTENT
+    ========================== -->
+    <div class="doctor-profile-body">
+
+        <form asp-action="UpdateProfile"
+              asp-controller="DoctorProfile"
+              asp-area="Doctor"
+              method="post"
+              enctype="multipart/form-data"
+              hx-post="@Url.Action("UpdateProfile", "DoctorProfile", new { area = "Doctor" })"
+              hx-target="#profileContent"
+              hx-swap="innerHTML"
+              hx-on::after-request="document.documentElement.scrollTop = 0; document.body.scrollTop = 0;">
+
+
+
+
+
             <input type="hidden" asp-for="DoctorId" />
             <input type="hidden" asp-for="UserId" />
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="FirstName" class="form-label">First Name</label>
-                    <input asp-for="FirstName" class="form-control" />
+
+            <!-- =========================
+                 PROFILE PHOTO
+            ========================== -->
+            <div class="doctor-profile-photo-section">
+
+                <div class="doctor-profile-photo-wrapper">
+
+                    <label for="ProfilePicture"
+                           class="doctor-profile-photo-label"
+                           title="Change profile photo">
+
+                        <img id="doctorProfilePreview"
+                             src="@profileImage"
+                             class="doctor-profile-photo"
+                             alt="Doctor profile photo" />
+
+                        <span class="doctor-profile-photo-edit">
+                            <span>✎</span>
+                        </span>
+
+                    </label>
+
+                    <input asp-for="ProfilePicture"
+                           id="ProfilePicture"
+                           class="doctor-profile-photo-input"
+                           type="file"
+                           accept="image/*" />
+
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label asp-for="LastName" class="form-label">Last Name</label>
-                    <input asp-for="LastName" class="form-control" />
+
+
+                <div class="doctor-profile-photo-info">
+
+                    <h6 class="doctor-profile-photo-title">
+                        Profile Photo
+                    </h6>
+
+                    <p class="doctor-profile-photo-description">
+                        Upload a clear photo for your professional profile.
+                    </p>
+
+                    <span class="doctor-profile-photo-hint">
+                        Recommended: passport-style square photo
+                    </span>
+
                 </div>
+
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Email" class="form-label">Email</label>
-                    <input asp-for="Email" class="form-control" type="email" />
+
+
+            <div class="doctor-profile-divider"></div>
+
+
+            <!-- =========================
+                 PERSONAL INFORMATION
+            ========================== -->
+            <div class="doctor-profile-section">
+
+                <div class="doctor-profile-section-heading">
+                    <h6>Personal Information</h6>
+                    <p>Your basic account and personal details.</p>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Username" class="form-label">Username</label>
-                    <input asp-for="Username" class="form-control" />
+
+
+                <div class="row g-3">
+
+                    <!-- First Name -->
+                    <div class="col-md-6">
+
+                        <label asp-for="FirstName"
+                               class="form-label doctor-profile-label">
+                            First Name
+                        </label>
+
+                        <input asp-for="FirstName"
+                               class="form-control doctor-profile-input"
+                               placeholder="Enter first name" />
+
+                        <span asp-validation-for="FirstName"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Last Name -->
+                    <div class="col-md-6">
+
+                        <label asp-for="LastName"
+                               class="form-label doctor-profile-label">
+                            Last Name
+                        </label>
+
+                        <input asp-for="LastName"
+                               class="form-control doctor-profile-input"
+                               placeholder="Enter last name" />
+
+                        <span asp-validation-for="LastName"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+
+                        <label asp-for="Email"
+                               class="form-label doctor-profile-label">
+                            Email Address
+                        </label>
+
+                        <input asp-for="Email"
+                               type="email"
+                               class="form-control doctor-profile-input"
+                               placeholder="Enter email address" />
+
+                        <span asp-validation-for="Email"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Username -->
+                    <div class="col-md-6">
+
+                        <label asp-for="Username"
+                               class="form-label doctor-profile-label">
+                            Username
+                        </label>
+
+                        <input asp-for="Username"
+                               class="form-control doctor-profile-input"
+                               placeholder="Enter username" />
+
+                        <span asp-validation-for="Username"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Gender -->
+                    <div class="col-md-6">
+
+                        <label asp-for="Gender"
+                               class="form-label doctor-profile-label">
+                            Gender
+                        </label>
+
+                        <select asp-for="Gender"
+                                class="form-select doctor-profile-input">
+
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+
+                        </select>
+
+                        <span asp-validation-for="Gender"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+
+                    <!-- Date of Birth -->
+                    <div class="col-md-6">
+
+                        <label asp-for="DateOfBirth"
+                               class="form-label doctor-profile-label">
+                            Date of Birth
+                        </label>
+
+                        <input asp-for="DateOfBirth"
+                               type="date"
+                               class="form-control doctor-profile-input"
+                               min="1850-01-01"
+                               max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+
+                        <span asp-validation-for="DateOfBirth"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
                 </div>
+
             </div>
 
-            <!-- Gender Dropdown -->
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Gender" class="form-label">Gender</label>
-                    <select asp-for="Gender" class="form-select">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
-                    <input asp-for="DateOfBirth"
-                           class="form-control"
-                           type="date"
-                           min="1850-01-01"
-                           max="@DateTime.Now.ToString("yyyy-MM-dd")" />
-                </div>
-            </div>
+            <!-- =========================
+                 FORM ACTIONS
+            ========================== -->
+            <div class="doctor-profile-actions">
 
+                <button type="submit"
+                        class="btn doctor-profile-save-btn">
 
+                    <span class="doctor-profile-save-icon">✓</span>
+                    Save Changes
 
-            <!-- Save Button -->
-            <div class="text-end mt-3">
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Changes
                 </button>
+
             </div>
+
         </form>
+
     </div>
+
 </div>
+
+<script src="~/js/doctor/profile/doctor_profile_photo.js"></script>

@@ -1,48 +1,423 @@
 ﻿@model Wellora.Areas.Doctor.ViewModels.DoctorProfile.DoctorDetailsViewModel
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <h5 class="card-title mb-4">Specialization & Services</h5>
+<link rel="stylesheet" href="~/css/doctor/profile/Specialization.css" />
 
-        <form asp-action="UpdateSpecialization" asp-controller="DoctorProfile" method="post">
-            <input type="hidden" asp-for="DoctorId" />
+<div class="doctor-profile-card">
+    <div class="doctor-profile-card__header">
+        <div>
+            <h5 class="doctor-profile-card__title">
+                Specialization & Services
+            </h5>
 
-            <!-- Specialization -->
-            <div class="mb-3">
-                <label asp-for="Specialization" class="form-label">Specialization</label>
-                <input asp-for="Specialization" class="form-control" />
-            </div>
-
-            <!-- Sub Specialties -->
-            <div class="mb-3">
-                <label asp-for="SubSpecialties" class="form-label">Sub Specialties</label>
-                <input asp-for="SubSpecialties" class="form-control" />
-            </div>
-
-            <!-- Services Offered -->
-            <div class="mb-3">
-                <label asp-for="ServicesOffered" class="form-label">Services Offered</label>
-                <textarea asp-for="ServicesOffered" class="form-control" rows="3"></textarea>
-            </div>
-
-            <!-- Years of Experience -->
-            <div class="mb-3">
-                <label asp-for="YearsExperience" class="form-label">Years of Experience</label>
-                <input asp-for="YearsExperience" class="form-control" type="number" min="0" />
-            </div>
-
-            <!-- Qualifications -->
-            <div class="mb-3">
-                <label asp-for="Qualifications" class="form-label">Qualifications</label>
-                <textarea asp-for="Qualifications" class="form-control" rows="2"></textarea>
-            </div>
-
-            <!-- Save Button -->
-            <div class="text-end">
-                <button type="submit" class="btn btn-primary">
-                    💾 Save Specialization & Services
-                </button>
-            </div>
-        </form>
+            <p class="doctor-profile-card__subtitle">
+                Add your medical specialization, areas of expertise, services, and professional education.
+            </p>
+        </div>
     </div>
+
+    <form asp-action="UpdateSpecialization"
+          asp-controller="DoctorProfile"
+          method="post"
+          class="doctor-profile-form">
+
+        <input type="hidden" asp-for="DoctorId" />
+
+        <!-- =====================================================
+             SPECIALIZATION
+        ====================================================== -->
+
+        <div class="form-section">
+            <div class="form-section__header">
+                <h6>Professional Specialization</h6>
+                <span>Select your primary area of practice.</span>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Specialization -->
+                <div class="col-md-6">
+                    <label asp-for="Specialization" class="form-label">
+                        Specialization
+                    </label>
+
+                    <select asp-for="Specialization"
+                            class="form-select"
+                            id="specializationSelect">
+
+                        <option value="">Select specialization</option>
+
+                        <option value="Anesthesiology">Anesthesiology</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Emergency Medicine">Emergency Medicine</option>
+                        <option value="Endocrinology">Endocrinology</option>
+                        <option value="Gastroenterology">Gastroenterology</option>
+                        <option value="General Medicine">General Medicine</option>
+                        <option value="General Physician">General Physician</option>
+                        <option value="Gynecology">Gynecology</option>
+                        <option value="Hematology">Hematology</option>
+                        <option value="Nephrology">Nephrology</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Oncology">Oncology</option>
+                        <option value="Ophthalmology">Ophthalmology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Psychiatry">Psychiatry</option>
+                        <option value="Pulmonology">Pulmonology</option>
+                        <option value="Radiology">Radiology</option>
+                        <option value="Urology">Urology</option>
+                        <option value="ENT">ENT</option>
+                        <option value="Allergy & Immunology">Allergy & Immunology</option>
+                        <option value="Rheumatology">Rheumatology</option>
+                        <option value="Infectious Disease">Infectious Disease</option>
+                        <option value="Geriatrics">Geriatrics</option>
+                        <option value="Sports Medicine">Sports Medicine</option>
+                        <option value="Nutrition">Nutrition</option>
+                        <option value="Pain Management">Pain Management</option>
+                        <option value="Sleep Medicine">Sleep Medicine</option>
+                        <option value="Occupational Medicine">Occupational Medicine</option>
+                        <option value="Plastic Surgery">Plastic Surgery</option>
+                        <option value="Psychology">Psychology</option>
+                        <option value="Neurosurgery">Neurosurgery</option>
+                        <option value="Cardiothoracic Surgery">Cardiothoracic Surgery</option>
+                        <option value="Vascular Surgery">Vascular Surgery</option>
+                        <option value="General Surgery">General Surgery</option>
+                        <option value="Colorectal Surgery">Colorectal Surgery</option>
+                        <option value="Oral & Maxillofacial Surgery">Oral & Maxillofacial Surgery</option>
+                        <option value="Pediatric Surgery">Pediatric Surgery</option>
+                        <option value="Reconstructive Surgery">Reconstructive Surgery</option>
+                        <option value="Maternal-Fetal Medicine">Maternal-Fetal Medicine</option>
+                        <option value="Reproductive Endocrinology">Reproductive Endocrinology</option>
+                        <option value="Fertility & Reproductive Medicine">Fertility & Reproductive Medicine</option>
+                        <option value="Neonatology">Neonatology</option>
+                        <option value="Pediatric Cardiology">Pediatric Cardiology</option>
+                        <option value="Pediatric Neurology">Pediatric Neurology</option>
+                        <option value="Pediatric Gastroenterology">Pediatric Gastroenterology</option>
+                        <option value="Pediatric Pulmonology">Pediatric Pulmonology</option>
+                        <option value="Interventional Cardiology">Interventional Cardiology</option>
+                        <option value="Interventional Radiology">Interventional Radiology</option>
+                        <option value="Radiation Oncology">Radiation Oncology</option>
+                        <option value="Medical Oncology">Medical Oncology</option>
+                        <option value="Surgical Oncology">Surgical Oncology</option>
+                        <option value="Hematology & Oncology">Hematology & Oncology</option>
+                        <option value="Clinical Pathology">Clinical Pathology</option>
+                        <option value="Anatomical Pathology">Anatomical Pathology</option>
+                        <option value="Nuclear Medicine">Nuclear Medicine</option>
+                        <option value="Physical Medicine & Rehabilitation">Physical Medicine & Rehabilitation</option>
+                        <option value="Family Medicine">Family Medicine</option>
+                        <option value="Preventive Medicine">Preventive Medicine</option>
+
+                    </select>
+
+                    <div class="form-text">
+                        Choose the specialization that best represents your primary practice.
+                    </div>
+                </div>
+
+
+                <!-- Sub Specialization -->
+                <div class="col-md-6">
+
+                    <label asp-for="SubSpecialties" class="form-label">
+                        Sub-Specialization
+                    </label>
+
+                    <select asp-for="SubSpecialties"
+                            id="subSpecialtySelect"
+                            class="form-select"
+                            data-selected="@Model.SubSpecialties">
+
+                        <option value="">
+                            Select a specialization first
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <!-- =====================================================
+             SERVICES
+        ====================================================== -->
+
+        <div class="form-section">
+
+            <div class="form-section__header">
+                <h6>Services Offered</h6>
+                <span>Describe the services you provide to patients.</span>
+            </div>
+
+            <div class="mb-0">
+
+                <label asp-for="ServicesOffered" class="form-label">
+                    Services
+                </label>
+
+                <textarea asp-for="ServicesOffered"
+                          class="form-control"
+                          rows="4"
+                          maxlength="50"
+                          placeholder="e.g. General consultation, follow-up consultation, patient assessment"></textarea>
+
+                <div class="form-field-footer">
+                    <div class="form-text">
+                        Maximum 50 characters.
+                    </div>
+
+                    <span class="character-counter"
+                          data-for="ServicesOffered">
+                        0 / 50
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             EDUCATION
+        ====================================================== -->
+
+        <div class="form-section">
+
+            <div class="form-section__header">
+                <h6>Education & Qualifications</h6>
+                <span>Select your completed medical degrees and professional qualifications.</span>
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- Primary Medical Degree -->
+                <div class="col-md-6">
+
+                    <label asp-for="PrimaryMedicalDegree" class="form-label">
+                        Primary Medical Degree
+                    </label>
+
+                    <select asp-for="PrimaryMedicalDegree"
+                            class="form-select">
+
+                        <option value="">Select primary degree</option>
+
+                        <option value="MBBS">MBBS</option>
+                        <option value="MD">MD</option>
+                        <option value="DO">DO</option>
+                        <option value="MBChB">MBChB</option>
+                        <option value="MBBCh">MBBCh</option>
+                        <option value="BMed">BMed</option>
+                        <option value="BMedSci">BMedSci</option>
+                        <option value="BAMS">BAMS</option>
+                        <option value="BHMS">BHMS</option>
+                        <option value="BUMS">BUMS</option>
+                        <option value="BSMS">BSMS</option>
+                        <option value="BNYS">BNYS</option>
+                        <option value="BDS">BDS</option>
+                        <option value="DDS">DDS</option>
+                        <option value="DMD">DMD</option>
+                        <option value="DVM">DVM</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Postgraduate Degree -->
+                <div class="col-md-6">
+
+                    <label asp-for="PostgraduateDegree" class="form-label">
+                        Postgraduate Degree
+                    </label>
+
+                    <select asp-for="PostgraduateDegree"
+                            class="form-select">
+
+                        <option value="">Select postgraduate degree</option>
+
+                        <option value="MD">MD</option>
+                        <option value="MS">MS</option>
+                        <option value="DNB">DNB</option>
+                        <option value="FCPS">FCPS</option>
+                        <option value="MDS">MDS</option>
+                        <option value="MMed">MMed</option>
+                        <option value="MSc">MSc</option>
+                        <option value="MPhil">MPhil</option>
+                        <option value="MPH">MPH</option>
+                        <option value="MA">MA</option>
+                        <option value="Diploma in Medicine">Diploma in Medicine</option>
+                        <option value="Diploma in Surgery">Diploma in Surgery</option>
+                        <option value="Diploma in Family Medicine">Diploma in Family Medicine</option>
+                        <option value="Diploma in Child Health">Diploma in Child Health</option>
+                        <option value="Diploma in Obstetrics & Gynecology">Diploma in Obstetrics & Gynecology</option>
+                        <option value="Diploma in Dermatology">Diploma in Dermatology</option>
+                        <option value="Diploma in Anesthesiology">Diploma in Anesthesiology</option>
+                        <option value="Diploma in Radiology">Diploma in Radiology</option>
+                        <option value="Diploma in Cardiology">Diploma in Cardiology</option>
+                        <option value="Diploma in Pediatrics">Diploma in Pediatrics</option>
+                        <option value="Postgraduate Diploma">Postgraduate Diploma</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Super Specialty -->
+                <div class="col-md-6">
+
+                    <label asp-for="SuperSpecialty" class="form-label">
+                        Super-Specialty
+                    </label>
+
+                    <select asp-for="SuperSpecialty"
+                            class="form-select">
+
+                        <option value="">Select super-specialty</option>
+
+                        <option value="DM">DM</option>
+                        <option value="MCh">MCh</option>
+                        <option value="DrNB">DrNB</option>
+                        <option value="Super-Specialty Fellowship">Super-Specialty Fellowship</option>
+                        <option value="Clinical Fellowship">Clinical Fellowship</option>
+                        <option value="Subspecialty Fellowship">Subspecialty Fellowship</option>
+                        <option value="Fellowship in Cardiology">Fellowship in Cardiology</option>
+                        <option value="Fellowship in Neurology">Fellowship in Neurology</option>
+                        <option value="Fellowship in Gastroenterology">Fellowship in Gastroenterology</option>
+                        <option value="Fellowship in Nephrology">Fellowship in Nephrology</option>
+                        <option value="Fellowship in Oncology">Fellowship in Oncology</option>
+                        <option value="Fellowship in Endocrinology">Fellowship in Endocrinology</option>
+                        <option value="Fellowship in Pulmonology">Fellowship in Pulmonology</option>
+                        <option value="Fellowship in Critical Care">Fellowship in Critical Care</option>
+                        <option value="Fellowship in Interventional Cardiology">Fellowship in Interventional Cardiology</option>
+                        <option value="Fellowship in Pediatric Cardiology">Fellowship in Pediatric Cardiology</option>
+                        <option value="Fellowship in Reproductive Medicine">Fellowship in Reproductive Medicine</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Professional Certification -->
+                <div class="col-md-6">
+
+                    <label asp-for="ProfessionalCertification" class="form-label">
+                        Professional Certification
+                    </label>
+
+                    <select asp-for="ProfessionalCertification"
+                            class="form-select">
+
+                        <option value="">Select certification</option>
+
+                        <option value="Board Certification">Board Certification</option>
+                        <option value="Specialist Certification">Specialist Certification</option>
+                        <option value="Consultant Certification">Consultant Certification</option>
+                        <option value="MRCP">MRCP</option>
+                        <option value="MRCS">MRCS</option>
+                        <option value="FRCS">FRCS</option>
+                        <option value="FRCPath">FRCPath</option>
+                        <option value="MRCOG">MRCOG</option>
+                        <option value="MRCPCH">MRCPCH</option>
+                        <option value="FRACP">FRACP</option>
+                        <option value="FACP">FACP</option>
+                        <option value="ABMS Certification">ABMS Certification</option>
+                        <option value="American Board Certification">American Board Certification</option>
+                        <option value="European Board Certification">European Board Certification</option>
+                        <option value="Fellowship Certification">Fellowship Certification</option>
+                        <option value="Advanced Life Support (ALS)">Advanced Life Support (ALS)</option>
+                        <option value="Advanced Cardiac Life Support (ACLS)">Advanced Cardiac Life Support (ACLS)</option>
+                        <option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
+                        <option value="Pediatric Advanced Life Support (PALS)">Pediatric Advanced Life Support (PALS)</option>
+                        <option value="Neonatal Resuscitation Program (NRP)">Neonatal Resuscitation Program (NRP)</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Additional Degree -->
+                <div class="col-md-6">
+
+                    <label asp-for="AdditionalDegree" class="form-label">
+                        Additional Degree
+                    </label>
+
+                    <select asp-for="AdditionalDegree"
+                            class="form-select">
+
+                        <option value="">Select additional degree</option>
+
+                        <option value="PhD">PhD</option>
+                        <option value="MPhil">MPhil</option>
+                        <option value="MPH">MPH</option>
+                        <option value="MSc">MSc</option>
+                        <option value="MBA">MBA</option>
+                        <option value="MA">MA</option>
+                        <option value="MEd">MEd</option>
+                        <option value="LLB">LLB</option>
+                        <option value="LLM">LLM</option>
+                        <option value="MS">MS</option>
+                        <option value="MD">MD</option>
+                        <option value="Research Degree">Research Degree</option>
+                        <option value="Doctorate">Doctorate</option>
+                        <option value="Postdoctoral Qualification">Postdoctoral Qualification</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Years Experience -->
+                <div class="col-md-6">
+
+                    <label asp-for="YearsExperience" class="form-label">
+                        Years of Experience
+                    </label>
+
+                    <input asp-for="YearsExperience"
+                           class="form-control"
+                           type="number"
+                           min="0"
+                           max="80"
+                           placeholder="e.g. 10" />
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             SAVE
+        ====================================================== -->
+
+        <div class="doctor-profile-form__footer">
+
+            <button type="submit"
+                    class="doctor-profile-save-btn">
+
+                <span class="doctor-profile-save-btn__icon">
+                    <i class="bi bi-check2"></i>
+                </span>
+
+                <span>
+                    Save Specialization & Services
+                </span>
+
+            </button>
+
+        </div>
+
+    </form>
 </div>
+
+
+<script src="~/js/doctor/profile/doctor_specialization.js"></script>
+

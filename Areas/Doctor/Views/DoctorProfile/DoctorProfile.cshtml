@@ -2,125 +2,502 @@
     ViewData["Title"] = "Doctor Profile";
 }
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid doctor-profile-page">
+    <div class="row min-vh-100">
 
-        <!-- Sidebar -->
-        <div class="col-md-3 d-flex flex-column sidebar border-end">
+        <!-- =========================================================
+             SIDEBAR
+             ========================================================= -->
+        <aside class="col-12 col-md-3 col-lg-2 doctor-profile-sidebar border-end d-flex flex-column p-0">
 
-            <!-- Top Settings -->
-            <div class="p-3 border-bottom">
-                <a class="nav-link sidebar-link"
-                   hx-get="@Url.Action("SettingsPartial", "DoctorProfile", new { area = "Doctor" })"
-                   hx-target="#profileContent"
-                   hx-swap="innerHTML">
-                    ⚙️ Settings
-                </a>
-            </div>
+            <!-- =====================================================
+                 SIDEBAR HEADER
+                 ===================================================== -->
+            <div class="doctor-sidebar-header p-3 border-bottom">
 
-            <!-- Navigation Links -->
-            <ul class="nav flex-column flex-grow-1">
+                <div class="d-flex align-items-center gap-2">
 
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("ProfilePartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Profile
-                    </a>
-                </li>
+                    <div class="doctor-sidebar-icon">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
 
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("PasswordPartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Change Password
-                    </a>
-                </li>
+                    <div>
+                        <h5 class="mb-0">
+                            Doctor Profile
+                        </h5>
 
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("SchedulePartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Schedule & Breaks
-                    </a>
-                </li>
+                        <small class="text-muted">
+                            Manage your profile
+                        </small>
+                    </div>
 
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("SpecializationPartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Specialization & Services
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("AchievementsPartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Achievements & Biography
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("ContactPartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Languages & Contact
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link"
-                       hx-get="@Url.Action("ClinicalInfoPartial", "DoctorProfile", new { area = "Doctor" })"
-                       hx-target="#profileContent"
-                       hx-swap="innerHTML">
-                        Clinical Info
-                    </a>
-                </li>
-
-            </ul>
-
-            <!-- Bottom Logout -->
-            <div class="p-3 border-top mt-auto">
-                <form asp-area=""
-                      asp-controller="Account"
-                      asp-action="Logout"
-                      method="post">
-                    <button type="submit" class="btn btn-danger w-100">
-                        🚪 Logout
-                    </button>
-                </form>
-            </div>
-
-        </div>
-
-        <!-- Content Area -->
-        <div class="col-md-9 p-4">
-
-            <div id="profileContent"
-                 hx-get="@Url.Action("ProfilePartial", "DoctorProfile", new { area = "Doctor" })"
-                 hx-trigger="load"
-                 hx-target="this"
-                 hx-swap="innerHTML">
-
-                <div class="text-center">
-                    <div class="spinner-border text-primary"></div>
                 </div>
 
             </div>
 
-        </div>
+
+            <!-- =====================================================
+                 SIDEBAR NAVIGATION
+                 ===================================================== -->
+            <nav class="doctor-sidebar-navigation flex-grow-1 p-3">
+
+                <div class="doctor-sidebar-section-title mb-2">
+                    PROFILE SETTINGS
+                </div>
+
+
+                <ul class="nav flex-column gap-1">
+
+
+                    <!-- =================================================
+                         PROFILE
+                         ================================================= -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link"
+                           data-title="Profile"
+                           data-description="Manage your personal and professional profile information."
+                           hx-get="@Url.Action(
+                                  "ProfilePartial",
+                                  "DoctorProfile",
+                                  new { area = "Doctor" }
+                              )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="event.preventDefault(); setProfileSection(this);">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-person"></i>
+                            </span>
+
+                            <span>
+                                Profile
+                            </span>
+
+                        </a>
+
+
+                    </li>
+
+
+                    <!-- =================================================
+                         CONTACT
+                         ================================================= -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link"
+                           data-title="Contact"
+                           data-description="Manage your contact information and communication details."
+                           hx-get="@Url.Action(
+                                                                 "ContactPartial",
+                                                                 "DoctorProfile",
+                                                                 new { area = "Doctor" }
+                                                             )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="setProfileSection(this)">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-telephone"></i>
+                            </span>
+
+                            <span>
+                                Contact
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- =================================================
+                         SPECIALIZATION
+                         ================================================= -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link"
+                           data-title="Specialization"
+                           data-description="Manage your medical specialties and areas of expertise."
+                           hx-get="@Url.Action(
+                                                                 "SpecializationPartial",
+                                                                 "DoctorProfile",
+                                                                 new { area = "Doctor" }
+                                                             )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="setProfileSection(this)">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-person-badge"></i>
+                            </span>
+
+                            <span>
+                                Specialization
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- =================================================
+                         CLINICAL INFO
+                         ================================================= -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link"
+                           data-title="Clinical Information"
+                           data-description="Manage your clinical information, experience and professional details."
+                           hx-get="@Url.Action(
+                                                                 "ClinicalInfoPartial",
+                                                                 "DoctorProfile",
+                                                                 new { area = "Doctor" }
+                                                             )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="setProfileSection(this)">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-heart-pulse"></i>
+                            </span>
+
+                            <span>
+                                Clinical Info
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- =================================================
+                         ACHIEVEMENTS
+                         ================================================= -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link"
+                           data-title="Achievements"
+                           data-description="Manage your qualifications, certifications, awards and professional achievements."
+                           hx-get="@Url.Action(
+                                                                 "AchievementsPartial",
+                                                                 "DoctorProfile",
+                                                                 new { area = "Doctor" }
+                                                             )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="setProfileSection(this)">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-trophy"></i>
+                            </span>
+
+                            <span>
+                                Achievements
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- ================================================= CHANGE PASSWORD ================================================= -->
+                    <li class="nav-item">
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link"
+                           data-title="Change Password"
+                           data-description="Update your account password to keep your profile secure."
+                           hx-get="@Url.Action(
+                                                                                       "ChangePasswordPartial",
+                                                                                       "DoctorProfile",
+                                                                                       new { area = "Doctor" }
+                                                                                   )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="setProfileSection(this)">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-key"></i>
+                            </span>
+
+                            <span>
+                                Change Password
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+
+                    <!-- =================================================
+                         SCHEDULE
+                         ================================================= -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link doctor-sidebar-link active"
+                           data-title="Schedule & Breaks"
+                           data-description="Manage your appointment schedule, breaks and availability."
+                           hx-get="@Url.Action(
+                                                                 "SchedulePartial",
+                                                                 "DoctorProfile",
+                                                                 new { area = "Doctor" }
+                                                             )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#scheduleLoading"
+                           hx-on:click="setProfileSection(this)">
+
+                            <span class="doctor-sidebar-link-icon">
+                                <i class="bi bi-calendar-week"></i>
+                            </span>
+
+                            <span>
+                                Schedule & Breaks
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    
+
+                </ul>
+
+            </nav>
+
+
+            <!-- =====================================================
+                 SIDEBAR FOOTER
+                 ===================================================== -->
+            <div class="doctor-sidebar-footer border-top p-3">
+
+                <div class="doctor-sidebar-user mb-3">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                        <div class="doctor-user-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+
+                        <div class="flex-grow-1">
+
+                            <div class="small fw-semibold">
+                                Doctor
+                            </div>
+
+                            <div class="small text-muted">
+                                Account
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Logout Partial -->
+                <div class="doctor-logout-container">
+
+                    @await Html.PartialAsync("_DoctorLogout")
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================================================
+             MAIN CONTENT
+             ========================================================= -->
+        <main class="col-12 col-md-9 col-lg-10 doctor-profile-content p-0">
+
+
+            <!-- =====================================================
+                 DYNAMIC HEADER
+                 ===================================================== -->
+            <div class="doctor-content-header border-bottom px-4 py-3">
+
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+
+                    <div>
+
+                        <h4 id="profileTitle"
+                            class="mb-1">
+
+                            Schedule & Breaks
+
+                        </h4>
+
+
+                        <p id="profileDescription"
+                           class="text-muted mb-0">
+
+                            Manage your appointment schedule, breaks and availability.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         LOADING INDICATOR
+                         ================================================= -->
+                    <div id="scheduleLoading"
+                         class="htmx-indicator">
+
+                        <div class="d-flex align-items-center gap-2 text-muted">
+
+                            <div class="spinner-border spinner-border-sm"
+                                 role="status"
+                                 aria-hidden="true">
+                            </div>
+
+                            <span>
+                                Loading...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 CONTENT
+                 ===================================================== -->
+            <div class="doctor-content-body p-3 p-md-4">
+
+                <div id="profileContent"
+                     hx-get="@Url.Action(
+                                                     "SchedulePartial",
+                                                     "DoctorProfile",
+                                                     new { area = "Doctor" }
+                                                 )"
+                     hx-trigger="load"
+                     hx-target="this"
+                     hx-swap="innerHTML"
+                     hx-indicator="#scheduleLoading">
+
+                    <!-- Initial Loading State -->
+                    <div class="doctor-page-loading">
+
+                        <div class="text-center py-5">
+
+                            <div class="spinner-border"
+                                 role="status"
+                                 aria-hidden="true">
+                            </div>
+
+                            <div class="mt-3 text-muted">
+                                Loading your schedule...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
 
     </div>
 </div>
 
-<!-- Toast Container -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index:1050">
-    <div id="toastContainer"></div>
+
+<!-- =============================================================
+     TOAST CONTAINER
+     ============================================================= -->
+<div class="position-fixed bottom-0 end-0 p-3"
+     style="z-index: 1090;">
+
+    <div id="toastContainer"
+         class="toast-container">
+    </div>
+
 </div>
+
+
+<!-- =============================================================
+     PROFILE NAVIGATION SCRIPT
+     ============================================================= -->
+<script>
+
+    function setProfileSection(element) {
+
+        /*
+         * Prevent the "#" from changing the browser URL.
+         */
+        event.preventDefault();
+
+
+        /*
+         * Remove active state from all sidebar links.
+         */
+        document
+            .querySelectorAll(".doctor-sidebar-link")
+            .forEach(function (link) {
+
+                link.classList.remove("active");
+
+            });
+
+
+        /*
+         * Add active state to clicked link.
+         */
+        element.classList.add("active");
+
+
+        /*
+         * Get section information from data attributes.
+         */
+        const title = element.dataset.title;
+        const description = element.dataset.description;
+
+
+        /*
+         * Update main content header.
+         */
+        const titleElement =
+            document.getElementById("profileTitle");
+
+        const descriptionElement =
+            document.getElementById("profileDescription");
+
+
+        if (titleElement) {
+
+            titleElement.textContent = title;
+
+        }
+
+
+        if (descriptionElement) {
+
+            descriptionElement.textContent = description;
+
+        }
+
+    }
+
+</script>
