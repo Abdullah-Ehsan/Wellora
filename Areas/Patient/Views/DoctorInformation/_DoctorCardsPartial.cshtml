@@ -2,37 +2,63 @@
 @model DoctorListingViewModel
 
 <div class="row" id="doctorCards">
-    @foreach (var doctor in Model.Doctors)
+    @if (Model.Doctors != null)
     {
-        <div class="col-md-3">
-            <div class="card doctor-card">
-                <img src="@(string.IsNullOrEmpty(doctor.ProfilePhoto)
-                         ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
-                         : Url.Content("~/" + doctor.ProfilePhoto))"
+        @foreach (var doctor in Model.Doctors)
+        {
+            @if (doctor.DoctorAvailable == true)
+            {
+                <div class="col-md-3">
+                    <div class="card doctor-card">
+                        <img src="@(string.IsNullOrEmpty(doctor.ProfilePhoto)
+                                                              ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                                                              : Url.Content("~/" + doctor.ProfilePhoto))"
                  alt="Doctor Avatar" class="doctor-img" />
 
-                <div class="card-body">
-                    <h5 class="card-title">Dr. @doctor.FullName</h5>
-                    <p class="card-text">Specialty: @doctor.Specialization</p>
-                    <a asp-area="Patient" asp-controller="DoctorInformation" asp-action="DoctorDetail" asp-route-id="@doctor.DoctorId"
-                       class="btn btn-primary">
-                        View
-                    </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Dr. @(doctor.FullName?.Split(new[] { ' ', '_', '-' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "Doctor")
+                            </h5>
+
+                            <p class="card-text">Specialty: @doctor.Specialization</p>
+                            <a asp-area="Patient" asp-controller="DoctorInformation" asp-action="DoctorDetail" asp-route-id="@doctor.DoctorId"
+                               class="btn btn-primary">
+                                View
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-     }
+        }
+        }
+    }
 </div>
 
-<nav>
-    <ul class="pagination justify-content-center" id="pagination">
-        @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <a class="page-link" href="javascript:void(0);" onclick="applyFilters(@i)">
-                    @i
-                </a>
-            </li>
-        }
-    </ul>
-</nav>
+@if (Model.TotalPages > 1)
+{
+    var startPage = Math.Max(1, Model.CurrentPage - 1);
+    var endPage = Math.Min(Model.TotalPages, startPage + 2);
+
+    if (endPage - startPage < 2)
+    {
+        startPage = Math.Max(1, endPage - 2);
+    }
+
+    <nav aria-label="Doctor listing pagination">
+        <ul class="pagination justify-content-center" id="pagination">
+
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                    <a class="page-link"
+                       href="javascript:void(0);"
+                       onclick="applyFilters(@i)">
+                        @i
+                    </a>
+
+                </li>
+            }
+
+        </ul>
+    </nav>
+}

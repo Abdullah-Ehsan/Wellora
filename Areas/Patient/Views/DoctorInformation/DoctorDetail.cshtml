@@ -40,15 +40,117 @@
         <p><strong>Country:</strong> @Model.Country</p>
     </section>
 
+    <section class="primary-doctor-section">
+
+        @if (!Model.IsPrimaryDoctor)
+        {
+            <div class="primary-doctor-content">
+
+                <div>
+                    <h3>Make this doctor your primary doctor</h3>
+
+                    <p>
+                        Make Dr. @Model.FullName your primary doctor
+                        for easier access to their care.
+                    </p>
+                </div>
+
+                <form asp-area="Patient"
+                      asp-controller="DoctorInformation"
+                      asp-action="SetPrimaryDoctor"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden"
+                           name="doctorId"
+                           value="@Model.DoctorId" />
+
+                    <button type="submit"
+                            class="primary-doctor-btn">
+
+                        <i class="bi bi-heart-pulse"></i>
+                        Primary Doctor
+
+                    </button>
+
+                </form>
+
+            </div>
+        }
+        else
+        {
+            <div class="primary-doctor-content">
+
+                <div>
+                    <h3>This is your primary doctor</h3>
+
+                    <p class="primary-doctor-confirmation">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Dr. @Model.FullName is your primary doctor.
+                    </p>
+                </div>
+
+                <div class="primary-doctor-actions">
+
+                    <!-- Disabled selected button -->
+                    <button type="button"
+                            class="primary-doctor-btn selected"
+                            disabled>
+
+                        <i class="bi bi-check-circle"></i>
+                        Primary Doctor
+
+                    </button>
+
+
+                    <!-- Remove primary doctor -->
+                    <form asp-area="Patient"
+                          asp-controller="DoctorInformation"
+                          asp-action="RemovePrimaryDoctor"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="doctorId"
+                               value="@Model.DoctorId" />
+
+                        <button type="submit"
+                                class="remove-primary-btn">
+
+                            <i class="bi bi-x-circle"></i>
+                            Not Primary Doctor
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        }
+
+    </section>
+
     <!-- Professional Credentials -->
     <section class="info-section">
         <h3>Professional Credentials</h3>
+
         <p><strong>License Number:</strong> @Model.LicenseNumber</p>
         <p><strong>PMDC Number:</strong> @Model.PmdcNumber</p>
         <p><strong>Medical School:</strong> @Model.MedicalSchool</p>
+
+        <h4>Qualifications</h4>
+
+        <p><strong>Primary Medical Degree:</strong> @Model.PrimaryMedicalDegree</p>
+        <p><strong>Postgraduate Degree:</strong> @Model.PostgraduateDegree</p>
+        <p><strong>Super Specialty:</strong> @Model.SuperSpecialty</p>
+        <p><strong>Professional Certification:</strong> @Model.ProfessionalCertification</p>
+        <p><strong>Additional Degree:</strong> @Model.AdditionalDegree</p>
         <p><strong>Certifications:</strong> @Model.Certifications</p>
-        <p><strong>Qualifications:</strong> @Model.Qualifications</p>
     </section>
+
 
     <!-- Clinical Practice -->
     <!-- Clinical Practice -->
