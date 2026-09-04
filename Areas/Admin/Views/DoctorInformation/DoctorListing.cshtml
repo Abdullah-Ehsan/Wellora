@@ -1,0 +1,159 @@
+﻿@using Wellora.Areas.Admin.ViewModels.DoctorInformation
+@model DoctorListingViewModel
+
+
+@{
+    ViewData["Title"] = "Doctor Listing";
+}
+
+
+<link rel="stylesheet" href="~/css/patient/DoctorListing.css" />
+
+
+
+<div class="container-fluid doctor-listing">
+    <div class="row">
+        <!-- Filter Panel -->
+        <div class="col-md-3 filter-panel">
+            <h4>Filters</h4>
+            <div class="form-group">
+                <label>Specialty</label>
+                <select id="specialtyFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="Anesthesiology">Anesthesiologist</option>
+                    <option value="Cardiology">Cardiologist</option>
+                    <option value="Dermatology">Dermatologist</option>
+                    <option value="Emergency Medicine">Emergency Medicine Specialist</option>
+                    <option value="Endocrinology">Endocrinologist</option>
+                    <option value="Gastroenterology">Gastroenterologist</option>
+                    <option value="General Medicine">General Medicine Specialist</option>
+                    <option value="General Physician">General Physician</option>
+                    <option value="Gynecology">Gynecologist</option>
+                    <option value="Hematology">Hematologist</option>
+                    <option value="Nephrology">Nephrologist</option>
+                    <option value="Neurology">Neurologist</option>
+                    <option value="Oncology">Oncologist</option>
+                    <option value="Ophthalmology">Ophthalmologist</option>
+                    <option value="Orthopedics">Orthopedic Specialist</option>
+                    <option value="Pediatrics">Pediatrician</option>
+                    <option value="Psychiatry">Psychiatrist</option>
+                    <option value="Pulmonology">Pulmonologist</option>
+                    <option value="Radiology">Radiologist</option>
+                    <option value="Urology">Urologist</option>
+                    <option value="ENT">ENT Specialist</option>
+                    <option value="Allergy & Immunology">Allergist / Immunologist</option>
+                    <option value="Rheumatology">Rheumatologist</option>
+                    <option value="Infectious Disease">Infectious Disease Specialist</option>
+                    <option value="Geriatrics">Geriatrician</option>
+                    <option value="Sports Medicine">Sports Medicine Specialist</option>
+                    <option value="Nutrition">Nutritionist</option>
+                    <option value="Pain Management">Pain Management Specialist</option>
+                    <option value="Sleep Medicine">Sleep Medicine Specialist</option>
+                    <option value="Occupational Medicine">Occupational Medicine Specialist</option>
+                    <option value="Plastic Surgery">Plastic Surgeon</option>
+                    <option value="Psychology">Psychologist</option>
+                    <option value="Neurosurgery">Neurosurgeon</option>
+                    <option value="Cardiothoracic Surgery">Cardiothoracic Surgeon</option>
+                    <option value="Vascular Surgery">Vascular Surgeon</option>
+                    <option value="General Surgery">General Surgeon</option>
+                    <option value="Colorectal Surgery">Colorectal Surgeon</option>
+                    <option value="Oral & Maxillofacial Surgery">Oral & Maxillofacial Surgeon</option>
+                    <option value="Pediatric Surgery">Pediatric Surgeon</option>
+                    <option value="Reconstructive Surgery">Reconstructive Surgeon</option>
+                    <option value="Maternal-Fetal Medicine">Maternal-Fetal Medicine Specialist</option>
+                    <option value="Reproductive Endocrinology">Reproductive Endocrinologist</option>
+                    <option value="Fertility & Reproductive Medicine">Fertility & Reproductive Medicine Specialist</option>
+                    <option value="Neonatology">Neonatologist</option>
+                    <option value="Pediatric Cardiology">Pediatric Cardiologist</option>
+                    <option value="Pediatric Neurology">Pediatric Neurologist</option>
+                    <option value="Pediatric Gastroenterology">Pediatric Gastroenterologist</option>
+                    <option value="Pediatric Pulmonology">Pediatric Pulmonologist</option>
+                    <option value="Interventional Cardiology">Interventional Cardiologist</option>
+                    <option value="Interventional Radiology">Interventional Radiologist</option>
+                    <option value="Radiation Oncology">Radiation Oncologist</option>
+                    <option value="Medical Oncology">Medical Oncologist</option>
+                    <option value="Surgical Oncology">Surgical Oncologist</option>
+                    <option value="Hematology & Oncology">Hematologist & Oncologist</option>
+                    <option value="Clinical Pathology">Clinical Pathologist</option>
+                    <option value="Anatomical Pathology">Anatomical Pathologist</option>
+                    <option value="Nuclear Medicine">Nuclear Medicine Specialist</option>
+                    <option value="Physical Medicine & Rehabilitation">Physical Medicine & Rehabilitation Specialist</option>
+                    <option value="Family Medicine">Family Medicine Physician</option>
+                    <option value="Preventive Medicine">Preventive Medicine Specialist</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Language</label>
+                <select id="languageFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="English">English</option>
+                    <option value="Urdu">اردو</option>
+                    <option value="German">Deutsch</option>
+                    <option value="Punjabi">ਪੰਜਾਬੀ</option>
+                    <option value="Sindhi">سنڌي</option>
+                    <option value="Pashto">پښتو</option>
+                    <option value="Balochi">بلوچی</option>
+                    <option value="Saraiki">سرائیکی</option>
+                    <option value="Hindko">ہندکو</option>
+                    <option value="Brahui">براہوی</option>
+                    <option value="Kashmiri">کٲشُر</option>
+                    <option value="Shina">شینا</option>
+                    <option value="Balti">بلتی</option>
+                    <option value="Wakhi">وخى</option>
+                    <option value="Burushaski">بروشسکی</option>
+                    <option value="Khowar">کھوار</option>
+                    <option value="Dari">دری</option>
+                    <option value="Persian">فارسی</option>
+                    <option value="Memoni">میمنی</option>
+                    <option value="Marwari">मारवाड़ी</option>
+                    <option value="Gujarati">ગુજરાતી</option>
+                    <option value="Hazargi">هزارگی</option>
+                    <option value="Torwali">توروالی</option>
+                    <option value="Gawri">گاؤری</option>
+                    <option value="Dameli">دامیلی</option>
+                    <option value="Kalasha">کلاشہ</option>
+                    <option value="Palula">پالولا</option>
+                    <option value="Ushojo">اوشوجو</option>
+                    <option value="Domaaki">دوماکی</option>
+                    <option value="Pahari">پہاڑی</option>
+                    <option value="Potohari">پوٹوہاری</option>
+                    <option value="Kohistani">کوہستانی</option>
+                    <option value="Gilgiti">گلگتی</option>
+                    <option value="Chitrali">چترالی</option>
+                    <option value="Arabic">العربية</option>
+                    <option value="Farsi">فارسی</option>
+
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="genderFilter" class="form-control">
+                    <option value="">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div id="doctorCardsContainer">
+                @await Html.PartialAsync("_DoctorCardsPartial", Model)
+            </div>
+        </div>
+
+
+
+        
+    </div>
+</div>
+
+
+<script>
+    const doctorListingUrl = '@Url.Action("DoctorListing", "DoctorInformation", new { area = "Admin" })';
+</script>
+
+
+<script src="~/js/doctorlisting.js"></script>

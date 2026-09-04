@@ -1,0 +1,1047 @@
+﻿@model Wellora.Areas.Admin.ViewModels.DoctorStats.DoctorStatsViewModel
+
+@{
+    ViewData["Title"] = "Doctor Stats";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/admin/stats/doctor-stats.css"
+          asp-append-version="true" />
+}
+
+<div class="doctor-stats-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <div class="doctor-stats-header">
+
+        <div class="doctor-stats-header-content">
+
+            <div class="doctor-stats-icon">
+                <i class="bi bi-person-badge"></i>
+            </div>
+
+            <div>
+                <h1>Doctor Statistics</h1>
+
+                <p>
+                    Detailed performance, appointment, revenue and patient
+                    analytics for <strong>@Model.DoctorName</strong>.
+                </p>
+            </div>
+
+        </div>
+
+        
+
+    </div>
+
+
+    <!-- =====================================================
+         DOCTOR PROFILE
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-profile-card">
+
+            <div class="doctor-profile-image">
+
+                @if (!string.IsNullOrWhiteSpace(Model.ProfilePhoto))
+                {
+                    <img src="@(string.IsNullOrEmpty(Model.ProfilePhoto)
+                        ? Url.Content("~/User/Doctor/Profile_Picture/Default.png")
+                        : Url.Content("~/" + Model.ProfilePhoto))"
+                        alt="@Model.DoctorName"
+                        class="profile-img mb-3" />
+                }
+                else
+                {
+                    <div class="doctor-profile-placeholder">
+                        <i class="bi bi-person"></i>
+                    </div>
+                }
+
+            </div>
+
+            <div class="doctor-profile-details">
+
+                <h2>@Model.DoctorName</h2>
+
+                <p class="doctor-specialization">
+                    @Model.Specialization
+                </p>
+
+                <div class="doctor-meta">
+
+                    <span>
+                        <i class="bi bi-briefcase"></i>
+                        @Model.YearsExperience years experience
+                    </span>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Country))
+                    {
+                        <span>
+                            <i class="bi bi-geo-alt"></i>
+                            @Model.Country
+                        </span>
+                    }
+
+                    <span>
+                        <i class="bi bi-cash"></i>
+                        Consultation Fee:
+                        @Model.ConsultationFee.ToString("N2")
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-stats-section-heading">
+
+            <div class="doctor-section-icon">
+                <i class="bi bi-speedometer2"></i>
+            </div>
+
+            <div>
+                <h2>Overview</h2>
+                <p>Key performance statistics for this doctor.</p>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-summary-grid">
+
+            <!-- Total Earnings -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-cash-stack"></i>
+                </div>
+
+                <div>
+                    <span>Total Earnings</span>
+                    <strong>
+                        @Model.Summary.TotalEarnings.ToString("N2")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Total Appointments -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+
+                <div>
+                    <span>Total Appointments</span>
+                    <strong>
+                        @Model.Summary.TotalAppointments.ToString("N0")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Upcoming -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-calendar-event"></i>
+                </div>
+
+                <div>
+                    <span>Upcoming Appointments</span>
+                    <strong>
+                        @Model.Summary.UpcomingAppointments.ToString("N0")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Completed -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <div>
+                    <span>Completed</span>
+                    <strong>
+                        @Model.Summary.CompletedAppointments.ToString("N0")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Online Earnings -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-camera-video"></i>
+                </div>
+
+                <div>
+                    <span>Online Earnings</span>
+                    <strong>
+                        @Model.Summary.OnlineEarnings.ToString("N2")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Onsite Earnings -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-building"></i>
+                </div>
+
+                <div>
+                    <span>Onsite Earnings</span>
+                    <strong>
+                        @Model.Summary.OnsiteEarnings.ToString("N2")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Online Appointments -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-laptop"></i>
+                </div>
+
+                <div>
+                    <span>Online Appointments</span>
+                    <strong>
+                        @Model.Summary.OnlineAppointments.ToString("N0")
+                    </strong>
+                </div>
+            </div>
+
+
+            <!-- Onsite Appointments -->
+
+            <div class="doctor-stat-card">
+                <div class="doctor-stat-icon">
+                    <i class="bi bi-hospital"></i>
+                </div>
+
+                <div>
+                    <span>Onsite Appointments</span>
+                    <strong>
+                        @Model.Summary.OnsiteAppointments.ToString("N0")
+                    </strong>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         KEY PERFORMANCE
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-stats-section-heading">
+
+            <div class="doctor-section-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+
+            <div>
+                <h2>Key Performance</h2>
+                <p>Important performance indicators for this doctor.</p>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-performance-grid">
+
+            <div class="doctor-performance-card">
+                <div class="performance-icon">
+                    <i class="bi bi-cash"></i>
+                </div>
+
+                <span>Average Consultation Fee</span>
+
+                <strong>
+                    @Model.Summary.AverageConsultationFee.ToString("N2")
+                </strong>
+            </div>
+
+
+            <div class="doctor-performance-card">
+                <div class="performance-icon">
+                    <i class="bi bi-check2-circle"></i>
+                </div>
+
+                <span>Completion Rate</span>
+
+                <strong>
+                    @Model.Summary.CompletionRate.ToString("N1")%
+                </strong>
+            </div>
+
+
+            <div class="doctor-performance-card">
+                <div class="performance-icon">
+                    <i class="bi bi-x-circle"></i>
+                </div>
+
+                <span>Cancellation Rate</span>
+
+                <strong>
+                    @Model.Summary.CancellationRate.ToString("N1")%
+                </strong>
+            </div>
+
+
+            <div class="doctor-performance-card">
+                <div class="performance-icon">
+                    <i class="bi bi-bar-chart"></i>
+                </div>
+
+                <span>Average Revenue / Appointment</span>
+
+                <strong>
+                    @Model.Summary.AverageRevenuePerAppointment.ToString("N2")
+                </strong>
+            </div>
+
+
+            <div class="doctor-performance-card">
+                <div class="performance-icon">
+                    <i class="bi bi-calendar-week"></i>
+                </div>
+
+                <span>Average Appointments / Week</span>
+
+                <strong>
+                    @Model.Summary.AverageAppointmentsPerWeek.ToString("N1")
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         APPOINTMENT ANALYTICS
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-stats-section-heading">
+
+            <div class="doctor-section-icon">
+                <i class="bi bi-calendar3"></i>
+            </div>
+
+            <div>
+                <h2>Appointment Analytics</h2>
+                <p>Appointment activity, trends and scheduling patterns.</p>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-highlight-grid">
+
+            <div class="doctor-highlight-card">
+                <span>Busiest Month</span>
+
+                <strong>
+                    @Model.Appointments.BusiestMonth
+                </strong>
+
+                <small>
+                    @Model.Appointments.BusiestMonthAppointmentCount appointments
+                </small>
+            </div>
+
+
+            <div class="doctor-highlight-card">
+                <span>Busiest Weekday</span>
+
+                <strong>
+                    @Model.Appointments.BusiestWeekday
+                </strong>
+
+                <small>
+                    @Model.Appointments.BusiestWeekdayAppointmentCount appointments
+                </small>
+            </div>
+
+
+            <div class="doctor-highlight-card">
+                <span>Cancelled Appointments</span>
+
+                <strong>
+                    @Model.Summary.CancelledAppointments
+                </strong>
+
+                <small>
+                    @Model.Summary.CancellationRate.ToString("N1")% cancellation rate
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-chart-grid">
+
+            <!-- Appointments Over Time -->
+
+            <div class="doctor-chart-card chart-wide">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Appointments Over Time</h3>
+                        <p>Daily appointment activity.</p>
+                    </div>
+
+                    <i class="bi bi-graph-up"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="appointmentsOverTimeChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Appointment Status -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Appointment Status</h3>
+                        <p>Appointment outcome distribution.</p>
+                    </div>
+
+                    <i class="bi bi-pie-chart"></i>
+
+                </div>
+
+                <div class="doctor-chart-container doctor-chart-small">
+                    <div id="appointmentStatusChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Weekday -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Appointments By Weekday</h3>
+                        <p>Which days are busiest.</p>
+                    </div>
+
+                    <i class="bi bi-calendar-week"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="weeklyAppointmentsChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Monthly -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Monthly Appointments</h3>
+                        <p>Appointment volume by month.</p>
+                    </div>
+
+                    <i class="bi bi-bar-chart"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="monthlyAppointmentsChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Appointment Methods -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Appointment Methods</h3>
+                        <p>Online versus onsite appointments.</p>
+                    </div>
+
+                    <i class="bi bi-laptop"></i>
+
+                </div>
+
+                <div class="doctor-chart-container doctor-chart-small">
+                    <div id="appointmentMethodsChart"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINANCIAL ANALYTICS
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-stats-section-heading">
+
+            <div class="doctor-section-icon">
+                <i class="bi bi-wallet2"></i>
+            </div>
+
+            <div>
+                <h2>Financial Analytics</h2>
+                <p>Revenue trends and payment information.</p>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-financial-highlights">
+
+            <div class="doctor-highlight-card revenue-highlight">
+                <span>Highest Revenue Month</span>
+
+                <strong>
+                    @Model.Financial.HighestRevenueMonth
+                </strong>
+
+                <small>
+                    @Model.Financial.HighestMonthlyRevenue.ToString("N2")
+                </small>
+            </div>
+
+
+            <div class="doctor-highlight-card revenue-highlight">
+                <span>Total Earnings</span>
+
+                <strong>
+                    @Model.Summary.TotalEarnings.ToString("N2")
+                </strong>
+
+                <small>
+                    From completed/paid activity
+                </small>
+            </div>
+
+
+            <div class="doctor-highlight-card revenue-highlight">
+                <span>Average Revenue / Appointment</span>
+
+                <strong>
+                    @Model.Summary.AverageRevenuePerAppointment.ToString("N2")
+                </strong>
+
+                <small>
+                    Average generated revenue
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-chart-grid">
+
+            <!-- Monthly Revenue -->
+
+            <div class="doctor-chart-card chart-wide">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Monthly Revenue</h3>
+                        <p>Revenue generated each month.</p>
+                    </div>
+
+                    <i class="bi bi-graph-up-arrow"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="monthlyRevenueChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Revenue Over Time -->
+
+            <div class="doctor-chart-card chart-wide">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Revenue Over Time</h3>
+                        <p>Daily revenue generated by the doctor.</p>
+                    </div>
+
+                    <i class="bi bi-currency-exchange"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="revenueOverTimeChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Payment Methods -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Payment Methods</h3>
+                        <p>Payment distribution.</p>
+                    </div>
+
+                    <i class="bi bi-credit-card"></i>
+
+                </div>
+
+                <div class="doctor-chart-container doctor-chart-small">
+                    <div id="paymentMethodsChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Payment Status -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Payment Status</h3>
+                        <p>Payment status distribution.</p>
+                    </div>
+
+                    <i class="bi bi-receipt"></i>
+
+                </div>
+
+                <div class="doctor-chart-container doctor-chart-small">
+                    <div id="paymentStatusChart"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PATIENT ANALYTICS
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-stats-section-heading">
+
+            <div class="doctor-section-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <div>
+                <h2>Patient Analytics</h2>
+                <p>Patient visits, spending and patient types.</p>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-patient-summary-grid">
+
+            <div class="doctor-patient-summary-card">
+                <i class="bi bi-people"></i>
+
+                <div>
+                    <span>Total Patients</span>
+
+                    <strong>
+                        @Model.Summary.TotalPatients
+                    </strong>
+                </div>
+            </div>
+
+
+            <div class="doctor-patient-summary-card">
+                <i class="bi bi-person-plus"></i>
+
+                <div>
+                    <span>New Patients</span>
+
+                    <strong>
+                        @Model.Summary.NewPatients
+                    </strong>
+                </div>
+            </div>
+
+
+            <div class="doctor-patient-summary-card">
+                <i class="bi bi-person-check"></i>
+
+                <div>
+                    <span>Returning Patients</span>
+
+                    <strong>
+                        @Model.Summary.ReturningPatients
+                    </strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="doctor-chart-grid">
+
+            <!-- Most Visited -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Most Visited Patients</h3>
+                        <p>Patients who visit this doctor most often.</p>
+                    </div>
+
+                    <i class="bi bi-person-lines-fill"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="mostVisitedPatientsChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Highest Spending -->
+
+            <div class="doctor-chart-card">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Highest Spending Patients</h3>
+                        <p>Patients generating the most revenue.</p>
+                    </div>
+
+                    <i class="bi bi-cash-stack"></i>
+
+                </div>
+
+                <div class="doctor-chart-container">
+                    <div id="highestSpendingPatientsChart"></div>
+                </div>
+
+            </div>
+
+
+            <!-- Patient Types -->
+
+            <div class="doctor-chart-card chart-wide">
+
+                <div class="doctor-chart-header">
+
+                    <div>
+                        <h3>Patient Types</h3>
+                        <p>New and returning patient distribution.</p>
+                    </div>
+
+                    <i class="bi bi-people-fill"></i>
+
+                </div>
+
+                <div class="doctor-chart-container doctor-chart-small">
+                    <div id="patientTypesChart"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         UPCOMING APPOINTMENTS
+    ====================================================== -->
+
+    <section class="doctor-stats-section">
+
+        <div class="doctor-stats-section-heading">
+
+            <div class="doctor-section-icon">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+
+            <div>
+                <h2>Upcoming Appointments</h2>
+                <p>Upcoming workload for this doctor.</p>
+            </div>
+
+        </div>
+
+
+        <div class="upcoming-summary-grid">
+
+            <div class="upcoming-summary-card">
+                <span>Today</span>
+                <strong>@Model.Upcoming.Today</strong>
+            </div>
+
+            <div class="upcoming-summary-card">
+                <span>Tomorrow</span>
+                <strong>@Model.Upcoming.Tomorrow</strong>
+            </div>
+
+            <div class="upcoming-summary-card">
+                <span>Next 7 Days</span>
+                <strong>@Model.Upcoming.Next7Days</strong>
+            </div>
+
+            <div class="upcoming-summary-card">
+                <span>Next 30 Days</span>
+                <strong>@Model.Upcoming.Next30Days</strong>
+            </div>
+
+        </div>
+
+
+        @if (Model.Upcoming.Appointments.Any())
+        {
+            <div class="upcoming-table-card">
+
+                <div class="upcoming-table-header">
+                    <h3>Upcoming Appointment Schedule</h3>
+
+                    <span>
+                        @Model.Upcoming.Appointments.Count appointment(s)
+                    </span>
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table doctor-upcoming-table">
+
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Payment</th>
+                                <th>Method</th>
+                                <th class="text-end">Fee</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var appointment in Model.Upcoming.Appointments)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <div class="patient-name">
+                                            <div class="patient-avatar">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+
+                                            <span>
+                                                @appointment.PatientName
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="appointment-date">
+                                            <strong>
+                                                @appointment.AppointmentDate.ToString("dd MMM yyyy")
+                                            </strong>
+
+                                            <small>
+                                                @appointment.AppointmentDate.ToString("hh:mm tt")
+                                            </small>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <span class="status-badge">
+                                            @appointment.Status
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="payment-badge">
+                                            @appointment.PaymentStatus
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        @appointment.PaymentMethod
+                                    </td>
+
+                                    <td class="text-end">
+                                        <strong>
+                                            @appointment.ConsultationFee.ToString("N2")
+                                        </strong>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="empty-upcoming-state">
+
+                <div>
+                    <i class="bi bi-calendar-x"></i>
+                </div>
+
+                <h3>No Upcoming Appointments</h3>
+
+                <p>
+                    This doctor currently has no upcoming appointments.
+                </p>
+
+            </div>
+        }
+
+    </section>
+
+</div>
+
+
+<!-- =========================================================
+     CHART DATA
+========================================================= -->
+
+<script>
+
+    const doctorStatsData = {
+
+        appointments: {
+
+            overTime:
+                @Html.Raw(Json.Serialize(Model.Appointments.AppointmentsOverTime)),
+
+            status:
+                @Html.Raw(Json.Serialize(Model.Appointments.AppointmentStatus)),
+
+            weekly:
+                @Html.Raw(Json.Serialize(Model.Appointments.AppointmentsByWeekday)),
+
+            monthly:
+                @Html.Raw(Json.Serialize(Model.Appointments.MonthlyAppointments)),
+
+            methods:
+                @Html.Raw(Json.Serialize(Model.Appointments.AppointmentsByMethod))
+
+        },
+
+        revenue: {
+
+            overTime:
+                @Html.Raw(Json.Serialize(Model.Financial.RevenueOverTime)),
+
+            monthly:
+                @Html.Raw(Json.Serialize(Model.Financial.MonthlyRevenue)),
+
+            paymentMethods:
+                @Html.Raw(Json.Serialize(Model.Financial.RevenueByPaymentMethod)),
+
+            paymentStatus:
+                @Html.Raw(Json.Serialize(Model.Financial.PaymentStatus))
+
+        },
+
+        patients: {
+
+            mostVisited:
+                @Html.Raw(Json.Serialize(Model.Patients.MostVisitedPatients)),
+
+            highestSpending:
+                @Html.Raw(Json.Serialize(Model.Patients.HighestSpendingPatients)),
+
+            patientTypes:
+                @Html.Raw(Json.Serialize(Model.Patients.PatientTypes))
+
+        }
+
+    };
+
+</script>
+
+
+@section Scripts {
+
+    <script src="~/js/admin/stats/doctor-stats.js"
+            asp-append-version="true"></script>
+
+}

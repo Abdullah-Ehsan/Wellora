@@ -1,0 +1,61 @@
+﻿@using Wellora.Areas.Admin.ViewModels.DoctorInformation
+@model DoctorListingViewModel
+
+<div class="row" id="doctorCards">
+    @foreach (var doctor in Model.Doctors)
+    {
+        <div class="col-md-3">
+            <div class="card doctor-card">
+                <img src="@(string.IsNullOrEmpty(doctor.ProfilePhoto)
+                         ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                         : Url.Content("~/" + doctor.ProfilePhoto))"
+                 alt="Doctor Avatar" class="doctor-img" />
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Dr. @(doctor.FullName?.Split(new[] { ' ', '_', '-' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "Doctor")
+                    </h5>
+
+                    <p class="card-text">Specialty: @doctor.Specialization</p>
+                    <a asp-area="Admin" asp-controller="DoctorInformation" asp-action="DoctorDetail" asp-route-id="@doctor.DoctorId"
+                       class="btn btn-primary">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+     }
+</div>
+
+@if (Model.TotalPages > 1)
+{
+    var startPage = Math.Max(1, Model.CurrentPage - 1);
+    var endPage = Math.Min(Model.TotalPages, startPage + 2);
+
+    // If we're near the end, move the window back
+    // so that we still show 3 pages.
+    if (endPage - startPage < 2)
+    {
+        startPage = Math.Max(1, endPage - 2);
+    }
+
+    <nav aria-label="Doctor listing pagination">
+        <ul class="pagination justify-content-center" id="pagination">
+
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                    <a class="page-link"
+                       href="javascript:void(0);"
+                       onclick="applyFilters(@i)">
+                        @i
+                    </a>
+
+                </li>
+            }
+
+        </ul>
+    </nav>
+}
+
