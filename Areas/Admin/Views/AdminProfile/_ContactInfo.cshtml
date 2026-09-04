@@ -1,0 +1,246 @@
+﻿@model Wellora.Areas.Admin.ViewModels.AdminProfile.ContactInfoViewModel
+
+<link rel="stylesheet"
+      href="~/css/admin/profile/contact_info.css"
+      asp-append-version="true" />
+
+<div class="admin-profile-info">
+
+    <div class="card admin-profile-card">
+
+        <!-- =========================================================
+             HEADER
+             ========================================================= -->
+        <div class="card-header">
+
+            <div class="d-flex align-items-center gap-2">
+
+                <div class="admin-section-icon">
+                    <i class="bi bi-telephone"></i>
+                </div>
+
+                <div>
+                    <h5 class="mb-0">
+                        Contact Information
+                    </h5>
+
+                    <small class="text-muted">
+                        Manage your contact and emergency information
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================================
+             BODY
+             ========================================================= -->
+        <div class="card-body">
+
+            <form method="post"
+                  hx-post="@Url.Action(
+                                        "UpdateContactInfo",
+                                        "AdminProfile",
+                                        new { area = "Admin" }
+                                    )"
+                  hx-target="#profileContent"
+                  hx-swap="innerHTML"
+                  hx-indicator="#profileLoading">
+
+                @Html.AntiForgeryToken()
+
+
+                <div class="row g-4">
+
+
+                    <!-- =================================================
+                         CONTACT NUMBER
+                         ================================================= -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="contactNumber"
+                               class="form-label">
+
+                            Contact Number
+
+                        </label>
+
+                        <input type="tel"
+                               id="contactNumber"
+                               name="ContactNumber"
+                               class="form-control"
+                               value="@Model.ContactNumber"
+                               maxlength="30"
+                               placeholder="Enter your contact number" />
+
+                        <div class="form-text">
+                            Your primary contact number.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         OFFICE NUMBER
+                         ================================================= -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="officeNumber"
+                               class="form-label">
+
+                            Office Number
+
+                        </label>
+
+                        <input type="tel"
+                               id="officeNumber"
+                               name="OfficeNumber"
+                               class="form-control"
+                               value="@Model.OfficeNumber"
+                               maxlength="30"
+                               placeholder="Enter your office number" />
+
+                        <div class="form-text">
+                            Your office or extension number.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         OFFICIAL OFFICE NUMBER
+                         ================================================= -->
+                    <div class="col-12">
+
+                        <label for="officeOfficialNumber"
+                               class="form-label">
+
+                            Official Office Number
+
+                        </label>
+
+                        <input type="tel"
+                               id="officeOfficialNumber"
+                               name="OfficeOfficialNumber"
+                               class="form-control"
+                               value="@Model.OfficeOfficialNumber"
+                               maxlength="30"
+                               placeholder="Enter your official office number" />
+
+                        <div class="form-text">
+                            The official number associated with your office.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         EMERGENCY CONTACT
+                         ================================================= -->
+                    <div class="col-12">
+
+                        <div class="admin-contact-subsection">
+
+                            <div class="admin-contact-subsection-header">
+
+                                <div class="admin-contact-subsection-icon">
+                                    <i class="bi bi-exclamation-circle"></i>
+                                </div>
+
+                                <div>
+
+                                    <h6 class="mb-0">
+                                        Emergency Contact
+                                    </h6>
+
+                                    <small class="text-muted">
+                                        Someone who can be contacted in an emergency
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3 mt-1">
+
+
+                                <!-- =====================================
+                                     EMERGENCY CONTACT NAME
+                                     ===================================== -->
+                                <div class="col-12 col-md-6">
+
+                                    <label for="emergencyContactName"
+                                           class="form-label">
+
+                                        Contact Name
+
+                                    </label>
+
+                                    <input type="text"
+                                           id="emergencyContactName"
+                                           name="EmergencyContactName"
+                                           class="form-control"
+                                           value="@Model.EmergencyContactName"
+                                           maxlength="150"
+                                           placeholder="Enter emergency contact name" />
+
+                                </div>
+
+
+                                <!-- =====================================
+                                     EMERGENCY CONTACT NUMBER
+                                     ===================================== -->
+                                <div class="col-12 col-md-6">
+
+                                    <label for="emergencyContactNumber"
+                                           class="form-label">
+
+                                        Contact Number
+
+                                    </label>
+
+                                    <input type="tel"
+                                           id="emergencyContactNumber"
+                                           name="EmergencyContactNumber"
+                                           class="form-control"
+                                           value="@Model.EmergencyContactNumber"
+                                           maxlength="30"
+                                           placeholder="Enter emergency contact number" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================================
+                     SAVE BUTTON
+                     ===================================================== -->
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button type="submit"
+                            class="btn admin-save-button">
+
+                        <i class="bi bi-check-lg me-1"></i>
+
+                        Save Contact Information
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

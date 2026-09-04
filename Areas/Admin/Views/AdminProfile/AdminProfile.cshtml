@@ -1,0 +1,366 @@
+﻿@{
+    ViewData["Title"] = "Admin Profile";
+}
+
+<link rel="stylesheet" href="~/css/admin/profile/profile.css" asp-append-version="true" />
+<div class="container-fluid admin-profile-page">
+    <div class="row min-vh-100">
+
+
+        <!-- =========================================================
+             SIDEBAR
+             ========================================================= -->
+
+        <aside class="col-12 col-md-3 col-lg-2
+                  admin-profile-sidebar
+                  border-end
+                  d-flex
+                  flex-column
+                  p-0">
+
+
+            <!-- =====================================================
+                 SIDEBAR HEADER
+                 ===================================================== -->
+
+            <div class="admin-sidebar-header p-3 border-bottom">
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <div class="admin-sidebar-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <div>
+
+                        <h5 class="mb-0">
+                            Admin Profile
+                        </h5>
+
+                        <small class="text-muted">
+                            Manage your profile
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 SIDEBAR NAVIGATION
+                 ===================================================== -->
+
+            <nav class="admin-sidebar-navigation flex-grow-1 p-3">
+
+                <div class="admin-sidebar-section-title mb-2">
+                    PROFILE SETTINGS
+                </div>
+
+
+                <ul class="nav flex-column gap-1">
+
+
+                    <!-- =================================================
+                         PROFILE INFORMATION
+                         ================================================= -->
+
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link admin-sidebar-link active"
+                           data-title="Profile Information"
+                           data-description="Manage your personal information and administrator profile details."
+                           hx-get="@Url.Action(
+                                                                          "ProfileInfoPartial",
+                                                                          "AdminProfile",
+                                                                          new { area = "Admin" }
+                                                                      )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#profileLoading"
+                           hx-on:click="setAdminProfileSection(this);">
+
+                            <span class="admin-sidebar-link-icon">
+                                <i class="bi bi-person"></i>
+                            </span>
+
+                            <span>
+                                Profile Info
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- =================================================
+                         CONTACT INFORMATION
+                         ================================================= -->
+
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link admin-sidebar-link"
+                           data-title="Contact Information"
+                           data-description="Manage your contact details, office information and emergency contact."
+                           hx-get="@Url.Action(
+                                                                          "ContactInfoPartial",
+                                                                          "AdminProfile",
+                                                                          new { area = "Admin" }
+                                                                      )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#profileLoading"
+                           hx-on:click="setAdminProfileSection(this);">
+
+                            <span class="admin-sidebar-link-icon">
+                                <i class="bi bi-telephone"></i>
+                            </span>
+
+                            <span>
+                                Contact Info
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- =================================================
+                         CHANGE PASSWORD
+                         ================================================= -->
+
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link admin-sidebar-link"
+                           data-title="Change Password"
+                           data-description="Update your account password to keep your administrator account secure."
+                           hx-get="@Url.Action(
+                                                                          "ChangePasswordPartial",
+                                                                          "AdminProfile",
+                                                                          new { area = "Admin" }
+                                                                      )"
+                           hx-target="#profileContent"
+                           hx-swap="innerHTML"
+                           hx-indicator="#profileLoading"
+                           hx-on:click="setAdminProfileSection(this);">
+
+                            <span class="admin-sidebar-link-icon">
+                                <i class="bi bi-key"></i>
+                            </span>
+
+                            <span>
+                                Change Password
+                            </span>
+
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </nav>
+
+
+            <!-- =====================================================
+                 SIDEBAR FOOTER
+                 ===================================================== -->
+
+            <div class="admin-sidebar-footer border-top p-3">
+
+
+                <div class="admin-sidebar-user mb-3">
+
+                    <div class="d-flex align-items-center gap-2">
+
+                        <div class="admin-user-icon">
+                            <i class="bi bi-shield-person"></i>
+                        </div>
+
+                        <div class="flex-grow-1">
+
+                            <div class="small fw-semibold">
+                                Administrator
+                            </div>
+
+                            <div class="small text-muted">
+                                Account
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     LOGOUT
+                     ================================================= -->
+
+                <div class="admin-logout-container">
+
+                    @await Html.PartialAsync("_AdminLogout")
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- =========================================================
+             MAIN CONTENT
+             ========================================================= -->
+
+        <main class="col-12 col-md-9 col-lg-10
+                 admin-profile-content
+                 p-0">
+
+
+            <!-- =====================================================
+                 CONTENT HEADER
+                 ===================================================== -->
+
+            <div class="admin-content-header border-bottom px-4 py-3">
+
+                <div class="d-flex
+                        flex-wrap
+                        align-items-center
+                        justify-content-between
+                        gap-3">
+
+
+                    <!-- =================================================
+                         HEADER INFORMATION
+                         ================================================= -->
+
+                    <div>
+
+                        <h4 id="profileTitle"
+                            class="mb-1">
+
+                            Profile Information
+
+                        </h4>
+
+
+                        <p id="profileDescription"
+                           class="text-muted mb-0">
+
+                            Manage your personal information and
+                            administrator profile details.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         LOADING INDICATOR
+                         ================================================= -->
+
+                    <div id="profileLoading"
+                         class="htmx-indicator">
+
+                        <div class="d-flex align-items-center gap-2 text-muted">
+
+                            <div class="spinner-border spinner-border-sm"
+                                 role="status"
+                                 aria-hidden="true">
+                            </div>
+
+                            <span>
+                                Loading...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 DYNAMIC CONTENT BODY
+                 ===================================================== -->
+
+            <div class="admin-content-body p-3 p-md-4">
+
+
+                <div id="profileContent"
+                     hx-get="@Url.Action(
+                                                              "ProfileInfoPartial",
+                                                              "AdminProfile",
+                                                              new { area = "Admin" }
+                                                          )"
+                     hx-trigger="load"
+                     hx-target="this"
+                     hx-swap="innerHTML"
+                     hx-indicator="#profileLoading">
+
+
+                    <!-- =================================================
+                         INITIAL LOADING STATE
+                         ================================================= -->
+
+                    <div class="admin-page-loading">
+
+                        <div class="text-center py-5">
+
+                            <div class="spinner-border"
+                                 role="status"
+                                 aria-hidden="true">
+                            </div>
+
+                            <div class="mt-3 text-muted">
+                                Loading your profile...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div> 
+<!-- ============================================================= TOAST CONTAINER ============================================================= --> <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">
+    <div id="toastContainer"
+         class="toast-container">
+    </div>
+
+</div> 
+<!-- ============================================================= ADMIN PROFILE NAVIGATION ============================================================= --> 
+<script> 
+    function setAdminProfileSection(element) 
+    { 
+        /* * Prevent "#" from changing the browser URL. */ 
+        event.preventDefault(); 
+        /* * Remove active state from all sidebar links. */ 
+        document .querySelectorAll(".admin-sidebar-link") .forEach(function (link) 
+        { link.classList.remove("active"); });
+        /* * Add active state to clicked link. */ 
+        element.classList.add("active"); 
+        /* * Get section information. */ 
+        const title = element.dataset.title; 
+        const description = element.dataset.description; 
+        /* * Update page header. */ 
+        const titleElement = document.getElementById("profileTitle"); 
+        const descriptionElement = document.getElementById("profileDescription"); 
+        if (titleElement) { titleElement.textContent = title; } 
+        if (descriptionElement) { descriptionElement.textContent = description; } 
+    } 
+</script>

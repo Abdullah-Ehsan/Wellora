@@ -1,0 +1,313 @@
+﻿@model Wellora.Areas.Admin.ViewModels.AdminProfile.ProfileInfoViewModel
+
+<link rel="stylesheet"
+      href="~/css/admin/profile/profile_info.css"
+      asp-append-version="true" />
+
+<div class="admin-profile-info">
+
+    <div class="card admin-profile-card">
+
+        <!-- =========================================================
+             HEADER
+             ========================================================= -->
+        <div class="card-header">
+
+            <div class="d-flex align-items-center gap-2">
+
+                <div class="admin-section-icon">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <div>
+                    <h5 class="mb-0">
+                        Profile Information
+                    </h5>
+
+                    <small class="text-muted">
+                        Manage your personal profile information
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================================
+             BODY
+             ========================================================= -->
+        <div class="card-body">
+
+            <form method="post"
+                  enctype="multipart/form-data"
+                  hx-post="@Url.Action(
+                                                        "UpdateProfileInfo",
+                                                        "AdminProfile",
+                                                        new { area = "Admin" }
+                                                    )"
+                  hx-target="#profileContent"
+                  hx-swap="innerHTML"
+                  hx-indicator="#profileLoading">
+
+                @Html.AntiForgeryToken()
+
+
+                <!-- =================================================
+                     PROFILE PICTURE
+                     ================================================= -->
+                <div class="admin-profile-picture-section">
+
+                    <div class="admin-profile-picture-wrapper">
+
+                        <img src="@(string.IsNullOrEmpty(Model.ProfilePicture)
+                                                                                      ? Url.Content("~/User/Admin/Profile_Picture/default.png")
+                                                                                      : Url.Content("~/" + Model.ProfilePicture))"
+                             alt="Admin Profile"
+                             class="admin-profile-picture"
+                             id="profilePicturePreview" />
+
+                    </div>
+
+
+                    <div class="admin-profile-picture-content">
+
+                        <h6>
+                            Profile Picture
+                        </h6>
+
+                        <p class="text-muted small">
+                            Upload a profile picture for your account.
+                        </p>
+
+                        <label for="profilePictureFile"
+                               class="btn admin-upload-button">
+
+                            <i class="bi bi-camera me-1"></i>
+
+                            Choose Picture
+
+                        </label>
+
+                        <input type="file"
+                               id="profilePictureFile"
+                               name="ProfilePictureFile"
+                               class="d-none"
+                               accept=".jpg,.jpeg,.png,.webp" />
+
+                        <div class="form-text">
+                            JPG, PNG or WebP. Maximum 5 MB.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <hr class="admin-profile-divider" />
+
+
+                <div class="row g-4">
+
+
+                    <!-- =================================================
+                         FIRST NAME
+                         ================================================= -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="firstName"
+                               class="form-label">
+
+                            First Name
+
+                        </label>
+
+                        <input type="text"
+                               id="firstName"
+                               name="FirstName"
+                               value="@Model.FirstName"
+                               class="form-control"
+                               maxlength="100"
+                               autocomplete="given-name"
+                               placeholder="Enter first name" />
+
+                    </div>
+
+
+                    <!-- =================================================
+                         LAST NAME
+                         ================================================= -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="lastName"
+                               class="form-label">
+
+                            Last Name
+
+                        </label>
+
+                        <input type="text"
+                               id="lastName"
+                               name="LastName"
+                               value="@Model.LastName"
+                               class="form-control"
+                               maxlength="100"
+                               autocomplete="family-name"
+                               placeholder="Enter last name" />
+
+                    </div>
+
+
+                    <!-- =================================================
+                         DATE OF BIRTH
+                         ================================================= -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="dateOfBirth"
+                               class="form-label">
+
+                            Date of Birth
+
+                        </label>
+
+                        <input type="date"
+                               id="dateOfBirth"
+                               name="DateOfBirth"
+                               value="@(Model.DateOfBirth?.ToString("yyyy-MM-dd"))"
+                               class="form-control" />
+
+                    </div>
+
+
+                    <!-- =================================================
+                         GENDER
+                         ================================================= -->
+                    <div class="col-12 col-md-6">
+
+                        <label for="gender"
+                               class="form-label">
+
+                            Gender
+
+                        </label>
+
+                        <select id="gender"
+                                name="Gender"
+                                class="form-select">
+
+                            <option value="">
+                                Select gender
+                            </option>
+
+                            <option value="male"
+                                    selected="@(Model.Gender == "male")">
+                                Male
+                            </option>
+
+                            <option value="female"
+                                    selected="@(Model.Gender == "female")">
+                                Female
+                            </option>
+
+                            <option value="other"
+                                    selected="@(Model.Gender == "other")">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         ADDRESS
+                         ================================================= -->
+                    <div class="col-12">
+
+                        <label for="address"
+                               class="form-label">
+
+                            Address
+
+                        </label>
+
+                        <textarea id="address"
+                                  name="Address"
+                                  class="form-control admin-profile-address"
+                                  rows="3"
+                                  maxlength="500"
+                                  autocomplete="street-address"
+                                  placeholder="Enter your address">@Model.Address</textarea>
+
+                        <div class="form-text">
+                            Maximum 500 characters.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================================
+                     SAVE BUTTON
+                     ===================================================== -->
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button type="submit"
+                            class="btn admin-save-button">
+
+                        <i class="bi bi-check-lg me-1"></i>
+
+                        Save Profile
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+     * Preview the selected profile picture immediately.
+     */
+
+    document.addEventListener("change", function (event) {
+
+        if (event.target.id !== "profilePictureFile") {
+            return;
+        }
+
+        const file = event.target.files?.[0];
+
+        if (!file) {
+            return;
+        }
+
+        const preview =
+            document.getElementById("profilePicturePreview");
+
+        if (!preview) {
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+
+            preview.src = e.target.result;
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+</script>
