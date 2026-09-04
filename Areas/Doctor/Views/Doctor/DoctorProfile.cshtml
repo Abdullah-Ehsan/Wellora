@@ -1,5 +1,135 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Theme Test";
 }
+
+<div class="container py-5">
+    <h1 class="mb-4">Theme Test Page</h1>
+
+    <!-- Semantic Colors -->
+    <h3 class="mb-3">Semantic Colors</h3>
+
+    <div class="row g-3 mb-5">
+        <div class="col-md-3">
+            <div class="card text-white h-100"
+                 style="background:var(--primary);">
+                <div class="card-body">
+                    <h5>Primary</h5>
+                    <p>var(--primary)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white h-100"
+                 style="background:var(--success);">
+                <div class="card-body">
+                    <h5>Success</h5>
+                    <p>var(--success)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-dark h-100"
+                 style="background:var(--warning);">
+                <div class="card-body">
+                    <h5>Warning</h5>
+                    <p>var(--warning)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white h-100"
+                 style="background:var(--danger);">
+                <div class="card-body">
+                    <h5>Danger</h5>
+                    <p>var(--danger)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teal Scale -->
+    <h3 class="mb-3">Teal Palette</h3>
+
+    <div class="d-flex flex-wrap mb-5">
+        @for (int i = 50; i <= 900; i += (i == 50 ? 50 : 100))
+        {
+            <div class="p-4 text-center border"
+                 style="width:120px;background:var(--teal-@i);">
+                @i
+            </div>
+        }
+    </div>
+
+    <!-- Aqua Scale -->
+    <h3 class="mb-3">Aqua Palette</h3>
+
+    <div class="d-flex flex-wrap mb-5">
+        <div class="p-4 border" style="background:var(--aqua-100)">100</div>
+        <div class="p-4 border" style="background:var(--aqua-300)">300</div>
+        <div class="p-4 border" style="background:var(--aqua-500)">500</div>
+        <div class="p-4 border text-white" style="background:var(--aqua-700)">700</div>
+        <div class="p-4 border text-white" style="background:var(--aqua-900)">900</div>
+    </div>
+
+    <!-- Green Scale -->
+    <h3 class="mb-3">Green Palette</h3>
+
+    <div class="d-flex flex-wrap mb-5">
+        <div class="p-4 border" style="background:var(--green-100)">100</div>
+        <div class="p-4 border" style="background:var(--green-300)">300</div>
+        <div class="p-4 border" style="background:var(--green-500)">500</div>
+        <div class="p-4 border text-white" style="background:var(--green-700)">700</div>
+        <div class="p-4 border text-white" style="background:var(--green-900)">900</div>
+    </div>
+
+    <!-- Coral Scale -->
+    <h3 class="mb-3">Coral Palette</h3>
+
+    <div class="d-flex flex-wrap mb-5">
+        <div class="p-4 border" style="background:var(--coral-100)">100</div>
+        <div class="p-4 border" style="background:var(--coral-300)">300</div>
+        <div class="p-4 border text-white" style="background:var(--coral-500)">500</div>
+        <div class="p-4 border text-white" style="background:var(--coral-700)">700</div>
+        <div class="p-4 border text-white" style="background:var(--coral-900)">900</div>
+    </div>
+
+    <!-- Orange Scale -->
+    <h3 class="mb-3">Orange Palette</h3>
+
+    <div class="d-flex flex-wrap mb-5">
+        <div class="p-4 border" style="background:var(--orange-100)">100</div>
+        <div class="p-4 border" style="background:var(--orange-300)">300</div>
+        <div class="p-4 border" style="background:var(--orange-500)">500</div>
+        <div class="p-4 border text-white" style="background:var(--orange-700)">700</div>
+        <div class="p-4 border text-white" style="background:var(--orange-900)">900</div>
+    </div>
+
+    <!-- Surface Test -->
+    <h3 class="mb-3">Surface / Text Test</h3>
+
+    <div class="card"
+         style="
+            background:var(--surface,var(--white));
+            color:var(--text,var(--black));
+            border:1px solid var(--border,var(--gray-300));
+         ">
+        <div class="card-body">
+            <h4>Theme Surface Card</h4>
+            <p>
+                If dark mode is active this card should switch
+                automatically using your CSS variables.
+            </p>
+
+            <button class="btn"
+                    style="
+                        background:var(--primary);
+                        color:white;
+                    ">
+                Primary Button
+            </button>
+        </div>
+    </div>
+</div>
