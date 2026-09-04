@@ -7,5 +7,7 @@
         public bool? TelemedicineAvailable { get; set; }
 
         public decimal ConsultationFee { get; set; }
+
+        public bool? DoctorAvailable { get; set; }
     }
 }
