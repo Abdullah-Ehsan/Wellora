@@ -1,0 +1,322 @@
+﻿/* =========================================================
+   ADMIN PROFILE INFO
+========================================================= */
+
+.admin-profile-info {
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.admin-profile-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
+}
+
+
+    /* =========================================================
+   CARD HEADER
+========================================================= */
+
+    .admin-profile-card .card-header {
+        padding: 1.25rem 1.5rem;
+        background-color: var(--white-25);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+.admin-section-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0.65rem;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.admin-profile-card .card-body {
+    padding: 1.5rem;
+}
+
+
+/* =========================================================
+   PROFILE PICTURE SECTION
+========================================================= */
+
+.admin-profile-picture-section {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.25rem 0;
+}
+
+
+/* =========================================================
+   PROFILE PICTURE
+========================================================= */
+
+.admin-profile-picture-wrapper {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--primary-subtle);
+    border: 3px solid var(--white-25);
+    box-shadow: 0 0 0 1px var(--border-subtle), 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.admin-profile-picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   PROFILE PICTURE CONTENT
+========================================================= */
+
+.admin-profile-picture-content {
+    min-width: 0;
+}
+
+    .admin-profile-picture-content h6 {
+        margin-bottom: 0.25rem;
+        color: var(--gray-800);
+        font-weight: 600;
+    }
+
+    .admin-profile-picture-content p {
+        margin-bottom: 0.6rem;
+    }
+
+
+/* =========================================================
+   UPLOAD BUTTON
+========================================================= */
+
+.admin-upload-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--primary);
+    border-radius: 0.5rem;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+    .admin-upload-button:hover {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: var(--white-25);
+    }
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.admin-profile-divider {
+    margin: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--border-subtle);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   FORM LABELS
+========================================================= */
+
+.admin-profile-card .form-label {
+    margin-bottom: 0.5rem;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+.admin-profile-card .form-control,
+.admin-profile-card .form-select {
+    min-height: 44px;
+    border: 1px solid var(--border-strong);
+    border-radius: 0.5rem;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .admin-profile-card .form-control:focus,
+    .admin-profile-card .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* =========================================================
+   ADDRESS
+========================================================= */
+
+.admin-profile-address {
+    min-height: 100px !important;
+    resize: vertical;
+}
+
+
+/* =========================================================
+   FORM HELP TEXT
+========================================================= */
+
+.admin-profile-card .form-text {
+    margin-top: 0.4rem;
+    color: var(--gray-500);
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.admin-save-button {
+    min-height: 42px;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--primary);
+    border-radius: 0.5rem;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+    .admin-save-button:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: var(--white-25);
+    }
+
+    .admin-save-button:active {
+        background-color: var(--primary-active);
+        border-color: var(--primary-active);
+        transform: translateY(1px);
+    }
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .admin-profile-card {
+    background-color: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+    .dark .admin-profile-card .card-header {
+        background-color: var(--surface);
+        border-color: var(--border);
+    }
+
+    .dark .admin-profile-card .card-body {
+        background-color: var(--surface);
+    }
+
+    .dark .admin-profile-card .form-label {
+        color: var(--text);
+    }
+
+    .dark .admin-profile-card .form-control,
+    .dark .admin-profile-card .form-select {
+        background-color: var(--surface-2);
+        border-color: var(--border-strong);
+        color: var(--text);
+    }
+
+        .dark .admin-profile-card .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+    .dark .admin-profile-card .form-text {
+        color: var(--text-muted);
+    }
+
+.dark .admin-profile-picture-wrapper {
+    background-color: var(--primary-bg);
+    border-color: var(--surface);
+}
+
+.dark .admin-profile-picture-content h6 {
+    color: var(--text);
+}
+
+.dark .admin-profile-divider {
+    border-color: var(--border);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .admin-profile-card .card-header {
+        padding: 1rem;
+    }
+
+    .admin-profile-card .card-body {
+        padding: 1rem;
+    }
+
+
+    .admin-profile-picture-section {
+        align-items: flex-start;
+    }
+
+
+    .admin-profile-picture-wrapper {
+        width: 80px;
+        height: 80px;
+    }
+
+
+    .admin-profile-picture-content {
+        flex: 1;
+    }
+
+
+    .admin-upload-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    .admin-save-button {
+        width: 100%;
+    }
+}

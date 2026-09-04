@@ -1,0 +1,289 @@
+﻿/* =========================================================
+   ADMIN CONTACT INFORMATION
+========================================================= */
+
+.admin-profile-info {
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.admin-profile-card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--white-25);
+    box-shadow: 0 2px 8px rgba(15, 20, 26, 0.04);
+    overflow: hidden;
+}
+
+
+    /* =========================================================
+   CARD HEADER
+========================================================= */
+
+    .admin-profile-card .card-header {
+        padding: 1.25rem 1.5rem;
+        background-color: var(--white-25);
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+
+/* =========================================================
+   SECTION ICON
+========================================================= */
+
+.admin-section-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.admin-profile-card .card-body {
+    padding: 1.5rem;
+}
+
+
+/* =========================================================
+   FORM LABELS
+========================================================= */
+
+.admin-profile-card .form-label {
+    margin-bottom: 0.5rem;
+    color: var(--gray-700);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+.admin-profile-card .form-control {
+    min-height: 2.75rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 0.5rem;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+
+    .admin-profile-card .form-control::placeholder {
+        color: var(--gray-400);
+    }
+
+
+    .admin-profile-card .form-control:hover {
+        border-color: var(--gray-350);
+    }
+
+
+    .admin-profile-card .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+        outline: none;
+    }
+
+
+/* =========================================================
+   FORM HELP TEXT
+========================================================= */
+
+.admin-profile-card .form-text {
+    margin-top: 0.4rem;
+    color: var(--gray-500);
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   EMERGENCY CONTACT SECTION
+========================================================= */
+
+.admin-contact-subsection {
+    padding: 1.25rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--gray-50);
+}
+
+
+/* =========================================================
+   EMERGENCY CONTACT HEADER
+========================================================= */
+
+.admin-contact-subsection-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+
+    .admin-contact-subsection-header h6 {
+        color: var(--gray-700);
+        font-weight: 600;
+    }
+
+
+    .admin-contact-subsection-header small {
+        color: var(--gray-500);
+    }
+
+
+/* =========================================================
+   EMERGENCY ICON
+========================================================= */
+
+.admin-contact-subsection-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    background-color: var(--warning-subtle);
+    color: var(--warning);
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.admin-save-button {
+    min-height: 2.75rem;
+    padding: 0.6rem 1.15rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+
+    .admin-save-button:hover {
+        background-color: var(--primary-hover);
+        color: var(--white-25);
+        box-shadow: 0 4px 10px rgba(26, 169, 154, 0.2);
+    }
+
+
+    .admin-save-button:active {
+        background-color: var(--primary-active);
+        transform: translateY(1px);
+    }
+
+
+    .admin-save-button:focus-visible {
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .admin-profile-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+
+    .dark .admin-profile-card .card-header {
+        background-color: var(--surface);
+        border-color: var(--border);
+    }
+
+
+    .dark .admin-profile-card .form-label {
+        color: var(--text);
+    }
+
+
+    .dark .admin-profile-card .form-control {
+        background-color: var(--surface-2);
+        border-color: var(--border-strong);
+        color: var(--text);
+    }
+
+
+        .dark .admin-profile-card .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+
+        .dark .admin-profile-card .form-control:focus {
+            border-color: var(--primary);
+        }
+
+
+    .dark .admin-profile-card .form-text {
+        color: var(--text-muted);
+    }
+
+
+.dark .admin-contact-subsection {
+    background-color: var(--surface-2);
+    border-color: var(--border);
+}
+
+
+.dark .admin-contact-subsection-header {
+    border-color: var(--border);
+}
+
+
+    .dark .admin-contact-subsection-header h6 {
+        color: var(--text);
+    }
+
+
+    .dark .admin-contact-subsection-header small {
+        color: var(--text-muted);
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .admin-profile-card .card-header {
+        padding: 1rem;
+    }
+
+    .admin-profile-card .card-body {
+        padding: 1rem;
+    }
+
+    .admin-contact-subsection {
+        padding: 1rem;
+    }
+
+    .admin-save-button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,328 @@
+﻿/* =========================================================
+ADMIN PROFILE PAGE
+========================================================= */
+
+.admin-profile-page {
+    background-color: var(--gray-50);
+    color: var(--gray-800);
+}
+
+/* =========================================================
+SIDEBAR
+========================================================= */
+
+.admin-profile-sidebar {
+    min-height: 100vh;
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+/* =========================================================
+SIDEBAR HEADER
+========================================================= */
+
+.admin-sidebar-header {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+.admin-sidebar-icon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.admin-sidebar-header h5 {
+    color: var(--gray-800);
+    font-weight: 600;
+}
+
+/* =========================================================
+SIDEBAR NAVIGATION
+========================================================= */
+
+.admin-sidebar-navigation {
+    background-color: var(--white-25);
+}
+
+.admin-sidebar-section-title {
+    padding: 0 0.65rem;
+    color: var(--gray-450);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.admin-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 8px;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+    .admin-sidebar-link:hover {
+        color: var(--primary);
+        background-color: var(--primary-subtle);
+        transform: translateX(2px);
+    }
+
+    .admin-sidebar-link.active {
+        color: var(--primary);
+        background-color: var(--primary-subtle);
+        font-weight: 600;
+    }
+
+.admin-sidebar-link-icon {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    color: var(--gray-500);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-sidebar-link:hover .admin-sidebar-link-icon,
+.admin-sidebar-link.active .admin-sidebar-link-icon {
+    color: var(--primary);
+    background-color: color-mix( in srgb, var(--primary) 10%, transparent );
+}
+
+/* =========================================================
+SIDEBAR FOOTER
+========================================================= */
+
+.admin-sidebar-footer {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+.admin-sidebar-user {
+    padding: 0.6rem;
+    border-radius: 8px;
+    background-color: var(--gray-50);
+}
+
+.admin-user-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+/* =========================================================
+MAIN CONTENT
+========================================================= */
+
+.admin-profile-content {
+    min-height: 100vh;
+    background-color: var(--gray-50);
+}
+
+/* =========================================================
+CONTENT HEADER
+========================================================= */
+
+.admin-content-header {
+    background-color: var(--white-25);
+    border-color: var(--border-subtle) !important;
+}
+
+    .admin-content-header h4 {
+        color: var(--gray-800);
+        font-weight: 600;
+    }
+
+    .admin-content-header p {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+    }
+
+/* =========================================================
+CONTENT BODY
+========================================================= */
+
+.admin-content-body {
+    min-height: calc(100vh - 90px);
+}
+
+/* =========================================================
+LOADING
+========================================================= */
+
+.admin-page-loading {
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .admin-page-loading .spinner-border {
+        color: var(--primary);
+    }
+
+/* =========================================================
+HTMX LOADING INDICATOR
+========================================================= */
+
+#profileLoading {
+    min-width: 100px;
+}
+
+    #profileLoading .spinner-border {
+        color: var(--primary);
+    }
+
+/* =========================================================
+DARK MODE
+========================================================= */
+
+.dark .admin-profile-page {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.dark .admin-profile-sidebar,
+.dark .admin-sidebar-header,
+.dark .admin-sidebar-navigation,
+.dark .admin-sidebar-footer {
+    background-color: var(--surface);
+}
+
+.dark .admin-profile-sidebar,
+.dark .admin-sidebar-header,
+.dark .admin-sidebar-footer,
+.dark .admin-content-header {
+    border-color: var(--border) !important;
+}
+
+.dark .admin-profile-content {
+    background-color: var(--bg);
+}
+
+.dark .admin-content-header {
+    background-color: var(--surface);
+}
+
+    .dark .admin-sidebar-header h5,
+    .dark .admin-content-header h4 {
+        color: var(--text);
+    }
+
+.dark .admin-sidebar-link {
+    color: var(--text-muted);
+}
+
+    .dark .admin-sidebar-link:hover,
+    .dark .admin-sidebar-link.active {
+        color: var(--primary);
+        background-color: var(--primary-bg);
+    }
+
+.dark .admin-sidebar-section-title {
+    color: var(--gray-500);
+}
+
+.dark .admin-sidebar-user {
+    background-color: var(--surface-2);
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .admin-profile-sidebar {
+        min-height: auto;
+    }
+
+
+    .admin-sidebar-navigation {
+        padding-bottom: 1rem !important;
+    }
+
+
+    .admin-sidebar-footer {
+        display: none;
+    }
+
+
+    .admin-content-header {
+        padding: 1rem !important;
+    }
+
+
+        .admin-content-header h4 {
+            font-size: 1.1rem;
+        }
+
+
+        .admin-content-header p {
+            font-size: 0.82rem;
+        }
+}
+
+@media (min-width: 768px) {
+
+    .admin-profile-sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+    }
+}
+
+
+/* =========================================================
+   LOGOUT HOVER
+========================================================= */
+
+.admin-logout-container:hover {
+    color: var(--danger);
+}
+
+    .admin-logout-container:hover i {
+        color: var(--danger) !important;
+    }
+
+    .admin-logout-container:hover a,
+    .admin-logout-container:hover button {
+        color: var(--danger) !important;
+    }
+
+
+.admin-logout-container {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .admin-logout-container:hover {
+        background-color: var(--danger-subtle);
+        color: var(--danger);
+    }
+
+        .admin-logout-container:hover a,
+        .admin-logout-container:hover button,
+        .admin-logout-container:hover i {
+            color: var(--danger) !important;
+        }
+
+
