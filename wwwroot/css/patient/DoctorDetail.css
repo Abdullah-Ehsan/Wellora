@@ -6,66 +6,48 @@
     --medium-teal: #008080;
     --light-teal: #66b2b2;
     --white: #ffffff;
+    /* Dark mode colors */
+    --dark-bg: #121a1a;
+    --dark-surface: #1b2929;
+    --dark-surface-2: #223333;
+    --dark-border: #008080;
+    --dark-text: #e8f6f6;
+    --dark-muted: #b8cccc;
 }
+
+
+/* ===========================
+   Page
+   =========================== */
 
 body {
-    overflow-x: hidden; /* prevent horizontal scroll */
-    overflow-y: auto; /* allow vertical scroll */
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #eefefe;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+h2,
+h3,
+h5 {
+    font-weight: 600;
+}
+
 
 /* ===========================
-   Doctor Card Styling
+   Doctor Detail Container
    =========================== */
-.doctor-card {
-    background-color: var(--light-teal);
-    border: 1px solid var(--medium-teal);
-    border-radius: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 20px;
-}
 
-.doctor-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 77, 77, 0.3);
-}
-
-.doctor-img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid var(--medium-teal);
-    margin: 15px auto 0 auto;
-    display: block;
-}
-
-.card-title {
-    color: var(--dark-teal);
-    font-weight: bold;
-}
-
-.card-text {
-    color: var(--white);
-}
-
-.btn-primary {
-    background-color: var(--medium-teal);
-    border-color: var(--dark-teal);
-}
-
-.btn-primary:hover {
-        background-color: var(--dark-teal);
-        border-color: var(--medium-teal);
- }
-
-/* ===========================
-   Doctor Detail Page Styling
-   =========================== */
 .doctor-detail {
     background: linear-gradient(135deg, var(--light-teal), var(--white));
     padding: 30px;
     border-radius: 10px;
 }
+
+
+/* ===========================
+   Profile Photo
+   =========================== */
 
 .profile-photo {
     width: 300px;
@@ -75,6 +57,17 @@ body {
     border: 5px solid var(--medium-teal);
     margin: 0 auto;
     display: block;
+}
+
+
+/* ===========================
+   Doctor Header
+   =========================== */
+
+.light-teal-box {
+    background-color: var(--light-teal);
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .doctor-name {
@@ -92,9 +85,15 @@ body {
     font-style: italic;
 }
 
+
+/* ===========================
+   Information Sections
+   =========================== */
+
 .info-section {
     margin-bottom: 30px;
     padding: 20px;
+    border: 1px solid var(--light-teal);
     border-left: 5px solid var(--medium-teal);
     background-color: #f9f9f9;
     border-radius: 6px;
@@ -107,6 +106,15 @@ body {
         padding-bottom: 5px;
     }
 
+    .info-section p {
+        color: #222;
+    }
+
+
+/* ===========================
+   Scroll Boxes
+   =========================== */
+
 .scroll-box {
     max-height: 200px;
     overflow-y: auto;
@@ -117,28 +125,11 @@ body {
     border-radius: 4px;
 }
 
+
 /* ===========================
-   Utility Enhancements
+   Appointment Button
    =========================== */
-body {
-    background-color: #eefefe; /* subtle teal tint */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
-h2, h3, h5 {
-    font-weight: 600;
-}
-
-
-
-/* Light teal background for the right section */
-.light-teal-box {
-    background-color: var(--light-teal);
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* Appointment Button */
 .appointment-btn {
     position: absolute;
     bottom: 15px;
@@ -149,6 +140,7 @@ h2, h3, h5 {
     font-weight: bold;
     padding: 12px 24px;
     border-radius: 6px;
+    border: 2px solid var(--dark-teal);
     transition: all 0.3s ease;
     text-decoration: none;
 }
@@ -156,41 +148,1320 @@ h2, h3, h5 {
     .appointment-btn:hover {
         background-color: var(--white);
         color: var(--dark-teal);
-        border: 2px solid var(--dark-teal);
-        transform: scale(1.05); /* makes it bigger on hover */
+        border-color: var(--dark-teal);
+        transform: scale(1.05);
     }
 
 
-/* Table base */
+/* ===========================
+   Doctor Schedule Table
+   =========================== */
+
 .doctor-schedule-table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
-    background-color: #ffffff; /* white background */
+    background-color: #ffffff;
 }
 
-    /* Header row */
+
+    /* Header */
+
     .doctor-schedule-table thead {
-        background-color: #006d77; /* dark teal */
+        background-color: #006d77;
         color: #ffffff;
     }
 
-    /* Work day rows */
+
+    /* Working Days */
+
     .doctor-schedule-table .work-day {
-        background-color: #83c5be; /* medium teal */
-        color: #003d3b; /* dark text for contrast */
+        background-color: #83c5be;
+        color: #003d3b;
     }
 
-    /* Off day rows */
+
+    /* Off Days */
+
     .doctor-schedule-table .off-day {
-        background-color: #edf6f9; /* light teal */
-        color: #006d77; /* dark teal text */
+        background-color: #edf6f9;
+        color: #006d77;
         font-style: italic;
     }
 
-    /* Borders */
+
+    /* Table Borders */
+
     .doctor-schedule-table th,
     .doctor-schedule-table td {
         border: 1px solid #006d77;
         padding: 8px;
     }
+
+
+/* ===========================
+   Primary Doctor Section
+   =========================== */
+
+.primary-doctor-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--light-teal);
+    border-left: 5px solid var(--medium-teal);
+    background-color: #f9f9f9;
+    border-radius: 6px;
+}
+
+    .primary-doctor-section h3 {
+        color: var(--dark-teal);
+        margin-bottom: 10px;
+    }
+
+    .primary-doctor-section p {
+        color: #333;
+    }
+
+
+/* ===========================
+   Primary Doctor Buttons
+   =========================== */
+
+.primary-doctor-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+/* Make Primary Doctor */
+
+.primary-doctor-btn {
+    background-color: var(--medium-teal);
+    color: white;
+    border: 2px solid var(--dark-teal);
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+    .primary-doctor-btn:hover {
+        background-color: var(--dark-teal);
+        border-color: var(--medium-teal);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+
+    /* ===========================
+   Selected Primary Doctor
+   =========================== */
+
+    .primary-doctor-btn.selected,
+    .primary-doctor-btn:disabled {
+        background-color: #6c757d;
+        border-color: #5a6268;
+        color: #ffffff;
+        cursor: default;
+        opacity: 1;
+        transform: none;
+    }
+
+        .primary-doctor-btn.selected:hover,
+        .primary-doctor-btn:disabled:hover {
+            background-color: #6c757d;
+            border-color: #5a6268;
+            color: #ffffff;
+            transform: none;
+        }
+
+
+/* ===========================
+   Remove Primary Doctor
+   =========================== */
+
+.remove-primary-btn {
+    background-color: #f4a6a6;
+    color: #7a0000;
+    border: 2px solid #d9534f;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+    /* Bright Red Hover */
+
+    .remove-primary-btn:hover {
+        background-color: #dc3545;
+        border-color: #b02a37;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+
+/* ===========================
+   Primary Doctor Message
+   =========================== */
+
+.primary-doctor-message {
+    margin-top: 12px;
+    color: var(--dark-teal);
+    font-weight: 600;
+    padding: 10px 15px;
+    background-color: rgba(102, 178, 178, 0.25);
+    border-left: 4px solid var(--medium-teal);
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   DARK MODE
+   Uses your existing JavaScript:
+   
+   document.documentElement.classList.add("dark");
+   
+   Therefore the selector is html.dark
+   ========================================================= */
+
+
+/* ===========================
+   Main Page
+   =========================== */
+
+html.dark body {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+
+/* ===========================
+   Doctor Detail Container
+   =========================== */
+
+html.dark .doctor-detail {
+    background: linear-gradient( 135deg, #1d3d3d, #121a1a );
+    color: var(--dark-text);
+}
+
+
+/* ===========================
+   Doctor Header
+   =========================== */
+
+html.dark .light-teal-box {
+    background-color: #315f5f;
+}
+
+html.dark .doctor-name {
+    color: #d9ffff;
+}
+
+html.dark .doctor-specialization {
+    color: #8ddada;
+}
+
+html.dark .doctor-sub {
+    color: #ffffff;
+}
+
+
+/* ===========================
+   Information Sections
+   =========================== */
+
+html.dark .info-section {
+    background-color: var(--dark-surface);
+    border-color: var(--dark-border);
+    border-left-color: var(--medium-teal);
+    color: var(--dark-text);
+}
+
+    html.dark .info-section h3 {
+        color: #8ddada;
+        border-bottom-color: var(--medium-teal);
+    }
+
+    html.dark .info-section p {
+        color: var(--dark-text);
+    }
+
+    html.dark .info-section strong {
+        color: #9de5e5;
+    }
+
+
+/* ===========================
+   Scroll Boxes
+   =========================== */
+
+html.dark .scroll-box {
+    background-color: var(--dark-surface-2);
+    color: var(--dark-text);
+    border-color: var(--medium-teal);
+}
+
+
+/* ===========================
+   Primary Doctor Section
+   =========================== */
+
+html.dark .primary-doctor-section {
+    background-color: var(--dark-surface);
+    border-color: var(--dark-border);
+    border-left-color: var(--medium-teal);
+    color: var(--dark-text);
+}
+
+    html.dark .primary-doctor-section h3 {
+        color: #8ddada;
+    }
+
+    html.dark .primary-doctor-section p {
+        color: var(--dark-text);
+    }
+
+
+/* ===========================
+   Primary Doctor Message
+   =========================== */
+
+html.dark .primary-doctor-message {
+    background-color: rgba(0, 128, 128, 0.25);
+    color: #9de5e5;
+    border-left-color: var(--medium-teal);
+}
+
+
+/* ===========================
+   Schedule Table - Dark Mode
+   =========================== */
+
+html.dark .doctor-schedule-table {
+    background-color: var(--dark-surface);
+    color: var(--dark-text);
+}
+
+
+    /* Table Header */
+
+    html.dark .doctor-schedule-table thead {
+        background-color: #005f5f;
+        color: white;
+    }
+
+
+    /* Working Days */
+
+    html.dark .doctor-schedule-table .work-day {
+        background-color: #356f6f;
+        color: #eaffff;
+    }
+
+
+    /* Off Days */
+
+    html.dark .doctor-schedule-table .off-day {
+        background-color: #263939;
+        color: #9de5e5;
+    }
+
+
+    /* Table Borders */
+
+    html.dark .doctor-schedule-table th,
+    html.dark .doctor-schedule-table td {
+        border-color: var(--medium-teal);
+        color: inherit;
+    }
+
+
+/* ===========================
+   Profile Image
+   =========================== */
+
+html.dark .profile-photo {
+    border-color: var(--medium-teal);
+}
+
+
+/* ===========================
+   Appointment Button - Dark
+   =========================== */
+
+html.dark .appointment-btn {
+    background-color: var(--dark-teal);
+    border-color: var(--medium-teal);
+    color: white;
+}
+
+    html.dark .appointment-btn:hover {
+        background-color: white;
+        color: var(--dark-teal);
+        border-color: var(--dark-teal);
+    }
+
+
+/* ===========================
+   Primary Button - Dark
+   =========================== */
+
+html.dark .primary-doctor-btn {
+    background-color: var(--medium-teal);
+    border-color: #66cccc;
+    color: white;
+}
+
+    html.dark .primary-doctor-btn:hover {
+        background-color: #006666;
+        border-color: #8ddada;
+        color: white;
+    }
+
+
+    /* ===========================
+   Selected Button - Dark
+   =========================== */
+
+    html.dark .primary-doctor-btn.selected,
+    html.dark .primary-doctor-btn:disabled {
+        background-color: #606a6a;
+        border-color: #788484;
+        color: #e5eeee;
+    }
+
+
+/* ===========================
+   Remove Button - Dark
+   =========================== */
+
+html.dark .remove-primary-btn {
+    background-color: #6f3333;
+    border-color: #d9534f;
+    color: #ffcccc;
+}
+
+    html.dark .remove-primary-btn:hover {
+        background-color: #dc3545;
+        border-color: #ff6b6b;
+        color: white;
+    }
+
+
+/* ===========================
+   Responsive
+   =========================== */
+
+@media (max-width: 768px) {
+
+    .doctor-detail {
+        padding: 15px;
+    }
+
+    .profile-photo {
+        width: 220px;
+        height: 220px;
+        margin-bottom: 20px;
+    }
+
+    .appointment-btn {
+        position: static;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .primary-doctor-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .primary-doctor-btn,
+    .remove-primary-btn {
+        width: 100%;
+    }
+
+    .doctor-schedule-table {
+        font-size: 0.85rem;
+    }
+
+        .doctor-schedule-table th,
+        .doctor-schedule-table td {
+            padding: 6px;
+        }
+}
+
+
+
+
+/* =========================================================
+   DOCTOR STATUS & AVAILABILITY SECTION
+   ========================================================= */
+
+.doctor-status-section {
+    margin-bottom: 30px;
+    padding: 24px;
+    border: 1px solid var(--light-teal);
+    border-left: 5px solid var(--medium-teal);
+    background: linear-gradient(135deg, #ffffff, #f4ffff);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 77, 77, 0.08);
+}
+
+
+/* ===========================
+   Header
+   =========================== */
+
+.doctor-status-header {
+    margin-bottom: 22px;
+}
+
+    .doctor-status-header h3 {
+        margin: 0 0 5px 0;
+        color: var(--dark-teal);
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    .doctor-status-header p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.92rem;
+    }
+
+
+/* ===========================
+   Two Groups In One Row
+   =========================== */
+
+.doctor-status-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+/* ===========================
+   Individual Control Group
+   =========================== */
+
+.status-control-group {
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #d5eeee;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+    .status-control-group:hover {
+        border-color: var(--medium-teal);
+        box-shadow: 0 5px 15px rgba(0, 128, 128, 0.10);
+    }
+
+
+/* ===========================
+   Control Title
+   =========================== */
+
+.status-control-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+    .status-control-title h4 {
+        margin: 0 0 4px 0;
+        color: var(--dark-teal);
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+
+    .status-control-title span:not(.status-icon) {
+        color: #64748b;
+        font-size: 0.82rem;
+        line-height: 1.4;
+    }
+
+
+/* ===========================
+   Status Icon
+   =========================== */
+
+.status-icon {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    margin-top: 5px;
+    border-radius: 50%;
+    background-color: #dc3545;
+    box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.12);
+    font-size: 0;
+}
+
+.availability-icon {
+    background-color: #198754;
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.12);
+}
+
+
+/* ===========================
+   Buttons
+   =========================== */
+
+.status-button-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.doctor-status-btn {
+    flex: 1;
+    min-height: 46px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+/* ===========================
+   Small Dot Inside Buttons
+   =========================== */
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+
+/* ===========================
+   BANNED
+   =========================== */
+
+.banned-btn {
+    background-color: #fff1f2;
+    color: #b42318;
+    border-color: #fecaca;
+}
+
+    .banned-btn:hover {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(220, 53, 69, 0.20);
+    }
+
+
+/* ===========================
+   NOT BANNED
+   =========================== */
+
+.not-banned-btn {
+    background-color: #ecfdf5;
+    color: #047857;
+    border-color: #a7f3d0;
+}
+
+    .not-banned-btn:hover {
+        background-color: #198754;
+        border-color: #198754;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(25, 135, 84, 0.20);
+    }
+
+
+/* ===========================
+   AVAILABLE
+   =========================== */
+
+.available-btn {
+    background-color: #ecfdf5;
+    color: #047857;
+    border-color: #a7f3d0;
+}
+
+    .available-btn:hover {
+        background-color: #198754;
+        border-color: #198754;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(25, 135, 84, 0.20);
+    }
+
+
+/* ===========================
+   NOT AVAILABLE
+   =========================== */
+
+.not-available-btn {
+    background-color: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+    .not-available-btn:hover {
+        background-color: #64748b;
+        border-color: #64748b;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(71, 85, 105, 0.20);
+    }
+
+
+/* =========================================================
+   SELECTED / DISABLED STATE
+   The selected button becomes greyed out.
+   ========================================================= */
+
+.doctor-status-btn.selected,
+.doctor-status-btn:disabled {
+    background-color: #6c757d !important;
+    border-color: #5a6268 !important;
+    color: #ffffff !important;
+    cursor: default;
+    opacity: 1;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+    .doctor-status-btn.selected .status-dot,
+    .doctor-status-btn:disabled .status-dot {
+        background-color: #ffffff;
+    }
+
+
+    /* Prevent hover effect on selected buttons */
+
+    .doctor-status-btn.selected:hover,
+    .doctor-status-btn:disabled:hover {
+        background-color: #6c757d !important;
+        border-color: #5a6268 !important;
+        color: #ffffff !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html.dark .doctor-status-section {
+    background: linear-gradient( 135deg, var(--dark-surface), var(--dark-bg) );
+    border-color: var(--dark-border);
+    border-left-color: var(--medium-teal);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+html.dark .doctor-status-header h3 {
+    color: #9de5e5;
+}
+
+html.dark .doctor-status-header p {
+    color: var(--dark-muted);
+}
+
+
+/* ===========================
+   Dark Control Groups
+   =========================== */
+
+html.dark .status-control-group {
+    background-color: var(--dark-surface-2);
+    border-color: #356f6f;
+}
+
+    html.dark .status-control-group:hover {
+        border-color: var(--medium-teal);
+        box-shadow: 0 5px 15px rgba(0, 128, 128, 0.18);
+    }
+
+
+html.dark .status-control-title h4 {
+    color: #9de5e5;
+}
+
+html.dark .status-control-title span:not(.status-icon) {
+    color: var(--dark-muted);
+}
+
+
+/* ===========================
+   Dark Banned
+   =========================== */
+
+html.dark .banned-btn {
+    background-color: #4a2528;
+    color: #ffb4b4;
+    border-color: #7f3f43;
+}
+
+    html.dark .banned-btn:hover {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+
+
+/* ===========================
+   Dark Not Banned
+   =========================== */
+
+html.dark .not-banned-btn {
+    background-color: #193d35;
+    color: #8de0c0;
+    border-color: #286b59;
+}
+
+    html.dark .not-banned-btn:hover {
+        background-color: #198754;
+        border-color: #198754;
+        color: white;
+    }
+
+
+/* ===========================
+   Dark Available
+   =========================== */
+
+html.dark .available-btn {
+    background-color: #193d35;
+    color: #8de0c0;
+    border-color: #286b59;
+}
+
+    html.dark .available-btn:hover {
+        background-color: #198754;
+        border-color: #198754;
+        color: white;
+    }
+
+
+/* ===========================
+   Dark Not Available
+   =========================== */
+
+html.dark .not-available-btn {
+    background-color: #293333;
+    color: #b8cccc;
+    border-color: #465555;
+}
+
+    html.dark .not-available-btn:hover {
+        background-color: #606a6a;
+        border-color: #788484;
+        color: white;
+    }
+
+
+/* ===========================
+   Dark Selected
+   =========================== */
+
+html.dark .doctor-status-btn.selected,
+html.dark .doctor-status-btn:disabled {
+    background-color: #606a6a !important;
+    border-color: #788484 !important;
+    color: #e5eeee !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .doctor-status-controls {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .doctor-status-section {
+        padding: 16px;
+    }
+
+    .status-control-group {
+        padding: 16px;
+    }
+
+    .status-button-group {
+        flex-direction: column;
+    }
+
+    .doctor-status-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   DOCTOR STATUS SECTION
+   ========================================================= */
+
+.doctor-status-section {
+    margin-bottom: 30px;
+    padding: 24px;
+    border: 1px solid var(--light-teal);
+    border-left: 5px solid var(--medium-teal);
+    background: linear-gradient(135deg, #ffffff, #f4ffff);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 77, 77, 0.08);
+}
+
+
+/* ===========================
+   Status Header
+   =========================== */
+
+.doctor-status-header {
+    margin-bottom: 22px;
+}
+
+    .doctor-status-header h3 {
+        color: var(--dark-teal);
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .doctor-status-header p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.95rem;
+    }
+
+
+/* ===========================
+   Status Groups
+   =========================== */
+
+.doctor-status-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+/* ===========================
+   Individual Group
+   =========================== */
+
+.status-group {
+    background-color: #ffffff;
+    border: 1px solid #d5eeee;
+    border-radius: 8px;
+    padding: 18px;
+    transition: all 0.25s ease;
+}
+
+    .status-group:hover {
+        border-color: var(--light-teal);
+        box-shadow: 0 5px 15px rgba(0, 128, 128, 0.08);
+    }
+
+
+/* ===========================
+   Group Title
+   =========================== */
+
+.status-group-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+    .status-group-title h4 {
+        margin: 0;
+        color: var(--dark-teal);
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+
+    .status-group-title span:not(.status-icon) {
+        color: #64748b;
+        font-size: 0.85rem;
+    }
+
+
+/* ===========================
+   Status Icon
+   =========================== */
+
+.status-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #e6f7f7;
+    color: var(--dark-teal);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+
+/* ===========================
+   Buttons Container
+   =========================== */
+
+.status-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+
+    /* Remove form default spacing */
+
+    .status-buttons form {
+        margin: 0;
+    }
+
+
+/* ===========================
+   Base Status Button
+   =========================== */
+
+.doctor-status-btn {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 16px;
+    border-radius: 7px;
+    border: 2px solid transparent;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+
+/* ===========================
+   Status Dot
+   =========================== */
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: currentColor;
+}
+
+
+/* =========================================================
+   BANNED BUTTON
+   ========================================================= */
+
+.banned-btn {
+    background-color: #fff1f2;
+    color: #be123c;
+    border-color: #fecdd3;
+}
+
+    .banned-btn:hover {
+        background-color: #be123c;
+        border-color: #be123c;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(190, 18, 60, 0.2);
+    }
+
+
+/* =========================================================
+   NOT BANNED BUTTON
+   ========================================================= */
+
+.not-banned-btn {
+    background-color: #ecfdf5;
+    color: #047857;
+    border-color: #a7f3d0;
+}
+
+    .not-banned-btn:hover {
+        background-color: #047857;
+        border-color: #047857;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(4, 120, 87, 0.2);
+    }
+
+
+/* =========================================================
+   AVAILABLE BUTTON
+   ========================================================= */
+
+.available-btn {
+    background-color: #ecfdf5;
+    color: #047857;
+    border-color: #a7f3d0;
+}
+
+    .available-btn:hover {
+        background-color: #008080;
+        border-color: #006666;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0, 128, 128, 0.2);
+    }
+
+
+/* =========================================================
+   NOT AVAILABLE BUTTON
+   ========================================================= */
+
+.unavailable-btn {
+    background-color: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+    .unavailable-btn:hover {
+        background-color: #64748b;
+        border-color: #475569;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(71, 85, 105, 0.2);
+    }
+
+
+/* =========================================================
+   SELECTED / CURRENT STATUS
+   ========================================================= */
+
+.doctor-status-btn.status-selected {
+    background-color: #6c757d;
+    border-color: #5a6268;
+    color: #ffffff;
+    cursor: default;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+
+    /* Keep selected button grey on hover */
+
+    .doctor-status-btn.status-selected:hover {
+        background-color: #6c757d;
+        border-color: #5a6268;
+        color: #ffffff;
+        transform: none;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+    }
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html.dark .doctor-status-section {
+    background: linear-gradient( 135deg, var(--dark-surface), #162525 );
+    border-color: var(--dark-border);
+    border-left-color: var(--medium-teal);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+
+html.dark .doctor-status-header h3 {
+    color: #8ddada;
+}
+
+
+html.dark .doctor-status-header p {
+    color: var(--dark-muted);
+}
+
+
+/* ===========================
+   Dark Status Group
+   =========================== */
+
+html.dark .status-group {
+    background-color: var(--dark-surface-2);
+    border-color: #315f5f;
+}
+
+
+    html.dark .status-group:hover {
+        border-color: var(--medium-teal);
+        box-shadow: 0 5px 15px rgba(0, 128, 128, 0.15);
+    }
+
+
+html.dark .status-group-title h4 {
+    color: #9de5e5;
+}
+
+
+html.dark .status-group-title span:not(.status-icon) {
+    color: var(--dark-muted);
+}
+
+
+/* ===========================
+   Dark Status Icon
+   =========================== */
+
+html.dark .status-icon {
+    background-color: rgba(0, 128, 128, 0.25);
+    color: #9de5e5;
+}
+
+
+/* ===========================
+   Dark Banned
+   =========================== */
+
+html.dark .banned-btn {
+    background-color: #42252a;
+    color: #ff9da8;
+    border-color: #73343d;
+}
+
+    html.dark .banned-btn:hover {
+        background-color: #be123c;
+        border-color: #be123c;
+        color: #ffffff;
+    }
+
+
+/* ===========================
+   Dark Not Banned
+   =========================== */
+
+html.dark .not-banned-btn {
+    background-color: #173a31;
+    color: #6ee7b7;
+    border-color: #28634f;
+}
+
+    html.dark .not-banned-btn:hover {
+        background-color: #047857;
+        border-color: #047857;
+        color: #ffffff;
+    }
+
+
+/* ===========================
+   Dark Available
+   =========================== */
+
+html.dark .available-btn {
+    background-color: #173a31;
+    color: #6ee7b7;
+    border-color: #28634f;
+}
+
+    html.dark .available-btn:hover {
+        background-color: #008080;
+        border-color: #66cccc;
+        color: #ffffff;
+    }
+
+
+/* ===========================
+   Dark Not Available
+   =========================== */
+
+html.dark .unavailable-btn {
+    background-color: #293333;
+    color: #b8cccc;
+    border-color: #4b5c5c;
+}
+
+    html.dark .unavailable-btn:hover {
+        background-color: #64748b;
+        border-color: #788484;
+        color: #ffffff;
+    }
+
+
+/* ===========================
+   Dark Selected
+   =========================== */
+
+html.dark .doctor-status-btn.status-selected {
+    background-color: #606a6a;
+    border-color: #788484;
+    color: #e5eeee;
+}
+
+
+    /* Keep selected grey on hover */
+
+    html.dark .doctor-status-btn.status-selected:hover {
+        background-color: #606a6a;
+        border-color: #788484;
+        color: #e5eeee;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .doctor-status-section {
+        padding: 18px;
+    }
+
+    .doctor-status-groups {
+        grid-template-columns: 1fr;
+    }
+
+    .status-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .status-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-status-btn {
+        min-height: 48px;
+    }
+
+    .status-group-title {
+        align-items: flex-start;
+    }
+
+    .status-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+}

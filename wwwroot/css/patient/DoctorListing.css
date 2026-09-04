@@ -1,32 +1,70 @@
-﻿.doctor-listing {
-    background-color: #f8f9fa;
+﻿/* =========================================================
+   DOCTOR LISTING
+========================================================= */
+
+.doctor-listing {
+    background-color: var(--gray-50);
+    color: var(--gray-800);
+    /*
+       Keeps the listing area from collapsing when
+       there are fewer doctors.
+    */
+    min-height: 1617px;
 }
 
+
+/* =========================================================
+   FILTER PANEL
+========================================================= */
+
 .filter-panel {
-    background-color: #004d4d; /* dark teal */
-    color: white;
+    background-color: var(--primary-active);
+    color: var(--white-25);
     padding: 20px;
     border-radius: 8px;
     margin-top: 15px;
     margin-bottom: 70px;
+    /*
+       Make sidebar cover the listing height.
+    */
+    min-height: 1510px;
+    box-sizing: border-box;
 }
 
-.filter-panel h4 {
-       margin-bottom: 15px;
-}
+    .filter-panel h4 {
+        margin-bottom: 15px;
+        color: var(--white-25);
+    }
+
+    .filter-panel label {
+        color: var(--white-25);
+    }
+
+
+/* =========================================================
+   EXISTING DOCTOR CARD
+   Keep your existing card sizing/layout.
+========================================================= */
 
 .doctor-card {
-    background-color: #e0f2f1; /* light teal */
+    background-color: var(--surface, var(--white-25));
+    color: var(--gray-800);
     margin: 15px 0;
     border-radius: 10px;
     text-align: center;
     padding: 20px;
     transition: transform 0.2s;
+    border: 1px solid var(--border-subtle);
 }
 
-.doctor-card:hover {
+    .doctor-card:hover {
         transform: scale(1.05);
-}
+    }
+
+
+/* =========================================================
+   DOCTOR IMAGE
+========================================================= */
 
 .doctor-img {
     width: 200px;
@@ -35,19 +73,253 @@
     border-radius: 50%;
     display: block;
     margin: 0 auto;
-    border: 3px solid #ffffff; /* white border around circle */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow */
+    border: 3px solid var(--white-25);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
+
+
+/* =========================================================
+   CARD TEXT
+========================================================= */
 
 .doctor-card .card-title {
-        color: #006666; /* medium teal */
-        font-weight: bold;
+    color: var(--primary-active);
+    font-weight: bold;
+    /*
+       Prevent long names from affecting the card.
+    */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+.doctor-card .card-text {
+    color: var(--gray-600);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
 
 .doctor-card .btn {
-        background-color: #004d4d; /* dark teal */
-        border: none;
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white-25);
+}
+
+    .doctor-card .btn:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: var(--white-25);
+    }
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+#pagination .page-link {
+    color: var(--primary);
+    background-color: var(--white-25);
+    border-color: var(--primary);
+}
+
+    #pagination .page-link:hover {
+        color: var(--white-25);
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+    }
+
+#pagination .page-item.active .page-link {
+    color: var(--white-25);
+    background-color: var(--primary);
+    border-color: var(--primary);
 }
 
 
+/* =========================================================
+   DARK MODE
+========================================================= */
 
+.dark .doctor-listing {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+
+/* =========================================================
+   DARK MODE - SIDEBAR
+========================================================= */
+
+.dark .filter-panel {
+    background-color: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+    .dark .filter-panel h4,
+    .dark .filter-panel label {
+        color: var(--text);
+    }
+
+
+    /* =========================================================
+   DARK MODE - FILTER INPUTS
+========================================================= */
+
+    .dark .filter-panel .form-control {
+        background-color: var(--surface-2);
+        color: var(--text);
+        border-color: var(--border-strong);
+    }
+
+        .dark .filter-panel .form-control:focus {
+            background-color: var(--surface-2);
+            color: var(--text);
+            border-color: var(--focus);
+            box-shadow: var(--focus-ring);
+        }
+
+
+/* =========================================================
+   DARK MODE - DOCTOR CARDS
+========================================================= */
+
+.dark .doctor-card {
+    background-color: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+    .dark .doctor-card:hover {
+        border-color: var(--primary);
+    }
+
+    .dark .doctor-card .card-title {
+        color: var(--primary);
+    }
+
+    .dark .doctor-card .card-text {
+        color: var(--text-muted);
+    }
+
+.dark .doctor-img {
+    border-color: var(--surface-2);
+}
+
+
+/* =========================================================
+   DARK MODE - BUTTON
+========================================================= */
+
+.dark .doctor-card .btn {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--black-25);
+}
+
+    .dark .doctor-card .btn:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: var(--black-25);
+    }
+
+
+/* =========================================================
+   DARK MODE - PAGINATION
+========================================================= */
+
+.dark #pagination .page-link {
+    color: var(--primary);
+    background-color: var(--surface);
+    border-color: var(--primary);
+}
+
+    .dark #pagination .page-link:hover {
+        color: var(--black-25);
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+    }
+
+.dark #pagination .page-item.active .page-link {
+    color: var(--black-25);
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+
+#pagination .page-link {
+    color: var(--primary) !important;
+    background-color: var(--white-25) !important;
+    border-color: var(--primary) !important;
+}
+
+    #pagination .page-link:hover {
+        color: var(--white-25) !important;
+        background-color: var(--primary-hover) !important;
+        border-color: var(--primary-hover) !important;
+    }
+
+#pagination .page-item.active .page-link {
+    color: var(--white-25) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+
+/* =========================================================
+   DARK MODE PAGINATION
+========================================================= */
+
+.dark #pagination .page-link {
+    color: var(--primary) !important;
+    background-color: var(--surface) !important;
+    border-color: var(--primary) !important;
+}
+
+    .dark #pagination .page-link:hover {
+        color: var(--black-25) !important;
+        background-color: var(--primary-hover) !important;
+        border-color: var(--primary-hover) !important;
+    }
+
+.dark #pagination .page-item.active .page-link {
+    color: var(--black-25) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+
+#doctorCardsContainer {
+    min-height: 1510px;
+}
+
+
+#doctorCardsContainer {
+    min-height: 1510px;
+    display: flex;
+    flex-direction: column;
+}
+
+.doctor-pagination {
+    margin-top: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+#doctorCardsContainer {
+    min-height: 1510px;
+    display: flex;
+    flex-direction: column;
+}
+
+    #doctorCardsContainer > nav {
+        margin-top: auto;
+        padding-bottom: 20px;
+    }

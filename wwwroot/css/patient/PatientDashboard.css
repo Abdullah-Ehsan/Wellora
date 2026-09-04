@@ -1,80 +1,394 @@
-﻿:root {
-    --dark-teal: #004d4d;
-    --light-teal-bg: #f4fafb;
-    --btn-teal: #008b8b;
-    --white: #ffffff;
-    --border-teal: #cfecec;
-}
+﻿/* =========================================================
+   APPOINTMENT VOLUME CHART
+========================================================= */
 
-.dashboard-page-container {
-    background-color: #f8fbfb;
-    font-family: "Segoe UI", system-ui, sans-serif;
-}
-
-/* Rigid 300x300 Box Scaling Rule */
-.dashboard-avatar-fixed {
-    width: 300px !important;
-    height: 300px !important;
-    min-width: 300px !important;
-    min-height: 300px !important;
-    max-width: 300px !important;
-    max-height: 300px !important;
-    border-radius: 12px !important;
-    object-fit: cover !important;
-    border: 3px solid var(--border-teal);
-    box-shadow: 0 4px 15px rgba(0, 63, 63, 0.08);
-}
-
-.text-teal {
-    color: var(--dark-teal) !important;
-}
-
-.badge-teal {
-    background-color: var(--dark-teal);
-    color: var(--white);
-    padding: 6px 12px;
-    font-weight: 700;
-}
-
-.badge-light-teal {
-    background-color: rgba(0, 139, 139, 0.1);
-    color: var(--btn-teal);
-}
-
-/* Upcoming Table Mini Dashboard Rules */
-.appointment-dashboard-table {
+.appointment-volume-chart {
+    position: relative;
     width: 100%;
-    vertical-align: middle;
+    height: 280px;
+    padding: 10px 5px;
 }
 
-    .appointment-dashboard-table th {
-        background-color: var(--light-teal-bg);
-        color: var(--dark-teal);
-        font-weight: 700;
-        font-size: 0.9rem;
-        text-transform: uppercase;
+
+/* =========================================================
+   ANALYTICS CHART CARD
+========================================================= */
+
+.dashboard-chart-card {
+    position: relative;
+    height: 100%;
+    padding: 18px;
+    background-color: var(--white-75);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+
+    .dashboard-chart-card:hover {
+        border-color: var(--primary-light);
+        box-shadow: 0 8px 24px rgba(0, 77, 77, 0.08);
+        transform: translateY(-2px);
     }
 
-    .appointment-dashboard-table td {
-        vertical-align: middle !important;
+
+/* =========================================================
+   CHART TITLE
+========================================================= */
+
+.dashboard-chart-title {
+    margin-bottom: 15px;
+    color: var(--gray-800);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DOUGHNUT CONTAINER
+========================================================= */
+
+.dashboard-doughnut-container {
+    position: relative;
+    width: 100%;
+    height: 230px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .dashboard-chart-card {
+    background-color: var(--surface-2);
+    border-color: var(--border);
+}
+
+
+.dark .dashboard-chart-title {
+    color: var(--text);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .appointment-volume-chart {
+        height: 250px;
     }
+
+    .dashboard-doughnut-container {
+        height: 240px;
+    }
+}
+
+
+@media (max-width: 575px) {
+
+    .appointment-volume-chart {
+        height: 220px;
+    }
+
+    .dashboard-doughnut-container {
+        height: 220px;
+    }
+}
+
+/* =========================================================
+   PATIENT DASHBOARD - IMAGE SIZING
+========================================================= */
+
+/* =========================================================
+   MAIN PATIENT PROFILE IMAGE
+   250px × 250px SQUARE
+========================================================= */
+
+.dashboard-avatar-fixed {
+    width: 250px !important;
+    height: 250px !important;
+    min-width: 250px;
+    min-height: 250px;
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
+    /* SQUARE */
+    border-radius: 0;
+    /* TEAL BORDER */
+    border: 5px solid var(--primary);
+    background-color: var(--primary-subtle);
+    box-shadow: 0 8px 24px rgba(26, 169, 154, 0.20);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+    /* Profile image hover */
+    .dashboard-avatar-fixed:hover {
+        transform: scale(1.02);
+        box-shadow: 0 12px 30px rgba(26, 169, 154, 0.30);
+    }
+
+
+/* =========================================================
+   DOCTOR IMAGES INSIDE UPCOMING APPOINTMENTS TABLE
+========================================================= */
 
 .dashboard-table-thumb {
     width: 50px !important;
     height: 50px !important;
-    min-width: 50px !important;
-    min-height: 50px !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
-    border: 1px solid var(--border-teal);
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 50%;
 }
 
-.grid-info-fields strong {
-    color: #111111;
-    font-size: 1.05rem;
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-avatar-fixed {
+        width: 200px !important;
+        height: 200px !important;
+        min-width: 200px;
+        min-height: 200px;
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    .dashboard-table-thumb {
+        width: 45px !important;
+        height: 45px !important;
+        min-width: 45px;
+        min-height: 45px;
+        max-width: 45px;
+        max-height: 45px;
+    }
 }
 
-.dashboard-timeline-footer {
-    letter-spacing: 0.3px;
-    font-weight: 500;
+
+/* =========================================================
+   PATIENT DASHBOARD
+   DARK MODE
+========================================================= */
+
+/*
+ * Main dashboard background
+ */
+.dark .dashboard-page-container {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+
+    /*
+ * =========================================================
+ * DASHBOARD CARDS
+ * =========================================================
+ *
+ * The view uses Bootstrap's .bg-white class.
+ * Override it only when dark mode is active.
+ */
+
+    .dark .dashboard-page-container .bg-white {
+        background-color: var(--surface) !important;
+        color: var(--text);
+    }
+
+
+    /*
+ * =========================================================
+ * HEADINGS
+ * =========================================================
+ *
+ * The view uses Bootstrap's .text-dark class.
+ */
+
+    .dark .dashboard-page-container .text-dark {
+        color: var(--text) !important;
+    }
+
+
+    /*
+ * =========================================================
+ * MUTED TEXT
+ * =========================================================
+ */
+
+    .dark .dashboard-page-container .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+
+/*
+ * =========================================================
+ * PROFILE SUMMARY
+ * ========================================================= */
+
+.dark .profile-summary-panel {
+    background-color: var(--surface) !important;
+    color: var(--text);
+}
+
+
+/*
+ * =========================================================
+ * BORDER COLORS
+ * =========================================================
+ *
+ * Bootstrap border classes otherwise remain light.
+ */
+
+.dark .dashboard-page-container .border,
+.dark .dashboard-page-container .border-top,
+.dark .dashboard-page-container .border-bottom,
+.dark .dashboard-page-container .border-right {
+    border-color: var(--border) !important;
+}
+
+
+/*
+ * =========================================================
+ * LIGHT BACKGROUND
+ * =========================================================
+ *
+ * Analytics card contains .bg-light.
+ */
+
+.dark .dashboard-page-container .bg-light {
+    background-color: var(--surface-2) !important;
+    color: var(--text);
+}
+
+
+/*
+ * =========================================================
+ * TABLE
+ * ========================================================= */
+
+.dark .appointment-dashboard-table {
+    color: var(--text);
+}
+
+
+    /*
+ * Table header
+ */
+
+    .dark .appointment-dashboard-table thead {
+        color: var(--text);
+    }
+
+
+    /*
+ * Table rows
+ */
+
+    .dark .appointment-dashboard-table tbody tr {
+        color: var(--text);
+    }
+
+
+    /*
+ * Bootstrap striped table
+ */
+
+    .dark .appointment-dashboard-table.table-striped > tbody > tr:nth-of-type(odd) > * {
+        color: var(--text);
+        background-color: rgba(255, 255, 255, 0.025);
+    }
+
+
+    .dark .appointment-dashboard-table.table-striped > tbody > tr:nth-of-type(even) > * {
+        color: var(--text);
+        background-color: transparent;
+    }
+
+
+    /*
+ * Table borders
+ */
+
+    .dark .appointment-dashboard-table > :not(caption) > * > * {
+        border-color: var(--border);
+    }
+
+
+/*
+ * =========================================================
+ * PROFILE / CLINICAL DATA
+ * ========================================================= */
+
+.dark .grid-info-fields strong,
+.dark .dashboard-page-container strong {
+    color: var(--text);
+}
+
+
+/*
+ * =========================================================
+ * HORIZONTAL RULE / BORDER AREAS
+ * ========================================================= */
+
+.dark .dashboard-page-container .border-top {
+    border-color: var(--border) !important;
+}
+
+
+/*
+ * =========================================================
+ * TIMELINE FOOTER
+ * ========================================================= */
+
+.dark .dashboard-timeline-footer {
+    color: var(--text-muted) !important;
+}
+
+
+    .dark .dashboard-timeline-footer strong {
+        color: var(--text);
+    }
+
+
+/*
+ * =========================================================
+ * BADGES
+ * ========================================================= */
+
+.dark .dashboard-page-container .badge-light-teal {
+    background-color: var(--primary-bg);
+    color: var(--primary);
+}
+
+
+/*
+ * =========================================================
+ * PROFILE IMAGE BACKGROUND
+ * ========================================================= */
+
+.dark .dashboard-avatar-fixed {
+    background-color: var(--surface-2);
+}
+
+
+/*
+ * =========================================================
+ * EMPTY APPOINTMENT MESSAGE
+ * ========================================================= */
+
+.dark .dashboard-page-container .text-center .text-muted {
+    color: var(--text-muted) !important;
 }

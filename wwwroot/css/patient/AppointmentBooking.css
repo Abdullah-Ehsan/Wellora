@@ -1,60 +1,103 @@
-﻿/* ---------- Color variables ---------- */
-:root {
-    --teal-900: #003f3f;
-    --teal-800: #004d4d;
-    --teal-700: #006666;
-    --teal-600: #007f7f;
-    --teal-500: #009999;
-    --teal-400: #33b3b3;
-    --teal-300: #66cfcf;
-    --teal-200: #cfecec;
-    --white: #ffffff;
-    --page-bg: #f6fbfb;
-}
+﻿/* =========================================================
+   APPOINTMENT BOOKING PAGE
+   Light Mode = Existing Teal Theme
+   Dark Mode = Blue Theme
+========================================================= */
 
-/* ---------- Page base ---------- */
-html, body {
-    height: 100%;
-    margin: 0;
-    background: var(--page-bg);
-    font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
-    color: var(--teal-900);
-}
+/* =========================================================
+   PAGE
+========================================================= */
 
-/* ---------- Container ---------- */
 .appointment-page {
     max-width: 1320px;
     margin: 28px auto;
     padding: 22px;
-    background: var(--white);
+    background: var(--white-25);
+    color: var(--gray-800);
     border-radius: 14px;
-    box-shadow: 0 18px 50px rgba(0,63,63,0.08);
+    box-shadow: 0 18px 50px rgba(0, 63, 63, 0.08);
+    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* ---------- Doctor header ---------- */
+/* =========================================================
+   DOCTOR HEADER
+========================================================= */
+
 .doctor-header {
     display: flex;
     gap: 18px;
     align-items: center;
     padding: 18px;
     border-radius: 12px;
-    background: linear-gradient(90deg, var(--teal-700), var(--teal-800));
-    color: var(--white);
+    background: linear-gradient( 90deg, var(--teal-700), var(--teal-800) );
+    color: var(--white-25);
     margin-bottom: 18px;
+    border: 1px solid var(--teal-750);
+    transition: all 0.25s ease;
 }
+
+.doctor-info {
+    padding: 15px;
+}
+
+.doctor-name {
+    color: var(--white-25);
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.doctor-info h5 {
+    color: var(--teal-100);
+    font-weight: 700;
+}
+
+.doctor-info p {
+    color: var(--white-25);
+}
+
+.doctor-fee {
+    margin-top: 15px;
+    font-size: 1.05rem;
+}
+
+    .doctor-fee strong {
+        color: var(--teal-100);
+    }
 
 .doctor-photo {
     width: 300px;
     height: 300px;
-    border-radius: 12px;
+    border-radius: 50%;
     object-fit: cover;
-    border: 3px solid rgba(255,255,255,0.12);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border: 5px solid var(--teal-300);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s ease;
 }
 
-/* ---------- Calendar ---------- */
-.calendar-section {
-    margin-top: 14px;
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.calendar-section h3,
+.slots-section h3,
+.payment-section h3 {
+    color: var(--teal-800);
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.slots-section h5 {
+    color: var(--teal-700);
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   CALENDAR NAVIGATION
+========================================================= */
+
+.calendar-nav {
+    padding: 12px 0;
 }
 
 .month-label {
@@ -63,6 +106,31 @@ html, body {
     color: var(--teal-700);
     font-size: 1.45rem;
 }
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-outline-teal {
+    color: var(--teal-700);
+    background-color: transparent;
+    border: 2px solid var(--teal-500);
+    border-radius: 9px;
+    padding: 9px 18px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+    .btn-outline-teal:hover {
+        background-color: var(--teal-600);
+        border-color: var(--teal-600);
+        color: var(--white-25);
+        transform: translateY(-2px);
+    }
+
+/* =========================================================
+   CALENDAR TABLE
+========================================================= */
 
 .calendar-table {
     width: 100%;
@@ -74,9 +142,14 @@ html, body {
     .calendar-table thead th {
         font-weight: 800;
         color: var(--teal-800);
+        text-align: center;
+        padding: 8px;
     }
 
-/* ---------- DATE CARDS ---------- */
+/* =========================================================
+   DATE CARDS
+========================================================= */
+
 .date-card {
     margin: 6px;
     border-radius: 12px;
@@ -86,46 +159,60 @@ html, body {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    transition: 180ms ease;
+    transition: all 180ms ease;
 }
 
-    /* placeholder / empty */
+    /* Empty calendar cells */
+
     .date-card.placeholder {
-        background: var(--teal-200);
-        color: var(--teal-800);
+        background: var(--teal-50);
+        color: var(--teal-700);
+        border: 1px dashed var(--teal-200);
     }
 
-    /* unavailable date */
+    /* Unavailable dates */
+
     .date-card.unavailable {
-        background: #e0e0e0;
-        color: #888;
+        background: var(--gray-200);
+        color: var(--gray-500);
+        border: 1px solid var(--gray-300);
         cursor: not-allowed;
     }
 
-    /* available date */
+    /* Available dates */
+
     .date-card.available {
         background: var(--teal-800);
-        color: var(--white);
+        color: var(--white-25);
         cursor: pointer;
+        border: 1px solid var(--teal-750);
+        box-shadow: 0 4px 10px rgba(0, 77, 77, 0.12);
     }
 
         .date-card.available:hover {
             background: var(--teal-700);
             transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0, 77, 77, 0.20);
         }
 
-    /* selected date */
+    /* Selected date */
+
     .date-card.selected {
-        background: var(--white);
+        background: var(--white-25);
         color: var(--teal-800);
-        border: 2px solid var(--teal-800);
+        border: 3px solid var(--teal-600);
         transform: scale(1.05);
-        box-shadow: 0 12px 30px rgba(0,63,63,0.25);
+        box-shadow: 0 12px 30px rgba(0, 63, 63, 0.25);
     }
 
-/* ---------- SLOTS ---------- */
+/* =========================================================
+   SLOTS
+========================================================= */
+
 .slots-section {
-    margin-top: 20px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid var(--gray-200);
 }
 
 .slots-grid {
@@ -134,7 +221,8 @@ html, body {
     gap: 8px;
 }
 
-/* base slot */
+/* Base slot */
+
 .slot-btn {
     width: 100%;
     height: 100%;
@@ -144,67 +232,109 @@ html, body {
     transition: all 140ms ease;
 }
 
-    /* available slot */
+    /* Available */
+
     .slot-btn.available {
-        background: var(--teal-300);
+        background: var(--teal-200);
         color: var(--teal-900);
+        border-color: var(--teal-300);
         cursor: pointer;
     }
 
         .slot-btn.available:hover {
             background: var(--teal-600);
-            color: var(--white);
+            border-color: var(--teal-600);
+            color: var(--white-25);
             transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(0, 77, 77, 0.18);
         }
 
-    /* selected slot */
+    /* Selected */
+
     .slot-btn.selected {
         background: var(--teal-900);
-        color: white;
+        color: var(--white-25);
         border: 2px solid var(--teal-300);
-        box-shadow: 0 10px 26px rgba(0,63,63,0.25);
+        box-shadow: 0 10px 26px rgba(0, 63, 63, 0.25);
     }
 
-    /* unavailable slot (booked / break / past) */
+    /* Unavailable */
+
     .slot-btn.unavailable {
-        background: #e0e0e0;
-        color: #888;
+        background: var(--gray-200);
+        color: var(--gray-500);
+        border-color: var(--gray-300);
         cursor: not-allowed;
         opacity: 0.7;
     }
 
-    /* placeholder slot */
+    /* Placeholder */
+
     .slot-btn.placeholder-slot {
-        background: #f3f3f3;
-        color: #aaa;
+        background: var(--gray-100);
+        color: var(--gray-400);
         cursor: not-allowed;
-        border: 1px dashed #ddd;
+        border: 1px dashed var(--gray-300);
     }
 
-/* ---------- PAYMENT ---------- */
+/* =========================================================
+   PAYMENT
+========================================================= */
+
 .payment-section {
-    margin-top: 20px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid var(--gray-200);
 }
 
-.form-check-label {
-    font-weight: 600;
+    .payment-section .form-check {
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: var(--gray-700);
+    }
+
+    .payment-section input[type="radio"] {
+        accent-color: var(--teal-600);
+        margin-right: 8px;
+    }
+
+/* =========================================================
+   CONFIRM SECTION
+========================================================= */
+
+.confirm-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid var(--gray-200);
 }
 
-/* ---------- CONFIRM BUTTON ---------- */
 .btn-teal {
     background: var(--teal-800);
-    color: white;
+    color: var(--white-25);
     padding: 14px 36px;
     border-radius: 12px;
-    font-weight: 700;
-    border: none;
+    font-weight: 800;
+    border: 2px solid var(--teal-800);
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 15px rgba(0, 63, 63, 0.18);
 }
 
-/* ---------- TOAST ---------- */
+    .btn-teal:hover {
+        background: var(--teal-600);
+        border-color: var(--teal-600);
+        color: var(--white-25);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgba(0, 63, 63, 0.25);
+    }
+
+/* =========================================================
+   TOAST
+========================================================= */
+
 .toast-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255, 255, 255, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,24 +343,335 @@ html, body {
 
 .toast-custom {
     width: 400px;
-    background: white;
-    border-radius: 8px;
+    background: var(--white-25);
+    color: var(--gray-800);
+    border-radius: 10px;
     overflow: hidden;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* =========================================================
+   DARK MODE
+   BLUE THEME
+========================================================= */
+
+/*
+    Your JavaScript adds:
+
+    <html class="dark">
+
+    Therefore these selectors work globally.
+*/
+
+/* Page */
+
+.dark .appointment-page {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--border);
+}
+
+/* =========================================================
+   DARK MODE BLUE VARIABLES
+========================================================= */
+
+.dark .appointment-page {
+    --appointment-blue-100: #dbeafe;
+    --appointment-blue-200: #bfdbfe;
+    --appointment-blue-300: #93c5fd;
+    --appointment-blue-400: #60a5fa;
+    --appointment-blue-500: #3b82f6;
+    --appointment-blue-600: #2563eb;
+    --appointment-blue-700: #1d4ed8;
+    --appointment-blue-800: #1e40af;
+    --appointment-blue-900: #172554;
+    --appointment-dark-bg: #0b1220;
+    --appointment-surface: #111827;
+    --appointment-surface-2: #1f2937;
+    --appointment-border: #334155;
+}
+
+/* =========================================================
+   DARK HEADER
+========================================================= */
+
+.dark .doctor-header {
+    background: linear-gradient( 135deg, var(--appointment-blue-800), var(--appointment-blue-700) );
+    border-color: var(--appointment-blue-600);
+    color: white;
+}
+
+.dark .doctor-name {
+    color: white;
+}
+
+.dark .doctor-info h5 {
+    color: var(--appointment-blue-200);
+}
+
+.dark .doctor-info p {
+    color: #e5e7eb;
+}
+
+.dark .doctor-fee strong {
+    color: var(--appointment-blue-200);
+}
+
+.dark .doctor-photo {
+    border-color: var(--appointment-blue-400);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25);
+}
+
+/* =========================================================
+   DARK HEADINGS
+========================================================= */
+
+.dark .calendar-section h3,
+.dark .slots-section h3,
+.dark .payment-section h3 {
+    color: var(--appointment-blue-300);
+}
+
+.dark .slots-section h5 {
+    color: var(--appointment-blue-300);
+}
+
+.dark .month-label {
+    color: var(--appointment-blue-300);
+}
+
+/* =========================================================
+   DARK NAV BUTTON
+========================================================= */
+
+.dark .btn-outline-teal {
+    color: var(--appointment-blue-300);
+    background: transparent;
+    border-color: var(--appointment-blue-500);
+}
+
+    .dark .btn-outline-teal:hover {
+        background: var(--appointment-blue-600);
+        border-color: var(--appointment-blue-500);
+        color: white;
+    }
+
+/* =========================================================
+   DARK CALENDAR
+========================================================= */
+
+.dark .calendar-table thead th {
+    color: var(--appointment-blue-300);
+}
+
+/* Placeholder */
+
+.dark .date-card.placeholder {
+    background: #172033;
+    color: #64748b;
+    border-color: #334155;
+}
+
+/* Unavailable */
+
+.dark .date-card.unavailable {
+    background: #252b35;
+    color: #6b7280;
+    border-color: #374151;
+}
+
+/* Available */
+
+.dark .date-card.available {
+    background: var(--appointment-blue-800);
+    color: white;
+    border-color: var(--appointment-blue-600);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.18);
+}
+
+    .dark .date-card.available:hover {
+        background: var(--appointment-blue-600);
+        border-color: var(--appointment-blue-400);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+    }
+
+/* Selected */
+
+.dark .date-card.selected {
+    background: #172554;
+    color: var(--appointment-blue-200);
+    border-color: var(--appointment-blue-400);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+}
+
+/* =========================================================
+   DARK SLOTS
+========================================================= */
+
+.dark .slots-section,
+.dark .payment-section,
+.dark .confirm-section {
+    border-color: var(--border-strong);
+}
+
+/* Available */
+
+.dark .slot-btn.available {
+    background: #1e3a5f;
+    color: var(--appointment-blue-200);
+    border-color: #2563eb;
+}
+
+    .dark .slot-btn.available:hover {
+        background: var(--appointment-blue-600);
+        color: white;
+        border-color: var(--appointment-blue-400);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.30);
+    }
+
+/* Selected */
+
+.dark .slot-btn.selected {
+    background: var(--appointment-blue-900);
+    color: white;
+    border-color: var(--appointment-blue-400);
+    box-shadow: 0 10px 26px rgba(37, 99, 235, 0.30);
+}
+
+/* Unavailable */
+
+.dark .slot-btn.unavailable {
+    background: #252b35;
+    color: #6b7280;
+    border-color: #374151;
+}
+
+/* Placeholder */
+
+.dark .slot-btn.placeholder-slot {
+    background: #171d27;
+    color: #4b5563;
+    border-color: #2c3544;
+}
+
+/* =========================================================
+   DARK PAYMENT
+========================================================= */
+
+.dark .payment-section .form-check {
+    color: var(--text);
+}
+
+.dark .payment-section input[type="radio"] {
+    accent-color: var(--appointment-blue-500);
+}
+
+/* =========================================================
+   DARK CONFIRM BUTTON
+========================================================= */
+
+.dark .btn-teal {
+    background: var(--appointment-blue-700);
+    color: white;
+    border-color: var(--appointment-blue-500);
+    box-shadow: 0 7px 18px rgba(37, 99, 235, 0.25);
+}
+
+    .dark .btn-teal:hover {
+        background: var(--appointment-blue-600);
+        border-color: var(--appointment-blue-400);
+        color: white;
+        box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+    }
+
+/* =========================================================
+   DARK TOAST
+========================================================= */
+
+.dark .toast-overlay {
+    background: rgba(0, 0, 0, 0.70);
+}
+
+.dark .toast-custom {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border-strong);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media (max-width: 900px) {
 
     .doctor-header {
         flex-direction: column;
+        text-align: center;
     }
 
     .doctor-photo {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
+    }
+
+    .doctor-info {
+        width: 100%;
     }
 
     .slots-grid {
         grid-template-rows: repeat(10, 45px);
+    }
+
+    .calendar-table {
+        border-spacing: 5px;
+    }
+
+    .date-card {
+        margin: 2px;
+        padding: 8px 4px;
+        min-height: 55px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .appointment-page {
+        margin: 10px;
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .doctor-photo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .month-label {
+        font-size: 1.1rem;
+    }
+
+    .btn-outline-teal {
+        padding: 7px 10px;
+        font-size: 0.85rem;
+    }
+
+    .calendar-table {
+        border-spacing: 2px;
+    }
+
+    .date-card {
+        min-height: 45px;
+        font-size: 0.85rem;
+    }
+
+    .calendar-table thead th {
+        font-size: 0.8rem;
+    }
+
+    .btn-teal {
+        width: 100%;
     }
 }
