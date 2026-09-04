@@ -1,0 +1,362 @@
+﻿/* =========================================================
+   LANGUAGES & CONTACT
+========================================================= */
+
+.contact-info-card {
+    background-color: var(--white-25);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 20, 26, 0.04);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.contact-info-header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.contact-info-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.contact-info-title {
+    color: var(--gray-800);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.contact-info-subtitle {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.contact-section {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.contact-social-section {
+    margin-bottom: 0;
+}
+
+.contact-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.contact-section-indicator {
+    width: 4px;
+    min-width: 4px;
+    height: 38px;
+    margin-top: 2px;
+    border-radius: 999px;
+    background-color: var(--primary);
+}
+
+.contact-section-title {
+    margin: 0;
+    color: var(--gray-800);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.contact-section-description {
+    margin: 0.25rem 0 0;
+    color: var(--gray-500);
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   FIELD CARD
+========================================================= */
+
+.contact-field-card {
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    background-color: var(--white-50);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .contact-field-card:hover {
+        border-color: var(--gray-300);
+        box-shadow: 0 3px 10px rgba(15, 20, 26, 0.04);
+    }
+
+
+/* =========================================================
+   FIELD HEADER
+========================================================= */
+
+.contact-field-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.contact-field-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+.contact-form-label {
+    color: var(--gray-700);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.contact-field-hint {
+    margin-top: 0.2rem;
+    color: var(--gray-450);
+    font-size: 0.73rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+.contact-form-control {
+    min-height: 44px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+    .contact-form-control::placeholder {
+        color: var(--gray-400);
+    }
+
+    .contact-form-control:hover {
+        border-color: var(--gray-300);
+    }
+
+    .contact-form-control:focus {
+        border-color: var(--primary);
+        background-color: var(--white-25);
+        color: var(--gray-800);
+        box-shadow: var(--focus-ring);
+        outline: none;
+    }
+
+
+/* =========================================================
+   CONTACT NUMBER
+========================================================= */
+
+.contact-number-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: 7px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 0.75rem;
+}
+
+.contact-number-preview-label {
+    color: var(--gray-500);
+}
+
+#contactNumberPreview {
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.contact-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+}
+
+.contact-save-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 42px;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+    .contact-save-button:hover {
+        border-color: var(--primary-hover);
+        background-color: var(--primary-hover);
+        color: var(--white-25);
+    }
+
+    .contact-save-button:active {
+        border-color: var(--primary-active);
+        background-color: var(--primary-active);
+        transform: translateY(1px);
+    }
+
+    .contact-save-button:focus {
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.contact-info-card .text-danger {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--danger);
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .contact-info-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark .contact-info-title,
+.dark .contact-section-title,
+.dark .contact-form-label {
+    color: var(--text);
+}
+
+.dark .contact-info-subtitle,
+.dark .contact-section-description,
+.dark .contact-field-hint {
+    color: var(--text-muted);
+}
+
+.dark .contact-section {
+    border-color: var(--border);
+}
+
+.dark .contact-field-card {
+    background-color: var(--surface-2);
+    border-color: var(--border-strong);
+}
+
+    .dark .contact-field-card:hover {
+        border-color: var(--gray-600);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.dark .contact-form-control {
+    background-color: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+    .dark .contact-form-control::placeholder {
+        color: var(--gray-500);
+    }
+
+    .dark .contact-form-control:hover {
+        border-color: var(--gray-600);
+    }
+
+    .dark .contact-form-control:focus {
+        background-color: var(--surface);
+        border-color: var(--primary);
+        color: var(--text);
+    }
+
+.dark .contact-number-preview {
+    background-color: var(--primary-subtle);
+}
+
+.dark .contact-number-preview-label {
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .contact-info-card .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .contact-info-header-content {
+        align-items: flex-start;
+    }
+
+    .contact-info-header-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .contact-section {
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .contact-field-card {
+        padding: 0.9rem;
+    }
+
+    .contact-form-actions {
+        justify-content: stretch;
+    }
+
+    .contact-save-button {
+        width: 100%;
+    }
+}

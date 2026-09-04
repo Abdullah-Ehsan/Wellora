@@ -1,0 +1,403 @@
+﻿/* =========================================================
+   DOCTOR PROFILE
+========================================================= */
+
+.doctor-profile-card {
+    background-color: var(--white-25);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    overflow: hidden;
+    color: var(--gray-800);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.doctor-profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 1.75rem;
+    background-color: var(--white-25);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.doctor-profile-title {
+    margin: 0;
+    color: var(--gray-800);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.doctor-profile-subtitle {
+    margin: 0.35rem 0 0;
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.doctor-profile-body {
+    padding: 1.75rem;
+}
+
+
+/* =========================================================
+   PROFILE PHOTO
+========================================================= */
+
+.doctor-profile-photo-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+
+/* Photo container */
+
+.doctor-profile-photo-wrapper {
+    position: relative;
+    flex: 0 0 auto;
+    width: 250px;
+    height: 250px;
+}
+
+
+/* Passport-style square image */
+
+.doctor-profile-photo {
+    display: block;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    background-color: var(--gray-100);
+}
+
+
+/* Hidden file input */
+
+.doctor-profile-photo-input {
+    display: none;
+}
+
+
+/* Photo edit button */
+
+.doctor-profile-photo-edit {
+    position: absolute;
+    right: -8px;
+    bottom: -8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--white-25);
+    border: 3px solid var(--white-25);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .doctor-profile-photo-edit:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-1px);
+        box-shadow: var(--focus-ring);
+    }
+
+    .doctor-profile-photo-edit span {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+
+/* Photo information */
+
+.doctor-profile-photo-info {
+    max-width: 420px;
+}
+
+.doctor-profile-photo-title {
+    margin: 0 0 0.35rem;
+    color: var(--gray-800);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.doctor-profile-photo-description {
+    margin: 0 0 0.4rem;
+    color: var(--gray-500);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.doctor-profile-photo-hint {
+    color: var(--gray-450);
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.doctor-profile-divider {
+    height: 1px;
+    margin: 1.75rem 0;
+    background-color: var(--border-subtle);
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.doctor-profile-section-heading {
+    margin-bottom: 1.25rem;
+}
+
+    .doctor-profile-section-heading h6 {
+        margin: 0;
+        color: var(--gray-800);
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .doctor-profile-section-heading p {
+        margin: 0.3rem 0 0;
+        color: var(--gray-500);
+        font-size: 0.8rem;
+    }
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.doctor-profile-label {
+    margin-bottom: 0.45rem;
+    color: var(--gray-700);
+    font-size: 0.84rem;
+    font-weight: 500;
+}
+
+
+/* Inputs */
+
+.doctor-profile-input {
+    min-height: 44px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+    .doctor-profile-input::placeholder {
+        color: var(--gray-400);
+    }
+
+    .doctor-profile-input:hover {
+        border-color: var(--gray-350);
+    }
+
+    .doctor-profile-input:focus {
+        border-color: var(--primary);
+        background-color: var(--white-25);
+        color: var(--gray-800);
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* Select */
+
+select.doctor-profile-input {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.doctor-profile-input.input-validation-error {
+    border-color: var(--danger);
+}
+
+.field-validation-error {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--danger) !important;
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.doctor-profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+
+/* Save button */
+
+.doctor-profile-save-btn {
+    min-height: 42px;
+    padding: 0.65rem 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .doctor-profile-save-btn:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: var(--white-25);
+        transform: translateY(-1px);
+    }
+
+    .doctor-profile-save-btn:focus {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: var(--white-25);
+        box-shadow: var(--focus-ring);
+    }
+
+    .doctor-profile-save-btn:active {
+        background-color: var(--primary-active) !important;
+        border-color: var(--primary-active) !important;
+        color: var(--white-25) !important;
+        transform: translateY(0);
+    }
+
+.doctor-profile-save-icon {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .doctor-profile-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.dark .doctor-profile-header {
+    background-color: var(--surface);
+    border-color: var(--border);
+}
+
+.dark .doctor-profile-title,
+.dark .doctor-profile-section-heading h6,
+.dark .doctor-profile-photo-title {
+    color: var(--text);
+}
+
+.dark .doctor-profile-subtitle,
+.dark .doctor-profile-section-heading p,
+.dark .doctor-profile-photo-description {
+    color: var(--text-muted);
+}
+
+.dark .doctor-profile-photo-hint {
+    color: var(--gray-500);
+}
+
+.dark .doctor-profile-photo {
+    background-color: var(--surface-2);
+    border-color: var(--border-strong);
+}
+
+.dark .doctor-profile-photo-edit {
+    border-color: var(--surface);
+}
+
+.dark .doctor-profile-input {
+    background-color: var(--surface-2);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+    .dark .doctor-profile-input::placeholder {
+        color: var(--gray-500);
+    }
+
+    .dark .doctor-profile-input:focus {
+        background-color: var(--surface-2);
+        color: var(--text);
+    }
+
+.dark .doctor-profile-label {
+    color: var(--gray-700);
+}
+
+.dark .doctor-profile-divider,
+.dark .doctor-profile-actions {
+    border-color: var(--border);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+    .doctor-profile-header {
+        padding: 1.25rem;
+    }
+
+    .doctor-profile-body {
+        padding: 1.25rem;
+    }
+
+    .doctor-profile-photo-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .doctor-profile-photo-wrapper {
+        width: 130px;
+        height: 130px;
+    }
+
+    .doctor-profile-photo {
+        width: 130px;
+        height: 130px;
+    }
+
+    .doctor-profile-actions {
+        justify-content: stretch;
+    }
+
+    .doctor-profile-save-btn {
+        width: 100%;
+    }
+}

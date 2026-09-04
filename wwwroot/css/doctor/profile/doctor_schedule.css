@@ -1,0 +1,565 @@
+﻿/* =========================================================
+   DOCTOR SCHEDULE
+   ========================================================= */
+
+.doctor-schedule-page {
+    color: var(--text, var(--text-color, #212529));
+    background: var(--bg, transparent);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.doctor-schedule-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+    .doctor-schedule-header h2 {
+        margin: 0;
+        font-weight: 700;
+        color: var(--gray-800, var(--dark-teal, #073f42));
+    }
+
+.doctor-schedule-description {
+    color: var(--gray-600, #6c757d);
+}
+
+
+/* =========================================================
+   CHANGE COUNTER
+   ========================================================= */
+
+.schedule-change-counter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--primary-subtle, rgba(0, 128, 128, 0.08));
+    border: 1px solid var(--border-subtle, rgba(0, 128, 128, 0.20));
+    color: var(--text, #212529);
+}
+
+.change-limit-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.change-count {
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--primary, var(--medium-teal, #159a9c));
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.doctor-schedule-card {
+    overflow: hidden;
+    border: 1px solid var(--border-subtle, rgba(0, 128, 128, 0.18));
+    border-radius: 14px;
+    background-color: var(--surface, var(--card-bg, #ffffff));
+    color: var(--text, #212529);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+    /* =========================================================
+   TABLE WRAPPER
+   ========================================================= */
+
+    .doctor-schedule-card .table-responsive {
+        background-color: var(--surface, #ffffff);
+    }
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.doctor-schedule-table {
+    width: 100%;
+    min-width: 1250px;
+    margin-bottom: 0;
+    vertical-align: middle;
+    --bs-table-bg: var(--surface, #ffffff);
+    --bs-table-color: var(--text, #212529);
+    --bs-table-border-color: var(--border-subtle, rgba(0, 128, 128, 0.10));
+    --bs-table-striped-bg: transparent;
+    --bs-table-hover-bg: rgba(0, 128, 128, 0.035);
+    --bs-table-hover-color: var(--text, #212529);
+    color: var(--text, #212529);
+    background-color: var(--surface, #ffffff);
+}
+
+
+    /* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+    .doctor-schedule-table thead th {
+        padding: 15px 12px;
+        border: 0;
+        background-color: var(--teal-800, var(--dark-teal, #073f42));
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+
+    /* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+    .doctor-schedule-table tbody {
+        background-color: var(--surface, #ffffff);
+    }
+
+        .doctor-schedule-table tbody td {
+            padding: 12px;
+            border-color: var( --border-subtle, rgba(0, 128, 128, 0.10) );
+            background-color: var(--surface, #ffffff);
+            color: var(--text, #212529);
+            vertical-align: middle;
+        }
+
+        .doctor-schedule-table tbody tr {
+            background-color: var(--surface, #ffffff);
+            color: var(--text, #212529);
+            transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+        }
+
+            .doctor-schedule-table tbody tr:hover {
+                background-color: rgba(0, 128, 128, 0.035);
+            }
+
+
+/* =========================================================
+   DAY
+   ========================================================= */
+
+.day-name {
+    min-width: 90px;
+    color: var(--gray-800, var(--dark-teal, #073f42));
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   INPUTS / SELECTS
+   ========================================================= */
+
+.doctor-schedule-table .form-select {
+    min-width: 125px;
+    min-height: 38px;
+    border-radius: 8px;
+    border: 1px solid var( --border, rgba(0, 128, 128, 0.25) );
+    background-color: var(--surface, #ffffff);
+    color: var(--text, #212529);
+    font-size: 13px;
+    color-scheme: light;
+}
+
+    .doctor-schedule-table .form-select:focus {
+        border-color: var(--primary, var(--medium-teal, #159a9c));
+        box-shadow: 0 0 0 0.2rem rgba(21, 154, 156, 0.15);
+    }
+
+
+    /* Select dropdown options */
+
+    .doctor-schedule-table .form-select option {
+        background-color: var(--surface, #ffffff);
+        color: var(--text, #212529);
+    }
+
+
+/* =========================================================
+   STATUS SELECT
+   ========================================================= */
+
+.schedule-status {
+    min-width: 90px !important;
+    font-weight: 600;
+}
+
+.schedule-row-on .schedule-status {
+    color: var(--success, #087f5b);
+}
+
+.schedule-row-off .schedule-status {
+    color: var(--gray-600, #6c757d);
+}
+
+
+/* =========================================================
+   OFF / UNSCHEDULED ROW
+   ========================================================= */
+
+.schedule-row-off {
+    background-color: var( --surface-muted, rgba(108, 117, 125, 0.08) ) !important;
+}
+
+    .schedule-row-off td {
+        background-color: var( --surface-muted, rgba(108, 117, 125, 0.08) ) !important;
+    }
+
+    .schedule-row-off .day-name {
+        color: var(--gray-500, #777777);
+    }
+
+    .schedule-row-off .schedule-input {
+        background-color: var( --surface-muted, #e9ecef );
+        color: var(--gray-500, #999999);
+        cursor: not-allowed;
+    }
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.doctor-schedule-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    border-top: 1px solid var( --border-subtle, rgba(0, 128, 128, 0.12) );
+    background-color: var(--surface, #ffffff);
+    color: var(--text, #212529);
+}
+
+.schedule-help {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-600, #6c757d);
+    font-size: 13px;
+}
+
+    .schedule-help strong {
+        color: var(--text, #212529);
+    }
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background-color: var( --primary, var(--medium-teal, #159a9c) );
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+.save-schedule-btn {
+    min-width: 150px;
+    border: 0;
+    border-radius: 8px;
+    background-color: var( --primary, var(--medium-teal, #159a9c) );
+    color: #ffffff;
+    font-weight: 600;
+}
+
+    .save-schedule-btn:hover {
+        background-color: var( --primary-dark, var(--dark-teal, #073f42) );
+        color: #ffffff;
+    }
+
+
+/* =========================================================
+   DARK MODE
+   Supports:
+   
+   .dark
+   .dark-mode
+   [data-theme="dark"]
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   PAGE
+--------------------------------------------------------- */
+
+.dark .doctor-schedule-page,
+.dark-mode .doctor-schedule-page,
+[data-theme="dark"] .doctor-schedule-page {
+    color: var(--text, #f1f5f9);
+}
+
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.dark .doctor-schedule-header h2,
+.dark-mode .doctor-schedule-header h2,
+[data-theme="dark"] .doctor-schedule-header h2 {
+    color: var(--text, #ffffff);
+}
+
+.dark .doctor-schedule-description,
+.dark-mode .doctor-schedule-description,
+[data-theme="dark"] .doctor-schedule-description {
+    color: var(--text-muted, #aab7bd);
+}
+
+
+/* ---------------------------------------------------------
+   COUNTER
+--------------------------------------------------------- */
+
+.dark .schedule-change-counter,
+.dark-mode .schedule-change-counter,
+[data-theme="dark"] .schedule-change-counter {
+    background-color: rgba(21, 154, 156, 0.12);
+    border-color: rgba(21, 154, 156, 0.30);
+    color: #e5f6f6;
+}
+
+
+/* ---------------------------------------------------------
+   CARD
+--------------------------------------------------------- */
+
+.dark .doctor-schedule-card,
+.dark-mode .doctor-schedule-card,
+[data-theme="dark"] .doctor-schedule-card {
+    background-color: var(--surface, #172b2d);
+    color: var(--text, #f1f3f5);
+    border-color: var( --border, rgba(255, 255, 255, 0.08) );
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+    /* ---------------------------------------------------------
+   TABLE RESPONSIVE AREA
+--------------------------------------------------------- */
+
+    .dark .doctor-schedule-card .table-responsive,
+    .dark-mode .doctor-schedule-card .table-responsive,
+    [data-theme="dark"] .doctor-schedule-card .table-responsive {
+        background-color: var(--surface, #172b2d);
+    }
+
+
+/* ---------------------------------------------------------
+   TABLE
+--------------------------------------------------------- */
+
+.dark .doctor-schedule-table,
+.dark-mode .doctor-schedule-table,
+[data-theme="dark"] .doctor-schedule-table {
+    --bs-table-bg: #172b2d;
+    --bs-table-color: #f1f3f5;
+    --bs-table-border-color: rgba(255, 255, 255, 0.08);
+    --bs-table-striped-bg: transparent;
+    --bs-table-hover-bg: rgba(21, 154, 156, 0.08);
+    --bs-table-hover-color: #ffffff;
+    background-color: #172b2d;
+    color: #f1f3f5;
+}
+
+
+    /* ---------------------------------------------------------
+   TABLE BODY
+--------------------------------------------------------- */
+
+    .dark .doctor-schedule-table tbody,
+    .dark-mode .doctor-schedule-table tbody,
+    [data-theme="dark"] .doctor-schedule-table tbody {
+        background-color: #172b2d;
+    }
+
+        .dark .doctor-schedule-table tbody tr,
+        .dark-mode .doctor-schedule-table tbody tr,
+        [data-theme="dark"] .doctor-schedule-table tbody tr {
+            background-color: #172b2d;
+            color: #f1f3f5;
+        }
+
+        .dark .doctor-schedule-table tbody td,
+        .dark-mode .doctor-schedule-table tbody td,
+        [data-theme="dark"] .doctor-schedule-table tbody td {
+            background-color: #172b2d;
+            color: #f1f3f5;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* ---------------------------------------------------------
+   TABLE HOVER
+--------------------------------------------------------- */
+
+        .dark .doctor-schedule-table tbody tr:hover,
+        .dark-mode .doctor-schedule-table tbody tr:hover,
+        [data-theme="dark"] .doctor-schedule-table tbody tr:hover {
+            background-color: rgba(21, 154, 156, 0.08);
+        }
+
+            .dark .doctor-schedule-table tbody tr:hover td,
+            .dark-mode .doctor-schedule-table tbody tr:hover td,
+            [data-theme="dark"] .doctor-schedule-table tbody tr:hover td {
+                background-color: rgba(21, 154, 156, 0.08);
+            }
+
+
+/* ---------------------------------------------------------
+   DAY
+--------------------------------------------------------- */
+
+.dark .day-name,
+.dark-mode .day-name,
+[data-theme="dark"] .day-name {
+    color: #ffffff;
+}
+
+
+/* ---------------------------------------------------------
+   SELECT INPUTS
+--------------------------------------------------------- */
+
+.dark .doctor-schedule-table .form-select,
+.dark-mode .doctor-schedule-table .form-select,
+[data-theme="dark"] .doctor-schedule-table .form-select {
+    background-color: #203638;
+    color: #ffffff;
+    border-color: rgba(21, 154, 156, 0.40);
+    color-scheme: dark;
+}
+
+
+    /* Dropdown options */
+
+    .dark .doctor-schedule-table .form-select option,
+    .dark-mode .doctor-schedule-table .form-select option,
+    [data-theme="dark"] .doctor-schedule-table .form-select option {
+        background-color: #203638;
+        color: #ffffff;
+    }
+
+
+    /* Focus */
+
+    .dark .doctor-schedule-table .form-select:focus,
+    .dark-mode .doctor-schedule-table .form-select:focus,
+    [data-theme="dark"] .doctor-schedule-table .form-select:focus {
+        border-color: #22b8b9;
+        box-shadow: 0 0 0 0.2rem rgba(21, 154, 156, 0.20);
+    }
+
+
+/* ---------------------------------------------------------
+   OFF ROW
+--------------------------------------------------------- */
+
+.dark .schedule-row-off,
+.dark-mode .schedule-row-off,
+[data-theme="dark"] .schedule-row-off {
+    background-color: rgba(255, 255, 255, 0.045) !important;
+}
+
+    .dark .schedule-row-off td,
+    .dark-mode .schedule-row-off td,
+    [data-theme="dark"] .schedule-row-off td {
+        background-color: rgba(255, 255, 255, 0.045) !important;
+    }
+
+    .dark .schedule-row-off .day-name,
+    .dark-mode .schedule-row-off .day-name,
+    [data-theme="dark"] .schedule-row-off .day-name {
+        color: #8f9b9d;
+    }
+
+    .dark .schedule-row-off .schedule-input,
+    .dark-mode .schedule-row-off .schedule-input,
+    [data-theme="dark"] .schedule-row-off .schedule-input {
+        background-color: #303b3c;
+        color: #777777;
+        border-color: rgba(255, 255, 255, 0.06);
+    }
+
+
+/* ---------------------------------------------------------
+   STATUS
+--------------------------------------------------------- */
+
+.dark .schedule-row-on .schedule-status,
+.dark-mode .schedule-row-on .schedule-status,
+[data-theme="dark"] .schedule-row-on .schedule-status {
+    color: #63e6be;
+}
+
+.dark .schedule-row-off .schedule-status,
+.dark-mode .schedule-row-off .schedule-status,
+[data-theme="dark"] .schedule-row-off .schedule-status {
+    color: #adb5bd;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER
+--------------------------------------------------------- */
+
+.dark .doctor-schedule-footer,
+.dark-mode .doctor-schedule-footer,
+[data-theme="dark"] .doctor-schedule-footer {
+    background-color: #172b2d;
+    color: #f1f3f5;
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .schedule-help,
+.dark-mode .schedule-help,
+[data-theme="dark"] .schedule-help {
+    color: #adb5bd;
+}
+
+    .dark .schedule-help strong,
+    .dark-mode .schedule-help strong,
+    [data-theme="dark"] .schedule-help strong {
+        color: #ffffff;
+    }
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .doctor-schedule-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .schedule-change-counter {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .doctor-schedule-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .save-schedule-btn {
+        width: 100%;
+    }
+}

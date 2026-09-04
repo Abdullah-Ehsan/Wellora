@@ -1,0 +1,372 @@
+﻿/* =========================================================
+   CLINICAL INFORMATION
+========================================================= */
+
+.clinical-info-card {
+    background-color: var(--white-25);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 20, 26, 0.04);
+}
+
+.clinical-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clinical-info-title {
+    color: var(--gray-800);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.clinical-info-subtitle {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.clinical-section {
+    padding: 0 0 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.clinical-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.clinical-section-indicator {
+    width: 4px;
+    min-width: 4px;
+    height: 38px;
+    margin-top: 2px;
+    border-radius: 999px;
+    background-color: var(--primary);
+}
+
+.clinical-section-title {
+    margin: 0;
+    color: var(--gray-800);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.clinical-section-description {
+    margin: 0.25rem 0 0;
+    color: var(--gray-500);
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+.clinical-form-label {
+    margin-bottom: 0.45rem;
+    color: var(--gray-700);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.clinical-form-control {
+    min-height: 44px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+textarea.clinical-form-control {
+    min-height: auto;
+    resize: vertical;
+}
+
+.clinical-form-control::placeholder {
+    color: var(--gray-400);
+}
+
+.clinical-form-control:hover {
+    border-color: var(--gray-300);
+}
+
+.clinical-form-control:focus {
+    border-color: var(--primary);
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    box-shadow: var(--focus-ring);
+    outline: none;
+}
+
+
+/* =========================================================
+   CONSULTATION FEE
+========================================================= */
+
+.clinical-fee-wrapper {
+    position: relative;
+}
+
+.clinical-currency {
+    position: absolute;
+    top: 50%;
+    left: 0.85rem;
+    z-index: 2;
+    color: var(--gray-500);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.clinical-fee-select {
+    padding-left: 3rem;
+    cursor: pointer;
+}
+
+.clinical-field-hint {
+    margin-top: 0.4rem;
+    color: var(--gray-450);
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   TELEMEDICINE
+========================================================= */
+
+.clinical-telemedicine-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 100px;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    background-color: var(--white-50);
+}
+
+.clinical-telemedicine-content {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.clinical-telemedicine-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.clinical-telemedicine-title {
+    color: var(--gray-800);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.clinical-telemedicine-description {
+    margin-top: 0.2rem;
+    color: var(--gray-500);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   TELEMEDICINE SWITCH
+========================================================= */
+
+.clinical-switch {
+    margin: 0;
+    padding-left: 0;
+}
+
+    .clinical-switch .form-check-input {
+        width: 3rem;
+        height: 1.55rem;
+        margin: 0;
+        border: 1px solid var(--gray-300);
+        background-color: var(--gray-200);
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .clinical-switch .form-check-input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--focus-ring);
+        }
+
+        .clinical-switch .form-check-input:checked {
+            border-color: var(--primary);
+            background-color: var(--primary);
+        }
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.clinical-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+}
+
+.clinical-save-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 42px;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+    .clinical-save-button:hover {
+        border-color: var(--primary-hover);
+        background-color: var(--primary-hover);
+        color: var(--white-25);
+    }
+
+    .clinical-save-button:active {
+        border-color: var(--primary-active);
+        background-color: var(--primary-active);
+        transform: translateY(1px);
+    }
+
+    .clinical-save-button:focus {
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.clinical-info-card .text-danger {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .clinical-info-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark .clinical-info-title,
+.dark .clinical-section-title,
+.dark .clinical-form-label,
+.dark .clinical-telemedicine-title {
+    color: var(--text);
+}
+
+.dark .clinical-info-subtitle,
+.dark .clinical-section-description,
+.dark .clinical-field-hint,
+.dark .clinical-telemedicine-description {
+    color: var(--text-muted);
+}
+
+.dark .clinical-section {
+    border-color: var(--border);
+}
+
+.dark .clinical-form-control {
+    background-color: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+    .dark .clinical-form-control::placeholder {
+        color: var(--gray-500);
+    }
+
+    .dark .clinical-form-control:hover {
+        border-color: var(--gray-600);
+    }
+
+    .dark .clinical-form-control:focus {
+        background-color: var(--surface);
+        border-color: var(--primary);
+        color: var(--text);
+    }
+
+.dark .clinical-telemedicine-box {
+    background-color: var(--surface-2);
+    border-color: var(--border-strong);
+}
+
+.dark .clinical-currency {
+    color: var(--text-muted);
+}
+
+.dark .clinical-switch .form-check-input {
+    border-color: var(--gray-600);
+    background-color: var(--gray-400);
+}
+
+    .dark .clinical-switch .form-check-input:checked {
+        border-color: var(--primary);
+        background-color: var(--primary);
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .clinical-info-card .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .clinical-section {
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .clinical-form-actions {
+        justify-content: stretch;
+    }
+
+    .clinical-save-button {
+        width: 100%;
+    }
+
+    .clinical-telemedicine-box {
+        min-height: 90px;
+    }
+}

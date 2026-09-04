@@ -1,0 +1,372 @@
+﻿/* =========================================================
+   ACHIEVEMENTS & BIOGRAPHY
+========================================================= */
+
+.achievements-card {
+    background-color: var(--white-25);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 20, 26, 0.04);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.achievements-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.achievements-header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.achievements-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+.achievements-title {
+    color: var(--gray-800);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.achievements-subtitle {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.achievements-section {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.achievements-biography-section {
+    margin-bottom: 0;
+}
+
+.achievements-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.achievements-section-indicator {
+    width: 4px;
+    min-width: 4px;
+    height: 38px;
+    margin-top: 2px;
+    border-radius: 999px;
+    background-color: var(--primary);
+}
+
+.achievements-section-title {
+    margin: 0;
+    color: var(--gray-800);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.achievements-section-description {
+    margin: 0.25rem 0 0;
+    color: var(--gray-500);
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   FIELD CARDS
+========================================================= */
+
+.achievements-field-card {
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    background-color: var(--white-50);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+    .achievements-field-card:hover {
+        border-color: var(--gray-300);
+        box-shadow: 0 3px 10px rgba(15, 20, 26, 0.04);
+    }
+
+
+/* =========================================================
+   FIELD HEADER
+========================================================= */
+
+.achievements-field-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.achievements-field-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background-color: var(--primary-subtle);
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+.achievements-form-label {
+    color: var(--gray-700);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.achievements-field-hint {
+    margin-top: 0.2rem;
+    color: var(--gray-450);
+    font-size: 0.73rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   TEXTAREAS
+========================================================= */
+
+.achievements-textarea,
+.achievements-biography-textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background-color: var(--white-25);
+    color: var(--gray-800);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.achievements-textarea {
+    min-height: 170px;
+}
+
+.achievements-biography-textarea {
+    min-height: 190px;
+}
+
+    .achievements-textarea::placeholder,
+    .achievements-biography-textarea::placeholder {
+        color: var(--gray-400);
+    }
+
+    .achievements-textarea:hover,
+    .achievements-biography-textarea:hover {
+        border-color: var(--gray-300);
+    }
+
+    .achievements-textarea:focus,
+    .achievements-biography-textarea:focus {
+        border-color: var(--primary);
+        background-color: var(--white-25);
+        color: var(--gray-800);
+        box-shadow: var(--focus-ring);
+        outline: none;
+    }
+
+
+/* =========================================================
+   BIOGRAPHY
+========================================================= */
+
+.achievements-biography-wrapper {
+    padding: 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    background-color: var(--white-50);
+}
+
+    .achievements-biography-wrapper .achievements-field-header {
+        margin-bottom: 0.85rem;
+    }
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.achievements-card .text-danger {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--danger);
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.achievements-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+}
+
+.achievements-save-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 42px;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--white-25);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+    .achievements-save-button:hover {
+        border-color: var(--primary-hover);
+        background-color: var(--primary-hover);
+        color: var(--white-25);
+    }
+
+    .achievements-save-button:active {
+        border-color: var(--primary-active);
+        background-color: var(--primary-active);
+        transform: translateY(1px);
+    }
+
+    .achievements-save-button:focus {
+        box-shadow: var(--focus-ring);
+    }
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .achievements-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark .achievements-title,
+.dark .achievements-section-title,
+.dark .achievements-form-label {
+    color: var(--text);
+}
+
+.dark .achievements-subtitle,
+.dark .achievements-section-description,
+.dark .achievements-field-hint {
+    color: var(--text-muted);
+}
+
+.dark .achievements-section {
+    border-color: var(--border);
+}
+
+.dark .achievements-field-card,
+.dark .achievements-biography-wrapper {
+    background-color: var(--surface-2);
+    border-color: var(--border-strong);
+}
+
+    .dark .achievements-field-card:hover {
+        border-color: var(--gray-600);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.dark .achievements-textarea,
+.dark .achievements-biography-textarea {
+    background-color: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+    .dark .achievements-textarea::placeholder,
+    .dark .achievements-biography-textarea::placeholder {
+        color: var(--gray-500);
+    }
+
+    .dark .achievements-textarea:hover,
+    .dark .achievements-biography-textarea:hover {
+        border-color: var(--gray-600);
+    }
+
+    .dark .achievements-textarea:focus,
+    .dark .achievements-biography-textarea:focus {
+        background-color: var(--surface);
+        border-color: var(--primary);
+        color: var(--text);
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .achievements-card .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .achievements-header-content {
+        align-items: flex-start;
+    }
+
+    .achievements-header-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .achievements-section {
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .achievements-field-card,
+    .achievements-biography-wrapper {
+        padding: 0.9rem;
+    }
+
+    .achievements-form-actions {
+        justify-content: stretch;
+    }
+
+    .achievements-save-button {
+        width: 100%;
+    }
+}
