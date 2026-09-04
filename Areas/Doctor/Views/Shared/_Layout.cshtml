@@ -6,8 +6,10 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - Wellora</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/theme.css" />
+    <link rel="stylesheet" href="~/css/admin/AdminProfileMenu.css" />
 </head>
 <body>
     <div class="container-fluid p-0">
@@ -30,21 +32,58 @@
                         <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="DoctorDashboard">DashBoard</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="DoctorProfile" asp-action="DoctorProfile">Profile</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="PatientAppointment" asp-action="PatientAppointmentlist">Patients</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="DoctorInformation" asp-action="DoctorListing">Doctors</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-area="Doctor" asp-controller="MakeAppointment" asp-action="PatientAppointment">Appointments</a></li>
+                        
                     </ul>
 
-                    <!-- Right: Profile Picture -->
-                        <!-- Right: Profile Picture -->
-                        <div class="d-flex align-items-center">
+                        <!-- Right: Profile Picture Dropdown -->
+                        <div class="dropdown">
+
                             @{
-                                var profilePicPath = User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value;
+                                var profilePicPath = User.Claims
+                                .FirstOrDefault(c => c.Type == "ProfilePicturePath")?.Value;
 
                                 var profilePic = string.IsNullOrWhiteSpace(profilePicPath)
                                 ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
                                 : Url.Content("~/" + profilePicPath.TrimStart('/'));
                             }
-                            <img src="@Url.Content(profilePic)" alt="Profile" class="rounded-circle" style="height:40px;width:40px;" />
+
+                            <!-- Profile Picture Button -->
+                            <button class="btn p-0 border-0 bg-transparent"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+
+                                <img src="@Url.Content(profilePic)"
+                                     alt="Profile"
+                                     class="rounded-circle"
+                                     style="height:40px;width:40px;object-fit:cover;" />
+
+                            </button>
+
+
+                            <!-- Profile Dropdown -->
+                            <ul class="dropdown-menu dropdown-menu-end admin-profile-menu">
+
+                                <!-- Night Mode -->
+                                <li>
+                                    <partial name="_ThemeToggle" />
+                                </li>
+
+
+
+                                <!-- Divider -->
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+
+
+                                <!-- Logout -->
+                                <li>
+                                    <partial name="_DoctorLogout" />
+                                </li>
+
+                            </ul>
+
                         </div>
                 </div>
             </nav>
@@ -75,6 +114,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/apexcharts/apexcharts.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/website_darkmode.js" asp-append-version="true"></script>
     
     @RenderSection("Scripts", required: false)
 </body>

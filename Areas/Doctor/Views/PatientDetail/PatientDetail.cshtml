@@ -29,6 +29,95 @@
         <p><strong>Date:</strong> @Model.CurrentAppointment.AppointmentDate.ToString("dddd, dd MMM yyyy hh:mm tt")</p>
     </div>
 
+    <!-- Primary Doctor -->
+    <h4 class="patient-section-title">Primary Doctor</h4>
+
+    <div class="primary-doctor-card">
+
+        @if (Model.PrimaryDoctor != null && Model.PrimaryDoctor.Exists)
+        {
+            <div class="primary-doctor-content">
+
+                <!-- Doctor Picture -->
+                <div class="primary-doctor-photo-container">
+                    <img src="@(string.IsNullOrEmpty(Model.PrimaryDoctor.ProfilePhoto)
+                                             ? Url.Content("~/User/Doctor/Profile_Picture/default.png")
+                                             : Url.Content("~/" + Model.PrimaryDoctor.ProfilePhoto))"
+                     alt="Primary Doctor"
+                     class="primary-doctor-photo" />
+            </div>
+
+                <!-- Doctor Information -->
+                <div class="primary-doctor-info">
+
+                    <h3>@Model.PrimaryDoctor.DoctorName</h3>
+
+                @if (Model.PrimaryDoctor.IsOutsideDoctor)
+                    {
+                        <span class="doctor-source outside-doctor-source">
+                            Doctor from another hospital / foreign medical system
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="doctor-source wellora-doctor-source">
+                            Doctor from Wellora Doctor Catalog
+                        </span>
+                    }
+
+                <p>
+                    <strong>Specialty:</strong>
+                    @(string.IsNullOrEmpty(Model.PrimaryDoctor.Specialty)
+                                        ? "Not provided"
+                                        : Model.PrimaryDoctor.Specialty)
+                                                                    </p>
+
+                <p>
+                    <strong>Contact:</strong>
+                    @(string.IsNullOrEmpty(Model.PrimaryDoctor.ContactNumber)
+                                        ? "Not provided"
+                                        : Model.PrimaryDoctor.ContactNumber)
+                </p>
+
+                @if (Model.PrimaryDoctor.IsOutsideDoctor)
+                    {
+                        <p>
+                            <strong>Hospital:</strong>
+                            @(string.IsNullOrEmpty(Model.PrimaryDoctor.HospitalName)
+                                                ? "Not provided"
+                                                : Model.PrimaryDoctor.HospitalName)
+                </p>
+                                }
+
+                <p>
+                    <strong>
+                        @(Model.PrimaryDoctor.IsOutsideDoctor
+                                                ? "Hospital Location:"
+                                                : "Hospital Address:")
+                                                                  </strong>
+
+                    @(string.IsNullOrEmpty(Model.PrimaryDoctor.HospitalAddress)
+                                        ? "Not provided"
+                                        : Model.PrimaryDoctor.HospitalAddress)
+                </p>
+
+                </div>
+            </div>
+                }
+        else
+        {
+            <div class="no-primary-doctor">
+                <p>
+                    This patient does not have a current primary doctor.
+                </p>
+            </div>
+        }
+
+    </div>
+
+    
+
+
     <!-- Previous Appointments -->
     <h4 class="patient-section-title">Previous Appointments</h4>
     <div class="appointments-container">
@@ -105,30 +194,138 @@
     <p><strong>Emergency Contact:</strong> @(string.IsNullOrEmpty(Model.Patient.EmergencyContactName) ? "Not provided" : Model.Patient.EmergencyContactName) - @(string.IsNullOrEmpty(Model.Patient.EmergencyContactPhone) ? "Not provided" : Model.Patient.EmergencyContactPhone)</p>
     <p><strong>Preferred Language:</strong> @(string.IsNullOrEmpty(Model.Patient.PreferredLanguage) ? "Not provided" : Model.Patient.PreferredLanguage)</p>
 
-    <!-- Actions -->
-    <div class="d-flex gap-3 mt-3">
-        <button class="btn btn-confirm">Confirm Appointment</button>
-        <button class="btn btn-cancel">Cancel Appointment</button>
-        <a asp-area="Doctor" asp-controller="PatientGetDiagnose" asp-action="PatientDiagnoses" 
-            asp-route-appointmentid="@Model.CurrentAppointment.AppointmentId" 
-             asp-route-patientid="@Model.Patient.PatientId" class="btn btn-diagnose">
-             Write Diagnose
-        </a>
+    <!-- Confirmation -->
+    <div class="confirmation-section mt-4">
+
+        <h4 class="patient-section-title">Confirmation</h4>
+
+        <div class="confirmation-card">
+
+            <!-- Appointment Acceptance -->
+            <div class="confirmation-group">
+                <h5 class="confirmation-group-title">
+                    Appointment Acceptance
+                </h5>
+
+                <div class="appointment-action-row">
+
+                    <!-- Confirm -->
+                    <form asp-area="Doctor"
+                          asp-controller="PatientDetail"
+                          asp-action="ConfirmAppointment"
+                          method="post">
+
+                        <input type="hidden"
+                               name="appointmentId"
+                               value="@Model.CurrentAppointment.AppointmentId" />
+
+                        <input type="hidden"
+                               name="patientId"
+                               value="@Model.Patient.PatientId" />
+
+                        <button type="submit"
+                                class="appointment-action-btn confirm-btn"
+                                @(Model.AppointmentActions.CanConfirm ? "" : "disabled")>
+
+                            <span class="action-icon">✓</span>
+                            <span>Confirm Appointment</span>
+
+                        </button>
+                    </form>
+
+
+                    <!-- Cancel -->
+                    <form asp-area="Doctor"
+                          asp-controller="PatientDetail"
+                          asp-action="CancelAppointment"
+                          method="post">
+
+                        <input type="hidden"
+                               name="appointmentId"
+                               value="@Model.CurrentAppointment.AppointmentId" />
+
+                        <input type="hidden"
+                               name="patientId"
+                               value="@Model.Patient.PatientId" />
+
+                        <button type="submit"
+                                class="appointment-action-btn cancel-btn"
+                                @(Model.AppointmentActions.CanCancel ? "" : "disabled")>
+
+                            <span class="action-icon">×</span>
+                            <span>Cancel Appointment</span>
+
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <!-- Payment -->
+            <div class="confirmation-group payment-group">
+
+                <h5 class="confirmation-group-title">
+                    Payment Status
+                </h5>
+
+                @if (Model.CurrentAppointment.PaymentStatus == "paid")
+                {
+                    <div class="payment-status paid-status">
+                        <span class="payment-icon">✓</span>
+
+                        <div>
+                            <strong>Paid</strong>
+                            <small>Payment has already been completed.</small>
+                        </div>
+                    </div>
+                }
+                else if (Model.CurrentAppointment.PaymentStatus == "pending")
+                {
+                    <form asp-area="Doctor"
+                          asp-controller="PatientDetail"
+                          asp-action="MarkPaymentPaid"
+                          method="post">
+
+                        <input type="hidden"
+                               name="appointmentId"
+                               value="@Model.CurrentAppointment.AppointmentId" />
+
+                        <input type="hidden"
+                               name="patientId"
+                               value="@Model.Patient.PatientId" />
+
+                        <button type="submit"
+                                class="appointment-action-btn payment-btn"
+                                @(Model.AppointmentActions.CanMarkPaid ? "" : "disabled")>
+
+                            <span class="action-icon">✓</span>
+                            <span>Mark as Paid</span>
+
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <div class="payment-status pending-status">
+                        <span class="payment-icon">!</span>
+
+                        <div>
+                            <strong>
+                                @Model.CurrentAppointment.PaymentStatus
+                            </strong>
+
+                            <small>
+                                Payment status cannot be changed.
+                            </small>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
     </div>
 
-    <!-- Notes -->
-    <div class="mt-3">
-        <form asp-action="SaveNote" asp-route-id="@Model.CurrentAppointment.AppointmentId" method="post">
-            <textarea class="form-control notes-box" name="Note" placeholder="Write note..."></textarea>
-            <button type="submit" class="btn btn-primary mt-2">Save Note</button>
-        </form>
-    </div>
 
-    <!-- Report -->
-    <div class="mt-3">
-        <a asp-area="Doctor" asp-controller="PatientGetReported" asp-action="PatientReported" asp-route-patientid="@Model.Patient.PatientId" 
-            class="report-link">
-            Report
-        </a>
-    </div>
 </div>

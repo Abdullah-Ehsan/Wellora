@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Wellora.Areas.Doctor.ViewModels.PatientAppointment.PatientAppointmentListViewModel>
 
 <div class="appointment-list d-flex flex-column gap-2">
-
     @foreach (var appt in Model)
     {
         <div class="appointment-row row align-items-center g-0 px-3 py-2">
@@ -9,52 +8,73 @@
             <!-- PHOTO -->
             <div class="col-auto">
                 <img src="@(string.IsNullOrEmpty(appt.ProfilePhoto)
-                                             ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
-                                             : Url.Content("~/" + appt.ProfilePhoto))"
-                 class="patient-photo" />
+                                     ? Url.Content("~/User/Patient/Profile_Picture/Default.png")
+                                     : Url.Content("~/" + appt.ProfilePhoto))"
+                 class="patient-photo"
+                 alt="@appt.PatientName" />
         </div>
 
             <!-- NAME -->
             <div class="col name-col ps-3">
-                <div class="fw-bold">@appt.PatientName</div>
-
-            
+                <div class="fw-bold">
+                    @appt.PatientName
+                </div>
             </div>
 
-            <!-- GENDER + AGE -->
+            <!-- GENDER -->
             <div class="col">
-                <div class="small text-muted">Gender</div>
-                <div>@appt.Gender</div>
+                <div class="small text-muted">
+                    Gender
+                </div>
+                <div>
+                    @appt.Gender
+                </div>
             </div>
 
+            <!-- AGE -->
             <div class="col">
-                <div class="small text-muted">Age</div>
-                <div>@appt.Age</div>
+                <div class="small text-muted">
+                    Age
+                </div>
+                <div>
+                    @appt.Age
+                </div>
             </div>
 
             <!-- LAST APPOINTMENT -->
             <div class="col">
-                <div class="small text-muted">Last</div>
-                    @if (appt.IsFirstAppointment)
-                    {
-                    <div class="text-primary small" style="color:#057741">First Appointment</div>
-                    }
-                    else
-                    {
-                        <div class="text-muted small">
-                            Last: @appt.LastVisitedDate?.ToString("dd MMM yyyy")
-                        </div>
-                    }
+                <div class="small text-muted">
+                    Last
+                </div>
+
+            @if (appt.IsFirstAppointment)
+                {
+                    <div class="small" style="color:#057741;">
+                        First Appointment
+                    </div>
+                }
+                else
+                {
+                    <div class="text-muted small">
+                        Last: @appt.LastVisitedDate?.ToString("dd MMM yyyy")
+                    </div>
+                }
             </div>
 
             <!-- UPCOMING -->
             <div class="col">
-                <div class="small text-muted">Upcoming</div>
-                <div>@appt.AppointmentDate.ToString("dd MMM yyyy hh:mm tt")</div>
+                <div class="small text-muted">
+                    Upcoming
+                </div>
+
+                <div>
+                    @appt.AppointmentDate.ToString("dd MMM yyyy hh:mm tt")
+                </div>
             </div>
 
-            <!-- LINK -->
+            <!-- VIEW -->
             <div class="col-auto text-end">
+
                 <a asp-action="PatientDetail"
                    asp-controller="PatientDetail"
                    asp-area="Doctor"
@@ -69,30 +89,75 @@
         </div>
     }
 
-</div>
+</div> <!-- ========================================================= PAGINATION ========================================================= -->
+@if (ViewBag.TotalPages > 1)
+{
+    <div class="d-flex justify-content-center mt-4">
 
-<!-- Pagination --> 
-<div class="d-flex justify-content-center mt-4"> 
-    <nav> 
-        <ul class="pagination"> 
-            
-            @{
-                int totalPages = ViewBag.TotalPages; 
-                int currentPage = ViewBag.CurrentPage; 
+        <nav aria-label="Appointment pagination">
 
-                for (int i = Math.Max(1, currentPage - 1); 
-                i <= Math.Min(totalPages, currentPage + 1); 
-                i++)
-                {
-                    <li class="page-item @(i == currentPage ? "active" : "")"> 
-                        <a class="page-link @(i == currentPage ? "active" : "")" hx-get="@Url.Action("Index", 
-                            new { page = i })" hx-target="#appointments-list">
-                            @i 
-                        </a> 
-                    </li>
+            <ul class="pagination">
+
+                @{
+                    int totalPages = ViewBag.TotalPages;
+                    int currentPage = ViewBag.CurrentPage;
+
+                    int startPage;
+                    int endPage;
+
+                    // ---------------------------------------------
+                    // Show maximum 3 page numbers
+                    //
+                    // Page 1 → 1 2 3
+                    // Page 2 → 1 2 3
+                    // Page 3 → 2 3 4
+                    // Page 4 → 3 4 5
+                    // ---------------------------------------------
+
+                    if (currentPage <= 2)
+                    {
+                        startPage = 1;
+                        endPage = Math.Min(3, totalPages);
+                    }
+                    else
+                    {
+                        startPage = currentPage - 1;
+                        endPage = Math.Min(
+                        currentPage + 1,
+                        totalPages);
+                    }
+
+                    for (int i = startPage; i <= endPage; i++)
+                    {
+                        <li class="page-item @(i == currentPage ? "active" : "")">
+
+                            <a class="page-link @(i == currentPage ? "active" : "")"
+                               href="javascript:void(0);"
+                               hx-get="@Url.Action(
+                                                              "PatientAppointmentList",
+                                                              "PatientAppointment",
+                                                              new
+                                                              {
+                                                                  area = "Doctor",
+                                                                  page = i,
+                                                                  gender = ViewBag.Gender
+                                                              })"
+                   hx-target="#appointments-list"
+                   hx-swap="innerHTML">
+
+                                @i
+
+                            </a>
+
+                        </li>
+                        }
                 }
 
-            }
-        </ul> 
-    </nav> 
-</div>
+            </ul>
+
+        </nav>
+
+    </div>
+
+
+}

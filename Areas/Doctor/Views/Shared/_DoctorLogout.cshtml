@@ -1,0 +1,12 @@
+﻿<form asp-area="Doctor"
+      asp-controller="DoctorAccount"
+      asp-action="DoctorLogout"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="dropdown-item admin-logout-item">
+        Logout
+    </button>
+
+</form>

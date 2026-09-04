@@ -29,6 +29,32 @@
 
     </div>
 
+    <!-- ================= VERIFICATION STATUS ================= -->
+    @{
+        bool isVerified = Model.ClinicalPractice.DoctorAvailable ?? false;
+    }
+
+    @if (isVerified)
+    {
+        <div class="verification-banner banner-verified">
+            <div class="banner-icon">✓</div>
+            <div class="banner-content">
+                <h4>Profile Verified</h4>
+                <p>Your profile is verified and active. Patients can browse your credentials and book appointments.</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="verification-banner banner-unverified">
+            <div class="banner-icon">!</div>
+            <div class="banner-content">
+                <h4>Profile Not Verified</h4>
+                <p>Your profile is currently not verified. Patients cannot book appointments at this time. If it has been more than a week since registration, please contact the Admins.</p>
+            </div>
+        </div>
+    }
+
     <!-- ================= PERSONAL INFO ================= -->
     <div class="section-box">
         <h3>Personal Information</h3>
@@ -283,10 +309,16 @@
         <div class="info-grid">
             <p>LicenseNumber: @Model.Credentials.LicenseNumber</p>
             <p>PmdcNumber: @Model.Credentials.PmdcNumber</p>
-            <p>Qualifications: @Model.Credentials.Qualifications</p>
+
+            <p>Primary Medical Degree: @Model.Credentials.PrimaryMedicalDegree</p>
+            <p>Postgraduate Degree: @Model.Credentials.PostgraduateDegree</p>
+            <p>Super Specialty: @Model.Credentials.SuperSpecialty</p>
+            <p>Professional Certification: @Model.Credentials.ProfessionalCertification</p>
+
             <p>MedicalSchool: @Model.Credentials.MedicalSchool</p>
             <p>Certifications: @Model.Credentials.Certifications</p>
         </div>
+
     </div>
 
 
