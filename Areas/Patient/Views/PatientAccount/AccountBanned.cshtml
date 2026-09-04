@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Account Suspended";
+    string role = (ViewBag.Role as string)?.ToUpper() ?? "USER";
+}
+
+<link rel="stylesheet" href="~/css/account/AccountBanned.css" />
+
+<div class="banned-page-wrapper">
+    <div class="banned-card">
+        <div class="banned-icon-box">
+            <span>🛡️</span>
+        </div>
+
+        <h1 class="banned-title">Access Restricted</h1>
+        <div class="banned-badge">@role ACCOUNT SUSPENDED</div>
+
+        <p class="banned-description">
+            Your @role.ToLower() account has been banned due to a violation of our terms of service or administrative review.
+        </p>
+
+        <div class="banned-instructions">
+            <h5>What should you do?</h5>
+            <ul>
+                <li>Contact the system administrators via email at <strong>support@wellora.com</strong></li>
+                <li>Visit our Head Office along with your government-issued ID and registered credentials.</li>
+            </ul>
+        </div>
+
+        <div class="banned-actions">
+            <form asp-area="Patient" asp-controller="PatientAccount" asp-action="PatientLogout" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-banned-logout">Return to Login</button>
+            </form>
+        </div>
+    </div>
+</div>

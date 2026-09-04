@@ -1,0 +1,211 @@
+﻿@{
+    ViewData["Title"] = "Chat with Lora";
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="~/css/patient/AIChat.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    /* Remove Bootstrap blue outline and rectangular box */
+    .chat-input,
+    .chat-input:focus,
+    .chat-input.form-control,
+    .chat-input.form-control:focus {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    .custom-input-group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+</style>
+
+<div class="chat-page-body">
+    <!-- Main Chat Card -->
+    <div class="container-fluid">
+        <div class="main-chat-card">
+
+            <!-- Header -->
+            <div class="chat-header border-bottom p-3 px-4">
+                <h5 class="m-0 fw-bold text-dark">AI Health Assistant</h5>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="d-flex flex-row h-100">
+
+                <!-- Character Panel -->
+                <div class="character-panel flex-shrink-0">
+                    <img src="~/images/Patient/AIChat/lora_withoutglasses_greeting.png"
+                         alt="Lora Character"
+                         class="character-img"
+                         id="loraCharacterImg">
+                </div>
+
+                <!-- Chat Panel -->
+                <div class="chat-panel flex-grow-1 d-flex flex-column justify-content-between p-3">
+
+                    <!-- Messages Container -->
+                    <div class="messages-box flex-grow-1 overflow-auto" id="messagesList" style="max-height: 60vh;">
+
+                        <!-- Initial Greeting -->
+                        <div class="d-flex align-items-start mb-3">
+                            <img src="~/images/Patient/AIChat/lora_icon_gradientbackground.png"
+                                 alt="AI"
+                                 class="rounded-circle me-2 flex-shrink-0"
+                                 style="width:36px; height:36px; object-fit:cover;">
+                            <div>
+                                <div class="bubble-ai">
+                                    Hello! I'm Lora, your personal health assistant. How can I help you today?
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="input-area mt-3">
+                        <div class="custom-input-group">
+                            <input type="text" class="chat-input flex-grow-1 px-3" placeholder="Type your message..." id="userMessage">
+                            <button class="send-btn" type="button" id="sendMessageBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (() => {
+        // Unique session ID to persist context across turns
+        let triageSessionId = sessionStorage.getItem("triage_session_id");
+        if (!triageSessionId) {
+            triageSessionId = "wellora_" + Date.now();
+            sessionStorage.setItem("triage_session_id", triageSessionId);
+        }
+
+        const messagesList = document.getElementById("messagesList");
+        const inputField = document.getElementById("userMessage");
+        const sendBtn = document.getElementById("sendMessageBtn");
+
+        function scrollToBottom() {
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
+
+        function appendUserBubble(text) {
+            const row = document.createElement("div");
+            row.className = "d-flex justify-content-end mb-3";
+            row.innerHTML = `<div class="bubble-user">${text}</div>`;
+            messagesList.appendChild(row);
+            scrollToBottom();
+        }
+
+        function appendLoraBubble(htmlContent, isEmergency = false) {
+            const row = document.createElement("div");
+            row.className = "d-flex align-items-start mb-3";
+
+            const emergencyStyle = isEmergency ? 'style="background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7;"' : '';
+
+            row.innerHTML = `
+                    <img src="/images/Patient/AIChat/lora_icon_gradientbackground.png"
+                         alt="AI"
+                         class="rounded-circle me-2 flex-shrink-0"
+                         style="width:36px; height:36px; object-fit:cover;">
+                    <div>
+                        <div class="bubble-ai" ${emergencyStyle}>
+                            ${htmlContent}
+                        </div>
+                    </div>
+                `;
+            messagesList.appendChild(row);
+            scrollToBottom();
+            return row;
+        }
+
+        async function sendMessage() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            // 1. Render user message & clear input
+            appendUserBubble(text);
+            inputField.value = "";
+            inputField.disabled = true;
+            sendBtn.disabled = true;
+
+            // 2. Loading state
+            const loadingDiv = appendLoraBubble("<em>Lora is thinking...</em>");
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/triage", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        session_id: triageSessionId,
+                        message: text
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error("HTTP " + response.status);
+                }
+
+                const data = await response.json();
+                loadingDiv.remove();
+
+                // Case A: Emergency / Red Flag Trigger
+                if (data.emergency_alert) {
+                    appendLoraBubble(`<strong>⚠️ URGENT MEDICAL ADVICE:</strong><br/>${data.emergency_reason || 'Severe symptoms flagged. Please seek emergency medical evaluation immediately.'}`, true);
+                    return;
+                }
+
+                // Case B: Completed Intake & Referral
+                if (data.ready_for_routing) {
+                    let summaryMsg = `Thank you. Based on your symptoms (<strong>${data.extracted_symptoms.join(', ')}</strong>), we recommend seeing a doctor in <strong>${data.suggested_specialty}</strong>.`;
+
+                    if (data.recommended_doctors && data.recommended_doctors.length > 0) {
+                        summaryMsg += `<hr class="my-2"/><strong>Recommended Specialists:</strong><ul class="mt-2 ps-3 mb-0">`;
+                        data.recommended_doctors.forEach(doc => {
+                            summaryMsg += `
+                                    <li class="mb-2">
+                                        <b>${doc.name}</b> (${doc.qualification})<br/>
+                                        <small>${doc.clinic_address} | 📞 ${doc.contact}</small>
+                                    </li>
+                                `;
+                        });
+                        summaryMsg += `</ul>`;
+                    }
+                    appendLoraBubble(summaryMsg);
+                    return;
+                }
+
+                // Case C: Standard Next Intake Question
+                appendLoraBubble(data.next_question);
+
+            } catch (err) {
+                console.error("Chat error:", err);
+                loadingDiv.remove();
+                appendLoraBubble("⚠️ Sorry, I could not connect to the triage backend. Please confirm the Python server is running on port 8000.", true);
+            } finally {
+                inputField.disabled = false;
+                sendBtn.disabled = false;
+                inputField.focus();
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        inputField.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    })();
+</script>
