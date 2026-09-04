@@ -8,8 +8,8 @@ using System.Security.Claims;
 using Wellora.Models;
 using Wellora.Data;
 using Wellora.Areas.Admin.Models;
-using Wellora.Areas.Admin.ViewModels;
 using AdminEntity = Wellora.Areas.Admin.Models.Admin;
+using Wellora.Areas.Admin.ViewModels.AdminAccount;
 
 
 
@@ -26,6 +26,13 @@ namespace Wellora.Areas.Admin.Controllers
         public AdminAccountController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        [HttpGet]
+        public IActionResult AccountBanned(string role = "patient")
+        {
+            ViewBag.Role = role;
+            return View();
         }
 
         /*
@@ -93,8 +100,23 @@ namespace Wellora.Areas.Admin.Controllers
         */
 
 
+        //for logging out
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminLogout()
+        {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
 
+            return RedirectToAction(
+                "AdminLogin",
+                "AdminAccount",
+                new { area = "Admin" }
+            );
+        }
 
+        //for logging in
         public IActionResult AdminLogin()
         {
             return View();
@@ -116,16 +138,51 @@ namespace Wellora.Areas.Admin.Controllers
                 return View(model);
             }
 
+            // Verify account situation
+            if (user.AccountSituation == "banned")
+            {
+                ViewBag.Role = user.Role;
+                return View("AccountBanned");
+            }
+
             // Build claims
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Name, user.Username ?? user.Email),
+                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                    new Claim(ClaimTypes.Name, user.Username ?? user.Email),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            // Get admin profile
+            var admin = await _context.Admins
+                .SingleOrDefaultAsync(d => d.UserId == user.UserId);
+
+            if (admin == null)
+            {
+                ModelState.AddModelError("", "Admin profile not found.");
+                return View(model);
+            }
+
+            // Add AdminId claim
+            claims.Add(
+                new Claim("CurrentAdminId", admin.AdminId.ToString())
+            );
+
+            // Add Admin Seniority claim
+            claims.Add(
+                new Claim("CurrentAdminSeniority", admin.Seniority ?? "junior")
+            );
+
+            // Add Profile Picture claim
+            claims.Add(
+                new Claim("ProfilePicturePath", admin.ProfilePicture ?? "")
+            );
+
+            var claimsIdentity = new ClaimsIdentity(
+                claims,
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
 
             // Sign in
             await HttpContext.SignInAsync(
@@ -133,12 +190,13 @@ namespace Wellora.Areas.Admin.Controllers
                 new ClaimsPrincipal(claimsIdentity),
                 new AuthenticationProperties
                 {
-                    IsPersistent = true, // keep logged in across browser sessions
+                    IsPersistent = true,
                     ExpiresUtc = DateTime.UtcNow.AddHours(2)
                 });
 
+
             // Redirect to dashboard
-            return RedirectToAction("AIChat", "Admin", new { area = "Admin" });
+            return RedirectToAction("AdminDashboard", "AdminDashboard", new { area = "Admin" });
         }
 
         [HttpGet]
