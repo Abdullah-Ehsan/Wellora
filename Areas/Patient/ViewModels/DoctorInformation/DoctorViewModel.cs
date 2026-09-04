@@ -21,6 +21,12 @@ namespace Wellora.Areas.Patient.ViewModels.DoctorInformation
         public string? Certifications { get; set; }
         public string? Qualifications { get; set; }
 
+        public string? PrimaryMedicalDegree { get; set; }
+        public string? PostgraduateDegree { get; set; }
+        public string? SuperSpecialty { get; set; }
+        public string? ProfessionalCertification { get; set; }
+        public string? AdditionalDegree { get; set; }
+
         // Clinical Practice
         public int? YearsExperience { get; set; }
         
@@ -43,6 +49,8 @@ namespace Wellora.Areas.Patient.ViewModels.DoctorInformation
         public string? SocialLinks { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
+        public bool IsPrimaryDoctor { get; set; }
 
         public List<DoctorScheduleViewModel>? Schedules { get; set; }
 
