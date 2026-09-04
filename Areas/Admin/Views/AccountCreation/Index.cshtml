@@ -1,0 +1,550 @@
+﻿@model Wellora.Areas.Admin.ViewModels.AccountCreation.AccountCreationViewModel
+
+@{
+    ViewData["Title"] = "Account Creation";
+}
+
+<link rel="stylesheet" href="~/css/admin/account_creation/account-creation.css" />
+
+
+<div class="admin-account-page">
+
+    <!-- =========================================================
+         PAGE HEADER
+    ========================================================== -->
+
+    <div class="admin-account-header border-bottom">
+        <div>
+            <h4 class="mb-1">
+                <i class="bi bi-person-plus me-2"></i>
+                Account Creation
+            </h4>
+
+            <p class="mb-0">
+                Create patient, doctor, and administrator accounts.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="admin-account-body">
+
+        <!-- =====================================================
+             SUCCESS MESSAGE
+        ====================================================== -->
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success admin-account-alert mb-4">
+                <i class="bi bi-check-circle me-2"></i>
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+
+        <!-- =====================================================
+             VALIDATION SUMMARY
+        ====================================================== -->
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger admin-account-alert mb-4">
+            </div>
+        }
+
+
+        <div class="row g-4">
+
+            <!-- =================================================
+                 DOCTOR / PATIENT ACCOUNT
+            ================================================== -->
+
+            <div class="col-12">
+
+                <div class="card admin-account-card">
+
+                    <!-- CARD HEADER -->
+
+                    <div class="card-header">
+
+                        <div class="d-flex align-items-center gap-3">
+
+                            <div class="admin-section-icon">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+
+                            <div>
+                                <h5 class="mb-1">
+                                    Create Account
+                                </h5>
+
+                                <p class="mb-0">
+                                    Create a new doctor or patient account.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CARD BODY -->
+
+                    <div class="card-body">
+
+                        <form asp-action="CreateUserAccount"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <div class="row g-4">
+
+                                <!-- FIRST NAME -->
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="UserAccount.FirstName"
+                                           class="form-label">
+                                        First Name
+                                    </label>
+
+                                    <input asp-for="UserAccount.FirstName"
+                                           class="form-control"
+                                           placeholder="Enter first name"
+                                           autocomplete="given-name" />
+
+                                    <span asp-validation-for="UserAccount.FirstName"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- LAST NAME -->
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="UserAccount.LastName"
+                                           class="form-label">
+                                        Last Name
+                                    </label>
+
+                                    <input asp-for="UserAccount.LastName"
+                                           class="form-control"
+                                           placeholder="Enter last name"
+                                           autocomplete="family-name" />
+
+                                    <span asp-validation-for="UserAccount.LastName"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- EMAIL -->
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="UserAccount.Email"
+                                           class="form-label">
+                                        Email
+                                    </label>
+
+                                    <input asp-for="UserAccount.Email"
+                                           type="email"
+                                           class="form-control"
+                                           placeholder="name@example.com"
+                                           autocomplete="email" />
+
+                                    <span asp-validation-for="UserAccount.Email"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- USERNAME -->
+
+                                <div class="col-md-6">
+
+                                    <label asp-for="UserAccount.Username"
+                                           class="form-label">
+                                        Username
+                                    </label>
+
+                                    <input asp-for="UserAccount.Username"
+                                           class="form-control"
+                                           placeholder="Enter username"
+                                           autocomplete="username" />
+
+                                    <span asp-validation-for="UserAccount.Username"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- PASSWORD -->
+
+                                <div class="col-md-8">
+
+                                    <label asp-for="UserAccount.Password"
+                                           class="form-label">
+                                        Password
+                                    </label>
+
+                                    <div class="input-group">
+
+                                        <input asp-for="UserAccount.Password"
+                                               type="text"
+                                               id="userPassword"
+                                               class="form-control"
+                                               placeholder="Enter or generate password"
+                                               autocomplete="new-password" />
+
+                                        <button type="button"
+                                                class="btn admin-generate-password-button"
+                                                hx-get="@Url.Action("GenerateNewPassword", "AccountCreation", new { area = "Admin" })"
+                                                hx-target="#userPassword"
+                                                hx-swap="none"
+                                                hx-on::after-request="document.getElementById('userPassword').value = event.detail.xhr.responseText">
+
+                                            <i class="bi bi-magic me-1"></i>
+                                            Generate
+
+                                        </button>
+
+                                    </div>
+
+
+                                    <div class="form-text">
+                                        Minimum 8 characters with at least one uppercase letter,
+                                        one number, and one special character.
+                                    </div>
+
+                                    <span asp-validation-for="UserAccount.Password"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- ACCOUNT ROLE -->
+
+                                <div class="col-md-4">
+
+                                    <label asp-for="UserAccount.Role"
+                                           class="form-label">
+                                        Account Role
+                                    </label>
+
+                                    <select asp-for="UserAccount.Role"
+                                            class="form-select">
+
+                                        <option value="">
+                                            Select account role
+                                        </option>
+
+                                        <option value="doctor">
+                                            Doctor
+                                        </option>
+
+                                        <option value="patient">
+                                            Patient
+                                        </option>
+
+                                    </select>
+
+                                    <span asp-validation-for="UserAccount.Role"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DIVIDER -->
+
+                            <hr class="admin-account-divider" />
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="d-flex justify-content-end">
+
+                                <button type="submit"
+                                        class="btn admin-save-button">
+
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    Create Account
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ADMIN ACCOUNT
+                 ONLY HEAD ADMIN
+            ================================================== -->
+
+            @if (ViewBag.IsHeadAdmin == true)
+            {
+                <div class="col-12">
+
+                    <div class="card admin-account-card admin-admin-card">
+
+                        <!-- CARD HEADER -->
+
+                        <div class="card-header">
+
+                            <div class="d-flex align-items-center gap-3">
+
+                                <div class="admin-section-icon">
+                                    <i class="bi bi-shield-lock"></i>
+                                </div>
+
+                                <div>
+                                    <h5 class="mb-1">
+                                        Create Admin Account
+                                    </h5>
+
+                                    <p class="mb-0">
+                                        Create a new administrator account and assign seniority.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD BODY -->
+
+                        <div class="card-body">
+
+                            <form asp-action="CreateAdminAccount"
+                                  method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <div class="row g-4">
+
+                                    <!-- FIRST NAME -->
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="AdminAccount.FirstName"
+                                               class="form-label">
+                                            First Name
+                                        </label>
+
+                                        <input asp-for="AdminAccount.FirstName"
+                                               class="form-control"
+                                               placeholder="Enter first name"
+                                               autocomplete="given-name" />
+
+                                        <span asp-validation-for="AdminAccount.FirstName"
+                                              class="text-danger">
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- LAST NAME -->
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="AdminAccount.LastName"
+                                               class="form-label">
+                                            Last Name
+                                        </label>
+
+                                        <input asp-for="AdminAccount.LastName"
+                                               class="form-control"
+                                               placeholder="Enter last name"
+                                               autocomplete="family-name" />
+
+                                        <span asp-validation-for="AdminAccount.LastName"
+                                              class="text-danger">
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- EMAIL -->
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="AdminAccount.Email"
+                                               class="form-label">
+                                            Email
+                                        </label>
+
+                                        <input asp-for="AdminAccount.Email"
+                                               type="email"
+                                               class="form-control"
+                                               placeholder="name@example.com"
+                                               autocomplete="email" />
+
+                                        <span asp-validation-for="AdminAccount.Email"
+                                              class="text-danger">
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- USERNAME -->
+
+                                    <div class="col-md-6">
+
+                                        <label asp-for="AdminAccount.Username"
+                                               class="form-label">
+                                            Username
+                                        </label>
+
+                                        <input asp-for="AdminAccount.Username"
+                                               class="form-control"
+                                               placeholder="Enter username"
+                                               autocomplete="username" />
+
+                                        <span asp-validation-for="AdminAccount.Username"
+                                              class="text-danger">
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- PASSWORD -->
+
+                                    <div class="col-md-8">
+
+                                        <label asp-for="AdminAccount.Password"
+                                               class="form-label">
+                                            Password
+                                        </label>
+
+                                        <div class="input-group">
+
+                                            <input asp-for="AdminAccount.Password"
+                                                   type="text"
+                                                   id="adminPassword"
+                                                   class="form-control"
+                                                   placeholder="Enter or generate password"
+                                                   autocomplete="new-password" />
+
+                                            <button type="button"
+                                                    class="btn admin-generate-password-button"
+                                                    hx-get="@Url.Action("GenerateNewPassword", "AccountCreation", new { area = "Admin" })"
+                                                    hx-target="#adminPassword"
+                                                    hx-swap="none"
+                                                    hx-on::after-request="document.getElementById('adminPassword').value = event.detail.xhr.responseText">
+
+                                                <i class="bi bi-magic me-1"></i>
+                                                Generate
+
+                                            </button>
+
+                                        </div>
+
+
+                                        <div class="form-text">
+                                            Minimum 8 characters with at least one uppercase letter,
+                                            one number, and one special character.
+                                        </div>
+
+                                        <span asp-validation-for="AdminAccount.Password"
+                                              class="text-danger">
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- SENIORITY -->
+
+                                    <div class="col-md-4">
+
+                                        <label asp-for="AdminAccount.Seniority"
+                                               class="form-label">
+                                            Seniority
+                                        </label>
+
+                                        <select asp-for="AdminAccount.Seniority"
+                                                class="form-select">
+
+                                            <option value="">
+                                                Select seniority
+                                            </option>
+
+                                            <option value="junior">
+                                                Junior
+                                            </option>
+
+                                            <option value="mid">
+                                                Mid
+                                            </option>
+
+                                            <option value="senior">
+                                                Senior
+                                            </option>
+
+                                            <option value="head">
+                                                Head
+                                            </option>
+
+                                        </select>
+
+                                        <span asp-validation-for="AdminAccount.Seniority"
+                                              class="text-danger">
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- DIVIDER -->
+
+                                <hr class="admin-account-divider" />
+
+
+                                <!-- ACTIONS -->
+
+                                <div class="d-flex justify-content-end">
+
+                                    <button type="submit"
+                                            class="btn admin-save-button">
+
+                                        <i class="bi bi-shield-plus me-2"></i>
+                                        Create Admin
+
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
