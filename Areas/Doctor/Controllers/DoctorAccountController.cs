@@ -29,11 +29,19 @@ namespace Wellora.Areas.Doctor.Controllers
         }
 
         [HttpGet]
+        public IActionResult AccountBanned(string role = "doctor")
+        {
+            ViewBag.Role = role;
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult DoctorRegistration()
         {
             return View();
         }
 
+        //Registration
         [HttpPost]
         public async Task<IActionResult> DoctorRegistration(DoctorRegistrationViewModel model)
         {
@@ -62,7 +70,8 @@ namespace Wellora.Areas.Doctor.Controllers
                     Username = model.Username, 
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),
                     Role = "doctor",
-                    Status = "active", 
+                    Status = "active",
+                    AccountSituation = "no_banned",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
@@ -76,8 +85,7 @@ namespace Wellora.Areas.Doctor.Controllers
                     UserId = user.UserId, // foreign key
                     FullName = $"{model.FirstName} {model.LastName}",
                     DateOfBirth = new DateOnly(1900, 1, 1), 
-                    Gender = "other",
-                    Specialization = "General", 
+                    Gender = "other", 
                     ConsultationFee = 0.00m, 
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
@@ -87,7 +95,7 @@ namespace Wellora.Areas.Doctor.Controllers
                 _context.Doctors.Add(Doctor);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("DoctorLogin", "Account", new { area = "Doctor" });
+                return RedirectToAction("DoctorLogin", "DoctorAccount", new { area = "Doctor" });
             }
 
             return View(model);
@@ -96,6 +104,23 @@ namespace Wellora.Areas.Doctor.Controllers
 
 
 
+        //for logging out
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DoctorLogout()
+        {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
+
+            return RedirectToAction(
+                "DoctorLogin",
+                "DoctorAccount",
+                new { area = "Doctor" }
+            );
+        }
+
+        //for logging in
         public IActionResult DoctorLogin()
         {
             return View();
@@ -115,6 +140,13 @@ namespace Wellora.Areas.Doctor.Controllers
             {
                 ModelState.AddModelError("", "Invalid login credentials.");
                 return View(model);
+            }
+
+            // Verify account situation
+            if (user.AccountSituation == "banned")
+            {
+                ViewBag.Role = user.Role;
+                return View("AccountBanned");
             }
 
             // Build claims
