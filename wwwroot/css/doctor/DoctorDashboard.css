@@ -1,17 +1,29 @@
-﻿.dashboard-container {
+﻿/* =========================================================
+   DOCTOR DASHBOARD
+   Theme-aware styling
+========================================================= */
+
+.dashboard-container {
     padding: 20px;
-    background: #f8fdfd;
-    color: #0d4b48;
+    background-color: var(--bg, var(--gray-50));
+    color: var(--text, var(--gray-800));
     font-family: Arial, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* HEADER */
+
+/* =========================================================
+   DOCTOR HEADER
+========================================================= */
+
 .doctor-header {
     display: flex;
     gap: 20px;
-    background: #7dbebe;
+    background-color: var(--primary);
     padding: 20px;
     border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .doctor-image-box img {
@@ -19,22 +31,71 @@
     height: 300px;
     border-radius: 10px;
     object-fit: cover;
+    border: 4px solid var(--primary-light, var(--teal-300));
 }
 
 .doctor-info-box {
-    color: white;
+    color: #ffffff;
 }
 
-/* SECTION BOX */
+    .doctor-info-box h2 {
+        color: #ffffff;
+    }
+
+    .doctor-info-box p {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+
+/* =========================================================
+   SECTION BOX
+========================================================= */
+
 .section-box {
     margin-top: 20px;
-    background: white;
+    background-color: var(--surface, var(--white));
+    color: var(--text, var(--gray-800));
     padding: 20px;
     border-radius: 10px;
-    border-left: 5px solid #004d4d;
+    border: 1px solid var(--border, var(--gray-300));
+    border-left: 5px solid var(--primary);
+    box-shadow: var( --shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.05) );
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* TWO COLUMN */
+    .section-box h3 {
+        color: var(--text, var(--gray-800));
+        margin-bottom: 15px;
+    }
+
+
+/* =========================================================
+   INFORMATION GRID
+   KEEP ORIGINAL VERTICAL LAYOUT
+========================================================= */
+
+.info-grid {
+    display: block;
+}
+
+    .info-grid p {
+        margin: 0 0 10px 0;
+        color: var(--text-secondary, var(--gray-700));
+    }
+
+        .info-grid p:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-grid p strong {
+            color: var(--text, var(--gray-800));
+        }
+
+
+/* =========================================================
+   TWO COLUMN
+========================================================= */
+
 .two-column {
     display: flex;
     gap: 20px;
@@ -43,59 +104,210 @@
 
 .box {
     flex: 1;
-    background: white;
-    padding: 15px;
+    background-color: var(--surface, var(--white));
+    color: var(--text, var(--gray-800));
+    padding: 20px;
     border-radius: 10px;
+    border: 1px solid var(--border, var(--gray-300));
+    box-shadow: var( --shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.05) );
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-/* APPOINTMENT CARD */
+.two-column .box {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.box h3 {
+    color: var(--text, var(--gray-800));
+}
+
+
+/* =========================================================
+   APPOINTMENT CARD
+========================================================= */
+
 .appointment-card {
     display: flex;
     gap: 10px;
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border, var(--gray-300));
 }
 
     .appointment-card img {
         width: 50px;
         height: 50px;
         border-radius: 50%;
+        object-fit: cover;
     }
 
-/* REVENUE */
-.revenue-grid {
+
+/* =========================================================
+   APPOINTMENT SLOTS
+========================================================= */
+
+.appointment-slot {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    min-height: 65px;
+    border-radius: 8px;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* TABLE */
+
+    /* REAL APPOINTMENT */
+
+    .appointment-slot.filled {
+        background-color: var(--teal-300);
+        color: #ffffff;
+    }
+
+        .appointment-slot.filled strong,
+        .appointment-slot.filled small {
+            color: #ffffff;
+        }
+
+
+    /* EMPTY SLOT */
+
+    .appointment-slot.empty {
+        background-color: var(--teal-700);
+        color: rgba(255, 255, 255, 0.75);
+    }
+
+        .appointment-slot.empty strong {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+
+/* =========================================================
+   TOP PATIENT CARDS
+========================================================= */
+
+.patient-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 15px;
+    background-color: var(--teal-300);
+    border-radius: 10px;
+    color: #ffffff;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+    .patient-stat-card:hover {
+        background-color: var(--teal-500);
+        transform: translateY(-2px);
+    }
+
+    .patient-stat-card img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .patient-stat-card strong,
+    .patient-stat-card small {
+        color: #ffffff;
+    }
+
+
+/* =========================================================
+   REVENUE
+========================================================= */
+
+.revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+    .revenue-grid > div {
+        padding: 15px;
+        border-radius: 8px;
+        background-color: var( --primary-subtle, var(--teal-100) );
+        color: var(--text, var(--gray-800));
+        border: 1px solid var(--border-subtle);
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   SCHEDULE TABLE
+========================================================= */
+
 .schedule-table {
     width: 100%;
     border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
     .schedule-table th {
-        background: #006d77;
-        color: white;
+        background-color: var(--primary);
+        color: #ffffff;
         padding: 10px;
+        border: 1px solid var(--primary);
     }
 
     .schedule-table td {
-        background: #83c5be;
+        background-color: var(--teal-100);
+        color: var(--text, var(--gray-800));
         padding: 10px;
+        border: 1px solid var(--border-subtle);
     }
 
-.off-day {
-    opacity: 0.5;
-}
+    .schedule-table .off-day td {
+        background-color: var( --surface-2, var(--gray-100) );
+        color: var( --text-secondary, var(--gray-600) );
+        opacity: 0.6;
+    }
 
 
-.two-column .box {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+/* =========================================================
+   TIME / DATE PANEL
+========================================================= */
+
+.doctor-time-panel {
+    color: #ffffff;
 }
+
+.doctor-time-header {
+    background-color: var(--teal-900);
+    color: #ffffff;
+}
+
+.doctor-time-static {
+    background-color: var(--teal-700);
+    color: #ffffff;
+}
+
+.doctor-time-live {
+    background-color: var(--teal-900);
+    color: #ffffff;
+}
+
+.doctor-time-item {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+    .doctor-time-item small,
+    .doctor-time-item h5 {
+        color: #ffffff;
+    }
+
+
+/* =========================================================
+   PLACEHOLDER / EMPTY CONTENT
+========================================================= */
 
 .appointment-empty {
     display: flex;
@@ -104,30 +316,29 @@
     padding: 10px;
     min-height: 65px;
     border-radius: 8px;
-    background: rgba(131, 197, 190, 0.12);
-    border: 1px dashed rgba(131, 197, 190, 0.4);
-    color: rgba(255, 255, 255, 0.6);
+    background-color: var( --surface-2, rgba(131, 197, 190, 0.10) );
+    border: 1px dashed var( --border, rgba(131, 197, 190, 0.4) );
+    color: var( --text-secondary, var(--gray-600) );
 }
 
-.appointment-empty {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    min-height: 65px;
-    border-radius: 8px;
-    background: rgba(131, 197, 190, 0.10);
-    border: 1px dashed rgba(131, 197, 190, 0.4);
-}
+
+/* =========================================================
+   PLACEHOLDER AVATAR
+========================================================= */
 
 .placeholder-avatar {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient( 90deg, rgba(131, 197, 190, 0.2), rgba(255, 255, 255, 0.08), rgba(131, 197, 190, 0.2) );
+    background: linear-gradient( 90deg, var(--teal-100), var(--surface-2), var(--teal-100) );
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite linear;
 }
+
+
+/* =========================================================
+   PLACEHOLDER LINES
+========================================================= */
 
 .placeholder-lines {
     display: flex;
@@ -138,7 +349,7 @@
 .placeholder-line {
     height: 10px;
     border-radius: 4px;
-    background: linear-gradient( 90deg, rgba(131, 197, 190, 0.2), rgba(255, 255, 255, 0.08), rgba(131, 197, 190, 0.2) );
+    background: linear-gradient( 90deg, var(--teal-100), var(--surface-2), var(--teal-100) );
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite linear;
 }
@@ -155,7 +366,13 @@
         width: 60px;
     }
 
+
+/* =========================================================
+   SHIMMER ANIMATION
+========================================================= */
+
 @keyframes shimmer {
+
     0% {
         background-position: -200% 0;
     }
@@ -166,23 +383,234 @@
 }
 
 
-.appointment-slot {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    min-height: 65px;
-    border-radius: 8px;
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dark .dashboard-container {
+    background-color: var(--bg, #111827);
+    color: var(--text, #f3f4f6);
 }
 
-    /* REAL DATA */
-    .appointment-slot.filled {
-        background: #83c5be; /* your teal */
-        color: white;
+.dark .doctor-header {
+    background-color: var(--surface-2, #1f2937);
+    border-color: var(--border, #374151);
+}
+
+.dark .section-box,
+.dark .box {
+    background-color: var(--surface, #1f2937);
+    color: var(--text, #f3f4f6);
+    border-color: var(--border, #374151);
+}
+
+    .dark .section-box h3,
+    .dark .box h3 {
+        color: var(--text, #f3f4f6);
     }
 
-    /* EMPTY SLOT */
-    .appointment-slot.empty {
-        background: #4d7c7a; /* darker medium teal */
-        color: rgba(255,255,255,0.7);
+.dark .info-grid p {
+    color: var( --text-secondary, #d1d5db );
+}
+
+    .dark .info-grid p strong {
+        color: var( --text, #f3f4f6 );
+    }
+
+.dark .appointment-card {
+    border-color: var(--border, #374151);
+}
+
+.dark .revenue-grid > div {
+    background-color: var( --surface-2, #374151 );
+    color: var( --text, #f3f4f6 );
+    border-color: var( --border, #4b5563 );
+}
+
+.dark .schedule-table td {
+    background-color: var( --surface-2, #374151 );
+    color: var( --text, #f3f4f6 );
+    border-color: var( --border, #4b5563 );
+}
+
+.dark .schedule-table .off-day td {
+    background-color: var( --surface, #1f2937 );
+    color: var( --text-secondary, #9ca3af );
+}
+
+.dark .patient-stat-card {
+    background-color: var(--teal-700);
+}
+
+    .dark .patient-stat-card:hover {
+        background-color: var(--teal-500);
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .two-column {
+        flex-direction: column;
+    }
+
+    .doctor-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .doctor-info-box {
+        padding-top: 0 !important;
+    }
+
+    .revenue-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        padding: 12px;
+    }
+
+    .doctor-image-box img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .section-box,
+    .box {
+        padding: 15px;
+    }
+
+    .schedule-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+
+@media (max-width: 575px) {
+
+    .doctor-image-box img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .doctor-info-box h2 {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* =========================================================
+   VERIFICATION BANNER (LIGHT & DARK MODE)
+========================================================= */
+
+.verification-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    border-left: 6px solid transparent;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.banner-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.banner-content h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.banner-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Light Mode: Verified */
+.banner-verified {
+    background-color: #ecfdf5;
+    border-left-color: #059669;
+    color: #065f46;
+}
+
+    .banner-verified .banner-icon {
+        background-color: #d1fae5;
+        color: #059669;
+    }
+
+    .banner-verified h4 {
+        color: #065f46;
+    }
+
+/* Light Mode: Unverified */
+.banner-unverified {
+    background-color: #fffbeb;
+    border-left-color: #d97706;
+    color: #92400e;
+}
+
+    .banner-unverified .banner-icon {
+        background-color: #fef3c7;
+        color: #d97706;
+    }
+
+    .banner-unverified h4 {
+        color: #92400e;
+    }
+
+/* =========================================================
+   DARK MODE ADJUSTMENTS FOR VERIFICATION BANNER
+========================================================= */
+
+.dark .banner-verified {
+    background-color: rgba(6, 95, 70, 0.25);
+    border-left-color: #10b981;
+    color: #a7f3d0;
+}
+
+    .dark .banner-verified .banner-icon {
+        background-color: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+    }
+
+    .dark .banner-verified h4 {
+        color: #ecfdf5;
+    }
+
+.dark .banner-unverified {
+    background-color: rgba(146, 64, 14, 0.25);
+    border-left-color: #f59e0b;
+    color: #fde68a;
+}
+
+    .dark .banner-unverified .banner-icon {
+        background-color: rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+    }
+
+    .dark .banner-unverified h4 {
+        color: #fffbeb;
     }

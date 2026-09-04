@@ -1,187 +1,680 @@
-﻿/* ================================
-   Layout Container
-================================ */
+﻿/* =========================================================
+   DOCTOR - PATIENT APPOINTMENT LIST
+   ========================================================= */
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
 
 .appointments-container {
     display: flex;
+    width: 100%;
     min-height: 100vh;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--gray-50, #f8fafc);
 }
 
-/* ================================
-   Sidebar (TEAL FIXED & STRONG)
-================================ */
+
+/* =========================================================
+   SIDEBAR - DEEP NAVY TEAL
+   ========================================================= */
 
 .filter-sidebar {
     width: 250px;
-    background: linear-gradient(180deg, var(--teal-800), var(--teal-900));
-    color: var(--white);
+    min-width: 250px;
+    background: linear-gradient( 180deg, #163b40 0%, #123337 50%, #0f292d 100% );
+    color: #e6fffb;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border-right: 2px solid var(--teal-700);
+    border-right: 1px solid rgba(94, 234, 212, 0.15);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
 }
+
+
+    /* Sidebar heading */
 
     .filter-sidebar h3,
     .filter-sidebar h5 {
-        color: var(--teal-100);
+        color: #ffffff;
+        font-weight: 700;
     }
+
+
+    /* Sidebar labels */
+
+    .filter-sidebar .form-label {
+        color: #b9e8e3 !important;
+        font-weight: 600;
+    }
+
+
+    /* Sidebar controls */
 
     .filter-sidebar input,
     .filter-sidebar select {
         width: 100%;
-        padding: 0.6rem;
-        border-radius: 6px;
-        border: none;
-        background: var(--teal-700);
-        color: white;
+        min-height: 42px;
+        padding: 0.6rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid rgba(94, 234, 212, 0.18);
+        background: #20545a;
+        color: #ffffff;
+        transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
+
+        /* Placeholder */
+
         .filter-sidebar input::placeholder {
-            color: var(--teal-300);
+            color: #9ccbc7;
         }
 
-/* ================================
-   Appointment Section
-================================ */
+
+        /* Focus */
+
+        .filter-sidebar input:focus,
+        .filter-sidebar select:focus {
+            outline: none;
+            background: #265f64;
+            border-color: #5eead4;
+            box-shadow: 0 0 0 0.2rem rgba(94, 234, 212, 0.12);
+        }
+
+
+        /* Dropdown options */
+
+        .filter-sidebar select option {
+            background: #163b40;
+            color: #ffffff;
+        }
+
+
+/* =========================================================
+   DARK MODE SIDEBAR
+   ========================================================= */
+
+[data-theme="dark"] .filter-sidebar,
+.dark-mode .filter-sidebar {
+    background: linear-gradient( 180deg, #163b40 0%, #123337 50%, #0c2428 100% );
+    color: #e6fffb;
+    border-right-color: rgba(94, 234, 212, 0.15);
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.25);
+}
+
+
+    [data-theme="dark"] .filter-sidebar h3,
+    [data-theme="dark"] .filter-sidebar h5,
+    .dark-mode .filter-sidebar h3,
+    .dark-mode .filter-sidebar h5 {
+        color: #ffffff;
+    }
+
+
+    [data-theme="dark"] .filter-sidebar .form-label,
+    .dark-mode .filter-sidebar .form-label {
+        color: #b9e8e3 !important;
+    }
+
+
+    [data-theme="dark"] .filter-sidebar input,
+    [data-theme="dark"] .filter-sidebar select,
+    .dark-mode .filter-sidebar input,
+    .dark-mode .filter-sidebar select {
+        background: #20545a;
+        color: #ffffff;
+        border-color: rgba(94, 234, 212, 0.2);
+    }
+
+
+        [data-theme="dark"] .filter-sidebar input:focus,
+        [data-theme="dark"] .filter-sidebar select:focus,
+        .dark-mode .filter-sidebar input:focus,
+        .dark-mode .filter-sidebar select:focus {
+            background: #286166;
+            border-color: #5eead4;
+            box-shadow: 0 0 0 0.2rem rgba(94, 234, 212, 0.15);
+        }
+
+
+        [data-theme="dark"] .filter-sidebar select option,
+        .dark-mode .filter-sidebar select option {
+            background: #163b40;
+            color: #ffffff;
+        }
+
+
+
+/* =========================================================
+   MAIN APPOINTMENTS AREA
+   ========================================================= */
 
 .appointments-section {
     flex: 1;
-    background: var(--gray-50);
+    min-width: 0;
+    background: var(--gray-50, #f8fafc);
     padding: 2rem;
 }
 
-/* ================================
-   Appointment Row (FIXED STRUCTURE)
-   IMPORTANT: NO FLEX LAYOUT HERE
-================================ */
+
+    /* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+    .appointments-section > .card {
+        width: 100%;
+        background: var(--surface, #ffffff);
+        color: var(--text, #212529);
+        border: 1px solid var(--gray-200, #e5e7eb);
+        border-radius: 12px;
+    }
+
+        .appointments-section > .card h4 {
+            color: var(--teal-900, #134e4a);
+            font-weight: 700;
+        }
+
+
+/* =========================================================
+   APPOINTMENT LIST
+   ========================================================= */
+
+.appointment-list {
+    width: 100%;
+}
+
+
+/* =========================================================
+   APPOINTMENT ROW
+   IMPORTANT:
+   Keep this as Bootstrap GRID.
+   Do NOT turn it into flex.
+   ========================================================= */
 
 .appointment-row {
-    background: var(--teal-100);
-    transition: all 0.2s ease;
+    width: 100%;
+    min-height: 110px;
+    margin: 0 !important;
+    background: var(--teal-100, #ccfbf1);
+    color: var(--teal-900, #134e4a);
+    border: 1px solid var(--teal-200, #99f6e4);
     border-radius: 10px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
 }
+
 
     /* Alternating rows */
+
     .appointment-row:nth-child(even) {
-        background: var(--teal-200);
+        background: var(--teal-200, #99f6e4);
     }
 
-    /* Hover effect */
+
+    /* Hover */
+
     .appointment-row:hover {
-        background: var(--teal-300) !important;
-        cursor: pointer;
+        background: var(--teal-300, #5eead4) !important;
+        border-color: var(--teal-500, #14b8a6);
+        box-shadow: 0 4px 14px rgba(13, 148, 136, 0.15);
     }
 
-/* ================================
-   Patient Image (STRICT SIZE)
-================================ */
+
+    /* =========================================================
+   BOOTSTRAP COLUMN STRUCTURE
+   ========================================================= */
+
+    /*
+   Do NOT use display:flex on .col here.
+
+   Bootstrap's row/column system is responsible for
+   keeping every piece of information in its own column.
+*/
+
+    .appointment-row > .col,
+    .appointment-row > .col-auto {
+        min-width: 0;
+    }
+
+
+    /* Vertically center content */
+
+    .appointment-row > .col,
+    .appointment-row > .col-auto {
+        align-self: center;
+    }
+
+
+/* =========================================================
+   PATIENT PHOTO
+   ========================================================= */
 
 .patient-photo {
+    display: block;
     width: 100px;
     height: 100px;
+    min-width: 100px;
+    max-width: 100px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--primary);
+    border: 3px solid var(--primary, #159a9c);
+    background: var(--gray-200, #e5e7eb);
 }
 
-/* ================================
-   TEXT (KEEP CLEAN ALIGNMENT)
-================================ */
 
-.patient-info h5 {
-    margin: 0;
-    color: var(--teal-900);
+/* =========================================================
+   NAME
+   ========================================================= */
+
+.name-col {
+    min-width: 180px !important;
 }
 
-/* First appointment text (BLUE as requested earlier) */
-.text-primary.small {
-    color: #0d6efd !important;
-}
-
-/* muted text fix */
-.text-muted {
-    color: var(--gray-700) !important;
-}
-
-/* ================================
-   BUTTON (VIEW LINK)
-================================ */
-
-.btn-outline-primary {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-    .btn-outline-primary:hover {
-        background: var(--primary);
-        color: white;
+    .name-col .fw-bold {
+        color: var(--teal-900, #134e4a);
+        font-size: 1rem;
+        line-height: 1.3;
     }
 
-/* ================================
-   IMPORTANT FIX FOR ROW ALIGNMENT
-   (This is what stops "center chaos")
-================================ */
 
-.appointment-row .row {
-    width: 100%;
-    margin: 0;
-}
+/* =========================================================
+   APPOINTMENT INFORMATION
+   ========================================================= */
 
-.appointment-row .col,
-.appointment-row .col-auto {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* keep columns aligned like table */
 .appointment-row .col {
-    min-width: 120px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
-/* ================================
-   VIEW LINK (BLUE)
-================================ */
+    .appointment-row .col > div {
+        line-height: 1.4;
+    }
+
+
+/* Field labels */
+
+.appointment-row .small.text-muted {
+    color: var(--gray-600, #4b5563) !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+
+/* Actual values */
+
+.appointment-row .col > div:not(.small) {
+    color: var(--teal-900, #134e4a);
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   FIRST APPOINTMENT
+   ========================================================= */
+
+.appointment-row .text-primary.small {
+    color: #057741 !important;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LAST APPOINTMENT
+   ========================================================= */
+
+.appointment-row .text-muted {
+    color: var(--gray-600, #4b5563) !important;
+}
+
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
 
 .view-link {
-    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    padding: 7px 14px;
+    border-radius: 7px;
+    background: var(--primary, #159a9c);
+    border: 1px solid var(--primary, #159a9c);
+    color: #ffffff !important;
     font-weight: 600;
     text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
 
     .view-link:hover {
-        text-decoration: underline;
+        background: var(--dark-teal, #073f42);
+        border-color: var(--dark-teal, #073f42);
+        color: #ffffff !important;
+        text-decoration: none;
+        transform: translateY(-1px);
     }
 
-/* ================================
-   Pagination
-================================ */
 
-.pagination a {
-    color: var(--primary);
-    border: 1px solid var(--primary);
-    border-radius: 6px;
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.pagination {
+    gap: 5px;
 }
 
-    .pagination a.active,
-    .pagination .page-item.active .page-link {
-        background: var(--primary);
-        color: white;
+    .pagination .page-item {
+        margin: 0;
     }
 
-/* ================================
-   Responsive
-================================ */
+    .pagination .page-link {
+        min-width: 38px;
+        text-align: center;
+        color: var(--primary, #159a9c);
+        background: var(--surface, #ffffff);
+        border: 1px solid var(--primary, #159a9c);
+        border-radius: 6px !important;
+        font-weight: 600;
+    }
 
-@media (max-width: 768px) {
+        .pagination .page-link:hover {
+            background: var(--teal-100, #ccfbf1);
+            color: var(--dark-teal, #073f42);
+        }
+
+        .pagination .page-item.active .page-link,
+        .pagination .page-link.active {
+            background: var(--primary, #159a9c);
+            border-color: var(--primary, #159a9c);
+            color: #ffffff;
+        }
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+/* Main page */
+
+[data-theme="dark"] .appointments-container,
+.dark-mode .appointments-container {
+    background: #0f2022;
+}
+
+
+/* Main section */
+
+[data-theme="dark"] .appointments-section,
+.dark-mode .appointments-section {
+    background: #0f2022;
+}
+
+
+    /* Main card */
+
+    [data-theme="dark"] .appointments-section > .card,
+    .dark-mode .appointments-section > .card {
+        background: #172b2d;
+        color: #f1f5f9;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+
+        /* Card heading */
+
+        [data-theme="dark"] .appointments-section > .card h4,
+        .dark-mode .appointments-section > .card h4 {
+            color: #ffffff;
+        }
+
+
+/* =========================================================
+   DARK MODE - SIDEBAR
+   ========================================================= */
+
+[data-theme="dark"] .filter-sidebar,
+.dark-mode .filter-sidebar {
+    background: linear-gradient( 180deg, #115e59, #0f3f3d );
+    border-right-color: rgba(94, 234, 212, 0.15);
+}
+
+
+/* =========================================================
+   DARK MODE - APPOINTMENT ROW
+   ========================================================= */
+
+[data-theme="dark"] .appointment-row,
+.dark-mode .appointment-row {
+    background: #203638;
+    color: #f1f5f9;
+    border-color: rgba(94, 234, 212, 0.12);
+}
+
+
+    /* Alternating */
+
+    [data-theme="dark"] .appointment-row:nth-child(even),
+    .dark-mode .appointment-row:nth-child(even) {
+        background: #263d3f;
+    }
+
+
+    /* Hover */
+
+    [data-theme="dark"] .appointment-row:hover,
+    .dark-mode .appointment-row:hover {
+        background: #2b4b4d !important;
+        border-color: rgba(45, 212, 191, 0.35);
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+    }
+
+
+/* =========================================================
+   DARK MODE - NAME
+   ========================================================= */
+
+[data-theme="dark"] .name-col .fw-bold,
+.dark-mode .name-col .fw-bold {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DARK MODE - FIELD LABELS
+   ========================================================= */
+
+[data-theme="dark"] .appointment-row .small.text-muted,
+.dark-mode .appointment-row .small.text-muted {
+    color: #94a3b8 !important;
+}
+
+
+/* =========================================================
+   DARK MODE - VALUES
+   ========================================================= */
+
+[data-theme="dark"] .appointment-row .col > div:not(.small),
+.dark-mode .appointment-row .col > div:not(.small) {
+    color: #e2e8f0;
+}
+
+
+/* =========================================================
+   DARK MODE - LAST / MUTED
+   ========================================================= */
+
+[data-theme="dark"] .appointment-row .text-muted,
+.dark-mode .appointment-row .text-muted {
+    color: #94a3b8 !important;
+}
+
+
+/* =========================================================
+   DARK MODE - FIRST APPOINTMENT
+   ========================================================= */
+
+[data-theme="dark"] .appointment-row .text-primary.small,
+.dark-mode .appointment-row .text-primary.small {
+    color: #5eead4 !important;
+}
+
+
+/* =========================================================
+   DARK MODE - PHOTO
+   ========================================================= */
+
+[data-theme="dark"] .patient-photo,
+.dark-mode .patient-photo {
+    border-color: #2dd4bf;
+    background: #263d3f;
+}
+
+
+/* =========================================================
+   DARK MODE - PAGINATION
+   ========================================================= */
+
+[data-theme="dark"] .pagination .page-link,
+.dark-mode .pagination .page-link {
+    background: #172b2d;
+    color: #5eead4;
+    border-color: #159a9c;
+}
+
+    [data-theme="dark"] .pagination .page-link:hover,
+    .dark-mode .pagination .page-link:hover {
+        background: #203638;
+        color: #99f6e4;
+    }
+
+[data-theme="dark"] .pagination .page-item.active .page-link,
+.dark-mode .pagination .page-item.active .page-link {
+    background: #159a9c;
+    border-color: #159a9c;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DARK MODE - SIDEBAR SELECT
+   ========================================================= */
+
+[data-theme="dark"] .filter-sidebar select,
+[data-theme="dark"] .filter-sidebar input,
+.dark-mode .filter-sidebar select,
+.dark-mode .filter-sidebar input {
+    background: #203638;
+    color: #ffffff;
+    border-color: rgba(45, 212, 191, 0.3);
+}
+
+    [data-theme="dark"] .filter-sidebar select option,
+    .dark-mode .filter-sidebar select option {
+        background: #203638;
+        color: #ffffff;
+    }
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .filter-sidebar {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    .appointments-section {
+        padding: 1.5rem;
+    }
+
     .patient-photo {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        max-width: 80px;
+    }
+
+    .name-col {
+        min-width: 150px !important;
     }
 
     .appointment-row .col {
-        min-width: 150px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .appointments-container {
+        display: block;
+    }
+
+    .filter-sidebar {
+        width: 100%;
+        min-width: 100%;
+        border-right: 0;
+        border-bottom: 2px solid var(--teal-700, #0f766e);
+    }
+
+    .appointments-section {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    /*
+       Keep appointment rows as horizontal cards.
+       They can scroll horizontally instead of destroying
+       the alignment of the information.
+    */
+
+    #appointments-list {
+        overflow-x: auto;
+    }
+
+    .appointment-list {
+        min-width: 900px;
+    }
+
+    .appointment-row {
+        min-height: 95px;
+    }
+
+    .patient-photo {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        max-width: 70px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .appointments-section {
+        padding: 0.75rem;
+    }
+
+        .appointments-section > .card {
+            border-radius: 8px;
+        }
+
+    .filter-sidebar {
+        padding: 1rem;
     }
 }

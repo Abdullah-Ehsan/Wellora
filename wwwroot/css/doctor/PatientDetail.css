@@ -124,3 +124,487 @@ strong{
 p{
     color: var(--teal-800);
 }
+
+.primary-doctor-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.primary-doctor-content {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.primary-doctor-photo-container {
+    flex-shrink: 0;
+}
+
+.primary-doctor-photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #e5e7eb;
+}
+
+.primary-doctor-info {
+    flex: 1;
+}
+
+    .primary-doctor-info h3 {
+        margin-bottom: 6px;
+        color: #1f2937;
+    }
+
+    .primary-doctor-info p {
+        margin: 8px 0;
+        color: #4b5563;
+    }
+
+.doctor-source {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.wellora-doctor-source {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.outside-doctor-source {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.no-primary-doctor {
+    text-align: center;
+    padding: 25px;
+    color: #6b7280;
+    background-color: #f9fafb;
+    border-radius: 10px;
+}
+
+    .no-primary-doctor p {
+        margin: 0;
+    }
+
+
+/* =========================================================
+   CONFIRMATION SECTION
+   ========================================================= */
+
+.confirmation-section {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.confirmation-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    border: 1px solid #edf0f4;
+}
+
+
+/* Group */
+
+.confirmation-group {
+    width: 100%;
+}
+
+.confirmation-group-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #27364a;
+    margin-bottom: 16px;
+}
+
+
+/* Appointment buttons */
+
+.appointment-action-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+    .appointment-action-row form {
+        flex: 1;
+    }
+
+
+/* General button */
+
+.appointment-action-btn {
+    width: 100%;
+    min-height: 52px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+
+/* Confirm */
+
+.confirm-btn {
+    background: #16a34a;
+    color: white;
+}
+
+    .confirm-btn:hover:not(:disabled) {
+        background: #15803d;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(22, 163, 74, 0.25);
+    }
+
+
+/* Cancel */
+
+.cancel-btn {
+    background: #ef4444;
+    color: white;
+}
+
+    .cancel-btn:hover:not(:disabled) {
+        background: #dc2626;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+    }
+
+
+/* Payment */
+
+.payment-btn {
+    background: #2563eb;
+    color: white;
+    max-width: 100%;
+}
+
+    .payment-btn:hover:not(:disabled) {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+    }
+
+
+/* Icons */
+
+.action-icon {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+
+/* Disabled buttons */
+
+.appointment-action-btn:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+
+/* =========================================================
+   PAYMENT
+   ========================================================= */
+
+.payment-group {
+    margin-top: 28px;
+    padding-top: 25px;
+    border-top: 1px solid #edf0f4;
+}
+
+
+/* Payment status */
+
+.payment-status {
+    min-height: 60px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+}
+
+
+/* Paid */
+
+.paid-status {
+    background: #ecfdf3;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+}
+
+    .paid-status strong {
+        display: block;
+        font-size: 15px;
+    }
+
+    .paid-status small {
+        display: block;
+        margin-top: 2px;
+        color: #4d7c5c;
+    }
+
+
+/* Other status */
+
+.pending-status {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+}
+
+    .pending-status strong {
+        display: block;
+        font-size: 15px;
+    }
+
+    .pending-status small {
+        display: block;
+        margin-top: 2px;
+        color: #c2410c;
+    }
+
+
+/* Payment icons */
+
+.payment-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.paid-status .payment-icon {
+    background: #22c55e;
+    color: white;
+}
+
+.pending-status .payment-icon {
+    background: #f97316;
+    color: white;
+}
+
+
+/* =========================================================
+   PATIENT DETAIL - DARK MODE
+   Dark mode is applied to <html class="dark">
+   ========================================================= */
+
+
+/* =========================================================
+   PRIMARY DOCTOR
+   ========================================================= */
+
+html.dark .primary-doctor-card {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .primary-doctor-info h3 {
+    color: #f9fafb;
+}
+
+html.dark .primary-doctor-info p {
+    color: #d1d5db;
+}
+
+html.dark .primary-doctor-info strong {
+    color: #f3f4f6;
+}
+
+html.dark .primary-doctor-photo {
+    border-color: #4b5563;
+}
+
+
+/* Doctor source badges */
+
+html.dark .wellora-doctor-source {
+    background-color: #164e63;
+    color: #bae6fd;
+}
+
+html.dark .outside-doctor-source {
+    background-color: #78350f;
+    color: #fde68a;
+}
+
+
+/* No primary doctor */
+
+html.dark .no-primary-doctor {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    color: #d1d5db;
+}
+
+    html.dark .no-primary-doctor p {
+        color: #d1d5db;
+    }
+
+
+/* =========================================================
+   PREVIOUS APPOINTMENTS
+   ========================================================= */
+
+html.dark .appointments-container {
+    background-color: #1f2937;
+    border-color: #374151;
+}
+
+
+    /* Table text */
+
+    html.dark .appointments-container .table {
+        color: #e5e7eb;
+    }
+
+        html.dark .appointments-container .table thead th {
+            color: #f9fafb;
+            border-color: #4b5563;
+        }
+
+        html.dark .appointments-container .table tbody td {
+            color: #e5e7eb;
+            border-color: #374151;
+        }
+
+
+    /* Striped rows */
+
+    html.dark .appointments-container .table-striped > tbody > tr:nth-of-type(odd) > * {
+        color: #e5e7eb;
+        background-color: #273449;
+    }
+
+    html.dark .appointments-container .table-striped > tbody > tr:nth-of-type(even) > * {
+        color: #e5e7eb;
+        background-color: #1f2937;
+    }
+
+
+    /* Placeholder text */
+
+    html.dark .appointments-container .text-muted {
+        color: #9ca3af !important;
+    }
+
+
+/* =========================================================
+   CONFIRMATION CARD
+   ========================================================= */
+
+html.dark .confirmation-card {
+    background-color: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .confirmation-group-title {
+    color: #f3f4f6;
+}
+
+html.dark .payment-group {
+    border-top-color: #374151;
+}
+
+
+/* =========================================================
+   CONFIRM / CANCEL / PAYMENT BUTTONS
+   ========================================================= */
+
+html.dark .confirm-btn {
+    background-color: #15803d;
+    color: #ffffff;
+}
+
+    html.dark .confirm-btn:hover:not(:disabled) {
+        background-color: #166534;
+    }
+
+
+html.dark .cancel-btn {
+    background-color: #b91c1c;
+    color: #ffffff;
+}
+
+    html.dark .cancel-btn:hover:not(:disabled) {
+        background-color: #991b1b;
+    }
+
+
+html.dark .payment-btn {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}
+
+    html.dark .payment-btn:hover:not(:disabled) {
+        background-color: #1e40af;
+    }
+
+
+/* Disabled buttons */
+
+html.dark .appointment-action-btn:disabled {
+    background-color: #374151;
+    color: #6b7280;
+    border-color: #4b5563;
+}
+
+
+/* =========================================================
+   PAYMENT STATUS
+   ========================================================= */
+
+html.dark .paid-status {
+    background-color: #064e3b;
+    border-color: #065f46;
+}
+
+    html.dark .paid-status strong {
+        color: #d1fae5;
+    }
+
+    html.dark .paid-status small {
+        color: #86efac;
+    }
+
+
+html.dark .pending-status {
+    background-color: #7c2d12;
+    border-color: #9a3412;
+}
+
+    html.dark .pending-status strong {
+        color: #ffedd5;
+    }
+
+    html.dark .pending-status small {
+        color: #fdba74;
+    }

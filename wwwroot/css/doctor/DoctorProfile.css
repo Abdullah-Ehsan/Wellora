@@ -249,3 +249,167 @@
     background-color: var(--info); /* aqua toast background */
     color: #fff;
 }
+
+
+/* =========================================================
+   THEME TEST PAGE - DARK MODE
+========================================================= */
+
+/* Main page */
+.dark {
+    color: var(--text);
+}
+
+
+    /* =========================================================
+   HEADINGS
+========================================================= */
+
+    .dark h1,
+    .dark h2,
+    .dark h3,
+    .dark h4,
+    .dark h5,
+    .dark h6 {
+        color: var(--text);
+    }
+
+
+    /* =========================================================
+   CARDS
+========================================================= */
+
+    .dark .card {
+        background-color: var(--surface);
+        color: var(--text);
+        border-color: var(--border);
+    }
+
+
+    /* =========================================================
+   FORM LABELS
+========================================================= */
+
+    .dark .form-label {
+        color: var(--text);
+    }
+
+
+    /* =========================================================
+   FORM CONTROLS
+========================================================= */
+
+    .dark .form-control,
+    .dark .form-select {
+        background-color: var(--surface-2);
+        color: var(--text);
+        border-color: var(--border);
+    }
+
+        .dark .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        .dark .form-control:focus,
+        .dark .form-select:focus {
+            background-color: var(--surface-2);
+            color: var(--text);
+            border-color: var(--primary);
+        }
+
+
+    /* =========================================================
+   SIDEBAR
+========================================================= */
+
+    .dark .sidebar {
+        background-color: var(--surface);
+        color: var(--text);
+    }
+
+    .dark .sidebar-link {
+        color: var(--primary);
+    }
+
+
+    /* =========================================================
+   TABLES / INACTIVE ROWS
+========================================================= */
+
+    .dark .schedule-table .inactive-row {
+        background-color: var(--surface-2);
+        color: var(--text);
+    }
+
+
+    /* =========================================================
+   PROFILE PHOTO
+========================================================= */
+
+    .dark .profile-photo {
+        border-color: var(--border);
+    }
+
+
+    /* =========================================================
+   MUTED TEXT
+========================================================= */
+
+    .dark .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+
+    /* =========================================================
+   BORDER UTILITIES
+========================================================= */
+
+    .dark .border {
+        border-color: var(--border) !important;
+    }
+
+    .dark .border-top {
+        border-top-color: var(--border) !important;
+    }
+
+    .dark .border-bottom {
+        border-bottom-color: var(--border) !important;
+    }
+
+
+    /* =========================================================
+   BOOTSTRAP LIGHT BACKGROUNDS
+========================================================= */
+
+    .dark .bg-light {
+        background-color: var(--surface-2) !important;
+        color: var(--text);
+    }
+
+
+    /* =========================================================
+   TEXT DARK
+========================================================= */
+
+    .dark .text-dark {
+        color: var(--text) !important;
+    }
+
+
+    /* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+    .dark .btn-primary {
+        color: #ffffff;
+    }
+
+
+    /* =========================================================
+   TOAST
+========================================================= */
+
+    .dark #toastContainer .toast {
+        background-color: var(--info);
+        color: #ffffff;
+    }
