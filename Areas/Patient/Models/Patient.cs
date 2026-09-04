@@ -23,7 +23,7 @@ namespace Wellora.Areas.Patient.Models
         [DataType(DataType.Date)]
         public DateOnly DateOfBirth { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         [Column("gender")]
         public string? Gender { get; set; }
 
@@ -68,6 +68,10 @@ namespace Wellora.Areas.Patient.Models
 
         [Column("updated_at")]
         public DateTime? UpdatedAt { get; set; }
+
+        public virtual ICollection<PatientOutsideDoctor> PatientOutsideDoctors { get; set; }
+            = new List<PatientOutsideDoctor>();
+
     }
 
 
